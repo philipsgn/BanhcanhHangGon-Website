@@ -202,6 +202,13 @@
       min-height: 132vh;
     }
 
+    .hero-panorama {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
     .hero-bg-photo {
       position: absolute;
       inset: 0;
@@ -216,6 +223,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
+      pointer-events: none;
       background: linear-gradient(100deg,
           var(--bg-deep) 0%,
           rgba(36, 22, 16, 0.92) 32%,
@@ -1492,11 +1500,13 @@
       #hero {
         padding: 0;
         min-height: 100vh;
+        overflow: hidden;
       }
 
       .hero-content {
         padding: 120px 24px 60px;
         max-width: 100%;
+        pointer-events: none;
       }
 
       .hero-quote {
@@ -1513,8 +1523,30 @@
             transparent 100%);
       }
 
+      .hero-panorama {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        touch-action: pan-x pan-y;
+      }
+
+      .hero-panorama::-webkit-scrollbar {
+        display: none;
+      }
+
       .hero-bg-photo {
-        object-position: 68% 48%;
+        position: relative;
+        inset: auto;
+        width: auto;
+        min-width: 100%;
+        height: 100svh;
+        max-width: none;
+        object-fit: contain;
+        object-position: center center;
+        user-select: none;
+        -webkit-user-drag: none;
       }
 
       .dotnav {
@@ -1723,8 +1755,10 @@
 
   <!-- SECTION 1: HERO -->
   <section id="hero">
-    <img class="hero-bg-photo" src="images/hero-scene.png"
-      alt="Đũa gắp miếng gà ta từ tô bánh canh gà, kèm chén nước chấm muối tiêu chanh">
+    <div class="hero-panorama" aria-hidden="true">
+      <img class="hero-bg-photo" src="images/hero-scene.png"
+        alt="Đũa gắp miếng gà ta từ tô bánh canh gà, kèm chén nước chấm muối tiêu chanh">
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-quote">"Đưa gánh bánh canh Hàng Gòn về giữa phố thị"</p>
@@ -2005,6 +2039,19 @@
     navLinks.forEach((link) => {
       link.addEventListener('click', closeMobileNav);
     });
+
+    const heroPanorama = document.querySelector('.hero-panorama');
+
+    function centerHeroPanorama() {
+      if (!heroPanorama || window.innerWidth > 880) return;
+      const maxScroll = heroPanorama.scrollWidth - heroPanorama.clientWidth;
+      if (maxScroll > 0) {
+        heroPanorama.scrollLeft = maxScroll * 0.34;
+      }
+    }
+
+    window.addEventListener('load', centerHeroPanorama);
+    window.addEventListener('resize', centerHeroPanorama);
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
