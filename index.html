@@ -100,6 +100,41 @@
       list-style: none;
     }
 
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 7px;
+      padding: 0;
+    }
+
+    .nav-toggle span {
+      width: 30px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .28s ease, opacity .22s ease;
+    }
+
+    .site-nav.nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .site-nav.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
     .site-nav ul li a {
       font-family: 'Cormorant Garamond', serif;
       color: var(--cream-dim);
@@ -987,6 +1022,13 @@
       align-items: center;
       color: inherit;
       text-decoration: none;
+      transition: color .25s;
+    }
+
+    .review-source a:hover,
+    .review-source a:focus-visible {
+      color: var(--gold);
+      outline: none;
     }
 
     .review-arrow {
@@ -1056,11 +1098,12 @@
     .social-corner {
       position: fixed;
       bottom: 26px;
-      left: 26px;
+      right: 26px;
       z-index: 90;
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      opacity: .55;
+      opacity: .78;
       transition: opacity .3s;
     }
 
@@ -1082,6 +1125,30 @@
       background: rgba(36, 22, 16, 0.6);
       backdrop-filter: blur(4px);
       transition: all .25s;
+    }
+
+    .social-icon {
+      width: 17px;
+      height: 17px;
+      display: block;
+      fill: currentColor;
+    }
+
+    .social-icon-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
+      opacity: 1;
+      filter: saturate(1.08) contrast(1.08);
+    }
+
+    .social-corner a.social-image-link {
+      color: var(--cream-dim);
+      background: transparent;
+      border-color: rgba(242, 232, 213, 0.22);
+      backdrop-filter: none;
     }
 
     .social-corner a:hover {
@@ -1148,6 +1215,7 @@
     @media (max-width: 880px) {
       .site-nav {
         padding: 18px 20px;
+        background: linear-gradient(to bottom, rgba(36, 22, 16, 0.94), rgba(36, 22, 16, 0.16));
       }
 
       .site-nav .logo {
@@ -1156,7 +1224,40 @@
       }
 
       .site-nav ul {
-        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        min-width: 190px;
+        padding: 12px 0;
+        border: 1px solid rgba(242, 232, 213, 0.12);
+        border-radius: 12px;
+        background: rgba(36, 22, 16, 0.92);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity .24s ease, transform .24s ease;
+      }
+
+      .site-nav.nav-open ul {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .site-nav ul li a {
+        display: block;
+        padding: 12px 18px;
+        font-size: 14px;
+        letter-spacing: 1.8px;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
       }
 
       section {
@@ -1413,7 +1514,7 @@
       }
 
       .hero-bg-photo {
-        object-position: center 20%;
+        object-position: 68% 48%;
       }
 
       .dotnav {
@@ -1422,7 +1523,7 @@
 
       .social-corner {
         bottom: 16px;
-        left: 16px;
+        right: 16px;
       }
     }
 
@@ -1591,16 +1692,33 @@
       <li><a href="#menu">Menu</a></li>
       <li><a href="#location">Vị trí</a></li>
     </ul>
+    <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
   </nav>
 
   <div class="dotnav" id="dotnav"></div>
 
   <div class="social-corner">
 
-    <a href="#" title="Facebook">FB</a>
-    <a href="#" title="TikTok">TT</a>
-    <a href="#" title="ShopeeFood">SF</a>
-    <a href="#" title="GrabFood">GF</a>
+    <a href="https://www.facebook.com/Banhcanhgahanggon" title="Facebook" aria-label="Facebook Bánh Canh Gà Hàng Gòn" target="_blank" rel="noopener">
+      <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14.2 8.2V6.9c0-.62.42-.77.71-.77h1.82V3.18L14.22 3.17c-2.79 0-3.43 2.09-3.43 3.43v1.6H8.55v3.04h2.24V21h3.41v-9.76h2.53l.33-3.04h-2.86z"/>
+      </svg>
+    </a>
+    <a href="https://www.tiktok.com/@banhcanhgahanggon?lang=en" title="TikTok" aria-label="TikTok Bánh Canh Gà Hàng Gòn" target="_blank" rel="noopener">
+      <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M16.58 4.06c.54 1.82 1.78 3.07 3.49 3.35v3.05a7.14 7.14 0 0 1-3.36-.93v5.7c0 3.43-2.39 5.77-5.68 5.77-3.05 0-5.1-2.05-5.1-4.82 0-2.95 2.24-5.01 5.47-5.01.31 0 .61.02.9.08v3.18a3.6 3.6 0 0 0-.94-.13c-1.32 0-2.18.73-2.18 1.81 0 1.02.78 1.74 1.88 1.74 1.29 0 2.13-.83 2.13-2.36V3h3.24c.02.37.07.72.15 1.06z"/>
+      </svg>
+    </a>
+    <a class="social-image-link" href="#" title="ShopeeFood" aria-label="ShopeeFood Bánh Canh Gà Hàng Gòn">
+      <img class="social-icon-img" src="images/icon-shopee.png" alt="">
+    </a>
+    <a class="social-image-link" href="#" title="GrabFood" aria-label="GrabFood Bánh Canh Gà Hàng Gòn">
+      <img class="social-icon-img" src="images/icon-grab-food.png" alt="">
+    </a>
   </div>
 
   <!-- SECTION 1: HERO -->
@@ -1803,10 +1921,7 @@
         <span>Đánh giá trên</span>
         <a href="https://www.google.com/search?q=b%C3%A1nh+canh+g%C3%A0+h%C3%A0ng+g%C3%B2n&oq=b%C3%A1nh+ca&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDkyBggCEEUYOzIGCAMQRRg80gEIMTExOGowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8#sv=CAESzQEKuQEStgEKd0FKaVQ0dEtMQ242dmZWNjA4WmZDcV9KMVZNdUhZZ3ByQ1BTUjFoTlhCOV9yZFZVZmVtb0FYdU54Ul9kZ1RDWlB4U1I3RUNjenZUNmFXcTdCS2xIZ095YXRZenY0S01qc1JEekNGU2pCc3ZMWHNpVzAxUzhWdllzEhdMa3RiYXRHQ05KU2E0LUVQNEpXbnVBZxoiQURzcjlmU3dhTG1IbzdhaV9oRHBtQ1VrV0kzV3c4MzdIQRIEODA1MRoBMyoAMAA4AUAAGAAgnKGEgwM6AEoCEAE" target="_blank" rel="noopener" aria-label="Xem đánh giá Hàng Gòn trên Google">
           <svg class="google-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#4285F4" d="M23.49 12.27c0-.82-.07-1.42-.22-2.04H12v3.97h6.62c-.13.99-.85 2.48-2.44 3.49l-.02.13 3.55 2.68.25.02c2.29-2.06 3.53-5.09 3.53-8.25z"/>
-            <path fill="#34A853" d="M12 24c3.27 0 6.02-1.05 8.03-2.86l-3.82-2.96c-1.02.69-2.39 1.17-4.21 1.17-3.2 0-5.92-2.06-6.89-4.91l-.14.01-3.69 2.78-.05.13C3.23 20.91 7.27 24 12 24z"/>
-            <path fill="#FBBC05" d="M5.11 14.44c-.26-.74-.41-1.53-.41-2.34s.15-1.6.4-2.34l-.01-.16-3.74-2.82-.12.06C.45 8.37 0 10.15 0 12.1s.45 3.73 1.23 5.26l3.88-2.92z"/>
-            <path fill="#EA4335" d="M12 4.85c2.28 0 3.82.96 4.7 1.76l3.43-3.26C18.02 1.44 15.27.25 12 .25 7.27.25 3.23 3.34 1.23 6.84l3.87 2.92C6.08 6.91 8.8 4.85 12 4.85z"/>
+            <path fill="currentColor" d="M12.14 10.16h9.54c.1.55.16 1.1.16 1.78 0 5.78-3.87 9.9-9.7 9.9A9.84 9.84 0 1 1 12.14 2c2.66 0 4.9.98 6.62 2.58l-2.68 2.68c-.98-.92-2.29-1.46-3.94-1.46a6.04 6.04 0 0 0 0 12.08c3.03 0 4.84-1.64 5.29-3.95h-5.29v-3.77z"/>
           </svg>
         </a>
       </div>
@@ -1870,7 +1985,26 @@
     sections.forEach(s => io.observe(s));
 
     const siteNav = document.getElementById('siteNav');
+    const navToggle = siteNav.querySelector('.nav-toggle');
+    const navLinks = siteNav.querySelectorAll('ul a');
     let lastScrollY = window.scrollY;
+
+    function closeMobileNav() {
+      siteNav.classList.remove('nav-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Mở menu');
+    }
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('nav-open');
+      siteNav.classList.remove('is-hidden');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Đóng menu' : 'Mở menu');
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', closeMobileNav);
+    });
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
@@ -1878,7 +2012,7 @@
 
       if (currentScrollY < 80) {
         siteNav.classList.remove('is-hidden');
-      } else if (scrollDelta > 8) {
+      } else if (scrollDelta > 8 && !siteNav.classList.contains('nav-open')) {
         siteNav.classList.add('is-hidden');
       } else if (scrollDelta < -8) {
         siteNav.classList.remove('is-hidden');
