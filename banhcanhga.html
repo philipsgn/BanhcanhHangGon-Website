@@ -1,0 +1,2044 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Bánh Canh Gà — Nóng Hổi Mỗi Ngày</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #241610;
+      --bg-deep-2: #2f1d14;
+      --cream: #f2e8d5;
+      --cream-dim: #c9bda4;
+      --gold: #c99a4a;
+      --chili: #b84b32;
+      --herb: #5c7a52;
+      --line: rgba(242, 232, 213, 0.14);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--cream);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ---------- NAV ---------- */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      background: linear-gradient(to bottom, rgba(36, 22, 16, 0.9), transparent);
+      transform: translateY(0);
+      transition: transform .32s ease, background .3s, opacity .32s ease;
+      will-change: transform;
+    }
+
+    .site-nav.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-100%);
+    }
+
+    .site-nav .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 76px;
+      height: 76px;
+      text-decoration: none;
+    }
+
+    .site-nav .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 14px rgba(201,154,74,0.36));
+    }
+
+    .site-nav ul {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .site-nav ul li a {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .25s;
+    }
+
+    .site-nav ul li a:hover,
+    .site-nav ul li a:focus-visible {
+      color: var(--gold);
+    }
+
+    /* ---------- DOT NAV ---------- */
+    .dotnav {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .dotnav button {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid var(--cream-dim);
+      cursor: pointer;
+      padding: 0;
+      opacity: .6;
+      transition: all .3s;
+    }
+
+    .dotnav button.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    section {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 48px;
+    }
+
+    /* ---------- SECTION 1 : HERO ---------- */
+    #hero {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      min-height: 132vh;
+    }
+
+    .hero-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(100deg,
+          var(--bg-deep) 0%,
+          rgba(36, 22, 16, 0.92) 32%,
+          rgba(36, 22, 16, 0.55) 52%,
+          rgba(36, 22, 16, 0.1) 72%,
+          transparent 85%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: none;
+      padding: 0 0 0 24px;
+    }
+
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2vw, 30px);
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--cream);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* ---------- SECTION 3 : MENU (redesigned — editorial minimal, template-matched) ---------- */
+    #menu {
+      background-image:
+        linear-gradient(180deg,
+          rgba(32,18,13,0.9) 0%,
+          rgba(38,22,15,0.76) 24%,
+          rgba(54,34,21,0.62) 52%,
+          rgba(38,22,15,0.78) 78%,
+          rgba(24,14,10,0.92) 100%),
+        url('images/menu/background-menu.png?v=20260718-1620');
+      background-position: center center, center center;
+      background-size: auto, 100% 100%;
+      background-repeat: no-repeat, no-repeat;
+      background-color: #0e0906;
+      background-blend-mode: multiply, normal;
+      overflow: hidden;
+      isolation: isolate;
+      position: relative;
+      padding: 64px clamp(38px, 5.2vw, 92px) 58px;
+      min-height: 100vh;
+      justify-content: flex-start;
+    }
+    /* Very faint film-grain / paper texture using layered noise gradients */
+    #menu::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 48%, rgba(222,176,96,0.1), transparent 31%),
+        radial-gradient(ellipse at 50% 58%, rgba(255,236,190,0.055), transparent 46%),
+        linear-gradient(90deg, rgba(28,16,11,0.2), transparent 18%, transparent 82%, rgba(28,16,11,0.2)),
+        linear-gradient(180deg, rgba(24,14,10,0.42), rgba(36,22,16,0.16) 42%, rgba(24,14,10,0.48));
+      pointer-events: none;
+      z-index: 0;
+    }
+    #menu::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 2% 54%, rgba(190,133,50,0.26), transparent 26%),
+        radial-gradient(ellipse at 98% 52%, rgba(190,133,50,0.28), transparent 27%),
+        linear-gradient(90deg, rgba(214,157,72,0.08), transparent 18%, transparent 82%, rgba(214,157,72,0.08));
+      mix-blend-mode: screen;
+      opacity: .62;
+    }
+
+    /* Corner leaf botanicals — 4 corners, subtle */
+    .menu-botanical {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      color: #6a5a3a;
+      opacity: .55;
+    }
+    .menu-botanical.b-tr,
+    .menu-botanical.b-bl { display: none; }
+    .menu-botanical.b-cr { display: none; }
+    .menu-botanical.b-cl { display: none; }
+    .menu-botanical.b-mid { display: none; }
+    .menu-leaf-tr, .menu-leaf-bl { display: none; }
+
+    .menu-shell {
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---- Menu heading: editorial left anchor ---- */
+    .menu-heading {
+      position: relative;
+      z-index: 3;
+      width: min(100%, 500px);
+      margin: clamp(4px, 1.2vw, 16px) 0 clamp(44px, 5vw, 68px);
+      padding-left: clamp(8px, 1.2vw, 18px);
+      text-align: left;
+      isolation: isolate;
+    }
+    .menu-heading::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 50%;
+      width: min(420px, 48vw);
+      height: 220px;
+      transform: translate(-18%, -50%);
+      background: radial-gradient(circle,
+        rgba(181,118,42,0.12) 0%,
+        rgba(181,118,42,0.04) 40%,
+        transparent 72%);
+      filter: blur(16px);
+      pointer-events: none;
+    }
+    .menu-heading::after { display: none; }
+
+    .menu-heading__eyebrow {
+      display: block;
+      margin-bottom: 14px;
+      color: rgba(201,154,74,0.72);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .menu-heading__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 5.6vw, 92px);
+      font-weight: 400;
+      line-height: .98;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #e8d4a6;
+      background: linear-gradient(110deg,
+        #f8edcf 0%,
+        #e9d4a3 24%,
+        #c99a4a 48%,
+        #f4e4bd 68%,
+        #a87327 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 8px 28px rgba(0,0,0,0.22);
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .menu-heading__divider {
+      width: 84px;
+      height: 1px;
+      margin: 24px 0 18px;
+      background: linear-gradient(90deg, #c99a4a 0%, rgba(201,154,74,0.15) 100%);
+    }
+
+    .menu-heading__subtitle {
+      max-width: 390px;
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1.75;
+      letter-spacing: .025em;
+      color: rgba(232,214,174,0.56);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 2.9vw, 48px);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: clamp(10px, 0.95vw, 16px);
+      text-shadow:
+        0 0 18px rgba(242,232,213,0.22),
+        0 8px 28px rgba(0,0,0,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: clamp(16px, 2.6vw, 34px);
+      padding: 0 4px 0 14px;
+      margin: 0;
+    }
+    .section-title::before,
+    .section-title::after {
+      display: none;
+    }
+    .section-title em { font-style: normal; color: inherit; font-weight: inherit; }
+
+    /* ---- Category header: icon chip + label + long hairline ---- */
+    .menu-category {
+      margin-top: 0;
+      position: relative;
+    }
+    .menu-category + .menu-category {
+      margin-top: 6px;
+    }
+    .menu-category-label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      width: 100%;
+      margin: 0 0 2px;
+      padding: 0 clamp(8px, 1.2vw, 18px);
+    }
+    .menu-category-label::before,
+    .menu-category-label .cat-line {
+      content: '';
+      flex: 0 1 86px;
+      height: 1px;
+      max-width: 220px;
+      background: linear-gradient(90deg, transparent, rgba(201,154,74,0.58));
+    }
+    .menu-category-label .cat-line {
+      flex: 1 1 auto;
+      background: linear-gradient(90deg, rgba(201,154,74,0.58), transparent);
+    }
+    .menu-cat-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      overflow: visible;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .menu-cat-icon svg { width: 18px; height: 18px; }
+    .menu-cat-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: none;
+      filter: saturate(0.95) contrast(1.08) drop-shadow(0 0 10px rgba(201,154,74,0.26));
+    }
+    .menu-category-label .cat-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      letter-spacing: 4.8px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .menu-category-label svg { color: var(--gold); }
+
+    /* ---- Card grid: minimal image + name + price ---- */
+    .menu-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px clamp(24px, 3.8vw, 56px);
+      width: 100%;
+      margin: 0;
+      align-items: start;
+    }
+    .menu-cards-wide {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 760px;
+      margin: 0 auto;
+      gap: 4px clamp(40px, 6vw, 80px);
+    }
+
+    /* Borderless side-by-side item */
+    .menu-card {
+      position: relative;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: inherit;
+      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      align-items: start;
+      gap: 4px;
+      transition: transform .45s cubic-bezier(.25, .8, .25, 1);
+      font: inherit;
+    }
+    .menu-cards-wide .menu-card {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .menu-card:focus-visible { outline: none; }
+    .menu-card:hover { transform: translateY(-3px); }
+
+    /* Image well — no plate glow ring; just soft drop-shadow */
+    .menu-card .dish-plate {
+      position: relative;
+      width: min(100%, 300px);
+      height: clamp(178px, 15vw, 232px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .menu-cards-wide .menu-card .dish-plate {
+      width: min(100%, 350px);
+      height: clamp(192px, 16vw, 250px);
+    }
+    .menu-card .dish-plate::before {
+      content: '';
+      position: absolute;
+      inset: auto 8% 4% 8%;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.6), transparent 70%);
+      filter: blur(14px);
+      z-index: 0;
+    }
+    .menu-card .dish-plate::after { display: none; }
+    .menu-card img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.68);
+      filter: drop-shadow(0 22px 26px rgba(0,0,0,0.6));
+      transition: transform .5s cubic-bezier(.25, .8, .25, 1), filter .4s ease;
+    }
+    .menu-card:hover img,
+    .menu-card:focus-visible img {
+      transform: scale(1.78) translateY(-4px);
+      filter: drop-shadow(0 28px 30px rgba(0,0,0,0.65));
+    }
+    .menu-card.dish-bc-xe img,
+    .menu-card.dish-bc-chat img {
+      transform: scale(1.56);
+    }
+    .menu-card.dish-bc-xe:hover img,
+    .menu-card.dish-bc-xe:focus-visible img,
+    .menu-card.dish-bc-chat:hover img,
+    .menu-card.dish-bc-chat:focus-visible img {
+      transform: scale(1.64) translateY(-4px);
+    }
+
+    /* Text block */
+    .menu-card > span {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+    }
+    .menu-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 1.45vw, 23px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--cream);
+      letter-spacing: 0.3px;
+      text-align: center;
+    }
+    .menu-card-name::after {
+      content: '✧';
+      display: block;
+      color: var(--gold);
+      font-size: 12px;
+      line-height: 1;
+      margin: 5px 0 0;
+      opacity: .78;
+    }
+    /* Price row with circular + button */
+    .menu-card-price {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold);
+      font-size: clamp(17px, 1.2vw, 20px);
+      font-weight: 500;
+      letter-spacing: 0.6px;
+      margin-top: 0;
+      white-space: nowrap;
+    }
+    .menu-card-price::before,
+    .menu-card-price::after { display: none; }
+    .menu-card-price .vnd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 1.6px;
+      color: var(--gold);
+      opacity: .7;
+      transform: translateY(-2px);
+    }
+    .menu-card-plus {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,154,74,0.6);
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      background: transparent;
+      margin-left: 6px;
+      transition: background .3s ease, color .3s ease, transform .3s ease;
+    }
+    .menu-card-price .menu-card-plus { display: none; }
+    .menu-card:hover .menu-card-plus {
+      background: var(--gold);
+      color: #1a120c;
+      transform: rotate(90deg);
+    }
+    .menu-card-hint {
+      display: inline-flex;
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: rgba(232,214,174,0.56);
+      opacity: 0;
+      transform: translateY(-2px);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .menu-card:hover .menu-card-hint,
+    .menu-card:focus-visible .menu-card-hint {
+      opacity: .72;
+      transform: translateY(0);
+    }
+
+    .dish-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(32px, 6vw, 88px);
+      background:
+        radial-gradient(ellipse at center, rgba(242,232,213,0.08), transparent 52%),
+        rgba(12, 8, 5, 0.46);
+      backdrop-filter: blur(8px) saturate(1.02);
+    }
+
+    .dish-modal.is-open {
+      display: flex;
+    }
+
+    .dish-modal.is-loading .dish-detail-img {
+      opacity: 0;
+    }
+
+    .dish-modal-panel {
+      width: min(860px, 76vw, 128vh);
+      aspect-ratio: 1672 / 941;
+      max-height: 72vh;
+      border-radius: 16px;
+      border: 1px solid rgba(242,232,213,0.18);
+      background: rgba(248,239,220,0.92);
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.36),
+        0 0 0 1px rgba(201,154,74,0.08) inset;
+    }
+
+    .dish-modal-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.16), transparent 34%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .dish-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 4;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(36, 22, 16, 0.16);
+      background: rgba(255, 251, 242, 0.82);
+      color: var(--bg-deep);
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+      box-shadow: 0 12px 28px rgba(36,22,16,0.18);
+      transition: transform .24s ease, background .24s ease;
+    }
+
+    .dish-close:hover,
+    .dish-close:focus-visible {
+      background: #fff7e8;
+      transform: translateY(-1px);
+    }
+
+    .dish-detail-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      padding: 0;
+      background: #f7ead2;
+      opacity: 1;
+      transition: opacity .18s ease;
+    }
+
+    /* ---------- SECTION 3 : STORY ---------- */
+    #story {
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .story-visual-modern {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-visual-modern img {
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      display: block;
+      transform: scale(1.15);
+    }
+
+    .story-text-modern {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .story-text-modern .eyebrow {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .story-text-modern .eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .story-text-modern .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.4;
+      color: var(--cream);
+      font-weight: 400;
+    }
+
+    .story-text-modern .quote em {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .story-text-modern .signature {
+      font-size: 13px;
+      color: var(--cream-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* ---------- SECTION 4 : LOCATION ---------- */
+    #location {
+      background:
+        radial-gradient(ellipse at 18% 28%, rgba(201, 154, 74, 0.12), transparent 34%),
+        linear-gradient(135deg, #3a2115 0%, #2b180f 48%, #1f110b 100%);
+      min-height: auto;
+      padding: clamp(34px, 4vw, 52px) clamp(22px, 5vw, 72px);
+    }
+
+    .loc-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.72fr) minmax(360px, 1fr);
+      gap: clamp(22px, 3vw, 36px);
+      align-items: center;
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0;
+    }
+
+    .loc-card {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+
+    .loc-card .label {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .loc-card .value {
+      font-size: 15px;
+      color: var(--cream);
+      line-height: 1.52;
+    }
+
+    .loc-actions {
+      margin-top: 18px;
+    }
+
+    .loc-map-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border: 1px solid rgba(201, 154, 74, 0.58);
+      border-radius: 999px;
+      color: var(--gold);
+      background: rgba(36, 22, 16, 0.32);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color .25s, border-color .25s, background .25s;
+    }
+
+    .loc-map-link:hover,
+    .loc-map-link:focus-visible {
+      color: var(--cream);
+      border-color: var(--gold);
+      background: rgba(201, 154, 74, 0.14);
+      outline: none;
+    }
+
+    .map-wrap {
+      height: clamp(190px, 20vw, 250px);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      filter: sepia(15%) saturate(85%) brightness(0.9) contrast(1.05);
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ---------- SECTION 5 : CUSTOMER REVIEWS ---------- */
+    #customer-reviews {
+      position: relative;
+      min-height: 720px;
+      padding: clamp(96px, 10vw, 132px) clamp(20px, 5vw, 72px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bg-deep);
+      isolation: isolate;
+    }
+
+    .reviews-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    #customer-reviews::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(36, 22, 16, 0.28), rgba(36, 22, 16, 0.42)),
+        radial-gradient(ellipse at center, rgba(36, 22, 16, 0.08), rgba(36, 22, 16, 0.52));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .review-panel {
+      position: relative;
+      z-index: 2;
+      width: min(940px, 100%);
+      margin: 0 auto;
+      padding: 48px clamp(56px, 6vw, 64px);
+      border-radius: 16px;
+      background: rgba(36, 22, 16, 0.82);
+      border: 1px solid rgba(242, 232, 213, 0.12);
+      box-shadow: 0 28px 80px rgba(36, 22, 16, 0.56);
+      backdrop-filter: blur(3px);
+      text-align: center;
+    }
+
+    .review-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 3.3vw, 48px);
+      line-height: 1.02;
+      font-weight: 500;
+      letter-spacing: 0;
+      color: rgba(242, 232, 213, 0.85);
+      margin-bottom: 16px;
+      white-space: nowrap;
+    }
+
+    .review-rating {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 34px;
+      font-size: 14px;
+      color: var(--cream-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .review-rating strong {
+      color: var(--gold);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .review-quote-wrap {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto 30px;
+      padding: 0 clamp(42px, 5vw, 72px);
+    }
+
+    .review-mark {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-48%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(90px, 9vw, 136px);
+      line-height: 0.8;
+      color: rgba(242, 232, 213, 0.32);
+      pointer-events: none;
+    }
+
+    .review-mark-left {
+      left: 0;
+    }
+
+    .review-mark-right {
+      right: 0;
+    }
+
+    .review-copy {
+      font-size: clamp(16px, 1.45vw, 20px);
+      line-height: 1.75;
+      color: var(--cream);
+      font-weight: 400;
+    }
+
+    .review-source {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      color: var(--cream-dim);
+      font-size: 13px;
+    }
+
+    .review-source a {
+      display: inline-flex;
+      align-items: center;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .review-arrow {
+      position: absolute;
+      top: 50%;
+      width: 34px;
+      height: 48px;
+      border: 0;
+      background: transparent;
+      color: rgba(242, 232, 213, 0.58);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: color .25s, opacity .25s, transform .25s;
+    }
+
+    .review-arrow:hover,
+    .review-arrow:focus-visible {
+      color: var(--gold);
+      transform: translateY(-50%) scale(1.08);
+      outline: none;
+    }
+
+    .review-arrow-prev {
+      left: 18px;
+    }
+
+    .review-arrow-next {
+      right: 18px;
+    }
+
+    .google-icon {
+      width: 22px;
+      height: 22px;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .review-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .review-dots button {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 154, 74, 0.7);
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .review-dots button.is-active {
+      width: 26px;
+      background: var(--gold);
+    }
+
+    /* ---------- SECTION 5 : SOCIAL (subtle corner) ---------- */
+    .social-corner {
+      position: fixed;
+      bottom: 26px;
+      left: 26px;
+      z-index: 90;
+      display: flex;
+      gap: 10px;
+      opacity: .55;
+      transition: opacity .3s;
+    }
+
+    .social-corner:hover {
+      opacity: 1;
+    }
+
+    .social-corner a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 13px;
+      background: rgba(36, 22, 16, 0.6);
+      backdrop-filter: blur(4px);
+      transition: all .25s;
+    }
+
+    .social-corner a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px;
+      font-size: 12px;
+      color: var(--cream-dim);
+      background: var(--bg-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 1300px) {
+      .dotnav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      #menu {
+        padding-inline: clamp(28px, 5vw, 54px);
+      }
+
+      .menu-heading {
+        width: min(100%, 460px);
+        margin-bottom: 48px;
+      }
+
+      .menu-heading::before {
+        width: 340px;
+        height: 180px;
+        opacity: .72;
+      }
+
+      .menu-heading__title {
+        font-size: clamp(48px, 6.2vw, 64px);
+        letter-spacing: .11em;
+      }
+
+      .menu-cards {
+        gap: 24px 24px;
+      }
+
+      .menu-card .dish-plate {
+        width: min(100%, 280px);
+        height: 212px;
+      }
+
+      .menu-cards-wide {
+        max-width: 760px;
+      }
+
+      .menu-cards-wide .menu-card .dish-plate {
+        width: min(100%, 320px);
+        height: 228px;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .site-nav {
+        padding: 18px 20px;
+      }
+
+      .site-nav .logo {
+        width: 58px;
+        height: 58px;
+      }
+
+      .site-nav ul {
+        display: none;
+      }
+
+      section {
+        padding: 100px 24px 60px;
+      }
+
+      #menu {
+        min-height: auto;
+        padding: 82px 20px 46px;
+        background-position: center top;
+        background-size: auto, cover;
+      }
+
+      .menu-heading {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 42px;
+        padding-top: 0;
+        padding-left: 0;
+      }
+
+      .menu-heading::before {
+        left: 10%;
+        top: 50%;
+        width: min(300px, 86vw);
+        height: 180px;
+        transform: translate(-18%, -50%);
+        opacity: .65;
+      }
+
+      .menu-heading::after {
+        display: none;
+      }
+
+      .menu-heading__eyebrow {
+        margin-bottom: 10px;
+        font-size: 10px;
+        letter-spacing: .22em;
+      }
+
+      .menu-heading__title {
+        font-size: clamp(40px, 12vw, 56px);
+        letter-spacing: .1em;
+        white-space: normal;
+      }
+
+      .menu-heading__divider {
+        width: 72px;
+        margin: 18px 0 14px;
+      }
+
+      .menu-heading__subtitle {
+        max-width: 100%;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .loc-grid,
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      #location {
+        padding: 34px 18px 32px;
+      }
+
+      .loc-grid {
+        gap: 16px;
+        padding: 0;
+      }
+
+      .map-wrap {
+        height: 210px;
+      }
+
+      #customer-reviews {
+        min-height: 620px;
+        padding: 92px 18px 72px;
+      }
+
+      .review-panel {
+        width: 100%;
+        padding: 38px 22px;
+        border-radius: 14px;
+      }
+
+      .review-title {
+        font-size: clamp(28px, 8.5vw, 38px);
+        line-height: 1.08;
+        white-space: normal;
+      }
+
+      .review-rating {
+        margin-bottom: 28px;
+        font-size: 13px;
+      }
+
+      .review-quote-wrap {
+        padding: 0 24px;
+        margin-bottom: 26px;
+      }
+
+      .review-mark {
+        font-size: 76px;
+      }
+
+      .review-copy {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .review-arrow {
+        width: 28px;
+        height: 42px;
+        font-size: 34px;
+      }
+
+      .review-arrow-prev {
+        left: 10px;
+      }
+
+      .review-arrow-next {
+        right: 10px;
+      }
+
+      .menu-cards,
+      .menu-cards-wide {
+        grid-template-columns: 1fr;
+        gap: 18px 0;
+        max-width: 420px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .menu-card,
+      .menu-cards-wide .menu-card {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .menu-card .dish-plate,
+      .menu-cards-wide .menu-card .dish-plate {
+        width: min(340px, 88vw);
+        height: 212px;
+      }
+      .menu-card img {
+        transform: scale(1.54);
+      }
+      .menu-card.dish-bc-xe img,
+      .menu-card.dish-bc-chat img {
+        transform: scale(1.44);
+      }
+      .menu-card:hover img,
+      .menu-card:focus-visible img {
+        transform: scale(1.6) translateY(-3px);
+      }
+      .menu-card.dish-bc-xe:hover img,
+      .menu-card.dish-bc-xe:focus-visible img,
+      .menu-card.dish-bc-chat:hover img,
+      .menu-card.dish-bc-chat:focus-visible img {
+        transform: scale(1.5) translateY(-3px);
+      }
+      .menu-card-name { font-size: 22px; }
+      .menu-card-price {
+        gap: 10px;
+        font-size: 21px;
+      }
+      .menu-card-hint {
+        opacity: .62;
+        transform: none;
+      }
+      .menu-card-plus {
+        width: 28px;
+        height: 28px;
+      }
+      .menu-category {
+        margin-top: 14px;
+      }
+      .menu-category + .menu-category {
+        margin-top: 18px;
+      }
+      .menu-category-label {
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 4px;
+        padding: 0;
+      }
+      .menu-category-label::before,
+      .menu-category-label .cat-line {
+        flex-basis: 34px;
+        min-width: 28px;
+      }
+      .menu-cat-icon {
+        width: 46px;
+        height: 46px;
+      }
+      .menu-cat-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .menu-cat-icon img {
+        width: 100%;
+        height: 100%;
+      }
+      .menu-category-label .cat-name { font-size: 16px; letter-spacing: 3px; }
+      .menu-botanical.b-tr,
+      .menu-botanical.b-bl { width: 150px; opacity: .35; }
+      .menu-botanical.b-cr, .menu-botanical.b-cl,
+      .menu-botanical.b-mid { display: none; }
+
+      .dish-modal {
+        padding: 24px;
+        align-items: center;
+      }
+
+      .dish-modal-panel {
+        width: min(100%, 520px);
+        max-height: 68vh;
+        border-radius: 14px;
+      }
+
+      .dish-detail-img {
+        padding: 0;
+        height: 100%;
+        object-fit: contain;
+        background: #f7ead2;
+      }
+
+      .story-visual-modern {
+        order: -1;
+      }
+
+      #hero {
+        padding: 0;
+        min-height: 100vh;
+      }
+
+      .hero-content {
+        padding: 120px 24px 60px;
+        max-width: 100%;
+      }
+
+      .hero-quote {
+        white-space: normal;
+        font-size: clamp(22px, 6vw, 30px);
+      }
+
+      .hero-overlay {
+        background: linear-gradient(to top,
+            var(--bg-deep) 0%,
+            rgba(36, 22, 16, 0.94) 45%,
+            rgba(36, 22, 16, 0.55) 68%,
+            rgba(36, 22, 16, 0.15) 85%,
+            transparent 100%);
+      }
+
+      .hero-bg-photo {
+        object-position: center 20%;
+      }
+
+      .dotnav {
+        display: none;
+      }
+
+      .social-corner {
+        bottom: 16px;
+        left: 16px;
+      }
+    }
+
+    /* ========== SECTION: BACKSTAGE (Hậu trường bếp) ========== */
+    #backstage {
+      background: var(--bg-deep);
+      padding: clamp(28px, 3.2vw, 44px) clamp(24px, 6vw, 96px) clamp(56px, 6vw, 84px);
+      color: var(--cream);
+    }
+    .bs-shell { max-width: 1240px; margin: 0 auto; }
+    .bs-head {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 10px; margin-bottom: clamp(22px, 2.6vw, 34px);
+    }
+    .bs-eyebrow {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .bs-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05; color: var(--cream); margin: 0;
+    }
+    .bs-title em { font-style: italic; color: var(--gold); }
+    .bs-sub {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px; color: var(--cream-dim); max-width: 520px; margin: 0;
+    }
+    .bs-quote {
+      position: relative;
+      max-width: 820px;
+      margin: 0;
+      padding-bottom: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 1.55vw, 24px);
+      font-weight: 400;
+      line-height: 1.42;
+      letter-spacing: 0.01em;
+      color: var(--cream);
+    }
+    .bs-quote::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 86px;
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(201,154,74,0.85), transparent);
+    }
+
+    .bs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 180px 180px clamp(320px, 28vw, 430px);
+      gap: 14px;
+      grid-template-areas:
+        "hero hero vert1 vert2"
+        "hero hero vert1 vert2"
+        "wide1 wide1 wide2 wide2";
+    }
+    .bs-item {
+      position: relative; overflow: hidden; border-radius: 18px;
+      background: #1a0f0a; cursor: pointer;
+    }
+    .bs-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
+    }
+    .bs-item.bs-fit-full {
+      background:
+        radial-gradient(ellipse at center, rgba(201,154,74,0.08), transparent 62%),
+        #241610;
+    }
+    .bs-item.bs-fit-full img {
+      object-fit: contain;
+    }
+    .bs-item::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,10,6,0.85) 0%, rgba(20,10,6,0.25) 40%, transparent 65%);
+      opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
+    }
+    .bs-caption {
+      position: absolute; left: 20px; right: 20px; bottom: 18px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 17px; color: var(--cream);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      z-index: 2; letter-spacing: 0.01em;
+    }
+    .bs-item:hover img { transform: scale(1.05); }
+    .bs-item.bs-fit-full:hover img { transform: none; }
+    .bs-item:hover::after { opacity: 1; }
+    .bs-item:hover .bs-caption { opacity: 1; transform: translateY(0); }
+
+    .bs-hero  { grid-area: hero; }
+    .bs-vert1 { grid-area: vert1; }
+    .bs-vert2 { grid-area: vert2; }
+    .bs-wide1 { grid-area: wide1; }
+    .bs-wide2 { grid-area: wide2; }
+
+    @media (max-width: 960px) {
+      .bs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 200px 200px 220px clamp(360px, 58vw, 520px) clamp(360px, 58vw, 520px);
+        grid-template-areas:
+          "hero hero"
+          "hero hero"
+          "vert1 vert2"
+          "wide1 wide1"
+          "wide2 wide2";
+      }
+    }
+    @media (max-width: 620px) {
+      #backstage {
+        padding: 30px 18px 48px;
+      }
+
+      .bs-head {
+        margin-bottom: 20px;
+      }
+
+      .bs-quote {
+        padding-bottom: 14px;
+      }
+
+      .bs-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows:
+          240px
+          clamp(280px, 72vw, 430px)
+          240px
+          240px
+          clamp(280px, 72vw, 430px);
+        grid-template-areas:
+          "hero"
+          "wide1"
+          "vert1"
+          "vert2"
+          "wide2";
+      }
+      .bs-caption { opacity: 1; transform: translateY(0); }
+      .bs-item::after { opacity: 1; }
+    }
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+<body>
+
+  <nav class="site-nav" id="siteNav">
+    <a class="logo" href="#hero" aria-label="Bánh Canh Gà Ta">
+      <img src="images/menu/icon-quan-an.png" alt="Bánh Canh Gà Ta">
+    </a>
+    <ul>
+      <li><a href="#hero">Trang chủ</a></li>
+      <li><a href="#story">Giới thiệu</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#location">Vị trí</a></li>
+    </ul>
+  </nav>
+
+  <div class="dotnav" id="dotnav"></div>
+
+  <div class="social-corner">
+
+    <a href="#" title="Facebook">FB</a>
+    <a href="#" title="TikTok">TT</a>
+    <a href="#" title="ShopeeFood">SF</a>
+    <a href="#" title="GrabFood">GF</a>
+  </div>
+
+  <!-- SECTION 1: HERO -->
+  <section id="hero">
+    <img class="hero-bg-photo" src="images/hero-scene.png"
+      alt="Đũa gắp miếng gà ta từ tô bánh canh gà, kèm chén nước chấm muối tiêu chanh">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-quote">"Đưa gánh bánh canh Hàng Gòn về giữa phố thị"</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: STORY -->
+  <section id="story">
+    <div class="story-grid">
+      <div class="story-visual-modern">
+        <img src="images/story-scene-v3.png" alt="Không gian bàn ghế bình dân Hàng Gòn">
+      </div>
+      <div class="story-text-modern">
+        
+        <div class="quote">
+          "Góc chợ <em>Hàng Gòn</em> chứng kiến bao thế hệ. Chúng tôi vẫn giữ cách ninh xương đủ giờ, chọn gà đủ lứa,
+          trao gửi hương vị <em>mộc mạc, chân thật</em> như thuở ban sơ."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: MENU (redesigned — minimal editorial, template-matched) -->
+  <section id="menu">
+    <!-- Corner leaf botanicals -->
+    <svg class="menu-botanical b-tr" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none">
+        <path d="M230 10 C 190 40, 150 80, 110 130 S 55 200, 20 232" />
+        <path d="M200 30 C 210 40, 214 54, 210 68 C 194 62, 186 48, 200 30 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M170 60 C 182 68, 188 82, 184 96 C 168 90, 160 76, 170 60 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M140 95 C 152 103, 158 117, 154 131 C 138 125, 130 111, 140 95 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M108 132 C 120 140, 126 154, 122 168 C 106 162, 98 148, 108 132 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M78 170 C 90 178, 96 192, 92 206 C 76 200, 68 186, 78 170 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M50 205 C 62 213, 68 227, 64 236 C 50 232, 42 220, 50 205 Z" fill="currentColor" fill-opacity=".2"/>
+      </g>
+    </svg>
+    <svg class="menu-botanical b-bl" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none">
+        <path d="M230 10 C 190 40, 150 80, 110 130 S 55 200, 20 232" />
+        <path d="M200 30 C 210 40, 214 54, 210 68 C 194 62, 186 48, 200 30 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M170 60 C 182 68, 188 82, 184 96 C 168 90, 160 76, 170 60 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M140 95 C 152 103, 158 117, 154 131 C 138 125, 130 111, 140 95 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M108 132 C 120 140, 126 154, 122 168 C 106 162, 98 148, 108 132 Z" fill="currentColor" fill-opacity=".25"/>
+        <path d="M78 170 C 90 178, 96 192, 92 206 C 76 200, 68 186, 78 170 Z" fill="currentColor" fill-opacity=".25"/>
+      </g>
+    </svg>
+    <svg class="menu-botanical b-cr" viewBox="0 0 160 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round">
+        <path d="M80 0 Q 78 100 78 300"/>
+        <path d="M78 50 Q 40 60 30 90 Q 60 90 78 70 Z" fill="currentColor" fill-opacity=".2"/>
+        <path d="M78 110 Q 120 118 132 148 Q 100 150 78 128 Z" fill="currentColor" fill-opacity=".2"/>
+        <path d="M78 170 Q 40 178 28 210 Q 60 210 78 188 Z" fill="currentColor" fill-opacity=".2"/>
+        <path d="M78 230 Q 120 238 132 268 Q 100 270 78 248 Z" fill="currentColor" fill-opacity=".2"/>
+      </g>
+    </svg>
+
+    <div class="menu-shell">
+      <div class="menu-category">
+        <div class="menu-category-label">
+          <span class="menu-cat-icon" aria-hidden="true">
+            <img src="images/menu/icon-banh-canh-ga.png" alt="">
+          </span>
+          <span class="cat-name">Bánh canh gà</span>
+          <span class="cat-line"></span>
+        </div>
+        <div class="menu-cards">
+          <button class="menu-card dish-bc-xe" type="button" data-detail="images/menu/detail-banh-canh-ga-xe.png"
+            data-name="Bánh canh gà xé">
+            <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-cutout.png" alt="Bánh canh gà xé"></span>
+            <span>
+              <span class="menu-card-name">Bánh canh<br/>gà xé</span>
+              <span class="menu-card-price">50.000 <span class="vnd">VND</span>
+                <span class="menu-card-plus" aria-hidden="true">+</span>
+              </span>
+              <span class="menu-card-hint">Xem chi tiết</span>
+            </span>
+          </button>
+
+          <button class="menu-card dish-bc-chat" type="button" data-detail="images/menu/detail-banh-canh-ga-chat.png"
+            data-name="Bánh canh gà chặt">
+            <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-cutout.png" alt="Bánh canh gà chặt"></span>
+            <span>
+              <span class="menu-card-name">Bánh canh<br/>gà chặt</span>
+              <span class="menu-card-price">60.000 <span class="vnd">VND</span>
+                <span class="menu-card-plus" aria-hidden="true">+</span>
+              </span>
+              <span class="menu-card-hint">Xem chi tiết</span>
+            </span>
+          </button>
+
+          <button class="menu-card" type="button" data-detail="images/menu/detail-banh-canh-dac-biet.png"
+            data-name="Bánh canh đặc biệt">
+            <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-cutout.png" alt="Bánh canh đặc biệt"></span>
+            <span>
+              <span class="menu-card-name">Bánh canh<br/>đặc biệt</span>
+              <span class="menu-card-price">70.000 <span class="vnd">VND</span>
+                <span class="menu-card-plus" aria-hidden="true">+</span>
+              </span>
+              <span class="menu-card-hint">Xem chi tiết</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-category-label">
+          <span class="menu-cat-icon" aria-hidden="true">
+            <img src="images/menu/icon-xoi-ga.png" alt="">
+          </span>
+          <span class="cat-name">Xôi gà</span>
+          <span class="cat-line"></span>
+        </div>
+        <div class="menu-cards menu-cards-wide">
+          <button class="menu-card" type="button" data-detail="images/menu/detail-xoi-ga-xe.png"
+            data-name="Xôi gà xé trứng non">
+            <span class="dish-plate"><img src="images/menu/xoi-ga-xe-cutout.png" alt="Xôi gà xé trứng non"></span>
+            <span>
+              <span class="menu-card-name">Xôi gà<br/>xé trứng non</span>
+              <span class="menu-card-price">45.000 <span class="vnd">VND</span>
+                <span class="menu-card-plus" aria-hidden="true">+</span>
+              </span>
+              <span class="menu-card-hint">Xem chi tiết</span>
+            </span>
+          </button>
+
+          <button class="menu-card" type="button" data-detail="images/menu/detail-xoi-ga-chat.png"
+            data-name="Xôi gà chặt trứng non">
+            <span class="dish-plate"><img src="images/menu/xoi-ga-chat-cutout.png" alt="Xôi gà chặt trứng non"></span>
+            <span>
+              <span class="menu-card-name">Xôi gà<br/>chặt trứng non</span>
+              <span class="menu-card-price">50.000 <span class="vnd">VND</span>
+                <span class="menu-card-plus" aria-hidden="true">+</span>
+              </span>
+              <span class="menu-card-hint">Xem chi tiết</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="dish-modal" id="dishModal" aria-hidden="true">
+    <div class="dish-modal-panel" role="dialog" aria-modal="true" aria-label="Chi tiết món ăn">
+      <button class="dish-close" type="button" aria-label="Đóng chi tiết món ăn">×</button>
+      <img class="dish-detail-img" src="" alt="">
+    </div>
+  </div>
+
+  <!-- SECTION 3.5: BACKSTAGE -->
+  <section id="backstage">
+    <div class="bs-shell">
+      <div class="bs-head">
+        <p class="bs-quote">“Mỗi tô bánh canh được nấu như bữa cơm nhà,<br>nóng hổi, đậm đà và đầy tình thương.”</p>
+      </div>
+      <div class="bs-grid">
+        <figure class="bs-item bs-hero">
+          <img src="images/behind-scenes/trung-non-nuoc-cham.png" alt="Trứng non chấm nước mắm" loading="lazy">
+          <figcaption class="bs-caption">Vị chấm không thể thiếu</figcaption>
+        </figure>
+        <figure class="bs-item bs-vert1">
+          <img src="images/behind-scenes/chan-nuoc-leo.png" alt="Chan nước lèo nóng hổi" loading="lazy">
+          <figcaption class="bs-caption">Nước lèo mới chan mỗi tô</figcaption>
+        </figure>
+        <figure class="bs-item bs-vert2">
+          <img src="images/behind-scenes/ga-luoc-quan.png" alt="Gà luộc tại quán" loading="lazy">
+          <figcaption class="bs-caption">Gà tuyển chọn mỗi sáng</figcaption>
+        </figure>
+        <figure class="bs-item bs-wide1 bs-fit-full">
+          <img src="images/behind-scenes/mot-goc-nho-cua-quan.png" alt="Một góc nhỏ của quán" loading="lazy">
+          <figcaption class="bs-caption">Góc quán mỗi trưa</figcaption>
+        </figure>
+        <figure class="bs-item bs-wide2 bs-fit-full">
+          <img src="images/behind-scenes/khong-gian-quan.png" alt="Không gian quán" loading="lazy">
+          <figcaption class="bs-caption">Mặt tiền Hàng Gòn</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: CUSTOMER REVIEWS -->
+  <section id="customer-reviews" aria-label="Đánh giá khách hàng">
+    <img class="reviews-bg" src="images/testimonials-bg.png" alt="" loading="lazy" aria-hidden="true">
+    <div class="review-panel">
+      <h2 class="review-title">Khách hàng nói gì về Hàng Gòn?</h2>
+      <div class="review-rating">Google Reviewer: <strong>5/5</strong></div>
+      <div class="review-quote-wrap">
+        <span class="review-mark review-mark-left" aria-hidden="true">“</span>
+        <p class="review-copy" id="reviewCopy">Quán mới mở sát ngay chỗ làm luôn, bánh canh gà ngon, gà dai nước lèo thơm ngọt, quán nhỏ nhỏ mà gọn gàng, nv phục vụ nch dễ thương nha. Sẽ ủng hộ quán lâu dài tiếc hôm nay chưa có xôi gà 🥹🥹</p>
+        <span class="review-mark review-mark-right" aria-hidden="true">”</span>
+      </div>
+      <div class="review-source">
+        <span>Đánh giá trên</span>
+        <a href="https://www.google.com/search?q=b%C3%A1nh+canh+g%C3%A0+h%C3%A0ng+g%C3%B2n&oq=b%C3%A1nh+ca&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDkyBggCEEUYOzIGCAMQRRg80gEIMTExOGowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8#sv=CAESzQEKuQEStgEKd0FKaVQ0dEtMQ242dmZWNjA4WmZDcV9KMVZNdUhZZ3ByQ1BTUjFoTlhCOV9yZFZVZmVtb0FYdU54Ul9kZ1RDWlB4U1I3RUNjenZUNmFXcTdCS2xIZ095YXRZenY0S01qc1JEekNGU2pCc3ZMWHNpVzAxUzhWdllzEhdMa3RiYXRHQ05KU2E0LUVQNEpXbnVBZxoiQURzcjlmU3dhTG1IbzdhaV9oRHBtQ1VrV0kzV3c4MzdIQRIEODA1MRoBMyoAMAA4AUAAGAAgnKGEgwM6AEoCEAE" target="_blank" rel="noopener" aria-label="Xem đánh giá Hàng Gòn trên Google">
+          <svg class="google-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M23.49 12.27c0-.82-.07-1.42-.22-2.04H12v3.97h6.62c-.13.99-.85 2.48-2.44 3.49l-.02.13 3.55 2.68.25.02c2.29-2.06 3.53-5.09 3.53-8.25z"/>
+            <path fill="#34A853" d="M12 24c3.27 0 6.02-1.05 8.03-2.86l-3.82-2.96c-1.02.69-2.39 1.17-4.21 1.17-3.2 0-5.92-2.06-6.89-4.91l-.14.01-3.69 2.78-.05.13C3.23 20.91 7.27 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.11 14.44c-.26-.74-.41-1.53-.41-2.34s.15-1.6.4-2.34l-.01-.16-3.74-2.82-.12.06C.45 8.37 0 10.15 0 12.1s.45 3.73 1.23 5.26l3.88-2.92z"/>
+            <path fill="#EA4335" d="M12 4.85c2.28 0 3.82.96 4.7 1.76l3.43-3.26C18.02 1.44 15.27.25 12 .25 7.27.25 3.23 3.34 1.23 6.84l3.87 2.92C6.08 6.91 8.8 4.85 12 4.85z"/>
+          </svg>
+        </a>
+      </div>
+      <button class="review-arrow review-arrow-prev" type="button" aria-label="Đánh giá trước" data-review-direction="-1">‹</button>
+      <button class="review-arrow review-arrow-next" type="button" aria-label="Đánh giá tiếp theo" data-review-direction="1">›</button>
+      <div class="review-dots" aria-label="Chuyển đánh giá" id="reviewDots">
+        <button class="is-active" type="button" aria-label="Đánh giá 1" data-review-index="0"></button>
+        <button type="button" aria-label="Đánh giá 2" data-review-index="1"></button>
+        <button type="button" aria-label="Đánh giá 3" data-review-index="2"></button>
+        <button type="button" aria-label="Đánh giá 4" data-review-index="3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: LOCATION -->
+  <section id="location">
+    <div class="loc-grid">
+      <div>
+        <div class="loc-card">
+          <div class="label">Địa chỉ</div>
+          <div class="value">490 Điện Biên Phủ, Thạnh Mỹ Tây, TP. Hồ Chí Minh</div>
+        </div>
+        <div class="loc-card">
+          <div class="label">Giờ mở cửa</div>
+          <div class="value">06:00 – 21:30 (Tất cả các ngày trong tuần)</div>
+        </div>
+        <div class="loc-card">
+          <div class="label">Hotline</div>
+          <div class="value">0356 539 789</div>
+        </div>
+        <div class="loc-actions">
+          <a class="loc-map-link" href="https://maps.app.goo.gl/m2fKyMJy4xSPQMa87" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.134059220087!2d106.71036697355223!3d10.801042958742219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529619df418e7%3A0x158a745e81901a1c!2zQsOhbmggQ2FuaCBHw6AgLSBYw7RpIEfDoCBIw6BuZyBHw7Ju!5e0!3m2!1svi!2s!4v1784371316143!5m2!1svi!2s" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>Copyright @ 2026 by Banh canh Ga Hang Gon TP. Ho Chi Minh. All Rights Reserved Site by Banh canh Ga Hang Gon Vietnam</footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const dotnav = document.getElementById('dotnav');
+    sections.forEach((sec, i) => {
+      const b = document.createElement('button');
+      b.addEventListener('click', () => sec.scrollIntoView({ behavior: 'smooth' }));
+      dotnav.appendChild(b);
+    });
+    const dots = dotnav.querySelectorAll('button');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = [...sections].indexOf(e.target);
+          dots.forEach(d => d.classList.remove('active'));
+          dots[idx].classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(s => io.observe(s));
+
+    const siteNav = document.getElementById('siteNav');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
+
+      if (currentScrollY < 80) {
+        siteNav.classList.remove('is-hidden');
+      } else if (scrollDelta > 8) {
+        siteNav.classList.add('is-hidden');
+      } else if (scrollDelta < -8) {
+        siteNav.classList.remove('is-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    const reviewPanel = document.querySelector('.review-panel');
+    const reviewCopy = document.getElementById('reviewCopy');
+    const reviewDots = document.querySelectorAll('[data-review-index]');
+    const reviewArrows = document.querySelectorAll('[data-review-direction]');
+    const reviews = [
+      'Quán mới mở sát ngay chỗ làm luôn, bánh canh gà ngon, gà dai nước lèo thơm ngọt, quán nhỏ nhỏ mà gọn gàng, nv phục vụ nch dễ thương nha. Sẽ ủng hộ quán lâu dài tiếc hôm nay chưa có xôi gà 🥹🥹',
+      'Đã thử và đồ ăn ngon nha, mấy bạn nhân viên cực nhiệt tình nên mình cho 5 sao',
+      'Nhân viên thân thiện món ăn ngon xứng đáng 5 sao',
+      'Ghé ăn thử đi mấy bà, xôi ngon dẻo lắmmm, nhân viên ổn nhiệt tình'
+    ];
+    let activeReviewIndex = 0;
+    let reviewTimer;
+
+    function showReview(index) {
+      activeReviewIndex = index;
+      reviewCopy.textContent = reviews[activeReviewIndex];
+      reviewDots.forEach((dot, dotIndex) => {
+        dot.classList.toggle('is-active', dotIndex === activeReviewIndex);
+      });
+    }
+
+    function startReviewCarousel() {
+      clearInterval(reviewTimer);
+      reviewTimer = setInterval(() => {
+        showReview((activeReviewIndex + 1) % reviews.length);
+      }, 6000);
+    }
+
+    function stopReviewCarousel() {
+      clearInterval(reviewTimer);
+    }
+
+    function goToAdjacentReview(direction) {
+      const nextIndex = (activeReviewIndex + direction + reviews.length) % reviews.length;
+      showReview(nextIndex);
+      startReviewCarousel();
+    }
+
+    reviewDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        showReview(Number(dot.dataset.reviewIndex));
+        startReviewCarousel();
+      });
+    });
+
+    reviewArrows.forEach((arrow) => {
+      arrow.addEventListener('click', () => {
+        goToAdjacentReview(Number(arrow.dataset.reviewDirection));
+      });
+    });
+
+    if (reviewPanel) {
+      reviewPanel.addEventListener('mouseenter', stopReviewCarousel);
+      reviewPanel.addEventListener('mouseleave', startReviewCarousel);
+      reviewPanel.addEventListener('focusin', stopReviewCarousel);
+      reviewPanel.addEventListener('focusout', startReviewCarousel);
+      reviewPanel.addEventListener('touchstart', stopReviewCarousel, { passive: true });
+      reviewPanel.addEventListener('touchend', startReviewCarousel, { passive: true });
+    }
+
+    if (reviewCopy && reviewDots.length) {
+      showReview(0);
+      startReviewCarousel();
+    }
+
+    const dishModal = document.getElementById('dishModal');
+    const dishModalImage = dishModal.querySelector('.dish-detail-img');
+    const dishClose = dishModal.querySelector('.dish-close');
+    const menuCards = document.querySelectorAll('.menu-card');
+    const imageCacheVersion = Date.now();
+    let dishDetailRequestId = 0;
+
+    function withImageCacheVersion(src) {
+      try {
+        const url = new URL(src, window.location.href);
+        url.searchParams.set('v', imageCacheVersion);
+        return url.toString();
+      } catch (error) {
+        return `${src}${src.includes('?') ? '&' : '?'}v=${imageCacheVersion}`;
+      }
+    }
+
+    function openDishDetail(card) {
+      const requestId = ++dishDetailRequestId;
+      const detailSrc = withImageCacheVersion(card.dataset.detail);
+      const detailAlt = `Chi tiết món ${card.dataset.name}`;
+
+      dishModal.classList.add('is-loading');
+      dishModalImage.removeAttribute('src');
+      dishModalImage.alt = '';
+      dishModal.classList.add('is-open');
+      dishModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      dishClose.focus();
+
+      const nextImage = new Image();
+      nextImage.onload = async () => {
+        if (requestId !== dishDetailRequestId) return;
+        try {
+          if (nextImage.decode) await nextImage.decode();
+        } catch (error) {
+          // Some browsers reject decode() for cached images; onload is enough here.
+        }
+        if (requestId !== dishDetailRequestId) return;
+        dishModalImage.src = detailSrc;
+        dishModalImage.alt = detailAlt;
+        dishModal.classList.remove('is-loading');
+      };
+      nextImage.src = detailSrc;
+    }
+
+    function closeDishDetail() {
+      dishDetailRequestId++;
+      dishModal.classList.remove('is-open');
+      dishModal.classList.remove('is-loading');
+      dishModal.setAttribute('aria-hidden', 'true');
+      dishModalImage.removeAttribute('src');
+      dishModalImage.alt = '';
+      document.body.classList.remove('modal-open');
+    }
+
+    menuCards.forEach((card) => {
+      card.addEventListener('click', () => openDishDetail(card));
+    });
+
+    dishClose.addEventListener('click', closeDishDetail);
+    dishModal.addEventListener('click', (event) => {
+      if (event.target === dishModal) closeDishDetail();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && dishModal.classList.contains('is-open')) {
+        closeDishDetail();
+      }
+    });
+
+    window.addEventListener('load', () => {
+      const stamp = Date.now();
+      document.querySelectorAll('img').forEach((img) => {
+        if (!img.src) return;
+        try {
+          const url = new URL(img.src, window.location.href);
+          if (url.protocol === 'http:' || url.protocol === 'https:') {
+            url.searchParams.set('v', stamp);
+            img.src = url.toString();
+          }
+        } catch (error) {
+          console.warn('Unable to refresh image cache:', img.src);
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
