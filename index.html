@@ -199,7 +199,7 @@
       padding: 0;
       display: flex;
       align-items: center;
-      min-height: 132vh;
+      min-height: 100vh;
     }
 
     .hero-panorama {
@@ -224,12 +224,7 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: linear-gradient(100deg,
-          var(--bg-deep) 0%,
-          rgba(36, 22, 16, 0.92) 32%,
-          rgba(36, 22, 16, 0.55) 52%,
-          rgba(36, 22, 16, 0.1) 72%,
-          transparent 85%);
+      background: none;
     }
 
     .hero-content {
@@ -664,6 +659,203 @@
       transform: translateY(0);
     }
 
+    /* ---- Menu editorial template layout ---- */
+    #menu {
+      background-image:
+        linear-gradient(180deg,
+          rgba(20, 11, 7, 0.72) 0%,
+          rgba(36, 22, 16, 0.58) 30%,
+          rgba(36, 22, 16, 0.5) 58%,
+          rgba(20, 11, 7, 0.78) 100%),
+        url('images/menu/background-menu.png?v=20260719-01');
+      background-position: center top, center top;
+      background-size: cover, cover;
+      background-repeat: no-repeat, no-repeat;
+      background-blend-mode: normal, normal;
+      padding: clamp(96px, 9vw, 140px) clamp(30px, 6vw, 110px) clamp(78px, 7vw, 110px);
+      min-height: auto;
+    }
+
+    #menu::before {
+      background:
+        radial-gradient(ellipse at 50% 10%, rgba(201,154,74,0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12,7,4,0.1), rgba(36,22,16,0.1) 42%, rgba(12,7,4,0.32));
+    }
+
+    #menu::after {
+      opacity: .28;
+    }
+
+    .menu-shell {
+      max-width: 1180px;
+    }
+
+    .menu-category-label {
+      width: min(100%, 720px);
+      margin: 0 auto clamp(34px, 4vw, 58px);
+      justify-content: center;
+    }
+
+    .menu-category-label::before,
+    .menu-category-label .cat-line {
+      flex-basis: clamp(56px, 10vw, 160px);
+    }
+
+    .menu-category-label .cat-name {
+      font-size: clamp(18px, 1.45vw, 24px);
+      letter-spacing: .32em;
+    }
+
+    .menu-category + .menu-category {
+      margin-top: clamp(58px, 7vw, 92px);
+    }
+
+    .menu-category:first-child .menu-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(54px, 7vw, 88px);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .menu-category:first-child .menu-card {
+      display: grid;
+      grid-template-columns: minmax(320px, 1.08fr) minmax(280px, .92fr);
+      align-items: center;
+      gap: clamp(34px, 6vw, 92px);
+      text-align: left;
+      justify-items: stretch;
+    }
+
+    .menu-category:first-child .menu-card:nth-child(even) {
+      grid-template-columns: minmax(280px, .92fr) minmax(320px, 1.08fr);
+    }
+
+    .menu-category:first-child .menu-card:nth-child(even) .dish-plate {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .menu-category:first-child .menu-card:nth-child(even) > span:not(.dish-plate) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .menu-category:first-child .menu-card .dish-plate {
+      width: 100%;
+      height: clamp(340px, 36vw, 500px);
+      overflow: hidden;
+      border-radius: 48% 52% 42% 58% / 44% 44% 56% 56%;
+      background:
+        radial-gradient(ellipse at 50% 42%, rgba(255,255,255,0.96), rgba(244,238,224,0.92) 62%, rgba(224,205,171,0.62) 100%);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.36),
+        inset 0 0 0 1px rgba(255,255,255,0.42);
+    }
+
+    .menu-category:first-child .menu-card:nth-child(2) .dish-plate {
+      border-radius: 42% 58% 52% 48% / 52% 42% 58% 48%;
+    }
+
+    .menu-category:first-child .menu-card:nth-child(3) .dish-plate {
+      border-radius: 56% 44% 48% 52% / 44% 54% 46% 56%;
+    }
+
+    .menu-category:first-child .menu-card .dish-plate::before {
+      inset: auto 12% 8% 12%;
+      height: 42px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.36), transparent 68%);
+      filter: blur(18px);
+    }
+
+    .menu-category:first-child .menu-card .dish-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 51%;
+      transform: scale(1.04);
+      filter: saturate(1.02) contrast(1.03);
+    }
+
+    .menu-category:first-child .menu-card:hover .dish-plate img,
+    .menu-category:first-child .menu-card:focus-visible .dish-plate img {
+      transform: scale(1.08);
+      filter: saturate(1.05) contrast(1.04);
+    }
+
+    .menu-category:first-child .menu-card > span:not(.dish-plate) {
+      align-items: flex-start;
+      gap: 10px;
+      max-width: 420px;
+      padding: clamp(4px, 1vw, 14px) 0;
+    }
+
+    .menu-category:first-child .menu-card > span:not(.dish-plate)::before {
+      content: 'Món quê trong bát canh';
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: rgba(201,154,74,0.76);
+      margin-bottom: 2px;
+    }
+
+    .menu-category:first-child .menu-card-name {
+      font-size: clamp(36px, 4.2vw, 62px);
+      line-height: .96;
+      text-align: left;
+      color: rgba(242,232,213,0.94);
+    }
+
+    .menu-category:first-child .menu-card-name::after {
+      width: 96px;
+      height: 1px;
+      content: '';
+      background: linear-gradient(90deg, rgba(201,154,74,0.82), rgba(201,154,74,0.08));
+      margin: 18px 0 2px;
+    }
+
+    .menu-category:first-child .menu-card-price {
+      font-size: clamp(24px, 2.1vw, 34px);
+      letter-spacing: .04em;
+    }
+
+    .menu-category:first-child .menu-card-hint {
+      opacity: .68;
+      transform: none;
+      margin-top: 6px;
+      color: rgba(242,232,213,0.6);
+    }
+
+    .menu-category:first-child .menu-card:hover .menu-card-hint,
+    .menu-category:first-child .menu-card:focus-visible .menu-card-hint {
+      opacity: .95;
+    }
+
+    .menu-cards-wide {
+      max-width: 900px;
+      gap: clamp(28px, 5vw, 70px);
+      align-items: end;
+    }
+
+    .menu-cards-wide .menu-card .dish-plate {
+      width: min(100%, 360px);
+      height: clamp(230px, 24vw, 330px);
+      border-radius: 46% 54% 44% 56% / 50% 44% 56% 50%;
+      background: rgba(242,232,213,0.06);
+      overflow: visible;
+    }
+
+    .menu-cards-wide .menu-card img {
+      transform: scale(1.22);
+      filter: drop-shadow(0 24px 30px rgba(0,0,0,0.56));
+    }
+
+    .menu-cards-wide .menu-card:hover img,
+    .menu-cards-wide .menu-card:focus-visible img {
+      transform: scale(1.28) translateY(-4px);
+    }
+
     .dish-modal {
       position: fixed;
       inset: 0;
@@ -748,41 +940,61 @@
 
     /* ---------- SECTION 3 : STORY ---------- */
     #story {
-      background: var(--bg-deep);
       position: relative;
       overflow: hidden;
+      min-height: clamp(420px, 58vh, 620px);
+      padding: clamp(72px, 9vw, 132px) clamp(28px, 7vw, 120px);
+      background:
+        linear-gradient(180deg,
+          rgba(36, 22, 16, 0.04) 0%,
+          rgba(36, 22, 16, 0.2) 34%,
+          rgba(36, 22, 16, 0.68) 100%),
+        linear-gradient(90deg,
+          rgba(36, 22, 16, 0.28) 0%,
+          rgba(36, 22, 16, 0.1) 46%,
+          rgba(36, 22, 16, 0.44) 100%),
+        url('images/story/background.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin-top: -1px;
+    }
+
+    #story::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg,
+          rgba(36, 22, 16, 0.22) 0%,
+          rgba(36, 22, 16, 0.08) 34%,
+          rgba(36, 22, 16, 0.32) 100%);
     }
 
     .story-grid {
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
+      display: block;
+      max-width: 900px;
+      margin: 0 auto 0 0;
       width: 100%;
     }
 
     .story-visual-modern {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: none;
     }
 
     .story-visual-modern img {
-      width: 100%;
-      max-width: 700px;
-      height: auto;
-      display: block;
-      transform: scale(1.15);
+      display: none;
     }
 
     .story-text-modern {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 0;
+      max-width: 860px;
     }
 
     .story-text-modern .eyebrow {
@@ -804,10 +1016,12 @@
 
     .story-text-modern .quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 3.5vw, 42px);
-      line-height: 1.4;
+      font-size: clamp(30px, 3.15vw, 48px);
+      line-height: 1.2;
       color: var(--cream);
       font-weight: 400;
+      text-wrap: balance;
+      text-shadow: 0 12px 34px rgba(0, 0, 0, 0.58);
     }
 
     .story-text-modern .quote em {
@@ -935,8 +1149,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(36, 22, 16, 0.28), rgba(36, 22, 16, 0.42)),
-        radial-gradient(ellipse at center, rgba(36, 22, 16, 0.08), rgba(36, 22, 16, 0.52));
+        linear-gradient(180deg, rgba(36, 22, 16, 0.18), rgba(36, 22, 16, 0.32)),
+        radial-gradient(ellipse at center, rgba(36, 22, 16, 0.04), rgba(36, 22, 16, 0.42));
       z-index: 1;
       pointer-events: none;
     }
@@ -953,6 +1167,7 @@
       box-shadow: 0 28px 80px rgba(36, 22, 16, 0.56);
       backdrop-filter: blur(3px);
       text-align: center;
+      transform: translateY(clamp(-54px, -4vw, -34px));
     }
 
     .review-title {
@@ -1497,15 +1712,49 @@
         order: -1;
       }
 
+      #story {
+        min-height: auto;
+        padding: 64px 24px 72px;
+        background-position: 58% bottom;
+      }
+
+      .story-grid {
+        max-width: 100%;
+      }
+
+      .story-text-modern {
+        max-width: 100%;
+      }
+
+      .story-text-modern .quote {
+        font-size: clamp(21px, 5.8vw, 25px);
+        line-height: 1.34;
+        text-wrap: auto;
+      }
+
       #hero {
         padding: 0;
-        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
         overflow: hidden;
+        background: var(--bg-deep);
       }
 
       .hero-content {
-        padding: 120px 24px 60px;
+        flex: 1 0 auto;
+        width: 100%;
+        min-height: 38svh;
+        padding: 28px 24px 96px;
         max-width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        background:
+          linear-gradient(180deg, rgba(36, 22, 16, 0.95) 0%, var(--bg-deep) 42%),
+          var(--bg-deep);
         pointer-events: none;
       }
 
@@ -1515,15 +1764,21 @@
       }
 
       .hero-overlay {
-        background: linear-gradient(to top,
-            var(--bg-deep) 0%,
-            rgba(36, 22, 16, 0.94) 45%,
-            rgba(36, 22, 16, 0.55) 68%,
-            rgba(36, 22, 16, 0.15) 85%,
-            transparent 100%);
+        inset: 0 0 auto;
+        height: 62svh;
+        background: linear-gradient(to bottom,
+            rgba(36, 22, 16, 0.22) 0%,
+            rgba(36, 22, 16, 0.08) 42%,
+            rgba(36, 22, 16, 0.2) 78%,
+            rgba(36, 22, 16, 0.46) 100%);
       }
 
       .hero-panorama {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: 62svh;
+        flex: 0 0 62svh;
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
@@ -1541,7 +1796,7 @@
         inset: auto;
         width: auto;
         min-width: 100%;
-        height: 100svh;
+        height: 62svh;
         max-width: none;
         object-fit: contain;
         object-position: center center;
@@ -1701,6 +1956,619 @@
       .bs-caption { opacity: 1; transform: translateY(0); }
       .bs-item::after { opacity: 1; }
     }
+
+    @media (max-width: 1080px) {
+      .menu-shell {
+        max-width: 820px;
+      }
+
+      .menu-category:first-child .menu-card,
+      .menu-category:first-child .menu-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        text-align: center;
+        justify-items: center;
+      }
+
+      .menu-category:first-child .menu-card:nth-child(even) .dish-plate,
+      .menu-category:first-child .menu-card:nth-child(even) > span:not(.dish-plate) {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .menu-category:first-child .menu-card > span:not(.dish-plate) {
+        align-items: center;
+        text-align: center;
+        max-width: 560px;
+      }
+
+      .menu-category:first-child .menu-card-name {
+        text-align: center;
+      }
+
+      .menu-category:first-child .menu-card-name::after {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .menu-category:first-child .menu-card .dish-plate {
+        width: min(560px, 100%);
+        height: clamp(360px, 58vw, 520px);
+      }
+    }
+
+    @media (max-width: 880px) {
+      #menu {
+        padding: 76px 18px 54px;
+        background-position: center top, center top;
+        background-size: cover, cover;
+      }
+
+      .menu-category-label {
+        margin-bottom: 28px;
+      }
+
+      .menu-category-label .cat-name {
+        font-size: 16px;
+        letter-spacing: .22em;
+      }
+
+      .menu-category:first-child .menu-cards {
+        gap: 42px;
+      }
+
+      .menu-category:first-child .menu-card .dish-plate {
+        width: min(100%, 390px);
+        height: clamp(330px, 94vw, 430px);
+        border-radius: 38px;
+      }
+
+      .menu-category:first-child .menu-card .dish-plate img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 52%;
+        transform: scale(1.02);
+        filter: saturate(1.02) contrast(1.03);
+      }
+
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img {
+        transform: scale(1.05);
+      }
+
+      .menu-category:first-child .menu-card > span:not(.dish-plate)::before {
+        font-size: 8px;
+        letter-spacing: .24em;
+      }
+
+      .menu-category:first-child .menu-card-name {
+        font-size: clamp(31px, 9.2vw, 42px);
+        line-height: .98;
+      }
+
+      .menu-category:first-child .menu-card-price {
+        font-size: 25px;
+      }
+
+      .menu-cards-wide {
+        grid-template-columns: 1fr;
+        gap: 34px;
+        max-width: 390px;
+      }
+
+      .menu-cards-wide .menu-card .dish-plate {
+        width: min(100%, 340px);
+        height: 250px;
+      }
+
+      .menu-cards-wide .menu-card img {
+        transform: scale(1.18);
+      }
+
+      .menu-cards-wide .menu-card:hover img,
+      .menu-cards-wide .menu-card:focus-visible img {
+        transform: scale(1.22) translateY(-3px);
+      }
+    }
+
+    /* ---- Menu final: live cutout dishes on background, no detail banner ---- */
+    .menu-card {
+      cursor: default;
+    }
+
+    .menu-card:hover,
+    .menu-card:focus-visible {
+      transform: none;
+    }
+
+    .menu-card .dish-plate,
+    .menu-category:first-child .menu-card .dish-plate,
+    .menu-cards-wide .menu-card .dish-plate {
+      overflow: visible;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      isolation: isolate;
+    }
+
+    .menu-card .dish-plate::before,
+    .menu-category:first-child .menu-card .dish-plate::before,
+    .menu-cards-wide .menu-card .dish-plate::before {
+      inset: auto 16% 5% 16%;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.58), transparent 70%);
+      filter: blur(18px);
+      opacity: .9;
+    }
+
+    .menu-card .dish-plate img,
+    .menu-category:first-child .menu-card .dish-plate img,
+    .menu-cards-wide .menu-card .dish-plate img,
+    .menu-card:hover img,
+    .menu-card:focus-visible img,
+    .menu-category:first-child .menu-card:hover .dish-plate img,
+    .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+    .menu-cards-wide .menu-card:hover img,
+    .menu-cards-wide .menu-card:focus-visible img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      transform: scale(1.42);
+      filter: drop-shadow(0 28px 32px rgba(0,0,0,0.48));
+    }
+
+    .menu-category:first-child .menu-card .dish-plate {
+      height: clamp(300px, 31vw, 460px);
+    }
+
+    .menu-cards-wide .menu-card .dish-plate {
+      height: clamp(240px, 22vw, 330px);
+    }
+
+    .menu-card-hint,
+    .menu-card-plus {
+      display: none;
+    }
+
+    @media (max-width: 880px) {
+      .menu-category:first-child .menu-cards {
+        gap: 30px;
+      }
+
+      .menu-category:first-child .menu-card .dish-plate {
+        height: clamp(270px, 74vw, 340px);
+      }
+
+      .menu-cards-wide .menu-card .dish-plate {
+        height: clamp(230px, 64vw, 300px);
+      }
+
+      .menu-card .dish-plate img,
+      .menu-category:first-child .menu-card .dish-plate img,
+      .menu-cards-wide .menu-card .dish-plate img,
+      .menu-card:hover img,
+      .menu-card:focus-visible img,
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+      .menu-cards-wide .menu-card:hover img,
+      .menu-cards-wide .menu-card:focus-visible img {
+        transform: scale(1.36);
+      }
+    }
+
+    /* Match xoi dishes to the same editorial rhythm as banh canh */
+    .menu-cards-wide {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(54px, 7vw, 88px);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .menu-cards-wide .menu-card {
+      display: grid;
+      grid-template-columns: minmax(320px, 1.08fr) minmax(280px, .92fr);
+      align-items: center;
+      gap: clamp(34px, 6vw, 92px);
+      text-align: left;
+      justify-items: stretch;
+    }
+
+    .menu-cards-wide .menu-card:nth-child(even) {
+      grid-template-columns: minmax(280px, .92fr) minmax(320px, 1.08fr);
+    }
+
+    .menu-cards-wide .menu-card:nth-child(even) .dish-plate {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .menu-cards-wide .menu-card:nth-child(even) > span:not(.dish-plate) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .menu-cards-wide .menu-card .dish-plate {
+      width: 100%;
+      height: clamp(300px, 31vw, 460px);
+    }
+
+    .menu-cards-wide .menu-card > span:not(.dish-plate) {
+      align-items: flex-start;
+      gap: 10px;
+      max-width: 420px;
+      padding: clamp(4px, 1vw, 14px) 0;
+    }
+
+    .menu-cards-wide .menu-card > span:not(.dish-plate)::before {
+      content: 'Món quê trong nếp thơm';
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: rgba(201,154,74,0.76);
+      margin-bottom: 2px;
+    }
+
+    .menu-cards-wide .menu-card-name {
+      font-size: clamp(36px, 4.2vw, 62px);
+      line-height: .96;
+      text-align: left;
+      color: rgba(242,232,213,0.94);
+    }
+
+    .menu-cards-wide .menu-card-name::after {
+      width: 96px;
+      height: 1px;
+      content: '';
+      background: linear-gradient(90deg, rgba(201,154,74,0.82), rgba(201,154,74,0.08));
+      margin: 18px 0 2px;
+    }
+
+    .menu-cards-wide .menu-card-price {
+      font-size: clamp(24px, 2.1vw, 34px);
+      letter-spacing: .04em;
+    }
+
+    @media (max-width: 1080px) {
+      .menu-cards-wide .menu-card,
+      .menu-cards-wide .menu-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        text-align: center;
+        justify-items: center;
+      }
+
+      .menu-cards-wide .menu-card:nth-child(even) .dish-plate,
+      .menu-cards-wide .menu-card:nth-child(even) > span:not(.dish-plate) {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .menu-cards-wide .menu-card > span:not(.dish-plate) {
+        align-items: center;
+        text-align: center;
+        max-width: 560px;
+      }
+
+      .menu-cards-wide .menu-card-name {
+        text-align: center;
+      }
+
+      .menu-cards-wide .menu-card-name::after {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .menu-cards-wide {
+        gap: 30px;
+        max-width: 100%;
+      }
+
+      .menu-cards-wide .menu-card .dish-plate {
+        width: min(100%, 390px);
+        height: clamp(270px, 74vw, 340px);
+      }
+
+      .menu-cards-wide .menu-card > span:not(.dish-plate)::before {
+        font-size: 8px;
+        letter-spacing: .24em;
+      }
+
+      .menu-cards-wide .menu-card-name {
+        font-size: clamp(31px, 9.2vw, 42px);
+        line-height: .98;
+      }
+
+      .menu-cards-wide .menu-card-price {
+        font-size: 25px;
+      }
+    }
+
+    /* ---- Menu refinement: compact zig-zag Vietnamese restaurant editorial ---- */
+    #menu {
+      background-image:
+        radial-gradient(ellipse at 50% 38%, rgba(201,154,74,0.16) 0%, rgba(201,154,74,0.05) 28%, transparent 56%),
+        radial-gradient(ellipse at 50% 90%, rgba(201,154,74,0.14) 0%, rgba(120,78,42,0.16) 34%, transparent 68%),
+        linear-gradient(180deg,
+          rgba(20, 11, 7, 0.88) 0%,
+          rgba(36, 22, 16, 0.72) 24%,
+          rgba(36, 22, 16, 0.66) 62%,
+          rgba(36, 22, 16, 0.72) 100%),
+        url('images/menu/background-menu.png?v=20260719-02');
+      background-position: center center, center bottom, center center, center center;
+      background-size: cover, 100% 52%, cover, cover;
+      padding: clamp(56px, 6vw, 78px) clamp(24px, 5vw, 86px) clamp(42px, 5vw, 62px);
+    }
+
+    #menu::before {
+      background:
+        linear-gradient(90deg, rgba(12,7,4,0.28), transparent 26%, transparent 74%, rgba(12,7,4,0.32)),
+        radial-gradient(ellipse at 50% 42%, rgba(242,232,213,0.08), transparent 42%);
+    }
+
+    #menu::after {
+      opacity: .18;
+    }
+
+    .menu-shell {
+      max-width: 1160px;
+    }
+
+    .menu-category-label {
+      width: min(100%, 620px);
+      margin: 0 auto clamp(10px, 1.35vw, 16px);
+    }
+
+    .menu-cat-icon {
+      width: 46px;
+      height: 46px;
+    }
+
+    .menu-category-label .cat-name {
+      font-size: clamp(18px, 1.55vw, 23px);
+      letter-spacing: .28em;
+    }
+
+    .menu-category + .menu-category {
+      margin-top: clamp(16px, 2vw, 26px);
+    }
+
+    .menu-category:first-child .menu-cards,
+    .menu-cards-wide {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(8px, 1.25vw, 16px);
+      max-width: 940px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .menu-cards-wide {
+      max-width: 940px;
+    }
+
+    .menu-category:first-child .menu-card,
+    .menu-cards-wide .menu-card {
+      display: grid;
+      grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+      gap: clamp(18px, 3vw, 42px);
+      justify-items: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .menu-category:first-child .menu-card:nth-child(even),
+    .menu-cards-wide .menu-card:nth-child(even) {
+      grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+    }
+
+    .menu-category:first-child .menu-card:nth-child(even) .dish-plate,
+    .menu-cards-wide .menu-card:nth-child(even) .dish-plate {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .menu-category:first-child .menu-card:nth-child(even) > span:not(.dish-plate),
+    .menu-cards-wide .menu-card:nth-child(even) > span:not(.dish-plate) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .menu-card .dish-plate,
+    .menu-category:first-child .menu-card .dish-plate,
+    .menu-cards-wide .menu-card .dish-plate {
+      width: min(100%, 420px);
+      height: clamp(250px, 25vw, 350px);
+      margin: 0;
+    }
+
+    .menu-cards-wide .menu-card .dish-plate {
+      width: min(100%, 430px);
+    }
+
+    .menu-card .dish-plate::before,
+    .menu-category:first-child .menu-card .dish-plate::before,
+    .menu-cards-wide .menu-card .dish-plate::before {
+      inset: auto 10% 1% 10%;
+      height: 30px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.62), transparent 72%);
+      filter: blur(16px);
+      opacity: .86;
+    }
+
+    .menu-card .dish-plate img,
+    .menu-category:first-child .menu-card .dish-plate img,
+    .menu-cards-wide .menu-card .dish-plate img,
+    .menu-card:hover img,
+    .menu-card:focus-visible img,
+    .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+      .menu-cards-wide .menu-card:hover img,
+      .menu-cards-wide .menu-card:focus-visible img {
+      transform: scale(1.66);
+      filter:
+        drop-shadow(0 30px 30px rgba(0,0,0,0.48))
+        drop-shadow(0 0 24px rgba(201,154,74,0.1));
+    }
+
+    .menu-card > span:not(.dish-plate),
+    .menu-category:first-child .menu-card > span:not(.dish-plate),
+    .menu-cards-wide .menu-card > span:not(.dish-plate) {
+      align-items: center;
+      text-align: center;
+      gap: 9px;
+      max-width: 360px;
+      min-height: 0;
+      padding: 0;
+    }
+
+    .menu-category:first-child .menu-card > span:not(.dish-plate)::before,
+    .menu-cards-wide .menu-card > span:not(.dish-plate)::before {
+      font-size: 7.5px;
+      letter-spacing: .22em;
+      margin-bottom: 0;
+      opacity: .78;
+    }
+
+    .menu-category:first-child .menu-card-name,
+    .menu-cards-wide .menu-card-name {
+      font-size: clamp(28px, 2.75vw, 42px);
+      line-height: 1;
+      text-align: center;
+      color: rgba(242,232,213,0.96);
+      text-shadow: 0 8px 22px rgba(0,0,0,0.34);
+    }
+
+    .menu-category:first-child .menu-card-name::after,
+    .menu-cards-wide .menu-card-name::after {
+      width: 62px;
+      margin: 11px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(201,154,74,0.78), transparent);
+    }
+
+    .menu-card-desc {
+      display: block;
+      max-width: 340px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: clamp(12px, .82vw, 13px);
+      line-height: 1.65;
+      font-weight: 300;
+      color: rgba(201,189,164,0.82);
+      letter-spacing: .01em;
+    }
+
+    .menu-category:first-child .menu-card-price,
+    .menu-cards-wide .menu-card-price {
+      font-size: clamp(22px, 1.75vw, 28px);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 880px) {
+      #menu {
+        padding: 48px 18px 42px;
+        background-size: auto 100%, auto 100%, cover;
+      }
+
+      .menu-category-label {
+        margin-bottom: 12px;
+        gap: 10px;
+      }
+
+      .menu-cat-icon {
+        width: 42px;
+        height: 42px;
+      }
+
+      .menu-category-label .cat-name {
+        font-size: 16px;
+        letter-spacing: .2em;
+      }
+
+      .menu-category + .menu-category {
+        margin-top: 24px;
+      }
+
+      .menu-category:first-child .menu-cards,
+      .menu-cards-wide {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        max-width: 420px;
+      }
+
+      .menu-category:first-child .menu-card,
+      .menu-category:first-child .menu-card:nth-child(even),
+      .menu-cards-wide .menu-card,
+      .menu-cards-wide .menu-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        text-align: center;
+        justify-items: center;
+      }
+
+      .menu-category:first-child .menu-card:nth-child(even) .dish-plate,
+      .menu-category:first-child .menu-card:nth-child(even) > span:not(.dish-plate),
+      .menu-cards-wide .menu-card:nth-child(even) .dish-plate,
+      .menu-cards-wide .menu-card:nth-child(even) > span:not(.dish-plate) {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .menu-card .dish-plate,
+      .menu-category:first-child .menu-card .dish-plate,
+      .menu-cards-wide .menu-card .dish-plate {
+        width: min(100%, 360px);
+        height: clamp(220px, 58vw, 280px);
+      }
+
+      .menu-card .dish-plate img,
+      .menu-category:first-child .menu-card .dish-plate img,
+      .menu-cards-wide .menu-card .dish-plate img,
+      .menu-card:hover img,
+      .menu-card:focus-visible img,
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+        .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+        .menu-cards-wide .menu-card:hover img,
+        .menu-cards-wide .menu-card:focus-visible img {
+        transform: scale(1.54);
+      }
+
+      .menu-category:first-child .menu-card-name,
+      .menu-cards-wide .menu-card-name {
+        font-size: clamp(29px, 8.1vw, 37px);
+        text-align: center;
+      }
+
+      .menu-card > span:not(.dish-plate),
+      .menu-category:first-child .menu-card > span:not(.dish-plate),
+      .menu-cards-wide .menu-card > span:not(.dish-plate) {
+        align-items: center;
+        text-align: center;
+      }
+
+      .menu-category:first-child .menu-card-name::after,
+      .menu-cards-wide .menu-card-name::after {
+        margin-left: auto;
+        margin-right: auto;
+        background: linear-gradient(90deg, transparent, rgba(201,154,74,0.78), transparent);
+      }
+
+      .menu-card-desc {
+        max-width: 315px;
+        font-size: 12px;
+        line-height: 1.58;
+      }
+
+      .menu-category:first-child .menu-card-price,
+      .menu-cards-wide .menu-card-price {
+        font-size: 24px;
+      }
+    }
   </style>
 </head>
 
@@ -1756,8 +2624,8 @@
   <!-- SECTION 1: HERO -->
   <section id="hero">
     <div class="hero-panorama" aria-hidden="true">
-      <img class="hero-bg-photo" src="images/hero-scene.png"
-        alt="Đũa gắp miếng gà ta từ tô bánh canh gà, kèm chén nước chấm muối tiêu chanh">
+      <img class="hero-bg-photo" src="images/home/background.png"
+        alt="Đũa gắp miếng gà ta từ tô bánh canh gà đặc biệt trên bàn nhựa nâu, kèm chén muối ớt chanh">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -1768,11 +2636,7 @@
   <!-- SECTION 3: STORY -->
   <section id="story">
     <div class="story-grid">
-      <div class="story-visual-modern">
-        <img src="images/story-scene-v3.png" alt="Không gian bàn ghế bình dân Hàng Gòn">
-      </div>
       <div class="story-text-modern">
-        
         <div class="quote">
           "Góc chợ <em>Hàng Gòn</em> chứng kiến bao thế hệ. Chúng tôi vẫn giữ cách ninh xương đủ giờ, chọn gà đủ lứa,
           trao gửi hương vị <em>mộc mạc, chân thật</em> như thuở ban sơ."
@@ -1825,39 +2689,36 @@
           <span class="cat-line"></span>
         </div>
         <div class="menu-cards">
-          <button class="menu-card dish-bc-xe" type="button" data-detail="images/menu/detail-banh-canh-ga-xe.png"
-            data-name="Bánh canh gà xé">
+          <button class="menu-card dish-bc-xe" type="button" data-name="Bánh canh gà xé" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-cutout.png" alt="Bánh canh gà xé"></span>
             <span>
               <span class="menu-card-name">Bánh canh<br/>gà xé</span>
+              <span class="menu-card-desc">Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.</span>
               <span class="menu-card-price">50.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
               </span>
-              <span class="menu-card-hint">Xem chi tiết</span>
             </span>
           </button>
 
-          <button class="menu-card dish-bc-chat" type="button" data-detail="images/menu/detail-banh-canh-ga-chat.png"
-            data-name="Bánh canh gà chặt">
+          <button class="menu-card dish-bc-chat" type="button" data-name="Bánh canh gà chặt" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-cutout.png" alt="Bánh canh gà chặt"></span>
             <span>
               <span class="menu-card-name">Bánh canh<br/>gà chặt</span>
+              <span class="menu-card-desc">Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.</span>
               <span class="menu-card-price">60.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
               </span>
-              <span class="menu-card-hint">Xem chi tiết</span>
             </span>
           </button>
 
-          <button class="menu-card" type="button" data-detail="images/menu/detail-banh-canh-dac-biet.png"
-            data-name="Bánh canh đặc biệt">
+          <button class="menu-card" type="button" data-name="Bánh canh đặc biệt" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-cutout.png" alt="Bánh canh đặc biệt"></span>
             <span>
               <span class="menu-card-name">Bánh canh<br/>đặc biệt</span>
+              <span class="menu-card-desc">Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.</span>
               <span class="menu-card-price">70.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
               </span>
-              <span class="menu-card-hint">Xem chi tiết</span>
             </span>
           </button>
         </div>
@@ -1872,27 +2733,25 @@
           <span class="cat-line"></span>
         </div>
         <div class="menu-cards menu-cards-wide">
-          <button class="menu-card" type="button" data-detail="images/menu/detail-xoi-ga-xe.png"
-            data-name="Xôi gà xé trứng non">
+          <button class="menu-card" type="button" data-name="Xôi gà xé trứng non" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/xoi-ga-xe-cutout.png" alt="Xôi gà xé trứng non"></span>
             <span>
               <span class="menu-card-name">Xôi gà<br/>xé trứng non</span>
+              <span class="menu-card-desc">Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.</span>
               <span class="menu-card-price">45.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
               </span>
-              <span class="menu-card-hint">Xem chi tiết</span>
             </span>
           </button>
 
-          <button class="menu-card" type="button" data-detail="images/menu/detail-xoi-ga-chat.png"
-            data-name="Xôi gà chặt trứng non">
+          <button class="menu-card" type="button" data-name="Xôi gà chặt trứng non" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/xoi-ga-chat-cutout.png" alt="Xôi gà chặt trứng non"></span>
             <span>
               <span class="menu-card-name">Xôi gà<br/>chặt trứng non</span>
+              <span class="menu-card-desc">Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.</span>
               <span class="menu-card-price">50.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
               </span>
-              <span class="menu-card-hint">Xem chi tiết</span>
             </span>
           </button>
         </div>
@@ -1900,14 +2759,6 @@
 
     </div>
   </section>
-
-
-  <div class="dish-modal" id="dishModal" aria-hidden="true">
-    <div class="dish-modal-panel" role="dialog" aria-modal="true" aria-label="Chi tiết món ăn">
-      <button class="dish-close" type="button" aria-label="Đóng chi tiết món ăn">×</button>
-      <img class="dish-detail-img" src="" alt="">
-    </div>
-  </div>
 
   <!-- SECTION 3.5: BACKSTAGE -->
   <section id="backstage">
@@ -2132,76 +2983,6 @@
       showReview(0);
       startReviewCarousel();
     }
-
-    const dishModal = document.getElementById('dishModal');
-    const dishModalImage = dishModal.querySelector('.dish-detail-img');
-    const dishClose = dishModal.querySelector('.dish-close');
-    const menuCards = document.querySelectorAll('.menu-card');
-    const imageCacheVersion = Date.now();
-    let dishDetailRequestId = 0;
-
-    function withImageCacheVersion(src) {
-      try {
-        const url = new URL(src, window.location.href);
-        url.searchParams.set('v', imageCacheVersion);
-        return url.toString();
-      } catch (error) {
-        return `${src}${src.includes('?') ? '&' : '?'}v=${imageCacheVersion}`;
-      }
-    }
-
-    function openDishDetail(card) {
-      const requestId = ++dishDetailRequestId;
-      const detailSrc = withImageCacheVersion(card.dataset.detail);
-      const detailAlt = `Chi tiết món ${card.dataset.name}`;
-
-      dishModal.classList.add('is-loading');
-      dishModalImage.removeAttribute('src');
-      dishModalImage.alt = '';
-      dishModal.classList.add('is-open');
-      dishModal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-      dishClose.focus();
-
-      const nextImage = new Image();
-      nextImage.onload = async () => {
-        if (requestId !== dishDetailRequestId) return;
-        try {
-          if (nextImage.decode) await nextImage.decode();
-        } catch (error) {
-          // Some browsers reject decode() for cached images; onload is enough here.
-        }
-        if (requestId !== dishDetailRequestId) return;
-        dishModalImage.src = detailSrc;
-        dishModalImage.alt = detailAlt;
-        dishModal.classList.remove('is-loading');
-      };
-      nextImage.src = detailSrc;
-    }
-
-    function closeDishDetail() {
-      dishDetailRequestId++;
-      dishModal.classList.remove('is-open');
-      dishModal.classList.remove('is-loading');
-      dishModal.setAttribute('aria-hidden', 'true');
-      dishModalImage.removeAttribute('src');
-      dishModalImage.alt = '';
-      document.body.classList.remove('modal-open');
-    }
-
-    menuCards.forEach((card) => {
-      card.addEventListener('click', () => openDishDetail(card));
-    });
-
-    dishClose.addEventListener('click', closeDishDetail);
-    dishModal.addEventListener('click', (event) => {
-      if (event.target === dishModal) closeDishDetail();
-    });
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && dishModal.classList.contains('is-open')) {
-        closeDishDetail();
-      }
-    });
 
     window.addEventListener('load', () => {
       const stamp = Date.now();
