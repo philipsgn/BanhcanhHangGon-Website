@@ -5,7 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 - Bánh Canh Gà Hàng Gòn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Be+Vietnam+Pro:wght@400;500&display=swap"
+    rel="stylesheet">
   <style>
+    :root {
+      --cream: #fff4df;
+      --cream-dim: #5f4027;
+      --gold: #c99a4a;
+      --brown: #2f1d14;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -25,6 +37,73 @@
       overflow: hidden;
     }
 
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 48px;
+      pointer-events: none;
+    }
+
+    .site-nav .logo,
+    .site-nav a {
+      pointer-events: auto;
+    }
+
+    .site-nav .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 76px;
+      height: 76px;
+      text-decoration: none;
+    }
+
+    .site-nav .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 14px rgba(201,154,74,0.36));
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 28px;
+      list-style: none;
+      padding: 13px 18px;
+      border: 1px solid rgba(95, 64, 39, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 244, 223, 0.52);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 34px rgba(47, 29, 20, 0.12);
+    }
+
+    .site-nav ul li a {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: color .25s ease;
+    }
+
+    .site-nav ul li a:hover,
+    .site-nav ul li a:focus-visible {
+      color: var(--gold);
+    }
+
     .order-404 {
       width: 100vw;
       min-height: 100vh;
@@ -36,6 +115,34 @@
     }
 
     @media (max-width: 768px) {
+      .site-nav {
+        align-items: flex-start;
+        padding: 18px 18px;
+      }
+
+      .site-nav .logo {
+        width: 58px;
+        height: 58px;
+      }
+
+      .site-nav ul {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+        width: auto;
+        min-width: 164px;
+        padding: 10px 0;
+        border-radius: 12px;
+        background: rgba(255, 244, 223, 0.74);
+      }
+
+      .site-nav ul li a {
+        display: block;
+        padding: 9px 14px;
+        font-size: 13px;
+        letter-spacing: 1.7px;
+      }
+
       .order-404 {
         background-position: center center;
       }
@@ -44,6 +151,17 @@
 </head>
 
 <body>
+  <nav class="site-nav" aria-label="Điều hướng chính">
+    <a class="logo" href="index.html#hero" aria-label="Bánh Canh Gà Hàng Gòn">
+      <img src="images/menu/icon-quan-an.png" alt="Bánh Canh Gà Hàng Gòn">
+    </a>
+    <ul>
+      <li><a href="index.html#hero">Trang chủ</a></li>
+      <li><a href="index.html#story">Giới thiệu</a></li>
+      <li><a href="index.html#menu">Menu</a></li>
+      <li><a href="index.html#location">Vị trí</a></li>
+    </ul>
+  </nav>
   <main class="order-404" aria-label="Trang đặt hàng chưa sẵn sàng"></main>
 </body>
 
