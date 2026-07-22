@@ -151,6 +151,32 @@
       color: var(--gold);
     }
 
+    .site-nav ul li a.nav-order-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      padding: 7px 16px 8px;
+      color: #ffd978;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 2.6px;
+      line-height: 1;
+      text-shadow:
+        0 1px 0 rgba(255, 246, 204, 0.42),
+        0 0 10px rgba(255, 187, 58, 0.42),
+        0 0 22px rgba(201, 112, 26, 0.28);
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(144, 91, 28, 0.38) 18%, rgba(255, 218, 105, 0.86) 50%, rgba(144, 91, 28, 0.38) 82%, transparent 100%) center top / 100% 1px no-repeat,
+        linear-gradient(90deg, transparent 0%, rgba(144, 91, 28, 0.42) 18%, rgba(255, 218, 105, 0.95) 50%, rgba(144, 91, 28, 0.42) 82%, transparent 100%) center bottom / 100% 1px no-repeat;
+    }
+
+    .site-nav ul li a.nav-order-link:hover,
+    .site-nav ul li a.nav-order-link:focus-visible {
+      color: #ffe9a8;
+    }
+
     /* ---------- DOT NAV ---------- */
     .dotnav {
       position: fixed;
@@ -1479,6 +1505,14 @@
         letter-spacing: 1.8px;
       }
 
+      .site-nav ul li a.nav-order-link {
+        display: inline-flex;
+        margin: 8px 12px 4px;
+        padding: 8px 18px 9px;
+        font-size: 16px;
+        letter-spacing: 2.3px;
+      }
+
       .nav-toggle {
         display: inline-flex;
       }
@@ -2664,7 +2698,7 @@
       <li><a href="#story">Giới thiệu</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#location">Vị trí</a></li>
-      <li><a href="order.html">Đặt hàng</a></li>
+      <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
     </ul>
     <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
       <span aria-hidden="true"></span>
