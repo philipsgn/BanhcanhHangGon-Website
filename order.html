@@ -212,7 +212,9 @@
     }
     .category-empty.is-visible { display: block; }
     .mobile-order-steps,
-    .continue-order-button { display: none; }
+    .continue-order-button,
+    .mobile-menu-next,
+    .mobile-final-review { display: none; }
     .order-item {
       display: grid;
       grid-template-columns: 132px minmax(0, 1fr) auto;
@@ -596,15 +598,19 @@
         padding: 0 0 10px;
         border-bottom: 1px solid var(--line-soft);
       }
-      .mobile-order-steps span {
-        padding-bottom: 7px;
+      .mobile-order-steps button {
+        border: 0;
         border-bottom: 2px solid transparent;
+        background: transparent;
+        padding-bottom: 7px;
         color: var(--cream-dim);
+        cursor: pointer;
         font-family: 'JetBrains Mono', monospace;
         font-size: 9px;
         text-align: center;
       }
-      .mobile-order-steps span.is-active { border-color: var(--gold); color: var(--gold); }
+      .mobile-order-steps button.is-active { border-color: var(--gold); color: var(--gold); }
+      .mobile-order-steps button:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
       .continue-order-button {
         display: block;
         width: 100%;
@@ -618,12 +624,72 @@
         font-weight: 600;
       }
       .continue-order-button:disabled { cursor: not-allowed; opacity: .38; }
+      .mobile-menu-next {
+        display: block;
+        width: 100%;
+        min-height: 42px;
+        margin: 22px 0 4px;
+        border: 1px solid var(--gold);
+        background: var(--gold);
+        color: var(--bg-deep);
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .mobile-menu-next:disabled { cursor: not-allowed; opacity: .38; }
+      .mobile-final-review { padding-top: 4px; }
+      .mobile-final-review.is-visible { display: block; }
+      .mobile-review-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .mobile-review-heading h2 { margin: 0; color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; }
+      .mobile-final-review .order-text { margin-top: 14px; border: 1px solid var(--line); background: rgba(36,22,16,.28); padding: 13px 14px; text-align: left; line-height: 1.55; }
+      .mobile-final-submit { width: 100%; min-height: 44px; margin-top: 14px; border: 1px solid var(--gold); background: var(--gold); color: var(--bg-deep); cursor: pointer; font-size: 11px; font-weight: 600; }
       .order-page[data-order-step="details"] .category-tabs,
       .order-page[data-order-step="details"] .menu-category-block,
       .order-page[data-order-step="details"] .category-empty { display: none; }
       .order-page[data-order-step="details"] .customer-form { max-height: 1200px; margin-top: 0; padding-top: 0; border-top: 0; opacity: 1; pointer-events: auto; }
       .order-page[data-order-step="details"] .continue-order-button { display: none; }
+      .order-page[data-order-step="details"] .mobile-menu-next,
+      .order-page[data-order-step="details"] .mobile-final-review { display: none; }
       .order-page[data-order-step="details"] .summary-support { display: none; }
+      .order-page[data-order-step="details"] .order-layout { display: flex; flex-direction: column; gap: 0; }
+      .order-page[data-order-step="details"] .order-summary {
+        position: static;
+        order: -1;
+        max-height: none;
+        overflow: visible;
+        padding: 16px 0 20px;
+        border-top: 1px solid var(--gold);
+        border-bottom: 1px solid var(--line-soft);
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+      }
+      .order-page[data-order-step="details"] .summary-items { max-height: none; overflow: visible; }
+      .order-page[data-order-step="details"] .customer-form { margin-bottom: 0; }
+      .order-page[data-order-step="menu"] .order-summary,
+      .order-page[data-order-step="menu"] .customer-form,
+      .order-page[data-order-step="menu"] .mobile-final-review { display: none; }
+      .order-page[data-order-step="confirm"] .category-tabs,
+      .order-page[data-order-step="confirm"] .menu-category-block,
+      .order-page[data-order-step="confirm"] .category-empty,
+      .order-page[data-order-step="confirm"] .customer-form,
+      .order-page[data-order-step="confirm"] .mobile-menu-next,
+      .order-page[data-order-step="confirm"] .continue-order-button { display: none; }
+      .order-page[data-order-step="confirm"] .mobile-final-review { display: block; }
+      .order-page[data-order-step="confirm"] .order-layout { display: flex; flex-direction: column; gap: 0; }
+      .order-page[data-order-step="confirm"] .order-summary {
+        position: static;
+        order: -1;
+        max-height: none;
+        overflow: visible;
+        padding: 16px 0 20px;
+        border-top: 1px solid var(--gold);
+        border-bottom: 1px solid var(--line-soft);
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+      }
+      .order-page[data-order-step="confirm"] .summary-items { max-height: none; overflow: visible; }
     }
     @media (max-width: 620px) {
       .site-nav { align-items: flex-start; }
@@ -688,9 +754,9 @@
         </nav>
 
         <div class="mobile-order-steps" aria-label="Tiến trình đặt món">
-          <span class="is-active" data-step-indicator="menu">1. Chọn món</span>
-          <span data-step-indicator="details">2. Thông tin</span>
-          <span data-step-indicator="confirm">3. Xác nhận</span>
+          <button class="is-active" type="button" data-step-indicator="menu">1. Chọn món</button>
+          <button type="button" data-step-indicator="details">2. Thông tin</button>
+          <button type="button" data-step-indicator="confirm">3. Xác nhận</button>
         </div>
 
         <div class="menu-category-block" data-category-panel="banh-canh">
@@ -705,6 +771,7 @@
           <div id="xoi-list"></div>
         </div>
         <p class="category-empty" id="category-empty">Danh mục nước đang được cập nhật.</p>
+        <button class="mobile-menu-next" id="mobile-menu-next" type="button" disabled>Tiếp tục đến thông tin</button>
 
         <form class="customer-form is-disabled" id="customer-form" novalidate aria-disabled="true">
           <h2>Thông tin nhận món</h2>
@@ -739,6 +806,21 @@
           </div>
           <button class="submit-button" id="submit-order" type="submit" disabled>Xác nhận đặt món</button>
         </form>
+
+        <section class="mobile-final-review" id="mobile-final-review" aria-labelledby="mobile-review-title">
+          <div class="mobile-review-heading">
+            <h2 id="mobile-review-title">Kiểm tra đơn hàng</h2>
+            <button class="copy-icon-button" id="mobile-copy-order" type="button" title="Sao chép đơn hàng" aria-label="Sao chép đơn hàng">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="8" y="8" width="11" height="11" rx="1.5"></rect>
+                <path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"></path>
+              </svg>
+            </button>
+          </div>
+          <pre class="order-text" id="mobile-final-text"></pre>
+          <p class="copy-status" id="mobile-copy-status" role="status" aria-live="polite"></p>
+          <button class="mobile-final-submit" id="mobile-final-submit" type="button">Đặt hàng</button>
+        </section>
       </section>
 
       <aside class="order-summary" aria-labelledby="summary-heading">
@@ -859,10 +941,14 @@
     const summaryTotal = document.getElementById('summary-total');
     const summaryCount = document.getElementById('summary-count');
     const continueOrder = document.getElementById('continue-order');
+    const mobileMenuNext = document.getElementById('mobile-menu-next');
     const customerForm = document.getElementById('customer-form');
     const submitOrder = document.getElementById('submit-order');
     const addressField = document.getElementById('delivery-address-field');
     const fulfillment = document.getElementById('fulfillment');
+    const mobileFinalReview = document.getElementById('mobile-final-review');
+    const mobileFinalText = document.getElementById('mobile-final-text');
+    const mobileCopyStatus = document.getElementById('mobile-copy-status');
 
     function updateSummary() {
       const selected = getSelected();
@@ -881,6 +967,7 @@
       customerForm.setAttribute('aria-disabled', String(!hasItems));
       submitOrder.disabled = !hasItems;
       continueOrder.disabled = !hasItems;
+      mobileMenuNext.disabled = !hasItems;
       menuItems.forEach(item => {
         const value = document.querySelector(`[data-quantity-for="${item.id}"]`);
         const decrease = document.querySelector(`[data-action="decrease"][data-item-id="${item.id}"]`);
@@ -898,11 +985,43 @@
         indicator.classList.toggle('is-active', indicator.dataset.stepIndicator === step);
       });
     }
+    setMobileStep('menu');
 
-    continueOrder.addEventListener('click', () => {
+    function goToDetailsStep() {
       if (continueOrder.disabled) return;
       setMobileStep('details');
       customerForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    continueOrder.addEventListener('click', goToDetailsStep);
+    mobileMenuNext.addEventListener('click', goToDetailsStep);
+
+    function prepareMobileReview() {
+      mobileFinalText.textContent = buildOrderText();
+      mobileCopyStatus.textContent = '';
+      setMobileStep('confirm');
+      mobileFinalReview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    stepIndicators.forEach(indicator => indicator.addEventListener('click', () => {
+      const step = indicator.dataset.stepIndicator;
+      if (step === 'menu') {
+        setMobileStep('menu');
+        orderPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (step === 'details') {
+        goToDetailsStep();
+      } else if (step === 'confirm' && validateForm()) {
+        prepareMobileReview();
+      }
+    }));
+
+    document.getElementById('mobile-final-submit').addEventListener('click', openSuccessModal);
+    document.getElementById('mobile-copy-order').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(mobileFinalText.textContent);
+        mobileCopyStatus.textContent = 'Đã sao chép';
+      } catch {
+        mobileCopyStatus.textContent = 'Không thể sao chép tự động.';
+      }
     });
 
     document.addEventListener('click', event => {
@@ -976,6 +1095,10 @@
     customerForm.addEventListener('submit', event => {
       event.preventDefault();
       if (!validateForm()) return;
+      if (window.matchMedia('(max-width: 920px)').matches) {
+        prepareMobileReview();
+        return;
+      }
       setMobileStep('confirm');
       confirmOrderText.textContent = buildOrderText();
       confirmCopyStatus.textContent = '';
