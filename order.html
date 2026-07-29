@@ -211,6 +211,8 @@
       text-align: center;
     }
     .category-empty.is-visible { display: block; }
+    .mobile-order-steps,
+    .continue-order-button { display: none; }
     .order-item {
       display: grid;
       grid-template-columns: 132px minmax(0, 1fr) auto;
@@ -586,6 +588,42 @@
       .summary-total-value { font-size: 20px; }
       .customer-form { margin-bottom: 180px; }
       .summary-support { display: none; }
+      .mobile-order-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        margin: 0 0 22px;
+        padding: 0 0 10px;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .mobile-order-steps span {
+        padding-bottom: 7px;
+        border-bottom: 2px solid transparent;
+        color: var(--cream-dim);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 9px;
+        text-align: center;
+      }
+      .mobile-order-steps span.is-active { border-color: var(--gold); color: var(--gold); }
+      .continue-order-button {
+        display: block;
+        width: 100%;
+        min-height: 40px;
+        margin-top: 10px;
+        border: 1px solid var(--gold);
+        background: var(--gold);
+        color: var(--bg-deep);
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .continue-order-button:disabled { cursor: not-allowed; opacity: .38; }
+      .order-page[data-order-step="details"] .category-tabs,
+      .order-page[data-order-step="details"] .menu-category-block,
+      .order-page[data-order-step="details"] .category-empty { display: none; }
+      .order-page[data-order-step="details"] .customer-form { max-height: 1200px; margin-top: 0; padding-top: 0; border-top: 0; opacity: 1; pointer-events: auto; }
+      .order-page[data-order-step="details"] .continue-order-button { display: none; }
+      .order-page[data-order-step="details"] .summary-support { display: none; }
     }
     @media (max-width: 620px) {
       .site-nav { align-items: flex-start; }
@@ -649,6 +687,12 @@
           <button class="category-tab" type="button" data-category="nuoc" aria-selected="false">Nước</button>
         </nav>
 
+        <div class="mobile-order-steps" aria-label="Tiến trình đặt món">
+          <span class="is-active" data-step-indicator="menu">1. Chọn món</span>
+          <span data-step-indicator="details">2. Thông tin</span>
+          <span data-step-indicator="confirm">3. Xác nhận</span>
+        </div>
+
         <div class="menu-category-block" data-category-panel="banh-canh">
           <h2 class="menu-section-heading" id="menu-heading">Bánh canh gà</h2>
           <p class="menu-section-note">Nước dùng ninh xương, gà ta và sợi bánh canh mềm dai.</p>
@@ -710,6 +754,7 @@
           <strong class="summary-total-value" id="summary-total">0 VND</strong>
         </div>
         <p class="summary-support">Đơn hàng sẽ được xác nhận qua cuộc gọi điện thoại.</p>
+        <button class="continue-order-button" id="continue-order" type="button" disabled> Xác nhận món đã chọn </button>
       </aside>
     </div>
   </main>
@@ -813,6 +858,7 @@
     const summaryItems = document.getElementById('summary-items');
     const summaryTotal = document.getElementById('summary-total');
     const summaryCount = document.getElementById('summary-count');
+    const continueOrder = document.getElementById('continue-order');
     const customerForm = document.getElementById('customer-form');
     const submitOrder = document.getElementById('submit-order');
     const addressField = document.getElementById('delivery-address-field');
@@ -834,6 +880,7 @@
       customerForm.classList.toggle('is-disabled', !hasItems);
       customerForm.setAttribute('aria-disabled', String(!hasItems));
       submitOrder.disabled = !hasItems;
+      continueOrder.disabled = !hasItems;
       menuItems.forEach(item => {
         const value = document.querySelector(`[data-quantity-for="${item.id}"]`);
         const decrease = document.querySelector(`[data-action="decrease"][data-item-id="${item.id}"]`);
@@ -841,6 +888,22 @@
         if (decrease) decrease.disabled = quantities[item.id] === 0;
       });
     }
+
+    const orderPage = document.querySelector('.order-page');
+    const stepIndicators = document.querySelectorAll('[data-step-indicator]');
+    function setMobileStep(step) {
+      if (!window.matchMedia('(max-width: 920px)').matches) return;
+      orderPage.dataset.orderStep = step;
+      stepIndicators.forEach(indicator => {
+        indicator.classList.toggle('is-active', indicator.dataset.stepIndicator === step);
+      });
+    }
+
+    continueOrder.addEventListener('click', () => {
+      if (continueOrder.disabled) return;
+      setMobileStep('details');
+      customerForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
     document.addEventListener('click', event => {
       const control = event.target.closest('[data-action]');
@@ -913,6 +976,7 @@
     customerForm.addEventListener('submit', event => {
       event.preventDefault();
       if (!validateForm()) return;
+      setMobileStep('confirm');
       confirmOrderText.textContent = buildOrderText();
       confirmCopyStatus.textContent = '';
       confirmModal.classList.add('is-open');
@@ -922,6 +986,7 @@
     function closeConfirmModal() {
       confirmModal.classList.remove('is-open');
       confirmModal.setAttribute('aria-hidden', 'true');
+      setMobileStep('details');
     }
     function openSuccessModal() {
       orderModal.classList.add('is-open');
@@ -938,6 +1003,7 @@
     document.getElementById('confirm-edit').addEventListener('click', closeConfirmModal);
     document.getElementById('confirm-submit').addEventListener('click', () => {
       closeConfirmModal();
+      setMobileStep('confirm');
       openSuccessModal();
     });
     document.getElementById('modal-close').addEventListener('click', closeModal);
