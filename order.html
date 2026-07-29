@@ -4,141 +4,618 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Bánh Canh Gà Hàng Gòn</title>
+  <title>Đặt món | Bánh Canh Gà Hàng Gòn</title>
+  <meta name="description" content="Đặt món bánh canh gà và xôi gà tại Bánh Canh Gà Hàng Gòn.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Be+Vietnam+Pro:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #fff4df;
-      --cream-dim: #5f4027;
+      --bg-deep: #241610;
+      --bg-deep-2: #2f1d14;
+      --cream: #f2e8d5;
+      --cream-dim: #c9bda4;
       --gold: #c99a4a;
-      --brown: #2f1d14;
+      --chili: #b84b32;
+      --line: rgba(201, 154, 74, 0.25);
+      --line-soft: rgba(242, 232, 213, 0.12);
     }
 
-    * {
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(201,154,74,.08), transparent 28rem),
+        var(--bg-deep);
+      color: var(--cream);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      overflow-x: hidden;
     }
-
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      background: #f6e7cc;
-    }
-
-    body {
-      min-height: 100vh;
-      min-height: 100svh;
-      overflow: hidden;
-    }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
 
     .site-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 10;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 22px 48px;
-      pointer-events: none;
+      gap: 28px;
+      min-height: 92px;
+      padding: 14px clamp(20px, 4vw, 58px);
+      background: transparent;
     }
-
-    .site-nav .logo,
-    .site-nav a {
-      pointer-events: auto;
-    }
-
     .site-nav .logo {
+      width: 66px;
+      height: 66px;
       display: inline-flex;
+      flex: 0 0 auto;
       align-items: center;
       justify-content: center;
-      width: 76px;
-      height: 76px;
       text-decoration: none;
     }
-
     .site-nav .logo img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
-      filter: drop-shadow(0 0 14px rgba(201,154,74,0.36));
+      filter: drop-shadow(0 0 14px rgba(201,154,74,.36));
     }
-
     .site-nav ul {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 28px;
-      list-style: none;
+      gap: clamp(16px, 2.6vw, 38px);
+      margin: 0;
       padding: 0;
+      list-style: none;
     }
-
-    .site-nav ul li a {
+    .site-nav li a {
       font-family: 'Cormorant Garamond', serif;
       color: var(--cream-dim);
-      text-decoration: none;
       font-size: 15px;
+      font-weight: 500;
       letter-spacing: 2px;
+      text-decoration: none;
       text-transform: uppercase;
-      font-weight: 600;
-      white-space: nowrap;
       transition: color .25s ease;
     }
-
-    .site-nav ul li a:hover,
-    .site-nav ul li a:focus-visible {
-      color: var(--gold);
+    .site-nav li a:hover,
+    .site-nav li a:focus-visible { color: var(--gold); }
+    .order-page {
+      width: min(1280px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 90px;
     }
-
-    .order-404 {
+    .page-heading {
+      position: relative;
+      display: flex;
+      min-height: 0;
+      aspect-ratio: 1916 / 821;
       width: 100vw;
-      min-height: 100vh;
-      min-height: 100svh;
-      background-image: url('images/order/404.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
+      margin: 0 0 clamp(42px, 6vw, 76px) calc(50% - 50vw);
+      padding: clamp(84px, 8vw, 120px) max(20px, calc((100vw - 1280px) / 2));
+      flex-direction: column;
+      justify-content: center;
+      background-image:
+        linear-gradient(90deg, rgba(36,22,16,.94) 0%, rgba(36,22,16,.78) 42%, rgba(36,22,16,.38) 100%),
+        url('images/testimonials-bg.png');
+      background-position: center top;
+      background-size: 100% 100%;
+      border-bottom: 1px solid rgba(201,154,74,.16);
+      overflow: hidden;
+    }
+    .eyebrow {
+      margin: 0 0 13px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+    }
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 12px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(54px, 8vw, 104px);
+      font-weight: 500;
+      letter-spacing: .015em;
+      line-height: .86;
+    }
+    .page-lead {
+      max-width: 520px;
+      margin-bottom: 0;
+      color: var(--cream-dim);
+      font-size: 14px;
+      line-height: 1.8;
     }
 
-    @media (max-width: 768px) {
-      .site-nav {
-        align-items: flex-start;
-        padding: 18px 18px;
-      }
+    .order-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
+      align-items: start;
+      gap: clamp(42px, 7vw, 110px);
+    }
+    .menu-section-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .menu-section-heading::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, var(--line), transparent);
+    }
+    .menu-section-heading:not(:first-child) { margin-top: 46px; }
+    .menu-category-block + .menu-category-block { margin-top: 30px; }
+    .menu-section-note {
+      margin: 0 0 8px;
+      color: var(--cream-dim);
+      font-size: 12px;
+    }
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 30px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .category-tab {
+      min-height: 34px;
+      padding: 7px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--cream-dim);
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: .03em;
+      transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+    }
+    .category-tab:hover,
+    .category-tab:focus-visible {
+      border-color: var(--gold);
+      color: var(--cream);
+      outline: none;
+      transform: translateY(-1px);
+    }
+    .category-tab.is-active {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--bg-deep);
+      font-weight: 600;
+    }
+    .category-empty {
+      display: none;
+      padding: 52px 0 64px;
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--cream-dim);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      text-align: center;
+    }
+    .category-empty.is-visible { display: block; }
+    .order-item {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 20px;
+      min-height: 116px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line-soft);
+      transition: border-color .25s ease, opacity .25s ease;
+    }
+    .order-item:hover { border-color: var(--line); }
+    .order-item-thumb {
+      width: 132px;
+      height: 98px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .order-item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.34);
+      filter: drop-shadow(0 9px 11px rgba(0,0,0,.42));
+      transition: transform .3s ease;
+    }
+    .order-item:hover .order-item-thumb img { transform: scale(1.4) translateY(-2px); }
+    .order-item-info { min-width: 0; }
+    .order-item-name {
+      margin: 0 0 5px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.2vw, 30px);
+      font-weight: 500;
+      line-height: 1;
+    }
+    .order-item-desc {
+      display: none;
+    }
+    .order-item-price {
+      margin-top: 5px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .quantity-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+    .quantity-control button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(201,154,74,.62);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .quantity-control button:hover:not(:disabled),
+    .quantity-control button:focus-visible {
+      background: var(--gold);
+      color: var(--bg-deep);
+      transform: scale(1.05);
+      outline: none;
+    }
+    .quantity-control button:disabled { cursor: not-allowed; opacity: .42; }
+    .quantity-value {
+      min-width: 20px;
+      color: var(--cream);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      text-align: center;
+    }
 
-      .site-nav .logo {
-        width: 58px;
-        height: 58px;
-      }
+    .order-summary {
+      position: sticky;
+      top: 116px;
+      padding: 24px 0 0;
+      border-top: 1px solid var(--gold);
+    }
+    .summary-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .summary-heading h2 {
+      margin: 0;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 500;
+    }
+    .summary-count {
+      color: var(--cream-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+    }
+    .summary-items {
+      max-height: 270px;
+      overflow-y: auto;
+      border-top: 1px solid var(--line-soft);
+    }
+    .summary-empty {
+      margin: 18px 0 26px;
+      color: var(--cream-dim);
+      font-size: 12px;
+      font-style: italic;
+    }
+    .summary-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .summary-row-name { color: var(--cream); font-size: 12px; }
+    .summary-row-meta { margin-top: 4px; color: var(--cream-dim); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+    .summary-row-total { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+    .summary-total {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0 24px;
+    }
+    .summary-total-label { color: var(--cream-dim); font-size: 12px; }
+    .summary-total-value { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 25px; font-weight: 600; }
 
-      .site-nav ul {
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 0;
-        width: auto;
-        min-width: 164px;
-        padding: 0;
-      }
+    .customer-form {
+      margin-top: 24px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line-soft);
+      max-height: 1200px;
+      overflow: hidden;
+      transition: opacity .25s ease, max-height .35s ease, margin .35s ease, padding .35s ease;
+    }
+    .customer-form.is-disabled {
+      max-height: 0;
+      margin-top: 0;
+      padding-top: 0;
+      border-top-color: transparent;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .customer-form h2 {
+      margin-bottom: 20px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 500;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cream-dim);
+      font-size: 11px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      outline: none;
+      padding: 9px 0 10px;
+      background: transparent;
+      color: var(--cream);
+      font-size: 13px;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field select { color-scheme: dark; }
+    .field textarea { min-height: 58px; resize: vertical; }
+    .field input::placeholder,
+    .field textarea::placeholder { color: rgba(201,189,164,.5); }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus { border-color: var(--gold); box-shadow: 0 2px 0 rgba(201,154,74,.16); }
+    .field.has-error input,
+    .field.has-error select,
+    .field.has-error textarea { border-color: var(--chili); }
+    .field-error { min-height: 17px; padding-top: 5px; color: #df846d; font-size: 10px; }
+    .delivery-address { display: none; }
+    .delivery-address.is-visible { display: block; }
+    .submit-button {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 24px;
+      border: 1px solid var(--gold);
+      border-radius: 0;
+      background: var(--gold);
+      color: var(--bg-deep);
+      cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .submit-button:hover:not(:disabled),
+    .submit-button:focus-visible { background: #e2b35d; transform: translateY(-2px); outline: none; }
+    .submit-button:disabled { cursor: not-allowed; opacity: .38; }
+    .summary-support { margin: 14px 0 0; color: var(--cream-dim); font-size: 10px; line-height: 1.6; text-align: center; }
 
-      .site-nav ul li a {
-        display: block;
-        padding: 9px 14px;
-        font-size: 13px;
-        letter-spacing: 1.7px;
-      }
+    .order-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(12,8,5,.72);
+      backdrop-filter: blur(8px);
+    }
+    .order-modal.is-open { display: flex; }
+    .modal-panel {
+      position: relative;
+      width: min(620px, 100%);
+      max-height: min(720px, 90svh);
+      overflow-y: auto;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--bg-deep-2);
+      box-shadow: 0 28px 70px rgba(0,0,0,.42), inset 0 0 0 1px rgba(201,154,74,.06);
+    }
+    .modal-close {
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .modal-close:hover, .modal-close:focus-visible { border-color: var(--gold); color: var(--gold); outline: none; }
+    .modal-panel h2 { margin: 0 0 8px; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500; }
+    .modal-intro { margin: 0 0 18px; color: var(--cream-dim); font-size: 12px; }
+    .order-text {
+      margin: 0;
+      padding: 16px;
+      border-left: 1px solid var(--gold);
+      background: rgba(36,22,16,.58);
+      color: var(--cream);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+    .modal-actions { display: flex; justify-content: flex-end; margin-top: 18px; }
+    .copy-icon-button {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .copy-icon-button svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+    .copy-icon-button:hover,
+    .copy-icon-button:focus-visible {
+      background: var(--gold);
+      color: var(--bg-deep);
+      outline: none;
+      transform: translateY(-2px);
+    }
+    .modal-actions a, .modal-actions button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .copy-status { min-height: 18px; margin: 10px 0 0; color: var(--gold); font-size: 11px; text-align: center; }
+    .confirm-modal { background: rgba(12,8,5,.58); }
+    .confirm-modal .modal-panel {
+      width: min(700px, 100%);
+      max-height: min(680px, 90svh);
+      padding: 24px 28px;
+      background: #352218;
+      border: 0;
+      box-shadow: none;
+      text-align: left;
+    }
+    .confirm-heading {
+      position: relative;
+      display: block;
+      min-height: 34px;
+      margin-bottom: 12px;
+      padding: 0 52px;
+    }
+    .confirm-heading .modal-intro { margin: 5px 0 0; text-align: center; }
+    .confirm-modal .order-text {
+      border: 1px solid var(--line);
+      background: rgba(36,22,16,.28);
+      padding: 13px 14px;
+      text-align: left;
+      line-height: 1.55;
+    }
+    .confirm-modal > .modal-panel > .modal-actions { display: none; }
+    .confirm-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 14px; }
+    .confirm-actions button {
+      min-width: 156px;
+      min-height: 40px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      font-size: 11px;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .confirm-actions button:hover,
+    .confirm-actions button:focus-visible {
+      background: var(--gold);
+      color: var(--bg-deep);
+      outline: none;
+      transform: translateY(-2px);
+    }
+    .confirm-actions .confirm-submit { background: var(--gold); color: var(--bg-deep); font-weight: 600; }
+    .confirm-heading .copy-icon-button { position: absolute; top: 0; left: 0; width: 34px; height: 34px; border: 0; }
+    .confirm-heading .copy-icon-button svg { width: 15px; height: 15px; }
+    .success-modal .modal-panel {
+      width: min(420px, 100%);
+      max-height: none;
+      padding: 34px 30px;
+      text-align: center;
+    }
+    .success-modal .modal-panel h2 { margin-bottom: 10px; font-size: 34px; }
 
-      .order-404 {
-        background-position: center center;
+    @media (max-width: 920px) {
+      .site-nav { min-height: 76px; padding: 10px 20px; }
+      .site-nav .logo { width: 54px; height: 54px; }
+      .site-nav ul { gap: 14px; }
+      .site-nav li a { font-size: 12px; letter-spacing: 1.4px; }
+      .confirm-modal .modal-panel { padding: 24px; }
+      .order-layout { grid-template-columns: 1fr; gap: 48px; }
+      .order-summary { position: fixed; right: 0; bottom: 0; left: 0; z-index: 15; max-height: 43svh; overflow-y: auto; padding: 15px 20px max(14px, env(safe-area-inset-bottom)); border-top: 1px solid var(--gold); background: rgba(36,22,16,.97); box-shadow: 0 -14px 36px rgba(0,0,0,.26); backdrop-filter: blur(10px); }
+      .summary-heading { margin-bottom: 10px; }
+      .summary-heading h2 { font-size: 27px; }
+      .summary-items { max-height: 18svh; }
+      .summary-total { padding: 12px 0 10px; }
+      .summary-total-value { font-size: 20px; }
+      .customer-form { margin-bottom: 180px; }
+      .summary-support { display: none; }
+    }
+    @media (max-width: 620px) {
+      .site-nav { align-items: flex-start; }
+      .site-nav ul { flex-wrap: wrap; justify-content: flex-end; gap: 4px 11px; max-width: 270px; }
+      .site-nav li a { font-size: 11px; letter-spacing: 1px; }
+      .order-page { width: min(100% - 32px, 560px); padding-top: 0; padding-bottom: 180px; }
+      .page-heading {
+        min-height: 380px;
+        aspect-ratio: auto;
+        margin-bottom: 42px;
+        padding: 78px 20px 62px;
+        background-position: 52% center;
+        background-size: auto 100%;
       }
+      h1 { font-size: clamp(54px, 17vw, 76px); }
+      .order-item { grid-template-columns: 88px minmax(0, 1fr); gap: 13px; min-height: 92px; }
+      .order-item-thumb { width: 88px; height: 76px; }
+      .order-item-name { font-size: 23px; }
+      .order-item-desc { font-size: 10px; }
+      .order-item-price { font-size: 11px; }
+      .quantity-control { grid-column: 2; margin-top: -4px; }
+      .menu-section-heading { font-size: 22px; }
+      .form-grid { grid-template-columns: 1fr; gap: 10px; }
+      .field.full { grid-column: auto; }
+      .modal-actions { grid-template-columns: 1fr; }
+      .confirm-modal .modal-panel { padding: 22px 20px; }
+      .confirm-heading { margin-bottom: 12px; padding: 0 44px; }
+      .confirm-heading .modal-intro { max-width: none; }
+      .confirm-actions { display: grid; grid-template-columns: 1fr; }
+      .confirm-actions button { width: 100%; }
     }
   </style>
 </head>
@@ -155,7 +632,332 @@
       <li><a href="index.html#location">Vị trí</a></li>
     </ul>
   </nav>
-  <main class="order-404" aria-label="Trang đặt hàng chưa sẵn sàng"></main>
+
+  <main class="order-page">
+    <header class="page-heading">
+      <p class="eyebrow">Món ngon · Hàng Gòn</p>
+      <h1>Đặt món</h1>
+      <p class="page-lead">Chọn món, chúng tôi chuẩn bị ngay khi bạn xác nhận.</p>
+    </header>
+
+    <div class="order-layout">
+      <section class="order-menu" aria-labelledby="menu-heading">
+        <nav class="category-tabs" aria-label="Lọc danh mục món ăn">
+          <button class="category-tab is-active" type="button" data-category="all" aria-selected="true">Tất cả</button>
+          <button class="category-tab" type="button" data-category="banh-canh" aria-selected="false">Bánh canh</button>
+          <button class="category-tab" type="button" data-category="xoi" aria-selected="false">Xôi</button>
+          <button class="category-tab" type="button" data-category="nuoc" aria-selected="false">Nước</button>
+        </nav>
+
+        <div class="menu-category-block" data-category-panel="banh-canh">
+          <h2 class="menu-section-heading" id="menu-heading">Bánh canh gà</h2>
+          <p class="menu-section-note">Nước dùng ninh xương, gà ta và sợi bánh canh mềm dai.</p>
+          <div id="banh-canh-list"></div>
+        </div>
+
+        <div class="menu-category-block" data-category-panel="xoi">
+          <h2 class="menu-section-heading">Xôi gà</h2>
+          <p class="menu-section-note">Xôi dẻo thơm, gà ta và trứng non vừa miệng.</p>
+          <div id="xoi-list"></div>
+        </div>
+        <p class="category-empty" id="category-empty">Danh mục nước đang được cập nhật.</p>
+
+        <form class="customer-form is-disabled" id="customer-form" novalidate aria-disabled="true">
+          <h2>Thông tin nhận món</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label for="customer-name">Họ tên <span aria-hidden="true">*</span></label>
+              <input id="customer-name" name="name" type="text" autocomplete="name" placeholder="Tên của bạn">
+              <p class="field-error" data-error-for="customer-name"></p>
+            </div>
+            <div class="field">
+              <label for="customer-phone">Số điện thoại <span aria-hidden="true">*</span></label>
+              <input id="customer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại">
+              <p class="field-error" data-error-for="customer-phone"></p>
+            </div>
+            <div class="field full">
+              <label for="fulfillment">Hình thức nhận món <span aria-hidden="true">*</span></label>
+              <select id="fulfillment" name="fulfillment">
+                <option value="pickup">Đến lấy tại quán</option>
+                <option value="delivery">Giao hàng</option>
+              </select>
+              <p class="field-error" data-error-for="fulfillment"></p>
+            </div>
+            <div class="field full delivery-address" id="delivery-address-field">
+              <label for="customer-address">Địa chỉ giao hàng <span aria-hidden="true">*</span></label>
+              <input id="customer-address" name="address" type="text" autocomplete="street-address" placeholder="Số nhà, đường, phường...">
+              <p class="field-error" data-error-for="customer-address"></p>
+            </div>
+            <div class="field full">
+              <label for="customer-note">Ghi chú thêm</label>
+              <textarea id="customer-note" name="note" placeholder="Ví dụ: ít cay, thêm hành..." rows="2"></textarea>
+            </div>
+          </div>
+          <button class="submit-button" id="submit-order" type="submit" disabled>Xác nhận đặt món</button>
+        </form>
+      </section>
+
+      <aside class="order-summary" aria-labelledby="summary-heading">
+        <div class="summary-heading">
+          <h2 id="summary-heading">Đơn của bạn</h2>
+          <span class="summary-count" id="summary-count">0 món</span>
+        </div>
+        <div class="summary-items" id="summary-items">
+          <p class="summary-empty">Chưa chọn món nào</p>
+        </div>
+        <div class="summary-total">
+          <span class="summary-total-label">Tổng cộng</span>
+          <strong class="summary-total-value" id="summary-total">0 VND</strong>
+        </div>
+        <p class="summary-support">Đơn hàng sẽ được xác nhận qua cuộc gọi điện thoại.</p>
+      </aside>
+    </div>
+  </main>
+
+  <div class="order-modal confirm-modal" id="confirm-modal" role="dialog" aria-modal="true" aria-label="Kiểm tra đơn hàng" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" id="confirm-close" type="button" aria-label="Quay lại">×</button>
+      <div class="confirm-heading">
+        <button class="copy-icon-button" id="copy-confirm-order" type="button" title="Sao chép đơn hàng" aria-label="Sao chép đơn hàng">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="8" y="8" width="11" height="11" rx="1.5"></rect>
+            <path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"></path>
+          </svg>
+        </button>
+        <p class="modal-intro">Kiểm tra lại giỏ hàng và thông tin nhận món trước khi gửi đơn.</p>
+      </div>
+      <pre class="order-text" id="confirm-order-text"></pre>
+      <p class="copy-status" id="confirm-copy-status" role="status" aria-live="polite"></p>
+      <div class="confirm-actions">
+        <button id="confirm-edit" type="button">Quay lại</button>
+        <button class="confirm-submit" id="confirm-submit" type="button">Xác nhận đơn hàng</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-modal success-modal" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Đóng cửa sổ">×</button>
+      <h2 id="modal-title">Đặt hàng thành công</h2>
+      <p class="modal-intro">Nhân viên quán sẽ gọi vào số điện thoại của bạn để xác nhận đơn.</p>
+    </div>
+  </div>
+
+  <script>
+    const menuItems = [
+      {
+        id: 'bc-xe', category: 'banh-canh', name: 'Bánh canh gà xé',
+        description: 'Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.',
+        price: 50000, image: 'images/menu/banh-canh-ga-xe-cutout.png'
+      },
+      {
+        id: 'bc-chat', category: 'banh-canh', name: 'Bánh canh gà chặt',
+        description: 'Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.',
+        price: 60000, image: 'images/menu/banh-canh-ga-chat-cutout.png'
+      },
+      {
+        id: 'bc-dac-biet', category: 'banh-canh', name: 'Bánh canh đặc biệt',
+        description: 'Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.',
+        price: 70000, image: 'images/menu/banh-canh-dac-biet-cutout.png'
+      },
+      {
+        id: 'xoi-xe', category: 'xoi', name: 'Xôi gà xé trứng non',
+        description: 'Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.',
+        price: 45000, image: 'images/menu/xoi-ga-xe-cutout.png'
+      },
+      {
+        id: 'xoi-chat', category: 'xoi', name: 'Xôi gà chặt trứng non',
+        description: 'Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.',
+        price: 50000, image: 'images/menu/xoi-ga-chat-cutout.png'
+      }
+    ];
+    const quantities = Object.fromEntries(menuItems.map(item => [item.id, 0]));
+    const formatPrice = value => `${value.toLocaleString('vi-VN')} VND`;
+    const getSelected = () => menuItems.filter(item => quantities[item.id] > 0);
+    const totalItems = () => getSelected().reduce((sum, item) => sum + quantities[item.id], 0);
+    const totalPrice = () => getSelected().reduce((sum, item) => sum + item.price * quantities[item.id], 0);
+
+    const renderMenuItem = item => `
+      <article class="order-item" data-item-id="${item.id}">
+        <div class="order-item-thumb"><img src="${item.image}" alt="${item.name}"></div>
+        <div class="order-item-info">
+          <h3 class="order-item-name">${item.name}</h3>
+          <div class="order-item-price">${formatPrice(item.price)}</div>
+        </div>
+        <div class="quantity-control" aria-label="Số lượng ${item.name}">
+          <button type="button" data-action="decrease" data-item-id="${item.id}" aria-label="Giảm ${item.name}">−</button>
+          <span class="quantity-value" data-quantity-for="${item.id}">0</span>
+          <button type="button" data-action="increase" data-item-id="${item.id}" aria-label="Tăng ${item.name}">+</button>
+        </div>
+      </article>`;
+
+    document.getElementById('banh-canh-list').innerHTML = menuItems.filter(item => item.category === 'banh-canh').map(renderMenuItem).join('');
+    document.getElementById('xoi-list').innerHTML = menuItems.filter(item => item.category === 'xoi').map(renderMenuItem).join('');
+
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const categoryPanels = document.querySelectorAll('[data-category-panel]');
+    const categoryEmpty = document.getElementById('category-empty');
+    categoryTabs.forEach(tab => tab.addEventListener('click', () => {
+      const category = tab.dataset.category;
+      categoryTabs.forEach(item => {
+        const active = item === tab;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+      categoryPanels.forEach(panel => {
+        panel.hidden = category !== 'all' && panel.dataset.categoryPanel !== category;
+      });
+      categoryEmpty.classList.toggle('is-visible', category === 'nuoc');
+    }));
+
+    const summaryItems = document.getElementById('summary-items');
+    const summaryTotal = document.getElementById('summary-total');
+    const summaryCount = document.getElementById('summary-count');
+    const customerForm = document.getElementById('customer-form');
+    const submitOrder = document.getElementById('submit-order');
+    const addressField = document.getElementById('delivery-address-field');
+    const fulfillment = document.getElementById('fulfillment');
+
+    function updateSummary() {
+      const selected = getSelected();
+      summaryItems.innerHTML = selected.length ? selected.map(item => `
+        <div class="summary-row">
+          <div>
+            <div class="summary-row-name">${item.name}</div>
+            <div class="summary-row-meta">${quantities[item.id]} × ${formatPrice(item.price)}</div>
+          </div>
+          <div class="summary-row-total">${formatPrice(item.price * quantities[item.id])}</div>
+        </div>`).join('') : '<p class="summary-empty">Chưa chọn món nào</p>';
+      summaryTotal.textContent = formatPrice(totalPrice());
+      summaryCount.textContent = `${totalItems()} món`;
+      const hasItems = selected.length > 0;
+      customerForm.classList.toggle('is-disabled', !hasItems);
+      customerForm.setAttribute('aria-disabled', String(!hasItems));
+      submitOrder.disabled = !hasItems;
+      menuItems.forEach(item => {
+        const value = document.querySelector(`[data-quantity-for="${item.id}"]`);
+        const decrease = document.querySelector(`[data-action="decrease"][data-item-id="${item.id}"]`);
+        if (value) value.textContent = quantities[item.id];
+        if (decrease) decrease.disabled = quantities[item.id] === 0;
+      });
+    }
+
+    document.addEventListener('click', event => {
+      const control = event.target.closest('[data-action]');
+      if (!control) return;
+      const id = control.dataset.itemId;
+      quantities[id] = Math.max(0, quantities[id] + (control.dataset.action === 'increase' ? 1 : -1));
+      updateSummary();
+    });
+
+    fulfillment.addEventListener('change', () => {
+      const delivery = fulfillment.value === 'delivery';
+      addressField.classList.toggle('is-visible', delivery);
+      document.getElementById('customer-address').required = delivery;
+      if (!delivery) clearError('customer-address');
+    });
+
+    function clearError(id) {
+      const field = document.getElementById(id)?.closest('.field');
+      const error = document.querySelector(`[data-error-for="${id}"]`);
+      if (field) field.classList.remove('has-error');
+      if (error) error.textContent = '';
+    }
+    function setError(id, message) {
+      const field = document.getElementById(id)?.closest('.field');
+      const error = document.querySelector(`[data-error-for="${id}"]`);
+      if (field) field.classList.add('has-error');
+      if (error) error.textContent = message;
+    }
+    function validateForm() {
+      ['customer-name', 'customer-phone', 'fulfillment', 'customer-address'].forEach(clearError);
+      let valid = true;
+      const name = document.getElementById('customer-name').value.trim();
+      const phone = document.getElementById('customer-phone').value.trim();
+      if (!name) { setError('customer-name', 'Bạn cho quán xin họ tên nhé.'); valid = false; }
+      if (!phone) { setError('customer-phone', 'Bạn cho quán xin số điện thoại nhé.'); valid = false; }
+      else if (!/^[+\d][\d\s().-]{7,}$/.test(phone)) { setError('customer-phone', 'Số điện thoại chưa đúng định dạng.'); valid = false; }
+      if (fulfillment.value === 'delivery' && !document.getElementById('customer-address').value.trim()) { setError('customer-address', 'Vui lòng nhập địa chỉ giao hàng.'); valid = false; }
+      const firstError = document.querySelector('.field.has-error input, .field.has-error select');
+      if (firstError) firstError.focus();
+      return valid;
+    }
+
+    function buildOrderText() {
+      const name = document.getElementById('customer-name').value.trim();
+      const phone = document.getElementById('customer-phone').value.trim();
+      const mode = fulfillment.value === 'delivery' ? 'Giao hàng' : 'Đến lấy tại quán';
+      const address = document.getElementById('customer-address').value.trim();
+      const note = document.getElementById('customer-note').value.trim();
+      const lines = getSelected().map(item => `- ${item.name}: ${quantities[item.id]} phần × ${formatPrice(item.price)} = ${formatPrice(item.price * quantities[item.id])}`);
+      return [
+        'ĐƠN ĐẶT MÓN - BÁNH CANH GÀ HÀNG GÒN',
+        '',
+        ...lines,
+        '',
+        `TỔNG CỘNG: ${formatPrice(totalPrice())}`,
+        '',
+        `Họ tên: ${name}`,
+        `Số điện thoại: ${phone}`,
+        `Hình thức nhận: ${mode}`,
+        ...(mode === 'Giao hàng' ? [`Địa chỉ: ${address}`] : []),
+        ...(note ? [`Ghi chú: ${note}`] : [])
+      ].join('\n');
+    }
+
+    const confirmModal = document.getElementById('confirm-modal');
+    const confirmOrderText = document.getElementById('confirm-order-text');
+    const confirmCopyStatus = document.getElementById('confirm-copy-status');
+    const orderModal = document.getElementById('order-modal');
+    let successCloseTimer;
+    customerForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!validateForm()) return;
+      confirmOrderText.textContent = buildOrderText();
+      confirmCopyStatus.textContent = '';
+      confirmModal.classList.add('is-open');
+      confirmModal.setAttribute('aria-hidden', 'false');
+      document.getElementById('confirm-submit').focus();
+    });
+    function closeConfirmModal() {
+      confirmModal.classList.remove('is-open');
+      confirmModal.setAttribute('aria-hidden', 'true');
+    }
+    function openSuccessModal() {
+      orderModal.classList.add('is-open');
+      orderModal.setAttribute('aria-hidden', 'false');
+      document.getElementById('modal-close').focus();
+      successCloseTimer = window.setTimeout(closeModal, 10000);
+    }
+    function closeModal() {
+      window.clearTimeout(successCloseTimer);
+      orderModal.classList.remove('is-open');
+      orderModal.setAttribute('aria-hidden', 'true');
+    }
+    document.getElementById('confirm-close').addEventListener('click', closeConfirmModal);
+    document.getElementById('confirm-edit').addEventListener('click', closeConfirmModal);
+    document.getElementById('confirm-submit').addEventListener('click', () => {
+      closeConfirmModal();
+      openSuccessModal();
+    });
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    confirmModal.addEventListener('click', event => { if (event.target === confirmModal) closeConfirmModal(); });
+    orderModal.addEventListener('click', event => { if (event.target === orderModal) closeModal(); });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      if (confirmModal.classList.contains('is-open')) closeConfirmModal();
+      if (orderModal.classList.contains('is-open')) closeModal();
+    });
+    document.getElementById('copy-confirm-order').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(confirmOrderText.textContent);
+        confirmCopyStatus.textContent = 'Đã sao chép';
+      } catch {
+        confirmCopyStatus.textContent = 'Không thể sao chép tự động. Bạn có thể bôi đen nội dung đơn.';
+      }
+    });
+    updateSummary();
+  </script>
 </body>
 
 </html>
