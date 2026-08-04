@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="images/menu/icon-quan-an_result.webp">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -121,6 +122,10 @@
       border-radius: 999px;
       background: currentColor;
       transition: transform .28s ease, opacity .22s ease;
+    }
+
+    .mobile-order-link {
+      display: none;
     }
 
     .site-nav.nav-open .nav-toggle span:nth-child(1) {
@@ -1273,6 +1278,7 @@
     @media (max-width: 880px) {
       #welcome {
         padding: 36px 20px 42px;
+        background-position: 42% center, 42% center;
       }
 
       .welcome-grid {
@@ -1374,6 +1380,16 @@
       font-size: 15px;
       color: var(--cream);
       line-height: 1.52;
+    }
+
+    .loc-card .value a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .loc-card .value a:hover,
+    .loc-card .value a:focus-visible {
+      color: var(--gold);
     }
 
     .loc-actions {
@@ -1799,12 +1815,33 @@
       }
 
       .site-nav ul li a.nav-order-link {
+        display: none;
+      }
+
+      .mobile-order-link {
         display: inline-flex;
-        margin: 8px 12px 4px;
-        padding: 8px 18px 9px;
-        transform: translateY(-3px);
-        font-size: 18px;
-        letter-spacing: 2.3px;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: 10px;
+        padding: 8px 12px 9px;
+        color: #ffd978;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1.8px;
+        line-height: 1;
+        text-decoration: none;
+        text-transform: uppercase;
+        background:
+          linear-gradient(90deg, transparent, rgba(255,218,105,.92), transparent) center top / 100% 1px no-repeat,
+          linear-gradient(90deg, transparent, rgba(255,218,105,.92), transparent) center bottom / 100% 1px no-repeat;
+        text-shadow: 0 0 10px rgba(255,187,58,.32);
+      }
+
+      .mobile-order-link:hover,
+      .mobile-order-link:focus-visible {
+        color: #ffe9a8;
       }
 
       .nav-toggle {
@@ -2828,10 +2865,16 @@
         flex: none;
         overflow-x: auto;
         overflow-y: hidden;
+        opacity: 0;
+        transition: opacity .18s ease;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
         touch-action: pan-x pan-y;
+      }
+
+      .hero-panorama.is-ready {
+        opacity: 1;
       }
 
       .hero-bg-photo {
@@ -2999,6 +3042,7 @@
       <li><a href="#location">Vị trí</a></li>
       <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
     </ul>
+    <a class="mobile-order-link" href="order.html">Đặt hàng</a>
     <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -3038,7 +3082,8 @@
   <section id="hero">
     <div class="hero-panorama" aria-hidden="true">
       <img class="hero-bg-photo" src="images/home/background_result.webp"
-        alt="Đũa gắp miếng gà ta từ tô bánh canh gà đặc biệt trên bàn nhựa nâu, kèm chén muối ớt chanh">
+        alt="Đũa gắp miếng gà ta từ tô bánh canh gà đặc biệt trên bàn nhựa nâu, kèm chén muối ớt chanh"
+        fetchpriority="high" loading="eager">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -3264,7 +3309,7 @@
         </div>
         <div class="loc-card">
           <div class="label">Hotline</div>
-          <div class="value">0356 539 789</div>
+          <div class="value"><a href="tel:+84356539789">0356 539 789</a></div>
         </div>
         <div class="loc-actions">
           <a class="loc-map-link" href="https://maps.app.goo.gl/m2fKyMJy4xSPQMa87" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a>
@@ -3321,6 +3366,7 @@
     });
 
     const heroPanorama = document.querySelector('.hero-panorama');
+    const heroBgPhoto = document.querySelector('.hero-bg-photo');
 
     function centerHeroPanorama() {
       if (!heroPanorama || window.innerWidth > 880) return;
@@ -3332,6 +3378,19 @@
 
     window.addEventListener('load', centerHeroPanorama);
     window.addEventListener('resize', centerHeroPanorama);
+
+    function revealHeroPanorama() {
+      if (!heroPanorama) return;
+      centerHeroPanorama();
+      heroPanorama.classList.add('is-ready');
+    }
+
+    if (heroBgPhoto) {
+      heroBgPhoto.addEventListener('load', revealHeroPanorama, { once: true });
+      if (heroBgPhoto.complete) {
+        requestAnimationFrame(revealHeroPanorama);
+      }
+    }
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
