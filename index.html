@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/webp" href="images/menu/icon-quan-an_result.webp">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -122,10 +121,6 @@
       border-radius: 999px;
       background: currentColor;
       transition: transform .28s ease, opacity .22s ease;
-    }
-
-    .mobile-order-link {
-      display: none;
     }
 
     .site-nav.nav-open .nav-toggle span:nth-child(1) {
@@ -285,7 +280,7 @@
           rgba(54,34,21,0.62) 52%,
           rgba(38,22,15,0.78) 78%,
           rgba(24,14,10,0.92) 100%),
-        url('images/menu/background-menu-2_result.webp?v=20260718-1620');
+        url('images/menu/background-menu.png?v=20260718-1620');
       background-position: center center, center center;
       background-size: auto, 100% 100%;
       background-repeat: no-repeat, no-repeat;
@@ -699,7 +694,7 @@
           rgba(36, 22, 16, 0.58) 30%,
           rgba(36, 22, 16, 0.5) 58%,
           rgba(20, 11, 7, 0.78) 100%),
-        url('images/menu/background-menu-2_result.webp?v=20260719-01');
+        url('images/menu/background-menu.png?v=20260719-01');
       background-position: center top, center top;
       background-size: cover, cover;
       background-repeat: no-repeat, no-repeat;
@@ -985,7 +980,7 @@
           rgba(36, 22, 16, 0.28) 0%,
           rgba(36, 22, 16, 0.1) 46%,
           rgba(36, 22, 16, 0.44) 100%),
-        url('images/story/background_result.webp');
+        url('images/story/background.png');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -1187,7 +1182,7 @@
       padding: clamp(34px, 4vw, 58px) clamp(28px, 7vw, 120px);
       background-image:
         linear-gradient(90deg, rgba(36,22,16,.92) 0%, rgba(36,22,16,.82) 34%, rgba(36,22,16,.64) 68%, rgba(36,22,16,.7) 100%),
-        url('images/greeting/background_result.webp');
+        url('images/greeting/background.png');
       background-position: center center, center center;
       background-size: cover, cover;
       background-repeat: no-repeat, no-repeat;
@@ -1275,10 +1270,44 @@
       box-shadow: 0 22px 50px rgba(0, 0, 0, .3);
     }
 
+    .welcome-corner {
+      position: absolute;
+      z-index: 2;
+      width: 52px;
+      height: 52px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .welcome-corner--tl {
+      top: 0;
+      left: 0;
+      border-width: 1px 0 0 1px;
+    }
+
+    .welcome-corner--tr {
+      top: 0;
+      right: 0;
+      border-width: 1px 1px 0 0;
+    }
+
+    .welcome-corner--bl {
+      bottom: 0;
+      left: 0;
+      border-width: 0 0 1px 1px;
+    }
+
+    .welcome-corner--br {
+      right: 0;
+      bottom: 0;
+      border-width: 0 1px 1px 0;
+    }
+
     @media (max-width: 880px) {
       #welcome {
         padding: 36px 20px 42px;
-        background-position: 42% center, 42% center;
       }
 
       .welcome-grid {
@@ -1296,6 +1325,11 @@
 
       .welcome-photo::before {
         inset: 10px;
+      }
+
+      .welcome-corner {
+        width: 38px;
+        height: 38px;
       }
 
       .welcome-copy,
@@ -1380,16 +1414,6 @@
       font-size: 15px;
       color: var(--cream);
       line-height: 1.52;
-    }
-
-    .loc-card .value a {
-      color: var(--cream);
-      text-decoration: none;
-    }
-
-    .loc-card .value a:hover,
-    .loc-card .value a:focus-visible {
-      color: var(--gold);
     }
 
     .loc-actions {
@@ -1815,33 +1839,12 @@
       }
 
       .site-nav ul li a.nav-order-link {
-        display: none;
-      }
-
-      .mobile-order-link {
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: auto;
-        margin-right: 10px;
-        padding: 8px 12px 9px;
-        color: #ffd978;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 1.8px;
-        line-height: 1;
-        text-decoration: none;
-        text-transform: uppercase;
-        background:
-          linear-gradient(90deg, transparent, rgba(255,218,105,.92), transparent) center top / 100% 1px no-repeat,
-          linear-gradient(90deg, transparent, rgba(255,218,105,.92), transparent) center bottom / 100% 1px no-repeat;
-        text-shadow: 0 0 10px rgba(255,187,58,.32);
-      }
-
-      .mobile-order-link:hover,
-      .mobile-order-link:focus-visible {
-        color: #ffe9a8;
+        margin: 8px 12px 4px;
+        padding: 8px 18px 9px;
+        transform: translateY(-3px);
+        font-size: 18px;
+        letter-spacing: 2.3px;
       }
 
       .nav-toggle {
@@ -2672,7 +2675,7 @@
     #menu {
       background-image:
         linear-gradient(180deg, rgba(242,232,213,0.08), rgba(201,154,74,0.11)),
-        url('images/menu/background-menu-2_result.webp?v=20260804-01');
+        url('images/menu/background-menu-2.png?v=20260804-01');
       background-position: center center, center center;
       background-size: cover, cover;
       padding: clamp(56px, 6vw, 78px) clamp(24px, 5vw, 86px) clamp(42px, 5vw, 62px);
@@ -2865,16 +2868,10 @@
         flex: none;
         overflow-x: auto;
         overflow-y: hidden;
-        opacity: 0;
-        transition: opacity .18s ease;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
         touch-action: pan-x pan-y;
-      }
-
-      .hero-panorama.is-ready {
-        opacity: 1;
       }
 
       .hero-bg-photo {
@@ -3018,6 +3015,28 @@
         font-size: 24px;
       }
     }
+
+    /* Keep touch devices stable when menu images receive focus or hover emulation. */
+    @media (max-width: 880px) {
+      .menu-card .dish-plate,
+      .menu-category:first-child .menu-card .dish-plate,
+      .menu-cards-wide .menu-card .dish-plate {
+        overflow: hidden;
+        contain: paint;
+      }
+
+      .menu-card .dish-plate img,
+      .menu-card:hover .dish-plate img,
+      .menu-card:focus-visible .dish-plate img,
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+      .menu-cards-wide .menu-card:hover .dish-plate img,
+      .menu-cards-wide .menu-card:focus-visible .dish-plate img {
+        transform: scale(1.08) !important;
+        filter: drop-shadow(0 14px 18px rgba(0,0,0,.42));
+        will-change: auto;
+      }
+    }
   </style>
 </head>
 
@@ -3033,7 +3052,7 @@
 
   <nav class="site-nav" id="siteNav">
     <a class="logo" href="#hero" aria-label="Bánh Canh Gà Ta">
-      <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Ta">
+      <img src="images/menu/icon-quan-an.png" alt="Bánh Canh Gà Ta">
     </a>
     <ul>
       <li><a href="#hero">Trang chủ</a></li>
@@ -3042,7 +3061,6 @@
       <li><a href="#location">Vị trí</a></li>
       <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
     </ul>
-    <a class="mobile-order-link" href="order.html">Đặt hàng</a>
     <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -3054,7 +3072,7 @@
 
   <div class="social-corner">
 
-    <a class="hotline-link" href="tel:+84356539789" title="Gọi Hotline 0356 539 789" aria-label="Gọi Hotline 0356 539 789">
+    <a class="hotline-link" href="tel:+84356538789" title="Gọi Hotline 0356 538 789" aria-label="Gọi Hotline 0356 539 789">
       <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M6.6 3.2 9 2.7c.65-.14 1.29.2 1.55.81l1.14 2.67c.22.52.1 1.12-.31 1.51L9.9 8.99a13.2 13.2 0 0 0 5.1 5.1l1.3-1.48c.39-.41.99-.53 1.51-.31l2.67 1.14c.61.26.95.9.81 1.55l-.5 2.4c-.14.67-.73 1.15-1.41 1.15C10.84 18.54 5.46 13.16 5.46 6.62c0-.68.48-1.27 1.14-1.41Z"/>
       </svg>
@@ -3071,19 +3089,18 @@
       </svg>
     </a>
     <a class="social-image-link" href="#" title="ShopeeFood" aria-label="ShopeeFood Bánh Canh Gà Hàng Gòn">
-      <img class="social-icon-img" src="images/icon-shopee_result.webp" alt="">
+      <img class="social-icon-img" src="images/icon-shopee.png" alt="">
     </a>
     <a class="social-image-link" href="#" title="GrabFood" aria-label="GrabFood Bánh Canh Gà Hàng Gòn">
-      <img class="social-icon-img" src="images/icon-grab-food_result.webp" alt="">
+      <img class="social-icon-img" src="images/icon-grab-food.png" alt="">
     </a>
   </div>
 
   <!-- SECTION 1: HERO -->
   <section id="hero">
     <div class="hero-panorama" aria-hidden="true">
-      <img class="hero-bg-photo" src="images/home/background_result.webp"
-        alt="Đũa gắp miếng gà ta từ tô bánh canh gà đặc biệt trên bàn nhựa nâu, kèm chén muối ớt chanh"
-        fetchpriority="high" loading="eager">
+      <img class="hero-bg-photo" src="images/home/background.png"
+        alt="Đũa gắp miếng gà ta từ tô bánh canh gà đặc biệt trên bàn nhựa nâu, kèm chén muối ớt chanh">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -3102,7 +3119,11 @@
         <p class="welcome-description">Hàng Gòn tự hào mang đến hương vị bánh canh gà đậm đà giữa lòng thành phố. Từng tô canh được nấu mỗi ngày với nước lèo ninh xương, thịt gà tươi chọn lọc — phục vụ ngay khi bạn vừa gọi món.</p>
       </div>
       <figure class="welcome-photo">
-        <img src="images/mattien-quan-dem_result.webp" alt="Mặt tiền quán Bánh Canh Gà Hàng Gòn về đêm">
+        <img src="images/mattien-quan-dem.png" alt="Mặt tiền quán Bánh Canh Gà Hàng Gòn về đêm">
+        <span class="welcome-corner welcome-corner--tl" aria-hidden="true"></span>
+        <span class="welcome-corner welcome-corner--tr" aria-hidden="true"></span>
+        <span class="welcome-corner welcome-corner--bl" aria-hidden="true"></span>
+        <span class="welcome-corner welcome-corner--br" aria-hidden="true"></span>
       </figure>
     </div>
   </section>
@@ -3111,9 +3132,9 @@
   <section id="story">
     <div class="story-slider" aria-label="Câu chuyện Hàng Gòn">
       <article class="story-slide is-active">
-        <img src="images/story/background_result.webp" alt="Không gian mộc mạc của quán Bánh Canh Gà Hàng Gòn">
+        <img src="images/story/background.png" alt="Không gian mộc mạc của quán Bánh Canh Gà Hàng Gòn">
         <div class="story-slide__content">
-          <p class="story-slide__quote">“Góc chợ <em>Hàng Gòn</em> chứng kiến bao thế hệ. Chúng tôi giữ vị quê mộc mạc và giản dị trong từng bát canh nóng.”</p>
+          <p class="story-slide__quote">“Góc chợ <em>Hàng Gòn</em> chứng kiến bao thế hệ. Chúng tôi giữ vị quê mộc mạc và  giản dị trong từng bát canh nóng.”</p>
         </div>
       </article>
     </div>
@@ -3157,14 +3178,14 @@
       <div class="menu-category">
         <div class="menu-category-label">
           <span class="menu-cat-icon" aria-hidden="true">
-            <img src="images/menu/icon-banh-canh-ga_result.webp" alt="">
+            <img src="images/menu/icon-banh-canh-ga.png" alt="">
           </span>
           <span class="cat-name">Bánh canh gà</span>
           <span class="cat-line"></span>
         </div>
         <div class="menu-cards">
           <button class="menu-card dish-bc-xe" type="button" data-name="Bánh canh gà xé" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-cutout_result.webp" alt="Bánh canh gà xé"></span>
+            <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-cutout.png" alt="Bánh canh gà xé"></span>
             <span>
               <span class="menu-card-name">Bánh canh<br/>gà xé</span>
               <span class="menu-card-desc">Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.</span>
@@ -3175,7 +3196,7 @@
           </button>
 
           <button class="menu-card dish-bc-chat" type="button" data-name="Bánh canh gà chặt" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-cutout_result.webp" alt="Bánh canh gà chặt"></span>
+            <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-cutout.png" alt="Bánh canh gà chặt"></span>
             <span>
               <span class="menu-card-name">Bánh canh<br/>gà chặt</span>
               <span class="menu-card-desc">Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.</span>
@@ -3186,7 +3207,7 @@
           </button>
 
           <button class="menu-card" type="button" data-name="Bánh canh đặc biệt" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-cutout_result.webp" alt="Bánh canh đặc biệt"></span>
+            <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-cutout.png" alt="Bánh canh đặc biệt"></span>
             <span>
               <span class="menu-card-name">Bánh canh<br/>đặc biệt</span>
               <span class="menu-card-desc">Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.</span>
@@ -3201,14 +3222,14 @@
       <div class="menu-category">
         <div class="menu-category-label">
           <span class="menu-cat-icon" aria-hidden="true">
-            <img src="images/menu/icon-xoi-ga_result.webp" alt="">
+            <img src="images/menu/icon-xoi-ga.png" alt="">
           </span>
           <span class="cat-name">Xôi gà</span>
           <span class="cat-line"></span>
         </div>
         <div class="menu-cards menu-cards-wide">
           <button class="menu-card" type="button" data-name="Xôi gà xé trứng non" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/xoi-ga-xe-cutout_result.webp" alt="Xôi gà xé trứng non"></span>
+            <span class="dish-plate"><img src="images/menu/xoi-ga-xe-cutout.png" alt="Xôi gà xé trứng non"></span>
             <span>
               <span class="menu-card-name">Xôi gà<br/>xé trứng non</span>
               <span class="menu-card-desc">Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.</span>
@@ -3219,7 +3240,7 @@
           </button>
 
           <button class="menu-card" type="button" data-name="Xôi gà chặt trứng non" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/xoi-ga-chat-cutout_result.webp" alt="Xôi gà chặt trứng non"></span>
+            <span class="dish-plate"><img src="images/menu/xoi-ga-chat-cutout.png" alt="Xôi gà chặt trứng non"></span>
             <span>
               <span class="menu-card-name">Xôi gà<br/>chặt trứng non</span>
               <span class="menu-card-desc">Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.</span>
@@ -3242,23 +3263,23 @@
       </div>
       <div class="bs-grid">
         <figure class="bs-item bs-hero">
-          <img src="images/behind-scenes/trung-non-nuoc-cham_result.webp" alt="Trứng non chấm nước mắm" loading="lazy">
+          <img src="images/behind-scenes/trung-non-nuoc-cham.png" alt="Trứng non chấm nước mắm" loading="lazy">
           <figcaption class="bs-caption">Vị chấm không thể thiếu</figcaption>
         </figure>
         <figure class="bs-item bs-vert1">
-          <img src="images/behind-scenes/chan-nuoc-leo_result.webp" alt="Chan nước lèo nóng hổi" loading="lazy">
+          <img src="images/behind-scenes/chan-nuoc-leo.png" alt="Chan nước lèo nóng hổi" loading="lazy">
           <figcaption class="bs-caption">Nước lèo ngọt thanh</figcaption>
         </figure>
         <figure class="bs-item bs-vert2">
-          <img src="images/behind-scenes/ga-luoc-quan_result.webp" alt="Gà luộc tại quán" loading="lazy">
+          <img src="images/behind-scenes/ga-luoc-quan.png" alt="Gà luộc tại quán" loading="lazy">
           <figcaption class="bs-caption">Gà tuyển chọn mỗi sáng</figcaption>
         </figure>
         <figure class="bs-item bs-wide1 bs-fit-full">
-          <img src="images/behind-scenes/mot-goc-nho-cua-quan_result.webp" alt="Một góc nhỏ của quán" loading="lazy">
+          <img src="images/behind-scenes/mot-goc-nho-cua-quan.png" alt="Một góc nhỏ của quán" loading="lazy">
           <figcaption class="bs-caption">Góc quán mỗi trưa</figcaption>
         </figure>
         <figure class="bs-item bs-wide2 bs-fit-full">
-          <img src="images/behind-scenes/khong-gian-quan_result.webp" alt="Không gian quán" loading="lazy">
+          <img src="images/behind-scenes/khong-gian-quan.png" alt="Không gian quán" loading="lazy">
           <figcaption class="bs-caption">Mặt tiền Hàng Gòn</figcaption>
         </figure>
       </div>
@@ -3267,7 +3288,7 @@
 
   <!-- SECTION 5: CUSTOMER REVIEWS -->
   <section id="customer-reviews" aria-label="Đánh giá khách hàng">
-    <img class="reviews-bg" src="images/testimonials-bg_result.webp" alt="" loading="lazy" aria-hidden="true">
+    <img class="reviews-bg" src="images/testimonials-bg.png" alt="" loading="lazy" aria-hidden="true">
     <div class="review-panel">
       <h2 class="review-title">Khách hàng nói gì về Hàng Gòn?</h2>
       <div class="review-rating">Google Reviewer: <strong>5/5</strong></div>
@@ -3305,11 +3326,11 @@
         </div>
         <div class="loc-card">
           <div class="label">Giờ mở cửa</div>
-          <div class="value">06:00 – 00:00 (Tất cả các ngày trong tuần)</div>
+          <div class="value">06:00 – 21:30 (Tất cả các ngày trong tuần)</div>
         </div>
         <div class="loc-card">
           <div class="label">Hotline</div>
-          <div class="value"><a href="tel:+84356539789">0356 539 789</a></div>
+          <div class="value">0356 538 789</div>
         </div>
         <div class="loc-actions">
           <a class="loc-map-link" href="https://maps.app.goo.gl/m2fKyMJy4xSPQMa87" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a>
@@ -3366,7 +3387,6 @@
     });
 
     const heroPanorama = document.querySelector('.hero-panorama');
-    const heroBgPhoto = document.querySelector('.hero-bg-photo');
 
     function centerHeroPanorama() {
       if (!heroPanorama || window.innerWidth > 880) return;
@@ -3378,19 +3398,6 @@
 
     window.addEventListener('load', centerHeroPanorama);
     window.addEventListener('resize', centerHeroPanorama);
-
-    function revealHeroPanorama() {
-      if (!heroPanorama) return;
-      centerHeroPanorama();
-      heroPanorama.classList.add('is-ready');
-    }
-
-    if (heroBgPhoto) {
-      heroBgPhoto.addEventListener('load', revealHeroPanorama, { once: true });
-      if (heroBgPhoto.complete) {
-        requestAnimationFrame(revealHeroPanorama);
-      }
-    }
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
