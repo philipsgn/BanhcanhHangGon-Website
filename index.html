@@ -1066,6 +1066,317 @@
       font-weight: 500;
     }
 
+    /* Section 2: calm two-image story slider */
+    #story {
+      aspect-ratio: auto;
+      min-height: 0;
+      height: clamp(420px, 33.333vw, 640px);
+      padding: 0;
+      background: var(--bg-deep);
+    }
+
+    #story::before {
+      z-index: 0;
+      background: linear-gradient(90deg, rgba(18, 10, 7, .46), transparent 60%),
+        linear-gradient(180deg, rgba(18, 10, 7, .08), rgba(18, 10, 7, .62));
+    }
+
+    .story-slider {
+      position: relative;
+      z-index: 1;
+      min-height: 0;
+      height: 100%;
+      overflow: hidden;
+      isolation: isolate;
+      touch-action: pan-y;
+    }
+
+    .story-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      opacity: 0;
+      visibility: hidden;
+      transform: none;
+      transition: opacity .75s ease, visibility 0s linear .75s;
+    }
+
+    .story-slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0s;
+    }
+
+    .story-slide img {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .story-slide__content {
+      position: relative;
+      z-index: 1;
+      width: min(760px, 72vw);
+      margin: 0 clamp(28px, 7vw, 120px) clamp(58px, 8vw, 104px);
+    }
+
+    .story-slide__eyebrow {
+      margin: 0 0 14px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+
+    .story-slide__quote {
+      margin: 0;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4.2vw, 62px);
+      font-weight: 400;
+      line-height: 1.08;
+      text-wrap: balance;
+      text-shadow: 0 10px 28px rgba(0, 0, 0, .48);
+    }
+
+    .story-slide__quote em {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .story-slider__dots {
+      position: absolute;
+      z-index: 4;
+      right: clamp(28px, 7vw, 120px);
+      bottom: clamp(28px, 4vw, 52px);
+      display: flex;
+      gap: 9px;
+    }
+
+    .story-slider__dot {
+      width: 28px;
+      height: 2px;
+      padding: 0;
+      border: 0;
+      background: rgba(242, 232, 213, .38);
+      transition: width .3s ease, background .3s ease;
+    }
+
+    .story-slider__dot.is-active {
+      width: 52px;
+      background: var(--gold);
+    }
+
+    /* Section: welcome */
+    #welcome {
+      position: relative;
+      padding: clamp(34px, 4vw, 58px) clamp(28px, 7vw, 120px);
+      background-image:
+        linear-gradient(90deg, rgba(36,22,16,.92) 0%, rgba(36,22,16,.82) 34%, rgba(36,22,16,.64) 68%, rgba(36,22,16,.7) 100%),
+        url('images/greeting/background.png');
+      background-position: center center, center center;
+      background-size: cover, cover;
+      background-repeat: no-repeat, no-repeat;
+      color: var(--cream);
+    }
+
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: clamp(32px, 5vw, 76px);
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .welcome-copy {
+      max-width: 520px;
+    }
+
+    .welcome-title {
+      margin: 0 0 16px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 3.7vw, 56px);
+      font-weight: 500;
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .welcome-title__line {
+      display: block;
+    }
+
+    .welcome-title__line--accent {
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .welcome-diamonds {
+      display: inline-block;
+      margin-left: 12px;
+      color: var(--gold);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: .2em;
+      letter-spacing: 5px;
+      vertical-align: middle;
+      transform: translateY(-.3em);
+    }
+
+    .welcome-description {
+      max-width: 500px;
+      margin: 0;
+      color: var(--cream-dim);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(19px, 1.7vw, 24px);
+      line-height: 1.42;
+    }
+
+    .welcome-photo {
+      position: relative;
+      isolation: isolate;
+      margin: 0;
+      padding: 14px;
+    }
+
+    .welcome-photo::before {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(36, 22, 16, .24), transparent 20%, transparent 80%, rgba(36, 22, 16, .18));
+      box-shadow: 0 22px 50px rgba(0, 0, 0, .3);
+    }
+
+    .welcome-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 14px;
+      object-fit: contain;
+      object-position: center;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, .3);
+    }
+
+    .welcome-corner {
+      position: absolute;
+      z-index: 2;
+      width: 52px;
+      height: 52px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .welcome-corner--tl {
+      top: 0;
+      left: 0;
+      border-width: 1px 0 0 1px;
+    }
+
+    .welcome-corner--tr {
+      top: 0;
+      right: 0;
+      border-width: 1px 1px 0 0;
+    }
+
+    .welcome-corner--bl {
+      bottom: 0;
+      left: 0;
+      border-width: 0 0 1px 1px;
+    }
+
+    .welcome-corner--br {
+      right: 0;
+      bottom: 0;
+      border-width: 0 1px 1px 0;
+    }
+
+    @media (max-width: 880px) {
+      #welcome {
+        padding: 36px 20px 42px;
+      }
+
+      .welcome-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        text-align: center;
+      }
+
+      .welcome-photo {
+        order: -1;
+        width: min(100%, 560px);
+        margin: 0 auto;
+        padding: 10px;
+      }
+
+      .welcome-photo::before {
+        inset: 10px;
+      }
+
+      .welcome-corner {
+        width: 38px;
+        height: 38px;
+      }
+
+      .welcome-copy,
+      .welcome-description {
+        max-width: 100%;
+      }
+
+      .welcome-title {
+        margin-bottom: 14px;
+        font-size: clamp(32px, 9vw, 46px);
+      }
+
+      .welcome-description {
+        font-size: clamp(19px, 5.5vw, 23px);
+        line-height: 1.42;
+      }
+    }
+
+    @media (max-width: 880px) {
+      #story {
+        aspect-ratio: auto;
+        min-height: 500px;
+        height: 560px;
+        padding: 0;
+      }
+
+      .story-slide img {
+        object-position: 58% center;
+      }
+
+      .story-slide__content {
+        width: auto;
+        margin: 0 24px 70px;
+      }
+
+      .story-slide__quote {
+        max-width: 18ch;
+        font-size: clamp(29px, 8.2vw, 40px);
+        line-height: 1.12;
+      }
+
+      .story-slider__dots {
+        right: 24px;
+        bottom: 42px;
+      }
+    }
+
     /* ---------- SECTION 4 : LOCATION ---------- */
     #location {
       background:
@@ -1770,9 +2081,12 @@
       }
 
       #story {
+        aspect-ratio: auto;
         min-height: auto;
-        padding: 64px 24px 72px;
-        background-position: 58% bottom;
+        min-height: 500px;
+        height: 560px;
+        padding: 0;
+        background-position: center;
       }
 
       .story-grid {
@@ -2360,27 +2674,19 @@
     /* ---- Menu refinement: compact zig-zag Vietnamese restaurant editorial ---- */
     #menu {
       background-image:
-        radial-gradient(ellipse at 50% 38%, rgba(201,154,74,0.16) 0%, rgba(201,154,74,0.05) 28%, transparent 56%),
-        radial-gradient(ellipse at 50% 90%, rgba(201,154,74,0.14) 0%, rgba(120,78,42,0.16) 34%, transparent 68%),
-        linear-gradient(180deg,
-          rgba(20, 11, 7, 0.88) 0%,
-          rgba(36, 22, 16, 0.72) 24%,
-          rgba(36, 22, 16, 0.66) 62%,
-          rgba(36, 22, 16, 0.72) 100%),
-        url('images/menu/background-menu.png?v=20260719-02');
-      background-position: center center, center bottom, center center, center center;
-      background-size: cover, 100% 52%, cover, cover;
+        linear-gradient(180deg, rgba(242,232,213,0.08), rgba(201,154,74,0.11)),
+        url('images/menu/background-menu-2.png?v=20260804-01');
+      background-position: center center, center center;
+      background-size: cover, cover;
       padding: clamp(56px, 6vw, 78px) clamp(24px, 5vw, 86px) clamp(42px, 5vw, 62px);
     }
 
     #menu::before {
-      background:
-        linear-gradient(90deg, rgba(12,7,4,0.28), transparent 26%, transparent 74%, rgba(12,7,4,0.32)),
-        radial-gradient(ellipse at 50% 42%, rgba(242,232,213,0.08), transparent 42%);
+      background: none;
     }
 
     #menu::after {
-      opacity: .18;
+      opacity: 0;
     }
 
     .menu-shell {
@@ -2612,7 +2918,7 @@
 
       #menu {
         padding: 48px 18px 42px;
-        background-size: auto 100%, auto 100%, cover;
+        background-size: cover;
       }
 
       .menu-category-label {
@@ -2728,7 +3034,7 @@
     </a>
     <ul>
       <li><a href="#hero">Trang chủ</a></li>
-      <li><a href="#story">Giới thiệu</a></li>
+      <li><a href="#welcome">Giới thiệu</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#location">Vị trí</a></li>
       <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
@@ -2780,15 +3086,35 @@
     </div>
   </section>
 
+  <!-- SECTION 2: WELCOME -->
+  <section id="welcome">
+    <div class="welcome-grid">
+      <div class="welcome-copy">
+        <h2 class="welcome-title">
+          <span class="welcome-title__line">Chào mừng bạn <span class="welcome-diamonds" aria-hidden="true">◆◆◆</span></span>
+          <span class="welcome-title__line welcome-title__line--accent">đến với Hàng Gòn</span>
+        </h2>
+        <p class="welcome-description">Hàng Gòn tự hào mang đến hương vị bánh canh gà đậm đà giữa lòng thành phố. Từng tô canh được nấu mỗi ngày với nước lèo ninh xương, thịt gà tươi chọn lọc — phục vụ ngay khi bạn vừa gọi món.</p>
+      </div>
+      <figure class="welcome-photo">
+        <img src="images/mattien-quan-dem.png" alt="Mặt tiền quán Bánh Canh Gà Hàng Gòn về đêm">
+        <span class="welcome-corner welcome-corner--tl" aria-hidden="true"></span>
+        <span class="welcome-corner welcome-corner--tr" aria-hidden="true"></span>
+        <span class="welcome-corner welcome-corner--bl" aria-hidden="true"></span>
+        <span class="welcome-corner welcome-corner--br" aria-hidden="true"></span>
+      </figure>
+    </div>
+  </section>
+
   <!-- SECTION 3: STORY -->
   <section id="story">
-    <div class="story-grid">
-      <div class="story-text-modern">
-        <div class="quote">
-          "Góc chợ <em>Hàng Gòn</em> chứng kiến bao thế hệ. Chúng tôi vẫn giữ cách ninh xương đủ giờ, chọn gà đủ lứa,
-          trao gửi hương vị <em>mộc mạc, chân thật</em> như thuở ban sơ."
+    <div class="story-slider" aria-label="Câu chuyện Hàng Gòn">
+      <article class="story-slide is-active">
+        <img src="images/story/background.png" alt="Không gian mộc mạc của quán Bánh Canh Gà Hàng Gòn">
+        <div class="story-slide__content">
+          <p class="story-slide__quote">“Góc chợ <em>Hàng Gòn</em> chứng kiến bao thế hệ. Chúng tôi giữ vị quê mộc mạc và giản dị trong từng bát canh nóng.”</p>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -3129,6 +3455,59 @@
     if (reviewCopy && reviewDots.length) {
       showReview(0);
       startReviewCarousel();
+    }
+
+    const storySlider = document.querySelector('.story-slider');
+    const storySlides = storySlider ? [...storySlider.querySelectorAll('.story-slide')] : [];
+    const storyDots = storySlider ? [...storySlider.querySelectorAll('.story-slider__dot')] : [];
+    let activeStoryIndex = 0;
+    let storyTimer;
+    let storyPointerStart = 0;
+
+    function showStory(index) {
+      if (!storySlides.length) return;
+      activeStoryIndex = (index + storySlides.length) % storySlides.length;
+      storySlides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === activeStoryIndex);
+      });
+      storyDots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === activeStoryIndex;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+      });
+    }
+
+    function startStoryCarousel() {
+      clearInterval(storyTimer);
+      storyTimer = setInterval(() => showStory(activeStoryIndex + 1), 7000);
+    }
+
+    function pauseStoryCarousel() {
+      clearInterval(storyTimer);
+    }
+
+    if (storySlider && storySlides.length > 1) {
+      storyDots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => {
+          showStory(dotIndex);
+          startStoryCarousel();
+        });
+      });
+      storySlider.addEventListener('mouseenter', pauseStoryCarousel);
+      storySlider.addEventListener('mouseleave', startStoryCarousel);
+      storySlider.addEventListener('focusin', pauseStoryCarousel);
+      storySlider.addEventListener('focusout', startStoryCarousel);
+      storySlider.addEventListener('pointerdown', (event) => {
+        storyPointerStart = event.clientX;
+      });
+      storySlider.addEventListener('pointerup', (event) => {
+        const distance = event.clientX - storyPointerStart;
+        if (Math.abs(distance) < 48) return;
+        showStory(activeStoryIndex + (distance < 0 ? 1 : -1));
+        startStoryCarousel();
+      });
+      showStory(0);
+      startStoryCarousel();
     }
 
     window.addEventListener('load', () => {
