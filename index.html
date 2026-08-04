@@ -1190,8 +1190,6 @@
     }
 
     .welcome-grid {
-      position: relative;
-      z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
       align-items: center;
@@ -1360,27 +1358,6 @@
 
       .story-slide img {
         object-position: 58% center;
-      }
-
-      .story-slider {
-        overflow-x: auto;
-        overflow-y: hidden;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x pan-y;
-      }
-
-      .story-slider::-webkit-scrollbar {
-        display: none;
-      }
-
-      .story-slide {
-        position: relative;
-        inset: auto;
-        width: max(100%, calc(560px * 1.7768));
-        min-width: max(100%, calc(560px * 1.7768));
-        height: 100%;
       }
 
       .story-slide__content {
@@ -3508,17 +3485,6 @@
     function pauseStoryCarousel() {
       clearInterval(storyTimer);
     }
-
-    function centerStoryPanorama() {
-      if (!storySlider || window.innerWidth > 880) return;
-      const maxScroll = storySlider.scrollWidth - storySlider.clientWidth;
-      if (maxScroll > 0) {
-        storySlider.scrollLeft = maxScroll / 2;
-      }
-    }
-
-    window.addEventListener('load', centerStoryPanorama);
-    window.addEventListener('resize', centerStoryPanorama);
 
     if (storySlider && storySlides.length > 1) {
       storyDots.forEach((dot, dotIndex) => {
