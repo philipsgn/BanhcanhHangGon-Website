@@ -2069,6 +2069,18 @@
         filter: none;
       }
       .menu-card-name { font-size: 22px; }
+
+      @media (hover: none) {
+        .menu-card:hover img,
+        .menu-card:focus-visible img,
+        .menu-card.dish-bc-xe:hover img,
+        .menu-card.dish-bc-xe:focus-visible img,
+        .menu-card.dish-bc-chat:hover img,
+        .menu-card.dish-bc-chat:focus-visible img {
+          transform: none;
+          filter: none;
+        }
+      }
       .menu-card-price {
         gap: 10px;
         font-size: 21px;
