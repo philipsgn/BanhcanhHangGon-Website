@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -561,10 +561,12 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      overflow: hidden;
     }
     .menu-cards-wide .menu-card .dish-plate {
       width: min(100%, 350px);
       height: clamp(192px, 16vw, 250px);
+      overflow: hidden;
     }
     .menu-card .dish-plate::before {
       content: '';
@@ -2046,21 +2048,25 @@
         height: 212px;
       }
       .menu-card img {
-        transform: scale(1.54);
+        transform: scale(1.2);
+        filter: none;
+        will-change: transform;
       }
       .menu-card.dish-bc-xe img,
       .menu-card.dish-bc-chat img {
-        transform: scale(1.44);
+        transform: scale(1.15);
       }
       .menu-card:hover img,
       .menu-card:focus-visible img {
-        transform: scale(1.6) translateY(-3px);
+        transform: scale(1.28) translateY(-3px);
+        filter: none;
       }
       .menu-card.dish-bc-xe:hover img,
       .menu-card.dish-bc-xe:focus-visible img,
       .menu-card.dish-bc-chat:hover img,
       .menu-card.dish-bc-chat:focus-visible img {
-        transform: scale(1.5) translateY(-3px);
+        transform: scale(1.25) translateY(-3px);
+        filter: none;
       }
       .menu-card-name { font-size: 22px; }
       .menu-card-price {
