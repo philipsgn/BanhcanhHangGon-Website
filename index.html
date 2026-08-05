@@ -276,21 +276,15 @@
       white-space: nowrap;
     }
 
-    /* ---------- SECTION 3 : MENU (redesigned — editorial minimal, template-matched) ---------- */
+    /* ---------- SECTION 3 : MENU (editorial minimal) ---------- */
     #menu {
-      background-image:
-        linear-gradient(180deg,
-          rgba(32,18,13,0.4) 0%,
-          rgba(38,22,15,0.3) 24%,
-          rgba(54,34,21,0.22) 52%,
-          rgba(38,22,15,0.3) 78%,
-          rgba(24,14,10,0.42) 100%),
-        url('images/menu/background-menu-2_result.webp?v=20260718-1620');
-      background-position: center center, center center;
-      background-size: auto, 100% 100%;
-      background-repeat: no-repeat, no-repeat;
-      background-color: #0e0906;
-      background-blend-mode: multiply, normal;
+      background:
+        radial-gradient(ellipse at center, rgba(255,245,220,0.06) 0%, rgba(0,0,0,0) 40%),
+        saddlebrown;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: var(--cream);
       overflow: hidden;
       isolation: isolate;
       position: relative;
@@ -687,17 +681,13 @@
 
     /* ---- Menu editorial template layout ---- */
     #menu {
-      background-image:
-        linear-gradient(180deg,
-          rgba(20, 11, 7, 0.18) 0%,
-          rgba(36, 22, 16, 0.12) 30%,
-          rgba(36, 22, 16, 0.08) 58%,
-          rgba(20, 11, 7, 0.18) 100%),
-        url('images/menu/background-menu-2_result.webp?v=20260719-01');
-      background-position: center center, center center;
-      background-size: auto, 100% 100%;
-      background-repeat: no-repeat, no-repeat;
-      background-blend-mode: multiply, normal;
+      background:
+        radial-gradient(ellipse at center, rgba(255,245,220,0.06) 0%, rgba(0,0,0,0) 40%),
+        saddlebrown;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: var(--cream);
       padding: clamp(96px, 9vw, 140px) clamp(30px, 6vw, 110px) clamp(78px, 7vw, 110px);
       min-height: auto;
     }
