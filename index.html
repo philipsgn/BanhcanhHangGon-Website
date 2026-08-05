@@ -596,16 +596,6 @@
       transform: scale(1.3);
       filter: drop-shadow(0 24px 30px rgba(0,0,0,0.45));
     }
-    .menu-card.dish-bc-xe img,
-    .menu-card.dish-bc-chat img {
-      transform: scale(1.28);
-    }
-    .menu-card.dish-bc-xe:hover img,
-    .menu-card.dish-bc-xe:focus-visible img,
-    .menu-card.dish-bc-chat:hover img,
-    .menu-card.dish-bc-chat:focus-visible img {
-      transform: scale(1.28);
-    }
 
     /* Text block */
     .menu-card > span {
@@ -2016,31 +2006,16 @@
         filter: none;
         will-change: transform;
       }
-      .menu-card.dish-bc-xe img,
-      .menu-card.dish-bc-chat img {
-        transform: scale(1.15);
-      }
       .menu-card:hover img,
       .menu-card:focus-visible img {
         transform: scale(1.28) translateY(-3px);
-        filter: none;
-      }
-      .menu-card.dish-bc-xe:hover img,
-      .menu-card.dish-bc-xe:focus-visible img,
-      .menu-card.dish-bc-chat:hover img,
-      .menu-card.dish-bc-chat:focus-visible img {
-        transform: scale(1.25) translateY(-3px);
         filter: none;
       }
       .menu-card-name { font-size: 22px; }
 
       @media (hover: none) {
         .menu-card:hover img,
-        .menu-card:focus-visible img,
-        .menu-card.dish-bc-xe:hover img,
-        .menu-card.dish-bc-xe:focus-visible img,
-        .menu-card.dish-bc-chat:hover img,
-        .menu-card.dish-bc-chat:focus-visible img {
+        .menu-card:focus-visible img {
           transform: none;
           filter: none;
         }
@@ -3168,6 +3143,26 @@
         transform: scale(1.34) !important;
         filter: drop-shadow(0 34px 40px rgba(0,0,0,0.48)) !important;
         transition: none !important;
+      }
+
+      /* Bánh canh source photos are cropped with more empty margin around the bowl
+         than the xôi plate photos, so the same box + scale renders visibly smaller.
+         Give this category a bigger box and a stronger scale to compensate. */
+      .menu-category:first-child .menu-card .dish-plate {
+        width: min(100%, 920px) !important;
+        height: clamp(560px, 48vw, 860px) !important;
+      }
+
+      .menu-category:first-child .menu-card .dish-plate img,
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+      .menu-card.dish-bc-xe img,
+      .menu-card.dish-bc-xe:hover img,
+      .menu-card.dish-bc-xe:focus-visible img,
+      .menu-card.dish-bc-chat img,
+      .menu-card.dish-bc-chat:hover img,
+      .menu-card.dish-bc-chat:focus-visible img {
+        transform: scale(1.72) !important;
       }
     }
   </style>
