@@ -26,3 +26,4 @@ build/
 # Local Codex / agent workspace metadata
 .codex/
 .agents/
+images.zip
