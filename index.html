@@ -276,63 +276,17 @@
       white-space: nowrap;
     }
 
-    /* ---------- SECTION 3 : MENU (editorial minimal) ---------- */
+    /* ---------- SECTION 3 : MENU ---------- */
     #menu {
-      background:
-        radial-gradient(ellipse at center, rgba(255,245,220,0.06) 0%, rgba(0,0,0,0) 40%),
-        saddlebrown;
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      background-color: #3F2311;
       color: var(--cream);
       overflow: hidden;
       isolation: isolate;
       position: relative;
-      padding: 64px clamp(38px, 5.2vw, 92px) 58px;
-      min-height: 100vh;
+      padding: clamp(56px, 6vw, 78px) clamp(24px, 5vw, 86px) clamp(42px, 5vw, 62px);
+      min-height: auto;
       justify-content: flex-start;
     }
-    /* Very faint film-grain / paper texture using layered noise gradients */
-    #menu::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 48%, rgba(222,176,96,0.1), transparent 31%),
-        radial-gradient(ellipse at 50% 58%, rgba(255,236,190,0.055), transparent 46%),
-        linear-gradient(90deg, rgba(28,16,11,0.2), transparent 18%, transparent 82%, rgba(28,16,11,0.2)),
-        linear-gradient(180deg, rgba(24,14,10,0.42), rgba(36,22,16,0.16) 42%, rgba(24,14,10,0.48));
-      pointer-events: none;
-      z-index: 0;
-    }
-    #menu::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse at 2% 54%, rgba(190,133,50,0.26), transparent 26%),
-        radial-gradient(ellipse at 98% 52%, rgba(190,133,50,0.28), transparent 27%),
-        linear-gradient(90deg, rgba(214,157,72,0.08), transparent 18%, transparent 82%, rgba(214,157,72,0.08));
-      mix-blend-mode: screen;
-      opacity: .62;
-    }
-
-    /* Corner leaf botanicals — 4 corners, subtle */
-    .menu-botanical {
-      position: absolute;
-      pointer-events: none;
-      z-index: 0;
-      color: #6a5a3a;
-      opacity: .55;
-    }
-    .menu-botanical.b-tr,
-    .menu-botanical.b-bl { display: none; }
-    .menu-botanical.b-cr { display: none; }
-    .menu-botanical.b-cl { display: none; }
-    .menu-botanical.b-mid { display: none; }
-    .menu-leaf-tr, .menu-leaf-bl { display: none; }
 
     .menu-shell {
       max-width: 1040px;
@@ -679,29 +633,6 @@
       transform: translateY(0);
     }
 
-    /* ---- Menu editorial template layout ---- */
-    #menu {
-      background:
-        radial-gradient(ellipse at center, rgba(255,245,220,0.06) 0%, rgba(0,0,0,0) 40%),
-        saddlebrown;
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      color: var(--cream);
-      padding: clamp(96px, 9vw, 140px) clamp(30px, 6vw, 110px) clamp(78px, 7vw, 110px);
-      min-height: auto;
-    }
-
-    #menu::before {
-      background:
-        radial-gradient(ellipse at 50% 10%, rgba(201,154,74,0.08), transparent 30%),
-        linear-gradient(180deg, rgba(12,7,4,0.06), rgba(36,22,16,0.06) 42%, rgba(12,7,4,0.18));
-    }
-
-    #menu::after {
-      opacity: .32;
-    }
-
     .menu-shell {
       max-width: 1180px;
     }
@@ -723,13 +654,13 @@
     }
 
     .menu-category + .menu-category {
-      margin-top: clamp(58px, 7vw, 92px);
+      margin-top: clamp(32px, 4vw, 48px);
     }
 
     .menu-category:first-child .menu-cards {
       display: grid;
       grid-template-columns: 1fr;
-      gap: clamp(54px, 7vw, 88px);
+      gap: clamp(28px, 4vw, 44px);
       max-width: 1120px;
       margin: 0 auto;
     }
@@ -1171,19 +1102,15 @@
     #welcome {
       position: relative;
       padding: clamp(34px, 4vw, 58px) clamp(28px, 7vw, 120px);
-      background-image:
-        linear-gradient(90deg, rgba(36,22,16,.92) 0%, rgba(36,22,16,.82) 34%, rgba(36,22,16,.64) 68%, rgba(36,22,16,.7) 100%),
-        url('images/greeting/background_result.webp');
-      background-position: center center, center center;
-      background-size: cover, cover;
-      background-repeat: no-repeat, no-repeat;
+      background-color: #3F2311;
       color: var(--cream);
+      overflow: hidden;
     }
 
     .welcome-grid {
       display: grid;
       grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-      align-items: center;
+      align-items: start;
       gap: clamp(32px, 5vw, 76px);
       max-width: 1240px;
       margin: 0 auto;
@@ -1199,8 +1126,9 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(34px, 3.7vw, 56px);
       font-weight: 500;
-      line-height: .98;
+      line-height: 1.05;
       letter-spacing: 0;
+      position: relative;
     }
 
     .welcome-title__line {
@@ -1212,42 +1140,20 @@
       font-weight: 600;
     }
 
-    .welcome-diamonds {
-      display: inline-block;
-      margin-left: 12px;
-      color: var(--gold);
-      font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: .2em;
-      letter-spacing: 5px;
-      vertical-align: middle;
-      transform: translateY(-.3em);
-    }
-
     .welcome-description {
       max-width: 500px;
       margin: 0;
-      color: var(--cream-dim);
+      color: rgba(255, 244, 220, 0.92);
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(19px, 1.7vw, 24px);
-      line-height: 1.42;
+      line-height: 1.55;
     }
 
     .welcome-photo {
       position: relative;
       isolation: isolate;
       margin: 0;
-      padding: 14px;
-    }
-
-    .welcome-photo::before {
-      content: '';
-      position: absolute;
-      inset: 14px;
-      z-index: 1;
-      pointer-events: none;
-      border-radius: 12px;
-      background: linear-gradient(90deg, rgba(36, 22, 16, .24), transparent 20%, transparent 80%, rgba(36, 22, 16, .18));
-      box-shadow: 0 22px 50px rgba(0, 0, 0, .3);
+      padding: 0;
     }
 
     .welcome-photo img {
@@ -1255,16 +1161,15 @@
       width: 100%;
       height: auto;
       aspect-ratio: auto;
-      border-radius: 14px;
+      border-radius: 18px;
       object-fit: contain;
       object-position: center;
-      box-shadow: 0 22px 50px rgba(0, 0, 0, .3);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.16);
     }
 
     @media (max-width: 880px) {
       #welcome {
         padding: 36px 20px 42px;
-        background-position: center center, 80% center;
       }
 
       .welcome-grid {
@@ -1278,10 +1183,6 @@
         width: min(100%, 560px);
         margin: 0 auto;
         padding: 0;
-      }
-
-      .welcome-photo::before {
-        display: none;
       }
 
       .welcome-copy,
@@ -1623,7 +1524,7 @@
       background: var(--gold);
     }
 
-    /* ---------- SECTION 5 : SOCIAL (subtle corner) ---------- */
+    /* ---------- SECTION 5 : SOCIAL (solid filled badges) ---------- */
     .social-corner {
       position: fixed;
       bottom: 26px;
@@ -1631,8 +1532,8 @@
       z-index: 90;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      opacity: .96;
+      gap: 14px;
+      opacity: .97;
       transition: opacity .3s;
     }
 
@@ -1641,39 +1542,41 @@
     }
 
     .social-corner a {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      border: 1px solid rgba(242, 232, 213, 0.48);
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--cream);
       text-decoration: none;
       font-size: 13px;
-      background: rgba(22, 13, 10, 0.88);
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.26), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(5px);
-      transition: all .25s;
+      background: var(--bg-deep);
+      box-shadow: 0 10px 22px rgba(18, 10, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
     .social-corner a.hotline-link {
-      width: 48px;
-      min-width: 48px;
+      width: 50px;
+      min-width: 50px;
       padding: 0;
-      border-color: rgba(201, 154, 74, 0.86);
-      color: #ffe4a0;
-      border-radius: 50%;
+    }
+
+    .hotline-link:hover {
+      transform: none;
+      box-shadow: 0 10px 22px rgba(18, 10, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      background: var(--bg-deep);
     }
 
     .hotline-link .social-icon {
-      width: 18px;
-      height: 18px;
+      width: 19px;
+      height: 19px;
     }
 
     .social-icon {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       display: block;
       fill: currentColor;
     }
@@ -1685,26 +1588,12 @@
       object-fit: cover;
       border-radius: 50%;
       opacity: 1;
-      filter: saturate(1.08) contrast(1.08);
-    }
-
-    .social-corner a.social-image-link {
-      color: var(--cream-dim);
-      background: transparent;
-      border-color: rgba(242, 232, 213, 0.22);
-      backdrop-filter: none;
     }
 
     .social-corner a:hover {
-      color: var(--gold);
-      border-color: var(--gold);
       transform: translateY(-3px);
-    }
-
-    .social-corner a.hotline-link:hover {
-      color: #fff1be;
-      border-color: #ffd978;
-      box-shadow: 0 5px 16px rgba(201, 154, 74, 0.24), inset 0 0 0 1px rgba(255, 217, 120, 0.18);
+      box-shadow: 0 14px 28px rgba(18, 10, 6, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      background: linear-gradient(160deg, #c17840 0%, #8a4423 100%);
     }
 
     footer {
@@ -1856,8 +1745,6 @@
       #menu {
         min-height: auto;
         padding: 82px 20px 46px;
-        background-position: center top, center top;
-        background-size: auto, cover;
       }
 
       .menu-heading {
@@ -2052,10 +1939,6 @@
         height: 100%;
       }
       .menu-category-label .cat-name { font-size: 16px; letter-spacing: 3px; }
-      .menu-botanical.b-tr,
-      .menu-botanical.b-bl { width: 150px; opacity: .35; }
-      .menu-botanical.b-cr, .menu-botanical.b-cl,
-      .menu-botanical.b-mid { display: none; }
 
       .dish-modal {
         padding: 24px;
@@ -2381,8 +2264,6 @@
     @media (max-width: 880px) {
       #menu {
         padding: 76px 18px 54px;
-        background-position: center top, center top;
-        background-size: cover, cover;
       }
 
       .menu-category-label {
@@ -2671,24 +2552,6 @@
       }
     }
 
-    /* ---- Menu refinement: compact zig-zag Vietnamese restaurant editorial ---- */
-    #menu {
-      background-image:
-        linear-gradient(180deg, rgba(242,232,213,0.08), rgba(201,154,74,0.11)),
-        url('images/menu/background-menu-2_result.webp?v=20260804-01');
-      background-position: center center, center center;
-      background-size: cover, cover;
-      padding: clamp(56px, 6vw, 78px) clamp(24px, 5vw, 86px) clamp(42px, 5vw, 62px);
-    }
-
-    #menu::before {
-      background: none;
-    }
-
-    #menu::after {
-      opacity: 0;
-    }
-
     .menu-shell {
       max-width: 1160px;
     }
@@ -2919,8 +2782,6 @@
 
       #menu {
         padding: 48px 18px 42px;
-        background-position: center top, center top;
-        background-size: cover;
       }
 
       .menu-category-label {
@@ -3093,7 +2954,7 @@
       .menu-cards-wide {
         max-width: 1440px;
         /* big vertical gap = the bigger bowls never crowd or touch the row below */
-        row-gap: clamp(64px, 7vw, 120px);
+        row-gap: clamp(28px, 3.4vw, 56px);
       }
 
       .menu-category:first-child .menu-card,
@@ -3102,9 +2963,29 @@
         gap: clamp(20px, 3vw, 48px);
       }
 
+      .menu-category:first-child .menu-card .dish-plate,
+      .menu-cards-wide .menu-card .dish-plate {
+        justify-self: end;
+      }
+
+      .menu-category:first-child .menu-card > span:not(.dish-plate),
+      .menu-cards-wide .menu-card > span:not(.dish-plate) {
+        justify-self: start;
+      }
+
       .menu-category:first-child .menu-card:nth-child(even),
       .menu-cards-wide .menu-card:nth-child(even) {
         grid-template-columns: minmax(220px, 1fr) minmax(340px, 1.7fr);
+      }
+
+      .menu-category:first-child .menu-card:nth-child(even) .dish-plate,
+      .menu-cards-wide .menu-card:nth-child(even) .dish-plate {
+        justify-self: start;
+      }
+
+      .menu-category:first-child .menu-card:nth-child(even) > span:not(.dish-plate),
+      .menu-cards-wide .menu-card:nth-child(even) > span:not(.dish-plate) {
+        justify-self: end;
       }
 
       .menu-card .dish-plate,
@@ -3259,7 +3140,7 @@
     <div class="welcome-grid">
       <div class="welcome-copy">
         <h2 class="welcome-title">
-          <span class="welcome-title__line">Chào mừng bạn <span class="welcome-diamonds" aria-hidden="true">◆◆◆</span></span>
+          <span class="welcome-title__line">Chào mừng bạn</span>
           <span class="welcome-title__line welcome-title__line--accent">đến với Hàng Gòn</span>
         </h2>
         <p class="welcome-description">Hàng Gòn tự hào mang đến hương vị bánh canh gà đậm đà giữa lòng thành phố. Từng tô canh được nấu mỗi ngày với nước lèo ninh xương, thịt gà tươi chọn lọc — phục vụ ngay khi bạn vừa gọi món.</p>
@@ -3284,38 +3165,6 @@
 
   <!-- SECTION 3: MENU (redesigned — minimal editorial, template-matched) -->
   <section id="menu">
-    <!-- Corner leaf botanicals -->
-    <svg class="menu-botanical b-tr" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none">
-        <path d="M230 10 C 190 40, 150 80, 110 130 S 55 200, 20 232" />
-        <path d="M200 30 C 210 40, 214 54, 210 68 C 194 62, 186 48, 200 30 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M170 60 C 182 68, 188 82, 184 96 C 168 90, 160 76, 170 60 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M140 95 C 152 103, 158 117, 154 131 C 138 125, 130 111, 140 95 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M108 132 C 120 140, 126 154, 122 168 C 106 162, 98 148, 108 132 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M78 170 C 90 178, 96 192, 92 206 C 76 200, 68 186, 78 170 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M50 205 C 62 213, 68 227, 64 236 C 50 232, 42 220, 50 205 Z" fill="currentColor" fill-opacity=".2"/>
-      </g>
-    </svg>
-    <svg class="menu-botanical b-bl" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none">
-        <path d="M230 10 C 190 40, 150 80, 110 130 S 55 200, 20 232" />
-        <path d="M200 30 C 210 40, 214 54, 210 68 C 194 62, 186 48, 200 30 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M170 60 C 182 68, 188 82, 184 96 C 168 90, 160 76, 170 60 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M140 95 C 152 103, 158 117, 154 131 C 138 125, 130 111, 140 95 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M108 132 C 120 140, 126 154, 122 168 C 106 162, 98 148, 108 132 Z" fill="currentColor" fill-opacity=".25"/>
-        <path d="M78 170 C 90 178, 96 192, 92 206 C 76 200, 68 186, 78 170 Z" fill="currentColor" fill-opacity=".25"/>
-      </g>
-    </svg>
-    <svg class="menu-botanical b-cr" viewBox="0 0 160 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round">
-        <path d="M80 0 Q 78 100 78 300"/>
-        <path d="M78 50 Q 40 60 30 90 Q 60 90 78 70 Z" fill="currentColor" fill-opacity=".2"/>
-        <path d="M78 110 Q 120 118 132 148 Q 100 150 78 128 Z" fill="currentColor" fill-opacity=".2"/>
-        <path d="M78 170 Q 40 178 28 210 Q 60 210 78 188 Z" fill="currentColor" fill-opacity=".2"/>
-        <path d="M78 230 Q 120 238 132 268 Q 100 270 78 248 Z" fill="currentColor" fill-opacity=".2"/>
-      </g>
-    </svg>
-
     <div class="menu-shell">
       <div class="menu-category">
         <div class="menu-category-label">
@@ -3329,7 +3178,7 @@
           <button class="menu-card dish-bc-xe" type="button" data-name="Bánh canh gà xé" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-cutout_result.webp" alt="Bánh canh gà xé"></span>
             <span>
-              <span class="menu-card-name">Bánh canh<br/>gà xé</span>
+              <span class="menu-card-name">Bánh canh gà xé</span>
               <span class="menu-card-desc">Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.</span>
               <span class="menu-card-price">50.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
@@ -3340,7 +3189,7 @@
           <button class="menu-card dish-bc-chat" type="button" data-name="Bánh canh gà chặt" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-cutout_result.webp" alt="Bánh canh gà chặt"></span>
             <span>
-              <span class="menu-card-name">Bánh canh<br/>gà chặt</span>
+              <span class="menu-card-name">Bánh canh gà chặt</span>
               <span class="menu-card-desc">Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.</span>
               <span class="menu-card-price">60.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
@@ -3351,7 +3200,7 @@
           <button class="menu-card" type="button" data-name="Bánh canh đặc biệt" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-cutout_result.webp" alt="Bánh canh đặc biệt"></span>
             <span>
-              <span class="menu-card-name">Bánh canh<br/>đặc biệt</span>
+              <span class="menu-card-name">Bánh canh đặc biệt</span>
               <span class="menu-card-desc">Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.</span>
               <span class="menu-card-price">70.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
@@ -3373,7 +3222,7 @@
           <button class="menu-card" type="button" data-name="Xôi gà xé trứng non" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/xoi-ga-xe-cutout_result.webp" alt="Xôi gà xé trứng non"></span>
             <span>
-              <span class="menu-card-name">Xôi gà<br/>xé trứng non</span>
+              <span class="menu-card-name">Xôi gà xé trứng non</span>
               <span class="menu-card-desc">Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.</span>
               <span class="menu-card-price">45.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
@@ -3384,7 +3233,7 @@
           <button class="menu-card" type="button" data-name="Xôi gà chặt trứng non" aria-disabled="true" tabindex="-1">
             <span class="dish-plate"><img src="images/menu/xoi-ga-chat-cutout_result.webp" alt="Xôi gà chặt trứng non"></span>
             <span>
-              <span class="menu-card-name">Xôi gà<br/>chặt trứng non</span>
+              <span class="menu-card-name">Xôi gà chặt trứng non</span>
               <span class="menu-card-desc">Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.</span>
               <span class="menu-card-price">50.000 <span class="vnd">VND</span>
                 <span class="menu-card-plus" aria-hidden="true">+</span>
