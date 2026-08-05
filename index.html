@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -1281,41 +1281,6 @@
       box-shadow: 0 22px 50px rgba(0, 0, 0, .3);
     }
 
-    .welcome-corner {
-      position: absolute;
-      z-index: 2;
-      width: 52px;
-      height: 52px;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: .9;
-      pointer-events: none;
-    }
-
-    .welcome-corner--tl {
-      top: 0;
-      left: 0;
-      border-width: 1px 0 0 1px;
-    }
-
-    .welcome-corner--tr {
-      top: 0;
-      right: 0;
-      border-width: 1px 1px 0 0;
-    }
-
-    .welcome-corner--bl {
-      bottom: 0;
-      left: 0;
-      border-width: 0 0 1px 1px;
-    }
-
-    .welcome-corner--br {
-      right: 0;
-      bottom: 0;
-      border-width: 0 1px 1px 0;
-    }
-
     @media (max-width: 880px) {
       #welcome {
         padding: 36px 20px 42px;
@@ -1337,10 +1302,6 @@
 
       .welcome-photo::before {
         display: none;
-      }
-
-      .welcome-corner {
-        display: none !important;
       }
 
       .welcome-copy,
@@ -3155,6 +3116,36 @@
       transform: scale(1.1) !important;
       filter: drop-shadow(0 18px 22px rgba(0,0,0,0.45)) !important;
     }
+
+    /* ---- Desktop menu refinement: bigger bowls, no hover-zoom flicker ---- */
+    @media (min-width: 881px) {
+      .menu-card .dish-plate,
+      .menu-cards-wide .menu-card .dish-plate {
+        width: min(100%, 460px);
+        height: clamp(300px, 27vw, 410px);
+      }
+
+      .menu-card .dish-plate img,
+      .menu-card img,
+      .menu-category:first-child .menu-card .dish-plate img,
+      .menu-cards-wide .menu-card .dish-plate img,
+      .menu-card:hover img,
+      .menu-card:focus-visible img,
+      .menu-card:hover .dish-plate img,
+      .menu-card:focus-visible .dish-plate img,
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+      .menu-cards-wide .menu-card:hover .dish-plate img,
+      .menu-cards-wide .menu-card:focus-visible .dish-plate img,
+      .menu-card.dish-bc-xe:hover img,
+      .menu-card.dish-bc-xe:focus-visible img,
+      .menu-card.dish-bc-chat:hover img,
+      .menu-card.dish-bc-chat:focus-visible img {
+        transform: scale(1.34) !important;
+        filter: drop-shadow(0 28px 34px rgba(0,0,0,0.46)) !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -3254,10 +3245,6 @@
       </div>
       <figure class="welcome-photo">
         <img src="images/mattien-quan-dem_result.webp" alt="Mặt tiền quán Bánh Canh Gà Hàng Gòn về đêm">
-        <span class="welcome-corner welcome-corner--tl" aria-hidden="true"></span>
-        <span class="welcome-corner welcome-corner--tr" aria-hidden="true"></span>
-        <span class="welcome-corner welcome-corner--bl" aria-hidden="true"></span>
-        <span class="welcome-corner welcome-corner--br" aria-hidden="true"></span>
       </figure>
     </div>
   </section>
