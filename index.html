@@ -3109,6 +3109,43 @@
         will-change: auto;
       }
     }
+
+    /* Force fixed fit of menu dish images; no zoom on hover or focus */
+    .menu-card .dish-plate,
+    .menu-cards-wide .menu-card .dish-plate {
+      width: min(100%, 360px);
+      height: clamp(240px, 20vw, 320px);
+      overflow: hidden !important;
+    }
+
+    .menu-card .dish-plate img,
+    .menu-card img,
+    .menu-category:first-child .menu-card .dish-plate img,
+    .menu-cards-wide .menu-card .dish-plate img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+      will-change: auto !important;
+    }
+
+    .menu-card:hover img,
+    .menu-card:focus-visible img,
+    .menu-card:hover .dish-plate img,
+    .menu-card:focus-visible .dish-plate img,
+    .menu-category:first-child .menu-card:hover .dish-plate img,
+    .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+    .menu-cards-wide .menu-card:hover .dish-plate img,
+    .menu-cards-wide .menu-card:focus-visible .dish-plate img,
+    .menu-card.dish-bc-xe:hover img,
+    .menu-card.dish-bc-xe:focus-visible img,
+    .menu-card.dish-bc-chat:hover img,
+    .menu-card.dish-bc-chat:focus-visible img {
+      transform: none !important;
+      filter: none !important;
+    }
   </style>
 </head>
 
