@@ -898,8 +898,9 @@
       padding: clamp(32px, 6vw, 88px);
       background:
         radial-gradient(ellipse at center, rgba(242,232,213,0.08), transparent 52%),
-        rgba(12, 8, 5, 0.46);
-      backdrop-filter: blur(8px) saturate(1.02);
+        rgba(12, 8, 5, 0.64);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
     }
 
     .dish-modal.is-open {
@@ -3609,21 +3610,8 @@
       startStoryCarousel();
     }
 
-    window.addEventListener('load', () => {
-      const stamp = Date.now();
-      document.querySelectorAll('img').forEach((img) => {
-        if (!img.src) return;
-        try {
-          const url = new URL(img.src, window.location.href);
-          if (url.protocol === 'http:' || url.protocol === 'https:') {
-            url.searchParams.set('v', stamp);
-            img.src = url.toString();
-          }
-        } catch (error) {
-          console.warn('Unable to refresh image cache:', img.src);
-        }
-      });
-    });
+    // Cache-busting disabled — caused all images to reload on mobile, crashing iOS Safari
+    // window.addEventListener('load', () => { ... });
   </script>
 
 </body>
