@@ -3147,10 +3147,19 @@
 
       /* Bánh canh source photos are cropped with more empty margin around the bowl
          than the xôi plate photos, so the same box + scale renders visibly smaller.
-         Give this category a bigger box and a stronger scale to compensate. */
+         Give this category a slightly bigger box/scale to compensate — sized down
+         from an earlier pass that was too large and left a soft shadow "ring"
+         around the bowl. */
       .menu-category:first-child .menu-card .dish-plate {
-        width: min(100%, 920px) !important;
-        height: clamp(560px, 48vw, 860px) !important;
+        width: min(100%, 760px) !important;
+        height: clamp(440px, 38vw, 660px) !important;
+      }
+
+      .menu-category:first-child .menu-card .dish-plate::before {
+        inset: auto 18% 4% 18%;
+        height: 26px;
+        filter: blur(14px);
+        opacity: .78;
       }
 
       .menu-category:first-child .menu-card .dish-plate img,
@@ -3162,7 +3171,10 @@
       .menu-card.dish-bc-chat img,
       .menu-card.dish-bc-chat:hover img,
       .menu-card.dish-bc-chat:focus-visible img {
-        transform: scale(1.72) !important;
+        transform: scale(1.48) !important;
+        /* Tighter, lower shadow instead of the big diffuse blur — the large blur
+           scaled up with the image was reading as an outline/ring around the bowl. */
+        filter: drop-shadow(0 12px 14px rgba(0,0,0,0.3)) !important;
       }
     }
   </style>
