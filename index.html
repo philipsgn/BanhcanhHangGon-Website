@@ -3007,7 +3007,7 @@
       .menu-cards-wide .menu-card,
       .menu-cards-wide .menu-card:nth-child(even) {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 2px;
         text-align: center;
         justify-items: center;
       }
@@ -3053,10 +3053,9 @@
       }
 
       .menu-category:first-child .menu-card-name::after,
-      .menu-cards-wide .menu-card-name::after {
-        margin-left: auto;
-        margin-right: auto;
-        background: linear-gradient(90deg, transparent, rgba(201,154,74,0.78), transparent);
+      .menu-cards-wide .menu-card-name::after,
+      .menu-card-name::after {
+        display: none !important;
       }
 
       .menu-card-desc {
