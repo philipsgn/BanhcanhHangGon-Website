@@ -555,8 +555,8 @@
     /* Image well — no plate glow ring; just soft drop-shadow */
     .menu-card .dish-plate {
       position: relative;
-      width: min(100%, 300px);
-      height: clamp(178px, 15vw, 232px);
+      width: min(100%, 360px);
+      height: clamp(220px, 18vw, 280px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -564,8 +564,8 @@
       overflow: hidden;
     }
     .menu-cards-wide .menu-card .dish-plate {
-      width: min(100%, 350px);
-      height: clamp(192px, 16vw, 250px);
+      width: min(100%, 380px);
+      height: clamp(230px, 19vw, 290px);
       overflow: hidden;
     }
     .menu-card .dish-plate::before {
@@ -586,24 +586,24 @@
       height: 100%;
       object-fit: contain;
       object-position: center;
-      transform: scale(1.05);
+      transform: scale(1.1);
       filter: drop-shadow(0 18px 22px rgba(0,0,0,0.45));
       transition: transform .3s ease, filter .3s ease;
     }
     .menu-card:hover img,
     .menu-card:focus-visible img {
-      transform: scale(1.05);
+      transform: scale(1.1);
       filter: drop-shadow(0 18px 22px rgba(0,0,0,0.45));
     }
     .menu-card.dish-bc-xe img,
     .menu-card.dish-bc-chat img {
-      transform: scale(1.03);
+      transform: scale(1.08);
     }
     .menu-card.dish-bc-xe:hover img,
     .menu-card.dish-bc-xe:focus-visible img,
     .menu-card.dish-bc-chat:hover img,
     .menu-card.dish-bc-chat:focus-visible img {
-      transform: scale(1.03);
+      transform: scale(1.08);
     }
 
     /* Text block */
@@ -3130,10 +3130,11 @@
     .menu-cards-wide .menu-card .dish-plate img {
       width: 100% !important;
       height: 100% !important;
-      object-fit: cover !important;
-      transform: none !important;
-      filter: none !important;
-      transition: none !important;
+      object-fit: contain !important;
+      object-position: center !important;
+      transform: scale(1.1) !important;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,0.45)) !important;
+      transition: transform .3s ease !important;
       will-change: auto !important;
     }
 
@@ -3149,8 +3150,8 @@
     .menu-card.dish-bc-xe:focus-visible img,
     .menu-card.dish-bc-chat:hover img,
     .menu-card.dish-bc-chat:focus-visible img {
-      transform: none !important;
-      filter: none !important;
+      transform: scale(1.1) !important;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,0.45)) !important;
     }
   </style>
 </head>
