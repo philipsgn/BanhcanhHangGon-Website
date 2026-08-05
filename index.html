@@ -515,18 +515,18 @@
     /* ---- Card grid: minimal image + name + price ---- */
     .menu-cards {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px 40px;
+      grid-template-columns: 1fr;
+      gap: 40px;
       width: 100%;
       margin: 0 auto;
       align-items: start;
-      max-width: 1520px;
+      max-width: 1160px;
     }
     .menu-cards-wide {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: 920px;
+      grid-template-columns: 1fr;
+      max-width: 1160px;
       margin: 0 auto;
-      gap: 24px 48px;
+      gap: 40px;
     }
 
     /* Borderless side-by-side item */
@@ -556,8 +556,8 @@
     /* Image well — no plate glow ring; just soft drop-shadow */
     .menu-card .dish-plate {
       position: relative;
-      width: min(100%, 560px);
-      height: clamp(300px, 24vw, 420px);
+      width: min(100%, 760px);
+      height: clamp(360px, 26vw, 520px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -565,8 +565,8 @@
       overflow: hidden;
     }
     .menu-cards-wide .menu-card .dish-plate {
-      width: min(100%, 580px);
-      height: clamp(320px, 26vw, 440px);
+      width: min(100%, 780px);
+      height: clamp(380px, 28vw, 540px);
       overflow: hidden;
     }
     .menu-card .dish-plate::before {
@@ -587,24 +587,24 @@
       height: 100%;
       object-fit: contain;
       object-position: center;
-      transform: scale(1.18);
-      filter: drop-shadow(0 20px 26px rgba(0,0,0,0.45));
+      transform: scale(1.3);
+      filter: drop-shadow(0 24px 30px rgba(0,0,0,0.45));
       transition: transform .3s ease, filter .3s ease;
     }
     .menu-card:hover img,
     .menu-card:focus-visible img {
-      transform: scale(1.18);
-      filter: drop-shadow(0 20px 26px rgba(0,0,0,0.45));
+      transform: scale(1.3);
+      filter: drop-shadow(0 24px 30px rgba(0,0,0,0.45));
     }
     .menu-card.dish-bc-xe img,
     .menu-card.dish-bc-chat img {
-      transform: scale(1.16);
+      transform: scale(1.28);
     }
     .menu-card.dish-bc-xe:hover img,
     .menu-card.dish-bc-xe:focus-visible img,
     .menu-card.dish-bc-chat:hover img,
     .menu-card.dish-bc-chat:focus-visible img {
-      transform: scale(1.16);
+      transform: scale(1.28);
     }
 
     /* Text block */
