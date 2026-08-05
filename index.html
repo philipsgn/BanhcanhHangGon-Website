@@ -756,7 +756,7 @@
 
     .menu-category:first-child .menu-card {
       display: grid;
-      grid-template-columns: minmax(320px, 1.08fr) minmax(280px, .92fr);
+      grid-template-columns: minmax(520px, 1.8fr) minmax(220px, .6fr);
       align-items: center;
       gap: clamp(34px, 6vw, 92px);
       text-align: left;
@@ -764,7 +764,7 @@
     }
 
     .menu-category:first-child .menu-card:nth-child(even) {
-      grid-template-columns: minmax(280px, .92fr) minmax(320px, 1.08fr);
+      grid-template-columns: minmax(220px, .6fr) minmax(520px, 1.8fr);
     }
 
     .menu-category:first-child .menu-card:nth-child(even) .dish-plate {
@@ -779,7 +779,7 @@
 
     .menu-category:first-child .menu-card .dish-plate {
       width: 100%;
-      height: clamp(340px, 36vw, 500px);
+      height: clamp(420px, 40vw, 620px);
       overflow: hidden;
       border-radius: 48% 52% 42% 58% / 44% 44% 56% 56%;
       background:
@@ -809,14 +809,15 @@
       height: 100%;
       object-fit: cover;
       object-position: center 51%;
-      transform: scale(1.04);
-      filter: saturate(1.02) contrast(1.03);
+      transform: scale(1.45);
+      filter: saturate(1.05) contrast(1.05);
+      transition: none;
     }
 
     .menu-category:first-child .menu-card:hover .dish-plate img,
     .menu-category:first-child .menu-card:focus-visible .dish-plate img {
-      transform: scale(1.08);
-      filter: saturate(1.05) contrast(1.04);
+      transform: scale(1.45);
+      filter: saturate(1.05) contrast(1.05);
     }
 
     .menu-category:first-child .menu-card > span:not(.dish-plate) {
@@ -2570,7 +2571,7 @@
       height: 100%;
       object-fit: contain;
       object-position: center center;
-      transform: scale(1.42);
+      transform: scale(1.45);
       filter: drop-shadow(0 28px 32px rgba(0,0,0,0.48));
     }
 
