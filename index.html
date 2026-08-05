@@ -72,6 +72,10 @@
       will-change: transform;
     }
 
+    .mobile-order-btn {
+      display: none;
+    }
+
     .site-nav.is-hidden {
       opacity: 0;
       pointer-events: none;
@@ -1822,6 +1826,36 @@
         height: 58px;
       }
 
+      .mobile-order-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: 16px;
+        padding: 6px 12px 7px;
+        color: #ffd978;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        line-height: 1;
+        text-shadow:
+          0 1px 0 rgba(255, 246, 204, 0.42),
+          0 0 10px rgba(255, 187, 58, 0.42),
+          0 0 22px rgba(201, 112, 26, 0.28);
+        background:
+          linear-gradient(90deg, transparent 0%, rgba(144, 91, 28, 0.38) 18%, rgba(255, 218, 105, 0.86) 50%, rgba(144, 91, 28, 0.38) 82%, transparent 100%) center top / 100% 1px no-repeat,
+          linear-gradient(90deg, transparent 0%, rgba(144, 91, 28, 0.42) 18%, rgba(255, 218, 105, 0.95) 50%, rgba(144, 91, 28, 0.42) 82%, transparent 100%) center bottom / 100% 1px no-repeat;
+        transition: color 0.25s;
+      }
+
+      .mobile-order-btn:hover,
+      .mobile-order-btn:focus-visible {
+        color: #ffe9a8;
+      }
+
       .site-nav ul {
         position: absolute;
         top: calc(100% + 8px);
@@ -1875,7 +1909,7 @@
       #menu {
         min-height: auto;
         padding: 82px 20px 46px;
-        background-position: center top, 10% top;
+        background-position: center top, center top;
         background-size: auto, cover;
       }
 
@@ -2399,7 +2433,7 @@
     @media (max-width: 880px) {
       #menu {
         padding: 76px 18px 54px;
-        background-position: center top, 10% top;
+        background-position: center top, center top;
         background-size: cover, cover;
       }
 
@@ -2937,7 +2971,7 @@
 
       #menu {
         padding: 48px 18px 42px;
-        background-position: center top, 10% top;
+        background-position: center top, center top;
         background-size: cover;
       }
 
@@ -3081,6 +3115,7 @@
       <li><a href="#location">Vị trí</a></li>
       <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
     </ul>
+    <a class="mobile-order-btn" href="order.html">Đặt hàng</a>
     <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
