@@ -276,11 +276,11 @@
     #menu {
       background-image:
         linear-gradient(180deg,
-          rgba(32,18,13,0.9) 0%,
-          rgba(38,22,15,0.76) 24%,
-          rgba(54,34,21,0.62) 52%,
-          rgba(38,22,15,0.78) 78%,
-          rgba(24,14,10,0.92) 100%),
+          rgba(32,18,13,0.4) 0%,
+          rgba(38,22,15,0.3) 24%,
+          rgba(54,34,21,0.22) 52%,
+          rgba(38,22,15,0.3) 78%,
+          rgba(24,14,10,0.42) 100%),
         url('images/menu/background-menu-2_result.webp?v=20260718-1620');
       background-position: center center, center center;
       background-size: auto, 100% 100%;
@@ -691,10 +691,10 @@
     #menu {
       background-image:
         linear-gradient(180deg,
-          rgba(20, 11, 7, 0.72) 0%,
-          rgba(36, 22, 16, 0.58) 30%,
-          rgba(36, 22, 16, 0.5) 58%,
-          rgba(20, 11, 7, 0.78) 100%),
+          rgba(20, 11, 7, 0.3) 0%,
+          rgba(36, 22, 16, 0.22) 30%,
+          rgba(36, 22, 16, 0.18) 58%,
+          rgba(20, 11, 7, 0.32) 100%),
         url('images/menu/background-menu-2_result.webp?v=20260719-01');
       background-position: center top, center top;
       background-size: cover, cover;
@@ -1309,6 +1309,7 @@
     @media (max-width: 880px) {
       #welcome {
         padding: 36px 20px 42px;
+        background-position: center center, 80% center;
       }
 
       .welcome-grid {
@@ -1321,16 +1322,15 @@
         order: -1;
         width: min(100%, 560px);
         margin: 0 auto;
-        padding: 10px;
+        padding: 0;
       }
 
       .welcome-photo::before {
-        inset: 10px;
+        display: none;
       }
 
       .welcome-corner {
-        width: 38px;
-        height: 38px;
+        display: none;
       }
 
       .welcome-copy,
@@ -1415,6 +1415,22 @@
       font-size: 15px;
       color: var(--cream);
       line-height: 1.52;
+    }
+
+    .loc-card .value a {
+      color: inherit;
+      text-decoration: none;
+      transition: color .25s ease;
+    }
+
+    .loc-card .value a:hover,
+    .loc-card .value a:focus-visible {
+      color: var(--gold);
+    }
+
+    a[href^="tel"] {
+      color: inherit;
+      text-decoration: none;
     }
 
     .loc-actions {
@@ -1859,7 +1875,7 @@
       #menu {
         min-height: auto;
         padding: 82px 20px 46px;
-        background-position: center top;
+        background-position: center top, 10% top;
         background-size: auto, cover;
       }
 
@@ -2174,6 +2190,7 @@
         object-position: center center;
         user-select: none;
         -webkit-user-drag: none;
+        aspect-ratio: 1672 / 941;
       }
 
       .dotnav {
@@ -2382,7 +2399,7 @@
     @media (max-width: 880px) {
       #menu {
         padding: 76px 18px 54px;
-        background-position: center top, center top;
+        background-position: center top, 10% top;
         background-size: cover, cover;
       }
 
@@ -2886,6 +2903,7 @@
         object-position: center center;
         user-select: none;
         -webkit-user-drag: none;
+        aspect-ratio: 1672 / 941;
       }
 
       .hero-overlay {
@@ -2919,6 +2937,7 @@
 
       #menu {
         padding: 48px 18px 42px;
+        background-position: center top, 10% top;
         background-size: cover;
       }
 
@@ -3073,7 +3092,7 @@
 
   <div class="social-corner">
 
-    <a class="hotline-link" href="tel:+84356538789" title="Gọi Hotline 0356 538 789" aria-label="Gọi Hotline 0356 539 789">
+    <a class="hotline-link" href="tel:0356538789" title="Gọi Hotline 0356 538 789" aria-label="Gọi Hotline 0356 538 789">
       <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M6.6 3.2 9 2.7c.65-.14 1.29.2 1.55.81l1.14 2.67c.22.52.1 1.12-.31 1.51L9.9 8.99a13.2 13.2 0 0 0 5.1 5.1l1.3-1.48c.39-.41.99-.53 1.51-.31l2.67 1.14c.61.26.95.9.81 1.55l-.5 2.4c-.14.67-.73 1.15-1.41 1.15C10.84 18.54 5.46 13.16 5.46 6.62c0-.68.48-1.27 1.14-1.41Z"/>
       </svg>
@@ -3100,8 +3119,23 @@
   <!-- SECTION 1: HERO -->
   <section id="hero">
     <div class="hero-panorama" aria-hidden="true">
-      <img class="hero-bg-photo" src="images/home/background_result.webp"
+      <img class="hero-bg-photo" src="images/home/background_result.webp" width="1672" height="941"
         alt="Đũa gắp miếng gà ta từ tô bánh canh gà đặc biệt trên bàn nhựa nâu, kèm chén muối ớt chanh">
+      <script>
+        // Snap scroll position on mobile immediately during HTML parsing
+        (function() {
+          if (window.innerWidth <= 880) {
+            const el = document.currentScript.parentElement;
+            const h = el.clientHeight || window.innerHeight;
+            const w = el.clientWidth || window.innerWidth;
+            const imgW = h * (1672 / 941);
+            const maxScroll = imgW - w;
+            if (maxScroll > 0) {
+              el.scrollLeft = maxScroll * 0.68;
+            }
+          }
+        })();
+      </script>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -3327,11 +3361,13 @@
         </div>
         <div class="loc-card">
           <div class="label">Giờ mở cửa</div>
-          <div class="value">06:00 – 21:30 (Tất cả các ngày trong tuần)</div>
+          <div class="value">6:00 – 0:00 (Tất cả các ngày trong tuần)</div>
         </div>
         <div class="loc-card">
           <div class="label">Hotline</div>
-          <div class="value">0356 538 789</div>
+          <div class="value">
+            <a href="tel:0356538789">0356 538 789</a> hoặc <a href="tel:0358345987">0358 345 987</a>
+          </div>
         </div>
         <div class="loc-actions">
           <a class="loc-map-link" href="https://maps.app.goo.gl/m2fKyMJy4xSPQMa87" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a>
@@ -3397,6 +3433,11 @@
       }
     }
 
+    // Run immediately when script runs to snap as early as possible
+    centerHeroPanorama();
+
+    // Also run on DOMContentLoaded and load to ensure layout updates are covered
+    document.addEventListener('DOMContentLoaded', centerHeroPanorama);
     window.addEventListener('load', centerHeroPanorama);
     window.addEventListener('resize', centerHeroPanorama);
 
