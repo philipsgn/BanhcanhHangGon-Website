@@ -806,6 +806,45 @@
       .confirm-actions { display: grid; grid-template-columns: 1fr; }
       .confirm-actions button { width: 100%; }
     }
+
+    /* ── API integration additions ── */
+    .order-error-message {
+      display: none;
+      margin: 10px 0 0;
+      padding: 10px 14px;
+      border-left: 3px solid var(--chili);
+      background: rgba(184, 75, 50, 0.1);
+      color: #df846d;
+      font-size: 12px;
+      line-height: 1.6;
+      border-radius: 0 4px 4px 0;
+    }
+    .order-error-message.is-visible { display: block; }
+
+    .confirm-submit.is-loading,
+    .mobile-final-submit.is-loading {
+      cursor: not-allowed;
+      opacity: 0.72;
+      position: relative;
+    }
+
+    @keyframes order-spin {
+      to { transform: rotate(360deg); }
+    }
+    .submit-spinner {
+      display: none;
+      width: 14px;
+      height: 14px;
+      margin-left: 8px;
+      border: 2px solid rgba(36, 22, 16, 0.3);
+      border-top-color: var(--bg-deep);
+      border-radius: 50%;
+      animation: order-spin 0.7s linear infinite;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .confirm-submit.is-loading .submit-spinner,
+    .mobile-final-submit.is-loading .submit-spinner { display: inline-block; }
   </style>
 </head>
 
@@ -921,7 +960,8 @@
           </div>
           <pre class="order-text" id="mobile-final-text"></pre>
           <p class="copy-status" id="mobile-copy-status" role="status" aria-live="polite"></p>
-          <button class="mobile-final-submit" id="mobile-final-submit" type="button">Đặt hàng</button>
+          <p class="order-error-message" id="mobile-error-message" role="alert" aria-live="polite"></p>
+          <button class="mobile-final-submit" id="mobile-final-submit" type="button">Đặt hàng<span class="submit-spinner" aria-hidden="true"></span></button>
         </section>
       </section>
 
@@ -957,9 +997,10 @@
       </div>
       <pre class="order-text" id="confirm-order-text"></pre>
       <p class="copy-status" id="confirm-copy-status" role="status" aria-live="polite"></p>
+      <p class="order-error-message" id="confirm-error-message" role="alert" aria-live="polite"></p>
       <div class="confirm-actions">
         <button id="confirm-edit" type="button">Quay lại</button>
-        <button class="confirm-submit" id="confirm-submit" type="button">Xác nhận đơn hàng</button>
+        <button class="confirm-submit" id="confirm-submit" type="button">Xác nhận đơn hàng<span class="submit-spinner" aria-hidden="true"></span></button>
       </div>
     </div>
   </div>
@@ -1048,7 +1089,7 @@
     const continueOrder = document.getElementById('continue-order');
     const mobileMenuNext = document.getElementById('mobile-menu-next');
     const customerForm = document.getElementById('customer-form');
-    const submitOrder = document.getElementById('submit-order');
+    const submitOrderBtn = document.getElementById('submit-order');
     const addressField = document.getElementById('delivery-address-field');
     const fulfillment = document.getElementById('fulfillment');
     const mobileFinalReview = document.getElementById('mobile-final-review');
@@ -1076,7 +1117,7 @@
       const hasItems = selected.length > 0;
       customerForm.classList.toggle('is-disabled', !hasItems);
       customerForm.setAttribute('aria-disabled', String(!hasItems));
-      submitOrder.disabled = !hasItems;
+      submitOrderBtn.disabled = !hasItems;
       continueOrder.disabled = !hasItems;
       mobileMenuNext.disabled = !hasItems;
       menuItems.forEach(item => {
@@ -1125,7 +1166,7 @@
       }
     }));
 
-    document.getElementById('mobile-final-submit').addEventListener('click', openSuccessModal);
+    document.getElementById('mobile-final-submit').addEventListener('click', () => submitOrder('mobile'));
     document.getElementById('mobile-copy-order').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(mobileFinalText.textContent);
@@ -1235,11 +1276,7 @@
     }
     document.getElementById('confirm-close').addEventListener('click', closeConfirmModal);
     document.getElementById('confirm-edit').addEventListener('click', closeConfirmModal);
-    document.getElementById('confirm-submit').addEventListener('click', () => {
-      closeConfirmModal();
-      setMobileStep('confirm');
-      openSuccessModal();
-    });
+    document.getElementById('confirm-submit').addEventListener('click', () => submitOrder('desktop'));
     document.getElementById('modal-close').addEventListener('click', closeModal);
     confirmModal.addEventListener('click', event => { if (event.target === confirmModal) closeConfirmModal(); });
     orderModal.addEventListener('click', event => { if (event.target === orderModal) closeModal(); });
@@ -1257,6 +1294,208 @@
       }
     });
     updateSummary();
+
+    // ═══════════════════════════════════════════════════════════════════
+    // API INTEGRATION LAYER
+    // Only this block is new. Everything above is unchanged.
+    // ═══════════════════════════════════════════════════════════════════
+
+    const API_ENDPOINT = '/api/order';
+    const REQUEST_TIMEOUT_MS = 12000;
+
+    // Duplicate-submission guard
+    let isSubmitting = false;
+
+    // Cached error elements (created in HTML above)
+    const confirmErrorMsg = document.getElementById('confirm-error-message');
+    const mobileErrorMsg  = document.getElementById('mobile-error-message');
+
+    /**
+     * Build the JSON payload the backend expects.
+     * Uses existing state (quantities, menuItems, totalPrice) and form values.
+     * Never sends prices — the server reconciles those from its own price table.
+     */
+    function buildOrderPayload() {
+      const selected = getSelected();
+      return {
+        customer_name: document.getElementById('customer-name').value.trim(),
+        phone:         document.getElementById('customer-phone').value.trim(),
+        order_type:    fulfillment.value,
+        ...(fulfillment.value === 'delivery' && {
+          address: document.getElementById('customer-address').value.trim()
+        }),
+        items: selected.map(item => ({
+          id:       item.id,
+          name:     item.name,
+          quantity: quantities[item.id]
+        })),
+        total_amount: totalPrice(),
+        ...(document.getElementById('customer-note').value.trim() && {
+          note: document.getElementById('customer-note').value.trim()
+        })
+      };
+    }
+
+    /**
+     * Show or hide the loading state on the active submit button.
+     * @param {boolean} isLoading
+     * @param {'desktop'|'mobile'} context
+     */
+    function setSubmitLoading(isLoading, context) {
+      const submitBtn  = document.getElementById(context === 'desktop' ? 'confirm-submit' : 'mobile-final-submit');
+      const editBtn    = document.getElementById('confirm-edit'); // desktop only
+
+      if (isLoading) {
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+        // Store original label so we can restore it
+        if (!submitBtn.dataset.originalLabel) {
+          // Label is the text node before the spinner span
+          submitBtn.dataset.originalLabel = submitBtn.childNodes[0].textContent.trim();
+        }
+        submitBtn.childNodes[0].textContent = 'Đang gửi đơn... ';
+        if (editBtn) editBtn.disabled = true;
+      } else {
+        submitBtn.classList.remove('is-loading');
+        submitBtn.disabled = false;
+        if (submitBtn.dataset.originalLabel) {
+          submitBtn.childNodes[0].textContent = submitBtn.dataset.originalLabel + ' ';
+        }
+        if (editBtn) editBtn.disabled = false;
+      }
+    }
+
+    /**
+     * Display an error message in the appropriate context panel.
+     * @param {string} message
+     * @param {'desktop'|'mobile'} context
+     */
+    function showOrderError(message, context) {
+      const el = context === 'desktop' ? confirmErrorMsg : mobileErrorMsg;
+      if (!el) return;
+      el.textContent = message;
+      el.classList.add('is-visible');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    /**
+     * Hide all error messages.
+     */
+    function clearOrderError() {
+      [confirmErrorMsg, mobileErrorMsg].forEach(el => {
+        if (el) {
+          el.textContent = '';
+          el.classList.remove('is-visible');
+        }
+      });
+    }
+
+    /**
+     * Map a server HTTP status + response body to a friendly Vietnamese string.
+     * @param {number} status
+     * @param {Object|null} body - Parsed JSON body, or null on parse failure
+     * @returns {string}
+     */
+    function friendlyErrorMessage(status, body) {
+      if (status === 400) {
+        // Surface the first specific validation detail if present
+        if (body && Array.isArray(body.details) && body.details.length > 0) {
+          return `Thông tin chưa hợp lệ: ${body.details[0]}`;
+        }
+        return 'Thông tin đơn hàng chưa hợp lệ. Vui lòng kiểm tra lại.';
+      }
+      if (status === 405) return 'Lỗi hệ thống. Vui lòng tải lại trang và thử lại.';
+      if (status >= 500) return 'Hệ thống tạm thời gián đoạn. Vui lòng thử lại sau ít phút.';
+      return 'Đã xảy ra lỗi. Vui lòng thử lại.';
+    }
+
+    /**
+     * Reset all order state after a successful submission.
+     * - Clears quantities
+     * - Resets the customer form
+     * - Hides the delivery address field
+     * - Refreshes the summary UI
+     * - Closes whichever modal/step is active
+     * - Opens the success modal
+     */
+    function handleOrderSuccess(context) {
+      // Close the active review panel before resetting state
+      if (context === 'desktop') {
+        closeConfirmModal();
+      } else {
+        setMobileStep('menu');
+      }
+
+      // Clear cart
+      menuItems.forEach(item => { quantities[item.id] = 0; });
+
+      // Reset form fields
+      customerForm.reset();
+      addressField.classList.remove('is-visible');
+      document.getElementById('customer-address').required = false;
+
+      // Rebuild the summary (cart is now empty)
+      updateSummary();
+
+      // Show success modal
+      openSuccessModal();
+    }
+
+    /**
+     * POST the order to /api/order.
+     * Handles loading state, errors, success, and duplicate-click prevention.
+     * @param {'desktop'|'mobile'} context - Which submit path triggered this.
+     */
+    async function submitOrder(context) {
+      if (isSubmitting) return;
+
+      clearOrderError();
+      setSubmitLoading(true, context);
+      isSubmitting = true;
+
+      const payload = buildOrderPayload();
+
+      const controller = new AbortController();
+      const timeoutId  = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+          signal:  controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        // Try to parse the JSON body regardless of status
+        let body = null;
+        try { body = await response.json(); } catch { /* non-JSON body — ignore */ }
+
+        if (!response.ok) {
+          const message = friendlyErrorMessage(response.status, body);
+          showOrderError(message, context);
+          setSubmitLoading(false, context);
+          isSubmitting = false;
+          return;
+        }
+
+        // HTTP 201 — success
+        isSubmitting = false;
+        handleOrderSuccess(context);
+
+      } catch (err) {
+        clearTimeout(timeoutId);
+        isSubmitting = false;
+        setSubmitLoading(false, context);
+
+        if (err.name === 'AbortError') {
+          showOrderError('Quá thời gian kết nối. Kiểm tra mạng và thử lại.', context);
+        } else {
+          showOrderError('Không thể kết nối đến máy chủ. Kiểm tra mạng và thử lại.', context);
+        }
+      }
+    }
   </script>
 </body>
 

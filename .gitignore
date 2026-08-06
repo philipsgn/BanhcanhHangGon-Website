@@ -27,3 +27,5 @@ build/
 .codex/
 .agents/
 images.zip
+.vercel
+.env*
