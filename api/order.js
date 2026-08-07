@@ -436,6 +436,9 @@ export default async function handler(req, res) {
   logNotification('discord', discordResult);
   logNotification('ntfy',    ntfyResult);
 
+  const ntfyResultValue = ntfyResult.status === 'fulfilled' ? ntfyResult.value : { success: false, error: ntfyResult.reason?.message };
+  console.log('NTFY RESULT:', JSON.stringify(ntfyResultValue));
+
   // ── 6. Respond ───────────────────────────────────────────────────────────
   logger.info('order_created', {
     request_id:   requestId,
