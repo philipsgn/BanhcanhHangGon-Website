@@ -1013,7 +1013,55 @@
     </div>
   </div>
 
+  <div id="safari-trace" aria-hidden="true" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;max-height:40vh;overflow:auto;padding:8px;background:rgba(0,0,0,0.92);color:#0f0;font:11px/1.4 monospace;white-space:pre-wrap;word-break:break-word;"></div>
+
   <script>
+    // ── TEMPORARY SAFARI TRACE INSTRUMENTATION (REMOVE AFTER DIAGNOSIS) ──────
+    // Logs the order-submit path to the browser console AND to the on-page
+    // #safari-trace overlay so it is readable on an iPhone without devtools.
+    function trace(label) {
+      try {
+        console.log('[SAFARI-TRACE] ' + label);
+        var el = document.getElementById('safari-trace');
+        if (el) {
+          var t = new Date().toISOString().slice(11, 19) + ' ' + label;
+          var lines = (el.textContent ? el.textContent + '\n' : '') + t;
+          lines = lines.split('\n').slice(-40).join('\n');
+          el.textContent = lines;
+        }
+      } catch (e) { /* diagnostics must never break the page */ }
+    }
+    window.__safariTrace = trace;
+
+    window.addEventListener('error', function (event) {
+      var msg = event && event.message ? event.message : String(event);
+      var loc = (event && event.filename ? ' @ ' + event.filename + ':' + event.lineno + ':' + event.colno : '');
+      trace('[SAFARI-TRACE-90] window "error" event: ' + msg + loc);
+      if (event && event.error) { try { console.log('[SAFARI-TRACE-90] original error:', event.error); } catch (e2) {} }
+    }, true);
+
+    window.onerror = function (message, source, lineno, colno, error) {
+      trace('[SAFARI-TRACE-91] window.onerror: ' + message + ' @ ' + source + ':' + lineno + ':' + colno);
+      if (error) { try { console.log('[SAFARI-TRACE-91] original error:', error); } catch (e2) {} }
+      return false;
+    };
+
+    window.addEventListener('unhandledrejection', function (event) {
+      var reason = event && event.reason;
+      var r = reason && reason.message ? reason.message : String(reason);
+      trace('[SAFARI-TRACE-92] window "unhandledrejection": ' + r);
+      try { console.log('[SAFARI-TRACE-92] original reason:', reason); } catch (e2) {}
+    });
+
+    window.onunhandledrejection = function (event) {
+      var reason = event && event.reason;
+      var r = reason && reason.message ? reason.message : String(reason);
+      trace('[SAFARI-TRACE-93] window.onunhandledrejection: ' + r);
+      try { console.log('[SAFARI-TRACE-93] original reason:', reason); } catch (e2) {}
+    };
+
+    trace('[SAFARI-TRACE-01] diagnostics installed (trace helper + global error listeners)');
+
     const menuItems = [
       {
         id: 'bc-xe', category: 'banh-canh', name: 'Bánh canh gà xé',
@@ -1166,7 +1214,10 @@
       }
     }));
 
-    document.getElementById('mobile-final-submit').addEventListener('click', () => submitOrder('mobile'));
+    document.getElementById('mobile-final-submit').addEventListener('click', () => {
+      trace('[SAFARI-TRACE-02] user tapped mobile-final-submit (mobile "Đặt hàng")');
+      submitOrder('mobile');
+    });
     document.getElementById('mobile-copy-order').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(mobileFinalText.textContent);
@@ -1246,13 +1297,22 @@
     let successCloseTimer;
     customerForm.addEventListener('submit', event => {
       event.preventDefault();
-      if (!validateForm()) return;
+      trace('[SAFARI-TRACE-04] customer-form submit event fired (preventDefault called)');
+      if (!validateForm()) {
+        trace('[SAFARI-TRACE-05] customer-form submit: validateForm() FAILED (aborting)');
+        return;
+      }
+      trace('[SAFARI-TRACE-05] customer-form submit: validateForm() passed');
 
       // Generate a fresh idempotency key at the start of each confirmation session.
       // This is the earliest point where we commit to a specific order attempt.
       // The key stays fixed for the lifetime of this session (until success or abandon).
       if (!idempotencyKey) {
-        idempotencyKey = generateIdempotencyKey();
+        idempotencyKey = crypto.randomUUID();
+        // If the trace below never prints on Safari, the line above THREW.
+        trace('[SAFARI-TRACE-06] customer-form submit: crypto.randomUUID() completed — idempotency key set');
+      } else {
+        trace('[SAFARI-TRACE-06] customer-form submit: idempotency key already set (randomUUID not called)');
       }
 
       if (window.matchMedia('(max-width: 920px)').matches) {
@@ -1284,7 +1344,10 @@
     }
     document.getElementById('confirm-close').addEventListener('click', closeConfirmModal);
     document.getElementById('confirm-edit').addEventListener('click', closeConfirmModal);
-    document.getElementById('confirm-submit').addEventListener('click', () => submitOrder('desktop'));
+    document.getElementById('confirm-submit').addEventListener('click', () => {
+      trace('[SAFARI-TRACE-03] user tapped confirm-submit (desktop "Xác nhận đơn hàng")');
+      submitOrder('desktop');
+    });
     document.getElementById('modal-close').addEventListener('click', closeModal);
     confirmModal.addEventListener('click', event => { if (event.target === confirmModal) closeConfirmModal(); });
     orderModal.addEventListener('click', event => { if (event.target === orderModal) closeModal(); });
@@ -1326,46 +1389,25 @@
     let idempotencyKey = null;
 
     /**
-     * Generate an idempotency key that works on every browser and context.
-     *
-     * WHY: crypto.randomUUID() only exists in secure contexts (HTTPS or
-     * localhost) and Safari iOS 15.4+. When order.html is opened on an iPhone
-     * over plain HTTP from a LAN IP (e.g. http://192.168.x.x:8080), Safari
-     * still exposes `crypto` but NOT `crypto.randomUUID`, so calling it throws
-     * "TypeError: crypto.randomUUID is not a function" and silently cancels the
-     * order before fetch() is ever reached. This helper never throws: it uses
-     * randomUUID when available and otherwise builds a standards-compliant
-     * RFC 4122 v4 UUID from crypto.getRandomValues(), which works in every
-     * context and every supported browser.
-     *
-     * @returns {string} A v4 UUID string (36 chars, within the backend's 100-char limit).
-     */
-    function generateIdempotencyKey() {
-      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-        return crypto.randomUUID();
-      }
-      const bytes = new Uint8Array(16);
-      crypto.getRandomValues(bytes);
-      bytes[6] = (bytes[6] & 0x0f) | 0x40; // version 4
-      bytes[8] = (bytes[8] & 0x3f) | 0x80; // RFC 4122 variant
-      const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
-      return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
-    }
-
-    /**
      * Build the JSON payload the backend expects.
      * Uses existing state (quantities, menuItems, totalPrice) and form values.
      * Never sends prices — the server reconciles those from its own price table.
      */
     function buildOrderPayload() {
+      trace('[SAFARI-TRACE-09] buildOrderPayload() entered');
       // Defensive fallback: ensure the key is never null in the payload.
       // Under normal flow this branch never executes — the key is always
       // generated during the customerForm submit handler before this runs.
       if (!idempotencyKey) {
-        idempotencyKey = generateIdempotencyKey();
+        idempotencyKey = crypto.randomUUID();
+        // If the trace below never prints on Safari, the line above THREW.
+        trace('[SAFARI-TRACE-10] buildOrderPayload(): crypto.randomUUID() completed — key generated here');
+      } else {
+        trace('[SAFARI-TRACE-10] buildOrderPayload(): idempotency key already set (randomUUID not called)');
       }
 
       const selected = getSelected();
+      trace('[SAFARI-TRACE-11] buildOrderPayload(): about to return payload (idempotency_key=' + idempotencyKey + ')');
       return {
         customer_name: document.getElementById('customer-name').value.trim(),
         phone:         document.getElementById('customer-phone').value.trim(),
@@ -1500,7 +1542,12 @@
      * @param {'desktop'|'mobile'} context - Which submit path triggered this.
      */
     async function submitOrder(context) {
-      if (isSubmitting) return;
+      trace('[SAFARI-TRACE-07] submitOrder() entered (context=' + context + ')');
+      if (isSubmitting) {
+        trace('[SAFARI-TRACE-08] submitOrder(): duplicate guard BLOCKED (isSubmitting already true)');
+        return;
+      }
+      trace('[SAFARI-TRACE-08] submitOrder(): duplicate guard passed');
 
       clearOrderError();
       setSubmitLoading(true, context);
@@ -1508,24 +1555,34 @@
 
       const payload = buildOrderPayload();
 
+      trace('[SAFARI-TRACE-12] submitOrder(): payload built — running JSON.stringify(payload)');
+      const serializedBody = JSON.stringify(payload);
+      trace('[SAFARI-TRACE-13] submitOrder(): JSON.stringify(payload) completed (' + serializedBody.length + ' chars)');
+
       const controller = new AbortController();
       const timeoutId  = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
+      trace('[SAFARI-TRACE-14] submitOrder(): before fetch()');
       try {
+        trace('[SAFARI-TRACE-15] submitOrder(): fetch() started');
         const response = await fetch(API_ENDPOINT, {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload),
+          body:    serializedBody,
           signal:  controller.signal,
         });
+        trace('[SAFARI-TRACE-16] submitOrder(): fetch() resolved (status=' + response.status + ')');
 
         clearTimeout(timeoutId);
 
         // Try to parse the JSON body regardless of status
         let body = null;
+        trace('[SAFARI-TRACE-17] submitOrder(): response.json() about to run');
         try { body = await response.json(); } catch { /* non-JSON body — ignore */ }
+        trace('[SAFARI-TRACE-18] submitOrder(): response.json() parsed (body=' + (body ? 'object' : 'null') + ')');
 
         if (!response.ok) {
+          trace('[SAFARI-TRACE-19] submitOrder(): NON-OK response status ' + response.status);
           const message = friendlyErrorMessage(response.status, body);
           showOrderError(message, context);
           setSubmitLoading(false, context);
@@ -1533,12 +1590,14 @@
           return;
         }
 
+        trace('[SAFARI-TRACE-20] submitOrder(): OK response — calling handleOrderSuccess(context)');
         // HTTP 201 (new order) or HTTP 200 with duplicated:true (already exists).
         // Both are treated as success — customer sees the success modal either way.
         isSubmitting = false;
         handleOrderSuccess(context);
 
       } catch (err) {
+        trace('[SAFARI-TRACE-21] submitOrder(): catch() entered — name=' + (err && err.name) + ' message=' + (err && err.message));
         clearTimeout(timeoutId);
         isSubmitting = false;
         setSubmitLoading(false, context);
@@ -1548,6 +1607,8 @@
         } else {
           showOrderError('Không thể kết nối đến máy chủ. Kiểm tra mạng và thử lại.', context);
         }
+      } finally {
+        trace('[SAFARI-TRACE-22] submitOrder(): finally()');
       }
     }
   </script>
