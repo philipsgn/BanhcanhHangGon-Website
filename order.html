@@ -1247,6 +1247,14 @@
     customerForm.addEventListener('submit', event => {
       event.preventDefault();
       if (!validateForm()) return;
+
+      // Generate a fresh idempotency key at the start of each confirmation session.
+      // This is the earliest point where we commit to a specific order attempt.
+      // The key stays fixed for the lifetime of this session (until success or abandon).
+      if (!idempotencyKey) {
+        idempotencyKey = crypto.randomUUID();
+      }
+
       if (window.matchMedia('(max-width: 920px)').matches) {
         prepareMobileReview();
         return;
@@ -1310,6 +1318,13 @@
     const confirmErrorMsg = document.getElementById('confirm-error-message');
     const mobileErrorMsg  = document.getElementById('mobile-error-message');
 
+    // ── Idempotency key ──────────────────────────────────────────────────────
+    // null until a confirmation session begins (form submit).
+    // Generated fresh when the customer reaches the review/confirm step.
+    // Cleared (set back to null) after a successful order.
+    // A new key is generated at the start of the next order session.
+    let idempotencyKey = null;
+
     /**
      * Build the JSON payload the backend expects.
      * Uses existing state (quantities, menuItems, totalPrice) and form values.
@@ -1329,7 +1344,8 @@
           name:     item.name,
           quantity: quantities[item.id]
         })),
-        total_amount: totalPrice(),
+        total_amount:     totalPrice(),
+        idempotency_key:  idempotencyKey,
         ...(document.getElementById('customer-note').value.trim() && {
           note: document.getElementById('customer-note').value.trim()
         })
@@ -1437,6 +1453,9 @@
       // Rebuild the summary (cart is now empty)
       updateSummary();
 
+      // Clear the key — the next order session will generate a new one on submit.
+      idempotencyKey = null;
+
       // Show success modal
       openSuccessModal();
     }
@@ -1480,7 +1499,8 @@
           return;
         }
 
-        // HTTP 201 — success
+        // HTTP 201 (new order) or HTTP 200 with duplicated:true (already exists).
+        // Both are treated as success — customer sees the success modal either way.
         isSubmitting = false;
         handleOrderSuccess(context);
 
