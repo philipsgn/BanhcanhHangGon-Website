@@ -154,10 +154,13 @@ async function findOrderByIdempotencyKey(key) {
 
 // ── Request ID ────────────────────────────────────────────────────────────────
 
+/** Maximum length accepted for a client-supplied X-Request-ID header. */
+const REQUEST_ID_MAX_LENGTH = 128;
+
 /**
  * Resolve the request ID for a given request.
- * Re-uses the client-supplied X-Request-ID header when present and non-empty
- * (allows distributed tracing to thread through the frontend).
+ * Re-uses the client-supplied X-Request-ID header when present, non-empty,
+ * and within the 128-character length limit (prevents log inflation attacks).
  * Falls back to a fresh UUID v4 generated server-side.
  *
  * @param {import('@vercel/node').VercelRequest} req
@@ -165,9 +168,14 @@ async function findOrderByIdempotencyKey(key) {
  */
 function resolveRequestId(req) {
   const forwarded = req.headers['x-request-id'];
-  return (typeof forwarded === 'string' && forwarded.trim().length > 0)
-    ? forwarded.trim()
-    : crypto.randomUUID();
+  if (
+    typeof forwarded === 'string' &&
+    forwarded.trim().length > 0 &&
+    forwarded.trim().length <= REQUEST_ID_MAX_LENGTH
+  ) {
+    return forwarded.trim();
+  }
+  return crypto.randomUUID();
 }
 
 // ── CORS ──────────────────────────────────────────────────────────────────────

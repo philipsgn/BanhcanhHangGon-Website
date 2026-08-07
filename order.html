@@ -1331,6 +1331,13 @@
      * Never sends prices — the server reconciles those from its own price table.
      */
     function buildOrderPayload() {
+      // Defensive fallback: ensure the key is never null in the payload.
+      // Under normal flow this branch never executes — the key is always
+      // generated during the customerForm submit handler before this runs.
+      if (!idempotencyKey) {
+        idempotencyKey = crypto.randomUUID();
+      }
+
       const selected = getSelected();
       return {
         customer_name: document.getElementById('customer-name').value.trim(),
