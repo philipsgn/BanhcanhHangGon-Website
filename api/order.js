@@ -1,5 +1,6 @@
 import supabase from '../lib/supabase.js';
 import { sendDiscordNotification } from '../lib/discord.js';
+import { sendNtfyNotification }    from '../lib/ntfy.js';
 import { validateOrderPayload } from '../lib/validator.js';
 import * as logger from '../lib/logger.js';
 
@@ -240,7 +241,7 @@ function jsonResponse(res, status, body, extraHeaders = {}) {
  *   4. Supabase INSERT (server-computed values only)
  *      — on 23505 from idx_orders_idempotency_key: fetch + return existing row
  *      — normal path: exactly one INSERT, zero SELECTs
- *   5. Discord notification (non-blocking)
+ *   5. Notifications — Discord + ntfy (both non-blocking)
  *   6. HTTP 201 response
  *
  * @param {import('@vercel/node').VercelRequest} req
@@ -399,16 +400,41 @@ export default async function handler(req, res) {
     return jsonResponse(res, 500, { success: false, error: 'Failed to save your order. Please try again.' }, cors);
   }
 
-  // ── 5. Discord notification (non-blocking on failure) ────────────────────
+  // ── 5. Notifications (non-blocking — failures never affect the response) ──
   // fullOrder uses orderCalc.items and orderCalc.total — fully server-generated.
   const fullOrder = { ...orderRecord, id: inserted.id, created_at: inserted.created_at };
-  const discordResult = await sendDiscordNotification(fullOrder);
 
-  if (discordResult.success) {
-    logger.info('discord_sent', { request_id: requestId, order_id: inserted.id }, ctx);
-  } else {
-    logger.warn('discord_failed', { request_id: requestId, order_id: inserted.id, error: discordResult.error }, ctx);
+  /**
+   * Log the outcome of a single notification provider.
+   * Handles both fulfilled results ({ success, error? }) and rejected promises.
+   *
+   * @param {'discord'|'ntfy'} provider
+   * @param {PromiseSettledResult} settled - One element from Promise.allSettled().
+   */
+  function logNotification(provider, settled) {
+    const sentEvent   = `${provider}_sent`;
+    const failedEvent = `${provider}_failed`;
+    const base        = { request_id: requestId, order_id: inserted.id };
+
+    if (settled.status === 'fulfilled' && settled.value.success) {
+      logger.info(sentEvent, base, ctx);
+    } else {
+      const error = settled.status === 'rejected'
+        ? settled.reason?.message ?? 'Unknown error'
+        : settled.value.error;
+      logger.warn(failedEvent, { ...base, error }, ctx);
+    }
   }
+
+  // Fire both notifications concurrently.
+  // Array order is documented here and must match the destructuring below.
+  const [discordResult, ntfyResult] = await Promise.allSettled([
+    sendDiscordNotification(fullOrder), // index 0 → discordResult
+    sendNtfyNotification(fullOrder),    // index 1 → ntfyResult
+  ]);
+
+  logNotification('discord', discordResult);
+  logNotification('ntfy',    ntfyResult);
 
   // ── 6. Respond ───────────────────────────────────────────────────────────
   logger.info('order_created', {
@@ -426,7 +452,9 @@ export default async function handler(req, res) {
     message: 'Order created successfully.',
   };
 
-  if (!discordResult.success) {
+  // Surface a client-visible warning if Discord (the primary channel) failed.
+  const discordOk = discordResult.status === 'fulfilled' && discordResult.value.success;
+  if (!discordOk) {
     response.warning = 'Order saved. Notification delivery was delayed — the team has been alerted.';
   }
 
