@@ -1252,7 +1252,7 @@
       // This is the earliest point where we commit to a specific order attempt.
       // The key stays fixed for the lifetime of this session (until success or abandon).
       if (!idempotencyKey) {
-        idempotencyKey = crypto.randomUUID();
+        idempotencyKey = generateIdempotencyKey();
       }
 
       if (window.matchMedia('(max-width: 920px)').matches) {
@@ -1326,6 +1326,33 @@
     let idempotencyKey = null;
 
     /**
+     * Generate an idempotency key that works on every browser and context.
+     *
+     * WHY: crypto.randomUUID() only exists in secure contexts (HTTPS or
+     * localhost) and Safari iOS 15.4+. When order.html is opened on an iPhone
+     * over plain HTTP from a LAN IP (e.g. http://192.168.x.x:8080), Safari
+     * still exposes `crypto` but NOT `crypto.randomUUID`, so calling it throws
+     * "TypeError: crypto.randomUUID is not a function" and silently cancels the
+     * order before fetch() is ever reached. This helper never throws: it uses
+     * randomUUID when available and otherwise builds a standards-compliant
+     * RFC 4122 v4 UUID from crypto.getRandomValues(), which works in every
+     * context and every supported browser.
+     *
+     * @returns {string} A v4 UUID string (36 chars, within the backend's 100-char limit).
+     */
+    function generateIdempotencyKey() {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID();
+      }
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      bytes[6] = (bytes[6] & 0x0f) | 0x40; // version 4
+      bytes[8] = (bytes[8] & 0x3f) | 0x80; // RFC 4122 variant
+      const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+      return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+    }
+
+    /**
      * Build the JSON payload the backend expects.
      * Uses existing state (quantities, menuItems, totalPrice) and form values.
      * Never sends prices — the server reconciles those from its own price table.
@@ -1335,7 +1362,7 @@
       // Under normal flow this branch never executes — the key is always
       // generated during the customerForm submit handler before this runs.
       if (!idempotencyKey) {
-        idempotencyKey = crypto.randomUUID();
+        idempotencyKey = generateIdempotencyKey();
       }
 
       const selected = getSelected();
