@@ -3161,6 +3161,32 @@
     .menu-cards-wide .menu-card .dish-plate {
       overflow: visible !important;
     }
+
+    /* ---- Bánh canh images: lock the scale, no shift on hover/focus/touch ----
+       The xôi fix above works because .menu-cards-wide gives it higher
+       selector specificity than the shared ":hover"/":focus-visible" rule
+       (transform: scale(1.1)) defined earlier for both categories. The
+       bánh canh cards only use the plain .menu-cards class, so they never
+       got an equivalent override — on mobile, tapping/scrolling a <button>
+       card can trigger :hover or :focus-visible, and the image would
+       visibly animate from scale(1.3) to scale(1.1) over its .3s
+       transition, reading as the bowl "jumping"/zooming while scrolling.
+       This override matches the xôi one: same final scale in every state
+       (rest, hover, focus-visible) so nothing animates. */
+    .menu-category:first-child .menu-card .dish-plate img,
+    .menu-category:first-child .menu-card:hover .dish-plate img,
+    .menu-category:first-child .menu-card:focus-visible .dish-plate img {
+      transform: scale(1.3) !important;
+      filter: none !important;
+    }
+
+    @media (min-width: 881px) {
+      .menu-category:first-child .menu-card .dish-plate img,
+      .menu-category:first-child .menu-card:hover .dish-plate img,
+      .menu-category:first-child .menu-card:focus-visible .dish-plate img {
+        transform: scale(1.55) !important;
+      }
+    }
   </style>
 </head>
 
