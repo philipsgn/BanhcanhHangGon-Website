@@ -169,6 +169,26 @@
       color: var(--cream-dim);
       font-size: 12px;
     }
+    .menu-subsection {
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line-soft);
+    }
+    .menu-subsection-heading {
+      margin: 0 0 6px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .menu-subsection-note {
+      margin: 0 0 8px;
+      color: var(--cream-dim);
+      font-size: 11px;
+      line-height: 1.6;
+    }
     .category-tabs {
       display: flex;
       flex-wrap: wrap;
@@ -792,6 +812,9 @@
       .quantity-control button { width: 34px; height: 34px; }
       .menu-section-heading { font-size: 24px; }
       .menu-section-note { margin-bottom: 12px; font-size: 11px; line-height: 1.6; }
+      .menu-subsection { margin-top: 26px; padding-top: 16px; }
+      .menu-subsection-heading { font-size: 17px; }
+      .menu-subsection-note { margin-bottom: 10px; font-size: 10px; }
       .form-grid { grid-template-columns: 1fr; gap: 12px; }
       .field.full { grid-column: auto; }
       .field label { margin-bottom: 4px; font-size: 11px; }
@@ -901,7 +924,13 @@
         <div class="menu-category-block" data-category-panel="nuoc">
           <h2 class="menu-section-heading">Nước giải khát</h2>
           <p class="menu-section-note">100% nguyên liệu tự nhiên — thanh mát, hỗ trợ thanh lọc cơ thể.</p>
-          <div id="nuoc-list"></div>
+          <div id="nuoc-natural-list"></div>
+
+          <div class="menu-subsection">
+            <h3 class="menu-subsection-heading">Nước đóng chai</h3>
+            <p class="menu-subsection-note">Nước suối, nước ngọt quen thuộc — tiện lợi, giải khát nhanh.</p>
+            <div id="nuoc-bottled-list"></div>
+          </div>
         </div>
         <button class="mobile-menu-next" id="mobile-menu-next" type="button" disabled>Tiếp tục đến thông tin</button>
 
@@ -1064,6 +1093,26 @@
         id: 'nuoc-thaomoc', category: 'nuoc', name: 'Sâm thảo mộc',
         description: 'Thảo mộc thiên nhiên nấu chậm, vị ngọt dịu, thanh lọc cơ thể.',
         price: 15000, image: '/images/order/sam-thao-moc_result.webp'
+      },
+      {
+        id: 'nuoc-aquafina', category: 'nuoc', subcategory: 'bottled', name: 'Nước suối Aquafina',
+        description: 'Nước tinh khiết đóng chai, giải khát nhanh gọn.',
+        price: 10000, image: '/images/order/aquafina_result.webp'
+      },
+      {
+        id: 'nuoc-pepsi', category: 'nuoc', subcategory: 'bottled', name: 'Pepsi',
+        description: 'Nước ngọt có gas vị cola quen thuộc.',
+        price: 12000, image: '/images/order/pepsi_result.webp'
+      },
+      {
+        id: 'nuoc-sting', category: 'nuoc', subcategory: 'bottled', name: 'Sting',
+        description: 'Nước tăng lực, tiếp thêm năng lượng tức thì.',
+        price: 12000, image: '/images/order/sting_result.webp'
+      },
+      {
+        id: 'nuoc-7up', category: 'nuoc', subcategory: 'bottled', name: '7Up',
+        description: 'Nước ngọt có gas vị chanh, mát lạnh sảng khoái.',
+        price: 12000, image: '/images/order/7up_result.webp'
       }
     ];
     const quantities = Object.fromEntries(menuItems.map(item => [item.id, 0]));
@@ -1088,7 +1137,8 @@
 
     document.getElementById('banh-canh-list').innerHTML = menuItems.filter(item => item.category === 'banh-canh').map(renderMenuItem).join('');
     document.getElementById('xoi-list').innerHTML = menuItems.filter(item => item.category === 'xoi').map(renderMenuItem).join('');
-    document.getElementById('nuoc-list').innerHTML = menuItems.filter(item => item.category === 'nuoc').map(renderMenuItem).join('');
+    document.getElementById('nuoc-natural-list').innerHTML = menuItems.filter(item => item.category === 'nuoc' && item.subcategory !== 'bottled').map(renderMenuItem).join('');
+    document.getElementById('nuoc-bottled-list').innerHTML = menuItems.filter(item => item.category === 'nuoc' && item.subcategory === 'bottled').map(renderMenuItem).join('');
 
     const categoryTabs = document.querySelectorAll('.category-tab');
     const categoryPanels = document.querySelectorAll('[data-category-panel]');
