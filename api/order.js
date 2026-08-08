@@ -450,7 +450,7 @@ export default async function handler(req, res) {
     success: true,
     orderId: inserted.id,
     message: 'Order created successfully.',
-  };
+  };  
 
   // Surface a client-visible warning if Discord (the primary channel) failed.
   const discordOk = discordResult.status === 'fulfilled' && discordResult.value.success;

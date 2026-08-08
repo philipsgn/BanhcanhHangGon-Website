@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="images/menu/icon-quan-an_result.webp">
+  <title>Chính sách bảo mật | Bánh Canh Gà Hàng Gòn</title>
+  <meta name="description" content="Chính sách bảo mật thông tin khách hàng tại Bánh Canh Gà Hàng Gòn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #241610;
+      --bg-deep-2: #2f1d14;
+      --cream: #f2e8d5;
+      --cream-dim: #c9bda4;
+      --gold: #c99a4a;
+      --line: rgba(201, 154, 74, 0.25);
+      --line-soft: rgba(242, 232, 213, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(201, 154, 74, .07), transparent 30rem),
+        var(--bg-deep);
+      color: var(--cream);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    /* ---------- NAV (matches order.html) ---------- */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      min-height: 92px;
+      padding: 14px clamp(20px, 4vw, 58px);
+      background: transparent;
+    }
+
+    .site-nav .logo {
+      width: 66px;
+      height: 66px;
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .site-nav .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 14px rgba(201, 154, 74, .36));
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 2.6vw, 38px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .site-nav li a {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--cream-dim);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .25s ease;
+    }
+
+    .site-nav li a:hover,
+    .site-nav li a:focus-visible { color: var(--gold); }
+
+    .mobile-home-nav { display: none; }
+
+    /* ---------- PAGE HEADING ---------- */
+    .policy-page {
+      width: min(760px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(150px, 20vw, 190px) 0 clamp(80px, 10vw, 120px);
+    }
+
+    .policy-eyebrow {
+      margin: 0 0 14px;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+    }
+
+    .policy-page h1 {
+      margin: 0 0 16px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 6vw, 58px);
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .policy-updated {
+      margin: 0 0 48px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+      color: var(--cream-dim);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .policy-updated strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ---------- CONTENT ---------- */
+    .policy-section {
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .policy-section:last-of-type {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .policy-section h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 0 0 14px;
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.6vw, 28px);
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+
+    .policy-section h2 .num {
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .06em;
+    }
+
+    .policy-section p {
+      margin: 0 0 14px;
+      color: var(--cream-dim);
+      font-size: 14.5px;
+      line-height: 1.85;
+    }
+
+    .policy-section p:last-child { margin-bottom: 0; }
+
+    .policy-section ul {
+      margin: 0 0 14px;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .policy-section ul:last-child { margin-bottom: 0; }
+
+    .policy-section li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--cream-dim);
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    .policy-section li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .policy-section li strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .policy-contact {
+      margin-top: 6px;
+      padding: 18px 22px;
+      border-left: 1px solid var(--gold);
+      background: rgba(201, 154, 74, 0.06);
+      color: var(--cream-dim);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .policy-contact a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .policy-contact a:hover,
+    .policy-contact a:focus-visible { text-decoration: underline; }
+
+    .policy-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 52px;
+      color: var(--cream-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color .25s ease, gap .25s ease;
+    }
+
+    .policy-back:hover,
+    .policy-back:focus-visible {
+      color: var(--gold);
+      gap: 12px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer {
+      padding: 20px;
+      border-top: 1px solid var(--line-soft);
+      color: var(--cream-dim);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 780px) {
+      .site-nav { display: none; }
+
+      .mobile-home-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 48px;
+        padding: 10px 18px;
+        background: linear-gradient(180deg, rgba(36, 22, 16, .82), transparent);
+      }
+
+      .mobile-home-nav a {
+        color: var(--cream);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 18px;
+        letter-spacing: .03em;
+        text-decoration: none;
+      }
+
+      .policy-page {
+        width: min(100% - 32px, 560px);
+        padding: 92px 0 64px;
+      }
+
+      .policy-updated { margin-bottom: 36px; padding-bottom: 22px; }
+      .policy-section { padding: 24px 0; }
+      .policy-contact { padding: 16px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="site-nav" aria-label="Điều hướng chính">
+    <a class="logo" href="index.html#hero" aria-label="Bánh Canh Gà Hàng Gòn">
+      <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Hàng Gòn">
+    </a>
+    <ul>
+      <li><a href="index.html#hero">Trang chủ</a></li>
+      <li><a href="index.html#welcome">Giới thiệu</a></li>
+      <li><a href="index.html#menu">Menu</a></li>
+      <li><a href="index.html#location">Vị trí</a></li>
+    </ul>
+  </nav>
+  <nav class="mobile-home-nav" aria-label="Điều hướng mobile">
+    <a href="index.html#hero">← Về trang chủ</a>
+  </nav>
+
+  <main class="policy-page">
+    <p class="policy-eyebrow">Bánh Canh Gà Hàng Gòn</p>
+    <h1>Chính sách bảo mật</h1>
+    <p class="policy-updated">Cập nhật lần cuối: <strong>tháng 8, 2026</strong>. Chính sách này giải thích cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân khi bạn đặt món hoặc liên hệ với quán.</p>
+
+    <section class="policy-section">
+      <h2><span class="num">01</span> Thông tin chúng tôi thu thập</h2>
+      <p>Khi bạn đặt món trên website, chúng tôi chỉ thu thập những thông tin cần thiết để chuẩn bị và giao đơn hàng đến đúng bạn:</p>
+      <ul>
+        <li><strong>Họ tên</strong> — để xác nhận đơn hàng và xưng hô khi liên hệ.</li>
+        <li><strong>Số điện thoại</strong> — để gọi xác nhận đơn và trao đổi khi cần.</li>
+        <li><strong>Địa chỉ giao hàng</strong> — chỉ thu thập khi bạn chọn hình thức giao hàng.</li>
+        <li><strong>Ghi chú đơn hàng</strong> — nếu bạn để lại yêu cầu riêng (ví dụ: ít cay, thêm hành).</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <h2><span class="num">02</span> Mục đích sử dụng</h2>
+      <p>Thông tin bạn cung cấp chỉ được dùng để:</p>
+      <ul>
+        <li>Xác nhận, chuẩn bị và giao món ăn đúng đơn hàng của bạn.</li>
+        <li>Liên hệ khi cần làm rõ thông tin đặt món hoặc thông báo tình trạng đơn hàng.</li>
+        <li>Cải thiện chất lượng phục vụ dựa trên phản hồi thực tế.</li>
+      </ul>
+      <p>Chúng tôi không sử dụng thông tin của bạn cho mục đích quảng cáo hay tiếp thị nếu chưa có sự đồng ý.</p>
+    </section>
+
+    <section class="policy-section">
+      <h2><span class="num">03</span> Lưu trữ &amp; bảo vệ</h2>
+      <p>Thông tin đặt món được lưu trữ trong hệ thống nội bộ, chỉ những nhân viên phụ trách xử lý đơn hàng mới có quyền truy cập. Chúng tôi áp dụng các biện pháp hợp lý để ngăn chặn truy cập, thay đổi hoặc tiết lộ trái phép, và không lưu trữ thông tin lâu hơn mức cần thiết cho mục đích vận hành.</p>
+    </section>
+
+    <section class="policy-section">
+      <h2><span class="num">04</span> Chia sẻ thông tin</h2>
+      <p>Chúng tôi <strong style="color: var(--cream);">không bán, cho thuê hay chia sẻ</strong> thông tin cá nhân của bạn cho bên thứ ba vì mục đích thương mại. Thông tin chỉ được chia sẻ trong trường hợp:</p>
+      <ul>
+        <li>Cần thiết để hoàn tất việc giao hàng (ví dụ: đơn vị vận chuyển đối tác).</li>
+        <li>Theo yêu cầu của cơ quan pháp luật có thẩm quyền.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <h2><span class="num">05</span> Quyền của bạn</h2>
+      <p>Bạn có quyền yêu cầu chúng tôi cung cấp, chỉnh sửa hoặc xoá thông tin cá nhân đã cung cấp bất cứ lúc nào, bằng cách liên hệ trực tiếp qua hotline hoặc mạng xã hội của quán.</p>
+      <div class="policy-contact">
+        Hotline: <a href="tel:0356538789">0356 538 789</a> · <a href="tel:0358345987">0358 345 987</a><br>
+        Địa chỉ: 490 Điện Biên Phủ, Thạnh Mỹ Tây, TP. Hồ Chí Minh
+      </div>
+    </section>
+
+    <a class="policy-back" href="index.html#location">← Quay lại trang chủ</a>
+  </main>
+
+  <footer class="site-footer">© 2026 Bánh Canh Gà Hàng Gòn · 490 Điện Biên Phủ, TP.HCM</footer>
+</body>
+
+</html>

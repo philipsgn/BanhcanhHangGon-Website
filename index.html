@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -1246,47 +1246,72 @@
         radial-gradient(ellipse at 18% 28%, rgba(201, 154, 74, 0.12), transparent 34%),
         linear-gradient(135deg, #3a2115 0%, #2b180f 48%, #1f110b 100%);
       min-height: auto;
-      padding: clamp(34px, 4vw, 52px) clamp(22px, 5vw, 72px);
+      padding: clamp(34px, 4vw, 52px) clamp(22px, 5vw, 72px) clamp(20px, 2.6vw, 28px);
     }
 
     .loc-grid {
       display: grid;
-      grid-template-columns: minmax(280px, 0.72fr) minmax(360px, 1fr);
-      gap: clamp(22px, 3vw, 36px);
-      align-items: center;
-      max-width: 1040px;
+      grid-template-columns:
+        minmax(160px, 0.85fr)
+        minmax(120px, 0.62fr)
+        minmax(120px, 0.62fr)
+        minmax(260px, 1fr);
+      gap: clamp(20px, 3.2vw, 44px);
+      align-items: start;
+      max-width: 1180px;
       margin: 0 auto;
       width: 100%;
       padding: 0;
     }
 
-    .loc-card {
-      border-bottom: 1px solid var(--line);
-      padding: 12px 0;
+    /* ---- Footer nav groups: Liên hệ / Chính sách / Danh mục ---- */
+    .loc-group {
+      position: relative;
+      padding-right: clamp(12px, 1.6vw, 20px);
     }
 
-    .loc-card .label {
-      font-size: 11px;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
+    .loc-group-title {
+      margin: 0 0 14px;
       color: var(--gold);
-      margin-bottom: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .24em;
+      text-transform: uppercase;
     }
 
-    .loc-card .value {
-      font-size: 15px;
-      color: var(--cream);
-      line-height: 1.52;
+    .loc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .loc-card .value a {
+    .loc-list li {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--cream-dim);
+    }
+
+    .loc-list-label {
+      display: block;
+      margin-bottom: 3px;
+      color: rgba(201, 154, 74, 0.66);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .loc-list a {
       color: inherit;
       text-decoration: none;
       transition: color .25s ease;
     }
 
-    .loc-card .value a:hover,
-    .loc-card .value a:focus-visible {
+    .loc-list a:hover,
+    .loc-list a:focus-visible {
       color: var(--gold);
     }
 
@@ -1295,23 +1320,54 @@
       text-decoration: none;
     }
 
+    .loc-list--links li {
+      color: var(--cream-dim);
+    }
+
+    .loc-list--links a {
+      position: relative;
+      display: inline-block;
+      color: var(--cream-dim);
+    }
+
+    .loc-list--links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -3px;
+      height: 1px;
+      background: var(--gold);
+      transition: right .25s ease;
+    }
+
+    .loc-list--links a:hover,
+    .loc-list--links a:focus-visible {
+      color: var(--gold);
+    }
+
+    .loc-list--links a:hover::after,
+    .loc-list--links a:focus-visible::after {
+      right: 0;
+    }
+
     .loc-actions {
-      margin-top: 18px;
+      margin-top: 16px;
     }
 
     .loc-map-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 0 18px;
+      min-height: 38px;
+      padding: 0 16px;
       border: 1px solid rgba(201, 154, 74, 0.58);
       border-radius: 999px;
       color: var(--gold);
       background: rgba(36, 22, 16, 0.32);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 1.6px;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
       text-decoration: none;
       transition: color .25s, border-color .25s, background .25s;
@@ -1326,7 +1382,7 @@
     }
 
     .map-wrap {
-      height: clamp(190px, 20vw, 250px);
+      height: clamp(190px, 15vw, 230px);
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -1588,13 +1644,14 @@
       opacity: 1;
     }
 
-    footer {
-      text-align: center;
-      padding: 26px;
-      font-size: 12px;
+    .loc-copyright {
+      margin: clamp(18px, 2vw, 26px) auto 0;
+      padding-top: 0;
+      max-width: 1180px;
+      border-top: 0;
       color: var(--cream-dim);
-      background: var(--bg-deep);
-      border-top: 1px solid var(--line);
+      font-size: 12px;
+      text-align: center;
     }
 
     @media (max-width: 1300px) {
@@ -1790,16 +1847,33 @@
       }
 
       #location {
-        padding: 34px 18px 32px;
+        padding: 34px 18px 24px;
       }
 
       .loc-grid {
-        gap: 16px;
+        gap: 26px;
         padding: 0;
+      }
+
+      .loc-group {
+        padding-right: 0;
+      }
+
+      .loc-group-title {
+        margin-bottom: 11px;
+      }
+
+      .loc-list {
+        gap: 9px;
       }
 
       .map-wrap {
         height: 210px;
+      }
+
+      .loc-copyright {
+        margin-top: 16px;
+        padding-top: 0;
       }
 
       #customer-reviews {
@@ -3028,19 +3102,26 @@
          than the xôi plate photos, so the same box + scale renders visibly smaller.
          Give this category a slightly bigger box/scale to compensate — sized down
          from an earlier pass that was too large and left a soft shadow "ring"
-         around the bowl. */
-      .menu-category:first-child .menu-card .dish-plate {
+         around the bowl. Applied to BOTH categories so bowl size reads consistently
+         across the whole menu — previously this only targeted bánh canh, which is
+         why xôi cards rendered visibly larger (860px/1.7 vs 760px/1.55). */
+      .menu-category:first-child .menu-card .dish-plate,
+      .menu-cards-wide .menu-card .dish-plate {
         width: min(100%, 760px) !important;
         height: clamp(300px, 26vw, 440px) !important;
       }
 
-      .menu-category:first-child .menu-card .dish-plate::before {
+      .menu-category:first-child .menu-card .dish-plate::before,
+      .menu-cards-wide .menu-card .dish-plate::before {
         display: none;
       }
 
       .menu-category:first-child .menu-card .dish-plate img,
       .menu-category:first-child .menu-card:hover .dish-plate img,
       .menu-category:first-child .menu-card:focus-visible .dish-plate img,
+      .menu-cards-wide .menu-card .dish-plate img,
+      .menu-cards-wide .menu-card:hover .dish-plate img,
+      .menu-cards-wide .menu-card:focus-visible .dish-plate img,
       .menu-card.dish-bc-xe img,
       .menu-card.dish-bc-xe:hover img,
       .menu-card.dish-bc-xe:focus-visible img,
@@ -3182,7 +3263,7 @@
         </div>
         <div class="menu-cards">
           <button class="menu-card dish-bc-xe" type="button" data-name="Bánh canh gà xé" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-cutout_result.webp" alt="Bánh canh gà xé" loading="lazy" decoding="async"></span>
+            <span class="dish-plate"><img src="images/menu/banh-canh-ga-xe-removebg-preview_result.webp" alt="Bánh canh gà xé" loading="lazy" decoding="async"></span>
             <span>
               <span class="menu-card-name">Bánh canh gà xé</span>
               <span class="menu-card-desc">Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.</span>
@@ -3193,7 +3274,7 @@
           </button>
 
           <button class="menu-card dish-bc-chat" type="button" data-name="Bánh canh gà chặt" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-cutout_result.webp" alt="Bánh canh gà chặt" loading="lazy" decoding="async"></span>
+            <span class="dish-plate"><img src="images/menu/banh-canh-ga-chat-removebg-preview_result.webp" alt="Bánh canh gà chặt" loading="lazy" decoding="async"></span>
             <span>
               <span class="menu-card-name">Bánh canh gà chặt</span>
               <span class="menu-card-desc">Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.</span>
@@ -3204,7 +3285,7 @@
           </button>
 
           <button class="menu-card" type="button" data-name="Bánh canh đặc biệt" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-cutout_result.webp" alt="Bánh canh đặc biệt" loading="lazy" decoding="async"></span>
+            <span class="dish-plate"><img src="images/menu/banh-canh-dac-biet-removebg-preview_result.webp" alt="Bánh canh đặc biệt" loading="lazy" decoding="async"></span>
             <span>
               <span class="menu-card-name">Bánh canh đặc biệt</span>
               <span class="menu-card-desc">Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.</span>
@@ -3226,7 +3307,7 @@
         </div>
         <div class="menu-cards menu-cards-wide">
           <button class="menu-card" type="button" data-name="Xôi gà xé trứng non" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/xoi-ga-xe-cutout_result.webp" alt="Xôi gà xé trứng non" loading="lazy" decoding="async"></span>
+            <span class="dish-plate"><img src="images/menu/xoi-ga-xe-removebg-preview_result.webp" alt="Xôi gà xé trứng non" loading="lazy" decoding="async"></span>
             <span>
               <span class="menu-card-name">Xôi gà xé trứng non</span>
               <span class="menu-card-desc">Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.</span>
@@ -3237,7 +3318,7 @@
           </button>
 
           <button class="menu-card" type="button" data-name="Xôi gà chặt trứng non" aria-disabled="true" tabindex="-1">
-            <span class="dish-plate"><img src="images/menu/xoi-ga-chat-cutout_result.webp" alt="Xôi gà chặt trứng non" loading="lazy" decoding="async"></span>
+            <span class="dish-plate"><img src="images/menu/xoi-ga-chat-removebg-preview_result.webp" alt="Xôi gà chặt trứng non" loading="lazy" decoding="async"></span>
             <span>
               <span class="menu-card-name">Xôi gà chặt trứng non</span>
               <span class="menu-card-desc">Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.</span>
@@ -3316,32 +3397,54 @@
   <!-- SECTION 4: LOCATION -->
   <section id="location">
     <div class="loc-grid">
-      <div>
-        <div class="loc-card">
-          <div class="label">Địa chỉ</div>
-          <div class="value">490 Điện Biên Phủ, Thạnh Mỹ Tây, TP. Hồ Chí Minh</div>
-        </div>
-        <div class="loc-card">
-          <div class="label">Giờ mở cửa</div>
-          <div class="value">6:00 – 0:00 (Tất cả các ngày trong tuần)</div>
-        </div>
-        <div class="loc-card">
-          <div class="label">Hotline</div>
-          <div class="value">
+      <div class="loc-group loc-group--contact">
+        <h3 class="loc-group-title">Liên hệ</h3>
+        <ul class="loc-list">
+          <li>
+            <span class="loc-list-label">Địa chỉ</span>
+            490 Điện Biên Phủ, Thạnh Mỹ Tây, TP. Hồ Chí Minh
+          </li>
+          <li>
+            <span class="loc-list-label">Giờ mở cửa</span>
+            6:00 – 0:00 (Tất cả các ngày trong tuần)
+          </li>
+          <li>
+            <span class="loc-list-label">Hotline</span>
             <a href="tel:0356538789">0356 538 789</a> hoặc <a href="tel:0358345987">0358 345 987</a>
-          </div>
-        </div>
+          </li>
+        </ul>
         <div class="loc-actions">
           <a class="loc-map-link" href="https://maps.app.goo.gl/m2fKyMJy4xSPQMa87" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a>
         </div>
       </div>
+
+      <div class="loc-group loc-group--policy">
+        <h3 class="loc-group-title">Chính sách</h3>
+        <ul class="loc-list loc-list--links">
+          <li><a href="#">Giấy phép Đăng ký kinh doanh</a></li>
+          <li><a href="chinh-sach-quyen-rieng-tu.html">Chính sách bảo mật</a></li>
+          <li><a href="#">Vệ sinh an toàn thực phẩm</a></li>
+        </ul>
+      </div>
+
+      <div class="loc-group loc-group--menu">
+        <h3 class="loc-group-title">Danh mục</h3>
+        <ul class="loc-list loc-list--links">
+          <li><a href="#hero">Trang chủ</a></li>
+          <li><a href="#menu">Thực đơn</a></li>
+          <li><a href="order.html">Đặt món</a></li>
+          <li><a href="#welcome">Về chúng tôi</a></li>
+          <li><a href="#location">Liên hệ</a></li>
+        </ul>
+      </div>
+
       <div class="map-wrap">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.134059220087!2d106.71036697355223!3d10.801042958742219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529619df418e7%3A0x158a745e81901a1c!2zQsOhbmggQ2FuaCBHw6AgLSBYw7RpIEfDoCBIw6BuZyBHw7Ju!5e0!3m2!1svi!2s!4v1784371316143!5m2!1svi!2s" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
-  </section>
 
-  <footer>© 2026 Bánh Canh Gà Hàng Gòn · 490 Điện Biên Phủ, TP.HCM</footer>
+    <footer class="loc-copyright">© 2026 Bánh Canh Gà Hàng Gòn · 490 Điện Biên Phủ, TP.HCM</footer>
+  </section>
 
   <script>
     const sections = document.querySelectorAll('section');
