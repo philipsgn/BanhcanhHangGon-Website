@@ -4,5 +4,16 @@
     "api/*.js": {
       "maxDuration": 20
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/home", "destination": "/index.html" },
+    { "source": "/home/:path*", "destination": "/index.html" },
+    { "source": "/order", "destination": "/order.html" },
+    { "source": "/chinhsachbaomat", "destination": "/chinh-sach-quyen-rieng-tu.html" }
+  ],
+  "redirects": [
+    { "source": "/welcome", "destination": "/home/welcome", "permanent": true },
+    { "source": "/menu", "destination": "/home/menu", "permanent": true },
+    { "source": "/location", "destination": "/home/location", "permanent": true }
+  ]
 }

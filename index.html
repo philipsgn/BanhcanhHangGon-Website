@@ -3175,17 +3175,17 @@
 <body>
 
   <nav class="site-nav" id="siteNav">
-    <a class="logo" href="#hero" aria-label="Bánh Canh Gà Ta">
+    <a class="logo" href="/home" aria-label="Bánh Canh Gà Ta">
       <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Ta" decoding="async">
     </a>
     <ul>
-      <li><a href="#hero">Trang chủ</a></li>
-      <li><a href="#welcome">Giới thiệu</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#location">Vị trí</a></li>
-      <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
+      <li><a href="/home">Trang chủ</a></li>
+      <li><a href="/home/welcome">Giới thiệu</a></li>
+      <li><a href="/home/menu">Menu</a></li>
+      <li><a href="/home/location">Vị trí</a></li>
+      <li><a class="nav-order-link" href="/order">Đặt hàng</a></li>
     </ul>
-    <a class="mobile-order-btn" href="order.html">Đặt hàng</a>
+    <a class="mobile-order-btn" href="/order">Đặt hàng</a>
     <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -3449,7 +3449,7 @@
         <h3 class="loc-group-title">Chính sách</h3>
         <ul class="loc-list loc-list--links">
           <li><a href="#">Giấy phép Đăng ký kinh doanh</a></li>
-          <li><a href="chinh-sach-quyen-rieng-tu.html">Chính sách bảo mật</a></li>
+          <li><a href="/chinhsachbaomat">Chính sách bảo mật</a></li>
           <li><a href="#">Vệ sinh an toàn thực phẩm</a></li>
         </ul>
       </div>
@@ -3457,11 +3457,11 @@
       <div class="loc-group loc-group--menu">
         <h3 class="loc-group-title">Danh mục</h3>
         <ul class="loc-list loc-list--links">
-          <li><a href="#hero">Trang chủ</a></li>
-          <li><a href="#menu">Thực đơn</a></li>
-          <li><a href="order.html">Đặt món</a></li>
-          <li><a href="#welcome">Về chúng tôi</a></li>
-          <li><a href="#location">Liên hệ</a></li>
+          <li><a href="/home">Trang chủ</a></li>
+          <li><a href="/home/menu">Thực đơn</a></li>
+          <li><a href="/order">Đặt món</a></li>
+          <li><a href="/home/welcome">Về chúng tôi</a></li>
+          <li><a href="/home/location">Liên hệ</a></li>
         </ul>
       </div>
 
@@ -3514,6 +3514,52 @@
     navLinks.forEach((link) => {
       link.addEventListener('click', closeMobileNav);
     });
+
+    const sectionRouteMap = {
+      '/': 'hero',
+      '/home': 'hero',
+      '/home/welcome': 'welcome',
+      '/home/menu': 'menu',
+      '/home/location': 'location'
+    };
+
+    function getSectionIdForPath(pathname) {
+      const clean = pathname.replace(/\/+$/, '') || '/';
+      return sectionRouteMap[clean] || sectionRouteMap[clean + '/'];
+    }
+
+    function scrollSectionForPath(pathname) {
+      const targetId = getSectionIdForPath(pathname);
+      if (!targetId) return false;
+      const target = document.getElementById(targetId);
+      if (!target) return false;
+      requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      return true;
+    }
+
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="/home"], a[href="/"]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      const nextPath = href === '/' ? '/' : href.replace(/\/+$/, '') || '/';
+      if (nextPath === window.location.pathname.replace(/\/+$/, '') || '/') {
+        event.preventDefault();
+        scrollSectionForPath(nextPath);
+        closeMobileNav();
+        return;
+      }
+      event.preventDefault();
+      window.history.pushState({}, '', href);
+      scrollSectionForPath(nextPath);
+      closeMobileNav();
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+
+    window.addEventListener('popstate', () => {
+      scrollSectionForPath(window.location.pathname);
+    });
+
+    scrollSectionForPath(window.location.pathname);
 
     const heroPanorama = document.querySelector('.hero-panorama');
 
