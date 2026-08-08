@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/webp" href="images/menu/icon-quan-an_result.webp">
+  <link rel="icon" type="image/webp" href="/images/menu/icon-quan-an_result.webp">
   <title>Đặt món | Bánh Canh Gà Hàng Gòn</title>
   <meta name="description" content="Đặt món bánh canh gà và xôi gà tại Bánh Canh Gà Hàng Gòn.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -851,7 +851,7 @@
 <body>
   <nav class="site-nav" aria-label="Điều hướng chính">
     <a class="logo" href="/home" aria-label="Bánh Canh Gà Hàng Gòn">
-      <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Hàng Gòn">
+      <img src="/images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Hàng Gòn">
     </a>
     <ul>
       <li><a href="/home">Trang chủ</a></li>
@@ -897,7 +897,12 @@
           <p class="menu-section-note">Xôi dẻo thơm, gà ta và trứng non vừa miệng.</p>
           <div id="xoi-list"></div>
         </div>
-        <p class="category-empty" id="category-empty">Danh mục nước đang được cập nhật.</p>
+
+        <div class="menu-category-block" data-category-panel="nuoc">
+          <h2 class="menu-section-heading">Nước giải khát</h2>
+          <p class="menu-section-note">100% nguyên liệu tự nhiên — thanh mát, hỗ trợ thanh lọc cơ thể.</p>
+          <div id="nuoc-list"></div>
+        </div>
         <button class="mobile-menu-next" id="mobile-menu-next" type="button" disabled>Tiếp tục đến thông tin</button>
 
         <form class="customer-form is-disabled" id="customer-form" novalidate aria-disabled="true">
@@ -1018,27 +1023,47 @@
       {
         id: 'bc-xe', category: 'banh-canh', name: 'Bánh canh gà xé',
         description: 'Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.',
-        price: 50000, image: 'images/menu/banh-canh-ga-xe-removebg-preview_result.webp'
+        price: 50000, image: '/images/menu/banh-canh-ga-xe-removebg-preview_result.webp'
       },
       {
         id: 'bc-chat', category: 'banh-canh', name: 'Bánh canh gà chặt',
         description: 'Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.',
-        price: 60000, image: 'images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
+        price: 60000, image: '/images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
       },
       {
         id: 'bc-dac-biet', category: 'banh-canh', name: 'Bánh canh đặc biệt',
         description: 'Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.',
-        price: 70000, image: 'images/menu/banh-canh-dac-biet-removebg-preview_result.webp'
+        price: 70000, image: '/images/menu/banh-canh-dac-biet-removebg-preview_result.webp'
       },
       {
         id: 'xoi-xe', category: 'xoi', name: 'Xôi gà xé trứng non',
         description: 'Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.',
-        price: 45000, image: 'images/menu/xoi-ga-xe-removebg-preview_result.webp'
+        price: 45000, image: '/images/menu/xoi-ga-xe-removebg-preview_result.webp'
       },
       {
         id: 'xoi-chat', category: 'xoi', name: 'Xôi gà chặt trứng non',
         description: 'Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.',
-        price: 50000, image: 'images/menu/xoi-ga-chat-removebg-preview_result.webp'
+        price: 50000, image: '/images/menu/xoi-ga-chat-removebg-preview_result.webp'
+      },
+      {
+        id: 'nuoc-hatchia', category: 'nuoc', name: 'Mủ trôm hạt chia',
+        description: 'Mủ trôm mát lành hoà cùng hạt chia dẻo bùi, đường phèn thanh nhẹ.',
+        price: 20000, image: '/images/order/hatchia-removebg-preview_result.webp'
+      },
+      {
+        id: 'nuoc-mutrom', category: 'nuoc', name: 'Nha đam mủ trôm',
+        description: 'Nha đam giòn mát kết hợp mủ trôm, giải nhiệt cơ thể ngày nắng.',
+        price: 20000, image: '/images/order/mutrom-removebg-preview_result.webp'
+      },
+      {
+        id: 'nuoc-rongbien', category: 'nuoc', name: 'Sâm rong biển',
+        description: 'Sâm rong biển thanh mát, hỗ trợ thanh lọc, uống giải khát mỗi ngày.',
+        price: 15000, image: '/images/order/rongbien-removebg-preview_result.webp'
+      },
+      {
+        id: 'nuoc-thaomoc', category: 'nuoc', name: 'Sâm thảo mộc',
+        description: 'Thảo mộc thiên nhiên nấu chậm, vị ngọt dịu, thanh lọc cơ thể.',
+        price: 15000, image: '/images/order/thaomoc-removebg-preview_result.webp'
       }
     ];
     const quantities = Object.fromEntries(menuItems.map(item => [item.id, 0]));
@@ -1063,10 +1088,10 @@
 
     document.getElementById('banh-canh-list').innerHTML = menuItems.filter(item => item.category === 'banh-canh').map(renderMenuItem).join('');
     document.getElementById('xoi-list').innerHTML = menuItems.filter(item => item.category === 'xoi').map(renderMenuItem).join('');
+    document.getElementById('nuoc-list').innerHTML = menuItems.filter(item => item.category === 'nuoc').map(renderMenuItem).join('');
 
     const categoryTabs = document.querySelectorAll('.category-tab');
     const categoryPanels = document.querySelectorAll('[data-category-panel]');
-    const categoryEmpty = document.getElementById('category-empty');
     categoryTabs.forEach(tab => tab.addEventListener('click', () => {
       const category = tab.dataset.category;
       categoryTabs.forEach(item => {
@@ -1077,7 +1102,6 @@
       categoryPanels.forEach(panel => {
         panel.hidden = category !== 'all' && panel.dataset.categoryPanel !== category;
       });
-      categoryEmpty.classList.toggle('is-visible', category === 'nuoc');
     }));
 
     const summaryItems = document.getElementById('summary-items');
