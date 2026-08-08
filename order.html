@@ -246,6 +246,16 @@
       transition: transform .3s ease;
     }
     .order-item:hover .order-item-thumb img { transform: scale(1.4) translateY(-2px); }
+
+    /* Featured items (e.g. Mủ trôm hạt chia, Nha đam mủ trôm) — thumbnail x2 */
+    .order-item-featured {
+      grid-template-columns: 264px minmax(0, 1fr) auto;
+      min-height: 196px;
+    }
+    .order-item-featured .order-item-thumb {
+      width: 264px;
+      height: 196px;
+    }
     .order-item-info { min-width: 0; }
     .order-item-name {
       margin: 0 0 5px;
@@ -785,6 +795,8 @@
       }
       .order-item { grid-template-columns: 104px minmax(0, 1fr); gap: 14px; min-height: 104px; padding: 12px 0; }
       .order-item-thumb { width: 104px; height: 88px; }
+      .order-item-featured { grid-template-columns: 208px minmax(0, 1fr); min-height: 176px; }
+      .order-item-featured .order-item-thumb { width: 208px; height: 176px; }
       .order-item-name { font-size: 25px; }
       .order-item-desc { font-size: 10px; }
       .order-item-price { font-size: 12px; }
@@ -1046,12 +1058,12 @@
         price: 50000, image: '/images/menu/xoi-ga-chat-removebg-preview_result.webp'
       },
       {
-        id: 'nuoc-hatchia', category: 'nuoc', name: 'Mủ trôm hạt chia',
+        id: 'nuoc-hatchia', category: 'nuoc', name: 'Mủ trôm hạt chia', featured: true,
         description: 'Mủ trôm mát lành hoà cùng hạt chia dẻo bùi, đường phèn thanh nhẹ.',
         price: 20000, image: '/images/order/hatchia-removebg-preview_result.webp'
       },
       {
-        id: 'nuoc-mutrom', category: 'nuoc', name: 'Nha đam mủ trôm',
+        id: 'nuoc-mutrom', category: 'nuoc', name: 'Nha đam mủ trôm', featured: true,
         description: 'Nha đam giòn mát kết hợp mủ trôm, giải nhiệt cơ thể ngày nắng.',
         price: 20000, image: '/images/order/mutrom-removebg-preview_result.webp'
       },
@@ -1073,7 +1085,7 @@
     const totalPrice = () => getSelected().reduce((sum, item) => sum + item.price * quantities[item.id], 0);
 
     const renderMenuItem = item => `
-      <article class="order-item" data-item-id="${item.id}">
+      <article class="order-item${item.featured ? ' order-item-featured' : ''}" data-item-id="${item.id}">
         <div class="order-item-thumb"><img src="${item.image}" alt="${item.name}"></div>
         <div class="order-item-info">
           <h3 class="order-item-name">${item.name}</h3>
