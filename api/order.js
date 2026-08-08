@@ -25,6 +25,14 @@ const MENU = Object.freeze({
   'bc-dac-biet': Object.freeze({ name: 'Bánh canh đặc biệt',    price: 70000 }),
   'xoi-xe':      Object.freeze({ name: 'Xôi gà xé trứng non',  price: 45000 }),
   'xoi-chat':    Object.freeze({ name: 'Xôi gà chặt trứng non', price: 50000 }),
+  'nuoc-hatchia':    Object.freeze({ name: 'Mủ trôm hạt chia',  price: 16000 }),
+  'nuoc-mutrom':     Object.freeze({ name: 'Nha đam mủ trôm',   price: 16000 }),
+  'nuoc-rongbien':   Object.freeze({ name: 'Sâm rong biển',     price: 16000 }),
+  'nuoc-thaomoc':    Object.freeze({ name: 'Sâm thảo mộc',      price: 16000 }),
+  'nuoc-aquafina':   Object.freeze({ name: 'Nước suối Aquafina', price: 10000 }),
+  'nuoc-pepsi':      Object.freeze({ name: 'Pepsi',             price: 20000 }),
+  'nuoc-sting':      Object.freeze({ name: 'Sting',             price: 20000 }),
+  'nuoc-7up':        Object.freeze({ name: '7Up',               price: 20000 }),
 });
 
 // ── Pricing layer ─────────────────────────────────────────────────────────────
