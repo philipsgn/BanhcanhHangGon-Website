@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/webp" href="/images/menu/icon-quan-an_result.webp">
+  <link rel="icon" type="image/webp" href="images/menu/icon-quan-an_result.webp">
   <title>Đặt món | Bánh Canh Gà Hàng Gòn</title>
   <meta name="description" content="Đặt món bánh canh gà và xôi gà tại Bánh Canh Gà Hàng Gòn.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -256,6 +256,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      border-radius: 8px;
     }
     .order-item-thumb img {
       width: 100%;
@@ -276,7 +277,14 @@
       line-height: 1;
     }
     .order-item-desc {
-      display: none;
+      margin: 3px 0 0;
+      color: var(--cream-dim);
+      font-size: 12px;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .order-item-price {
       margin-top: 5px;
@@ -874,7 +882,7 @@
 <body>
   <nav class="site-nav" aria-label="Điều hướng chính">
     <a class="logo" href="/home" aria-label="Bánh Canh Gà Hàng Gòn">
-      <img src="/images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Hàng Gòn">
+      <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Hàng Gòn">
     </a>
     <ul>
       <li><a href="/home">Trang chủ</a></li>
@@ -898,9 +906,12 @@
       <section class="order-menu" aria-labelledby="menu-heading">
         <nav class="category-tabs" aria-label="Lọc danh mục món ăn">
           <button class="category-tab is-active" type="button" data-category="all" aria-selected="true">Tất cả</button>
-          <button class="category-tab" type="button" data-category="banh-canh" aria-selected="false">Bánh canh</button>
-          <button class="category-tab" type="button" data-category="xoi" aria-selected="false">Xôi</button>
-          <button class="category-tab" type="button" data-category="nuoc" aria-selected="false">Nước</button>
+          <button class="category-tab" type="button" data-category="com" aria-selected="false">Cơm gà</button>
+          <button class="category-tab" type="button" data-category="banh-canh" aria-selected="false">Bánh canh gà</button>
+          <button class="category-tab" type="button" data-category="xoi" aria-selected="false">Xôi gà</button>
+          <button class="category-tab" type="button" data-category="goi" aria-selected="false">Gỏi gà</button>
+          <button class="category-tab" type="button" data-category="mon-them" aria-selected="false">Món thêm</button>
+          <button class="category-tab" type="button" data-category="nuoc" aria-selected="false">Nước giải khát</button>
         </nav>
 
         <div class="mobile-order-steps" aria-label="Tiến trình đặt món">
@@ -909,16 +920,34 @@
           <button type="button" data-step-indicator="confirm">3. Xác nhận</button>
         </div>
 
+        <div class="menu-category-block" data-category-panel="com">
+          <h2 class="menu-section-heading">Cơm gà ta &amp; Cơm gỏi</h2>
+          <p class="menu-section-note">Hạt cơm vàng óng dẻo bùi nấu nước luộc gà, thịt gà ta luộc mọng ngọt và gỏi chua ngọt giòn giòn.</p>
+          <div id="com-list"></div>
+        </div>
+
         <div class="menu-category-block" data-category-panel="banh-canh">
           <h2 class="menu-section-heading" id="menu-heading">Bánh canh gà</h2>
-          <p class="menu-section-note">Nước dùng ninh xương, gà ta và sợi bánh canh mềm dai.</p>
+          <p class="menu-section-note">Nước dùng ninh xương ngọt thanh tự nhiên, gà ta thả vườn dai mềm và sợi bánh canh dẻo dai.</p>
           <div id="banh-canh-list"></div>
         </div>
 
         <div class="menu-category-block" data-category-panel="xoi">
           <h2 class="menu-section-heading">Xôi gà</h2>
-          <p class="menu-section-note">Xôi dẻo thơm, gà ta và trứng non vừa miệng.</p>
+          <p class="menu-section-note">Xôi nếp dẻo thơm ngào ngạt, gà ta luộc, trứng non béo bùi và hành phi vàng rụm.</p>
           <div id="xoi-list"></div>
+        </div>
+
+        <div class="menu-category-block" data-category-panel="goi">
+          <h2 class="menu-section-heading">Gỏi gà ta</h2>
+          <p class="menu-section-note">Gỏi gà bóp chua ngọt giòn mát, thơm nồng rau răm hành tây và đậu phộng rang giòn rụm.</p>
+          <div id="goi-list"></div>
+        </div>
+
+        <div class="menu-category-block" data-category-panel="mon-them">
+          <h2 class="menu-section-heading">Món thêm &amp; Topping</h2>
+          <p class="menu-section-note">Gọi thêm cơm, xôi, bánh canh hoặc các phần topping gà xé, trứng non, lòng mề theo khẩu vị.</p>
+          <div id="mon-them-list"></div>
         </div>
 
         <div class="menu-category-block" data-category-panel="nuoc">
@@ -1049,70 +1078,183 @@
 
   <script>
     const menuItems = [
+      // ── CƠM (GÀ TA LUỘC) ──────────────────────────
+      {
+        id: 'com-xe', category: 'com', name: 'Cơm gà xé',
+        description: 'Hạt cơm vàng óng dẻo bùi, thịt gà ta xé ngọt mềm kèm đồ chua và nước mắm tỏi ớt đặc trưng.',
+        price: 40000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'com-dui-toi', category: 'com', name: 'Cơm gà đùi tỏi',
+        description: 'Đùi tỏi gà ta luộc vàng ươm, da giòn sần sật thịt săn chắc, ăn cùng cơm nghệ thơm lừng.',
+        price: 52000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'com-xe-trung-non', category: 'com', name: 'Cơm gà xé trứng non',
+        description: 'Cơm gà xé kết hợp cùng chùm trứng non béo bùi, vàng óng ngậy thơm đậm đà.',
+        price: 47000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'com-ma-dui', category: 'com', name: 'Cơm gà má đùi',
+        description: 'Phần má đùi gà ta béo ngọt mọng nước, thịt dày và da vàng giòn ăn cùng cơm nóng.',
+        price: 65000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+
+      // ── CƠM + GỎI ─────────────────────────────────
+      {
+        id: 'com-goi-xe', category: 'com', name: 'Cơm gà xé + gỏi',
+        description: 'Cơm vàng thơm dẻo ăn kèm đĩa gỏi gà xé bóp chua ngọt giòn sần sật, hành tây rau răm bắt vị.',
+        price: 45000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'com-goi-long-trung-non', category: 'com', name: 'Cơm + gỏi lòng gà trứng non',
+        description: 'Lòng mề gà giòn sần sật và trứng non béo bùi bóp gỏi chua ngọt ăn kèm cơm gà nóng hổi.',
+        price: 48000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'com-goi-dui', category: 'com', name: 'Cơm gỏi gà đùi',
+        description: 'Đùi gà ta chắc ngọt xé trộn gỏi chua thanh, hòa quyện tuyệt vời cùng cơm gà vàng óng.',
+        price: 60000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+
+      // ── BÁNH CANH GÀ ──────────────────────────────
       {
         id: 'bc-xe', category: 'banh-canh', name: 'Bánh canh gà xé',
-        description: 'Gà ta xé mềm, nước lèo ninh xương ngọt thanh, thêm huyết và lòng gà.',
-        price: 50000, image: '/images/menu/banh-canh-ga-xe-removebg-preview_result.webp'
+        description: 'Gà ta xé ngọt thịt, sợi bánh canh mềm dai, nước dùng ninh gà thanh trong ngọt dịu.',
+        price: 48000, image: 'images/menu/banh-canh-ga-xe-removebg-preview_result.webp'
       },
       {
-        id: 'bc-chat', category: 'banh-canh', name: 'Bánh canh gà chặt',
-        description: 'Miếng gà chặt chắc thịt, nước dùng nóng hổi, vị đậm đà vừa ăn.',
-        price: 60000, image: '/images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
+        id: 'bc-dui-toi', category: 'banh-canh', name: 'Bánh canh gà đùi tỏi',
+        description: 'Đùi tỏi gà ta nguyên chiếc thịt săn chắc, nước dùng nóng hổi thơm nồng hành phi tiêu sọ.',
+        price: 59000, image: 'images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
       },
       {
-        id: 'bc-dac-biet', category: 'banh-canh', name: 'Bánh canh đặc biệt',
-        description: 'Tô đầy đủ topping: gà, trứng non, huyết, tim mề và gan.',
-        price: 70000, image: '/images/menu/banh-canh-dac-biet-removebg-preview_result.webp'
+        id: 'bc-ma-dui', category: 'banh-canh', name: 'Bánh canh gà má đùi',
+        description: 'Má đùi gà ta béo ngậy mềm mọng, da vàng giòn dai, ngập trong nước dùng thanh tao.',
+        price: 68000, image: 'images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
       },
+      {
+        id: 'bc-long-me', category: 'banh-canh', name: 'Bánh canh lòng mề',
+        description: 'Lòng mề gan gà ta sơ chế sạch sẽ giòn sần sật, nước dùng ngọt thanh nóng hổi.',
+        price: 70000, image: 'images/menu/banhcanhga-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'bc-trung-non', category: 'banh-canh', name: 'Bánh canh trứng non',
+        description: 'Tô bánh canh ngập tràn trứng gà non béo ngậy mềm dẻo, thơm phức hành lá và rau răm.',
+        price: 55000, image: 'images/menu/banh-canh-dac-biet-removebg-preview_result.webp'
+      },
+
+      // ── XÔI ───────────────────────────────────────
       {
         id: 'xoi-xe', category: 'xoi', name: 'Xôi gà xé trứng non',
-        description: 'Xôi dẻo thơm, gà xé vừa miệng, trứng non béo nhẹ và hành phi giòn.',
-        price: 45000, image: '/images/menu/xoi-ga-xe-removebg-preview_result.webp'
+        description: 'Xôi nếp dẻo thơm, gà ta xé ngọt mềm, trứng non béo bùi và hành phi giòn tan.',
+        price: 42000, image: 'images/menu/xoiga-t9-removebg-preview_result.webp'
       },
       {
-        id: 'xoi-chat', category: 'xoi', name: 'Xôi gà chặt trứng non',
-        description: 'Xôi nóng ăn cùng gà chặt chắc thịt, trứng non béo và nước sốt đậm đà.',
-        price: 50000, image: '/images/menu/xoi-ga-chat-removebg-preview_result.webp'
+        id: 'xoi-dui', category: 'xoi', name: 'Xôi gà đùi trứng non',
+        description: 'Đùi gà ta chặt chắc ngọt, trứng non béo bùi, xôi dẻo nóng chan nước sốt bí truyền.',
+        price: 52000, image: 'images/menu/xoi-ga-chat-removebg-preview_result.webp'
       },
+
+      // ── GỎI ───────────────────────────────────────
+      {
+        id: 'goi-nho', category: 'goi', name: 'Gỏi gà ta nhỏ',
+        description: 'Đĩa gỏi vừa vặn cho 1–2 người: gà ta xé bóp hành tây giòn ngọt, rau răm và đậu phộng.',
+        price: 50000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
+      },
+      {
+        id: 'goi-lon', category: 'goi', name: 'Gỏi gà ta lớn',
+        description: 'Phần gỏi lớn đầy đặn cho cả gia đình, gà ta chắc ngọt bóp thấu chua ngọt thơm lừng.',
+        price: 100000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
+      },
+      {
+        id: 'goi-nua-con', category: 'goi', name: 'Gỏi gà ta nửa con (tặng 1 phần xôi)',
+        description: 'Nửa con gà ta luộc xé trộn gỏi chua ngọt đậm đà, được tặng kèm 1 phần xôi nếp dẻo thơm.',
+        price: 247000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
+      },
+
+      // ── MÓN THÊM ──────────────────────────────────
+      {
+        id: 'them-com', category: 'mon-them', name: 'Cơm thêm',
+        description: 'Chén cơm dẻo nấu từ nước luộc gà ta vàng óng thơm ngon.',
+        price: 5000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'them-xoi', category: 'mon-them', name: 'Xôi thêm',
+        description: 'Phần xôi nếp nương dẻo thơm, phủ hành phi béo ngậy.',
+        price: 10000, image: 'images/menu/xoiga-t9-removebg-preview_result.webp'
+      },
+      {
+        id: 'them-banh', category: 'mon-them', name: 'Bánh thêm',
+        description: 'Thêm một phần sợi bánh canh gạo mềm dai nóng hổi.',
+        price: 10000, image: 'images/menu/icon-banh-canh-ga_result.webp'
+      },
+      {
+        id: 'them-ga-xe', category: 'mon-them', name: 'Gà xé thêm',
+        description: 'Thịt gà ta thả vườn xé ngọt mềm chắc thịt.',
+        price: 27000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
+      },
+      {
+        id: 'them-trung-non', category: 'mon-them', name: 'Trứng non thêm',
+        description: 'Trứng gà non vàng ươm béo bùi ngậy mềm.',
+        price: 25000, image: 'images/behind-scenes/trung-non-nuoc-cham_result.webp'
+      },
+      {
+        id: 'them-long-me', category: 'mon-them', name: 'Lòng mề thêm',
+        description: 'Lòng mề gà ta làm sạch kỹ giòn sần sật, thơm bùi.',
+        price: 25000, image: 'images/behind-scenes/trung-non-nuoc-cham_result.webp'
+      },
+      {
+        id: 'them-co-canh', category: 'mon-them', name: 'Cổ cánh thêm',
+        description: 'Phần cổ cánh gà ta da vàng giòn ngọt thịt.',
+        price: 30000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
+      },
+      {
+        id: 'them-dui', category: 'mon-them', name: 'Đùi thêm',
+        description: 'Đùi gà ta luộc vàng óng săn chắc thơm ngọt.',
+        price: 30000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
+      },
+
+      // ── NƯỚC GIẢI KHÁT ────────────────────────────
       {
         id: 'nuoc-hatchia', category: 'nuoc', name: 'Mủ trôm hạt chia',
         description: 'Mủ trôm mát lành hoà cùng hạt chia dẻo bùi, đường phèn thanh nhẹ.',
-        price: 16000, image: '/images/order/mutrom-hatchia_result.webp'
+        price: 16000, image: 'images/order/mutrom-hatchia_result.webp'
       },
       {
         id: 'nuoc-mutrom', category: 'nuoc', name: 'Nha đam mủ trôm',
         description: 'Nha đam giòn mát kết hợp mủ trôm, giải nhiệt cơ thể ngày nắng.',
-        price: 16000, image: '/images/order/nhadam-mutrom_result.webp'
+        price: 16000, image: 'images/order/nhadam-mutrom_result.webp'
       },
       {
         id: 'nuoc-rongbien', category: 'nuoc', name: 'Sâm rong biển',
         description: 'Sâm rong biển thanh mát, hỗ trợ thanh lọc, uống giải khát mỗi ngày.',
-        price: 16000, image: '/images/order/sam-rong-bien_result.webp'
+        price: 16000, image: 'images/order/sam-rong-bien_result.webp'
       },
       {
         id: 'nuoc-thaomoc', category: 'nuoc', name: 'Sâm thảo mộc',
         description: 'Thảo mộc thiên nhiên nấu chậm, vị ngọt dịu, thanh lọc cơ thể.',
-        price: 16000, image: '/images/order/sam-thao-moc_result.webp'
+        price: 16000, image: 'images/order/sam-thao-moc_result.webp'
       },
       {
         id: 'nuoc-aquafina', category: 'nuoc', subcategory: 'bottled', name: 'Nước suối Aquafina',
         description: 'Nước tinh khiết đóng chai, giải khát nhanh gọn.',
-        price: 10000, image: '/images/order/aquafina_result.webp'
+        price: 10000, image: 'images/order/aquafina_result.webp'
       },
       {
         id: 'nuoc-pepsi', category: 'nuoc', subcategory: 'bottled', name: 'Pepsi',
         description: 'Nước ngọt có gas vị cola quen thuộc.',
-        price: 20000, image: '/images/order/pepsi_result.webp'
+        price: 20000, image: 'images/order/pepsi_result.webp'
       },
       {
         id: 'nuoc-sting', category: 'nuoc', subcategory: 'bottled', name: 'Sting',
         description: 'Nước tăng lực, tiếp thêm năng lượng tức thì.',
-        price: 20000, image: '/images/order/sting_result.webp'
+        price: 20000, image: 'images/order/sting_result.webp'
       },
       {
         id: 'nuoc-7up', category: 'nuoc', subcategory: 'bottled', name: '7Up',
         description: 'Nước ngọt có gas vị chanh, mát lạnh sảng khoái.',
-        price: 20000, image: '/images/order/7up_result.webp'
+        price: 20000, image: 'images/order/7up_result.webp'
       }
     ];
     const quantities = Object.fromEntries(menuItems.map(item => [item.id, 0]));
@@ -1123,9 +1265,10 @@
 
     const renderMenuItem = item => `
       <article class="order-item${item.featured ? ' order-item-featured' : ''}" data-item-id="${item.id}">
-        <div class="order-item-thumb"><img src="${item.image}" alt="${item.name}"></div>
+        <div class="order-item-thumb"><img src="${item.image}" alt="${item.name}" loading="lazy" decoding="async"></div>
         <div class="order-item-info">
           <h3 class="order-item-name">${item.name}</h3>
+          ${item.description ? `<p class="order-item-desc">${item.description}</p>` : ''}
           <div class="order-item-price">${formatPrice(item.price)}</div>
         </div>
         <div class="quantity-control" aria-label="Số lượng ${item.name}">
@@ -1136,7 +1279,10 @@
       </article>`;
 
     document.getElementById('banh-canh-list').innerHTML = menuItems.filter(item => item.category === 'banh-canh').map(renderMenuItem).join('');
+    document.getElementById('com-list').innerHTML = menuItems.filter(item => item.category === 'com').map(renderMenuItem).join('');
     document.getElementById('xoi-list').innerHTML = menuItems.filter(item => item.category === 'xoi').map(renderMenuItem).join('');
+    document.getElementById('goi-list').innerHTML = menuItems.filter(item => item.category === 'goi').map(renderMenuItem).join('');
+    document.getElementById('mon-them-list').innerHTML = menuItems.filter(item => item.category === 'mon-them').map(renderMenuItem).join('');
     document.getElementById('nuoc-natural-list').innerHTML = menuItems.filter(item => item.category === 'nuoc' && item.subcategory !== 'bottled').map(renderMenuItem).join('');
     document.getElementById('nuoc-bottled-list').innerHTML = menuItems.filter(item => item.category === 'nuoc' && item.subcategory === 'bottled').map(renderMenuItem).join('');
 

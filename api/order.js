@@ -20,19 +20,57 @@ import * as logger from '../lib/logger.js';
 //
 /** @type {Readonly<Record<string, {name: string, price: number}>>} */
 const MENU = Object.freeze({
-  'bc-xe':       Object.freeze({ name: 'Bánh canh gà xé',      price: 50000 }),
-  'bc-chat':     Object.freeze({ name: 'Bánh canh gà chặt',     price: 60000 }),
-  'bc-dac-biet': Object.freeze({ name: 'Bánh canh đặc biệt',    price: 70000 }),
-  'xoi-xe':      Object.freeze({ name: 'Xôi gà xé trứng non',  price: 45000 }),
-  'xoi-chat':    Object.freeze({ name: 'Xôi gà chặt trứng non', price: 50000 }),
-  'nuoc-hatchia':    Object.freeze({ name: 'Mủ trôm hạt chia',  price: 16000 }),
-  'nuoc-mutrom':     Object.freeze({ name: 'Nha đam mủ trôm',   price: 16000 }),
-  'nuoc-rongbien':   Object.freeze({ name: 'Sâm rong biển',     price: 16000 }),
-  'nuoc-thaomoc':    Object.freeze({ name: 'Sâm thảo mộc',      price: 16000 }),
-  'nuoc-aquafina':   Object.freeze({ name: 'Nước suối Aquafina', price: 10000 }),
-  'nuoc-pepsi':      Object.freeze({ name: 'Pepsi',             price: 20000 }),
-  'nuoc-sting':      Object.freeze({ name: 'Sting',             price: 20000 }),
-  'nuoc-7up':        Object.freeze({ name: '7Up',               price: 20000 }),
+  // ── CƠM (GÀ TA LUỘC) ──────────────────────────
+  'com-xe':              Object.freeze({ name: 'Cơm gà xé',                 price: 40000 }),
+  'com-dui-toi':         Object.freeze({ name: 'Cơm gà đùi tỏi',            price: 52000 }),
+  'com-xe-trung-non':    Object.freeze({ name: 'Cơm gà xé trứng non',       price: 47000 }),
+  'com-ma-dui':          Object.freeze({ name: 'Cơm gà má đùi',             price: 65000 }),
+
+  // ── CƠM + GỎI ─────────────────────────────────
+  'com-goi-xe':          Object.freeze({ name: 'Cơm gà xé + gỏi',           price: 45000 }),
+  'com-goi-long-trung-non': Object.freeze({ name: 'Cơm + gỏi lòng gà trứng non', price: 48000 }),
+  'com-goi-dui':         Object.freeze({ name: 'Cơm gỏi gà đùi',            price: 60000 }),
+
+  // ── BÁNH CANH GÀ ──────────────────────────────
+  'bc-xe':               Object.freeze({ name: 'Bánh canh gà xé',           price: 48000 }),
+  'bc-dui-toi':          Object.freeze({ name: 'Bánh canh gà đùi tỏi',      price: 59000 }),
+  'bc-ma-dui':           Object.freeze({ name: 'Bánh canh gà má đùi',       price: 68000 }),
+  'bc-long-me':          Object.freeze({ name: 'Bánh canh lòng mề',         price: 70000 }),
+  'bc-trung-non':        Object.freeze({ name: 'Bánh canh trứng non',       price: 55000 }),
+  // Legacy aliases
+  'bc-chat':             Object.freeze({ name: 'Bánh canh gà đùi tỏi',      price: 59000 }),
+  'bc-dac-biet':         Object.freeze({ name: 'Bánh canh lòng mề',         price: 70000 }),
+
+  // ── XÔI ───────────────────────────────────────
+  'xoi-xe':              Object.freeze({ name: 'Xôi gà xé trứng non',       price: 42000 }),
+  'xoi-dui':             Object.freeze({ name: 'Xôi gà đùi trứng non',      price: 52000 }),
+  // Legacy alias
+  'xoi-chat':            Object.freeze({ name: 'Xôi gà đùi trứng non',      price: 52000 }),
+
+  // ── GỎI ───────────────────────────────────────
+  'goi-nho':             Object.freeze({ name: 'Gỏi gà ta nhỏ',             price: 50000 }),
+  'goi-lon':             Object.freeze({ name: 'Gỏi gà ta lớn',             price: 100000 }),
+  'goi-nua-con':         Object.freeze({ name: 'Gỏi gà ta nửa con (tặng 1 phần xôi)', price: 247000 }),
+
+  // ── MÓN THÊM ──────────────────────────────────
+  'them-com':            Object.freeze({ name: 'Cơm thêm',                  price: 5000 }),
+  'them-xoi':            Object.freeze({ name: 'Xôi thêm',                  price: 10000 }),
+  'them-banh':           Object.freeze({ name: 'Bánh thêm',                 price: 10000 }),
+  'them-ga-xe':          Object.freeze({ name: 'Gà xé thêm',                price: 27000 }),
+  'them-trung-non':      Object.freeze({ name: 'Trứng non thêm',            price: 25000 }),
+  'them-long-me':        Object.freeze({ name: 'Lòng mề thêm',              price: 25000 }),
+  'them-co-canh':        Object.freeze({ name: 'Cổ cánh thêm',              price: 30000 }),
+  'them-dui':            Object.freeze({ name: 'Đùi thêm',                  price: 30000 }),
+
+  // ── NƯỚC GIẢI KHÁT ────────────────────────────
+  'nuoc-hatchia':        Object.freeze({ name: 'Mủ trôm hạt chia',          price: 16000 }),
+  'nuoc-mutrom':         Object.freeze({ name: 'Nha đam mủ trôm',           price: 16000 }),
+  'nuoc-rongbien':       Object.freeze({ name: 'Sâm rong biển',             price: 16000 }),
+  'nuoc-thaomoc':        Object.freeze({ name: 'Sâm thảo mộc',              price: 16000 }),
+  'nuoc-aquafina':       Object.freeze({ name: 'Nước suối Aquafina',        price: 10000 }),
+  'nuoc-pepsi':          Object.freeze({ name: 'Pepsi',                     price: 20000 }),
+  'nuoc-sting':          Object.freeze({ name: 'Sting',                     price: 20000 }),
+  'nuoc-7up':            Object.freeze({ name: '7Up',                       price: 20000 }),
 });
 
 // ── Pricing layer ─────────────────────────────────────────────────────────────
