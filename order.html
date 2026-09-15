@@ -242,10 +242,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 16px 14px;
+      gap: 20px;
+      padding: 11px 12px;
       border-bottom: 1px solid var(--line-soft);
-      border-radius: 8px;
+      border-radius: 6px;
       transition: background .2s ease, border-color .2s ease;
     }
     .order-item:hover {
@@ -253,21 +253,18 @@
       background: rgba(49, 31, 22, 0.4);
     }
     .order-item-info {
-      flex: 1;
-      min-width: 0;
-    }
-    .order-item-header {
       display: flex;
       align-items: baseline;
-      justify-content: space-between;
       gap: 16px;
+      flex: 1;
+      min-width: 0;
       flex-wrap: wrap;
     }
     .order-item-name {
       margin: 0;
       color: var(--cream);
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(20px, 2vw, 25px);
+      font-size: clamp(19px, 1.8vw, 23px);
       font-weight: 600;
       line-height: 1.25;
       letter-spacing: .01em;
@@ -280,12 +277,6 @@
       font-weight: 600;
       letter-spacing: .02em;
       white-space: nowrap;
-    }
-    .order-item-desc {
-      margin: 5px 0 0;
-      color: var(--cream-dim);
-      font-size: 12.5px;
-      line-height: 1.5;
     }
     .quantity-control {
       display: inline-flex;
@@ -808,20 +799,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 14px;
+        gap: 12px;
         min-height: 0;
-        padding: 13px 8px;
+        padding: 9px 4px;
       }
-      .order-item-header {
+      .order-item-info {
         flex-direction: column;
         align-items: flex-start;
-        gap: 3px;
+        gap: 2px;
       }
-      .order-item-name { font-size: 19px; }
-      .order-item-price { font-size: 13px; }
-      .order-item-desc { font-size: 11px; margin-top: 3px; line-height: 1.4; }
+      .order-item-name { font-size: 18px; line-height: 1.2; }
+      .order-item-price { font-size: 12.5px; }
       .quantity-control { margin-top: 0; }
-      .quantity-control button { width: 32px; height: 32px; }
+      .quantity-control button { width: 30px; height: 30px; }
       .menu-section-heading { font-size: 24px; }
       .menu-section-note { margin-bottom: 12px; font-size: 11px; line-height: 1.6; }
       .menu-subsection { margin-top: 26px; padding-top: 16px; }
@@ -1270,11 +1260,8 @@
     const renderMenuItem = item => `
       <article class="order-item${item.featured ? ' order-item-featured' : ''}" data-item-id="${item.id}">
         <div class="order-item-info">
-          <div class="order-item-header">
-            <h3 class="order-item-name">${item.name}</h3>
-            <span class="order-item-price">${formatPrice(item.price)}</span>
-          </div>
-          ${item.description ? `<p class="order-item-desc">${item.description}</p>` : ''}
+          <h3 class="order-item-name">${item.name}</h3>
+          <span class="order-item-price">${formatPrice(item.price)}</span>
         </div>
         <div class="quantity-control" aria-label="Số lượng ${item.name}">
           <button type="button" data-action="decrease" data-item-id="${item.id}" aria-label="Giảm ${item.name}">−</button>
