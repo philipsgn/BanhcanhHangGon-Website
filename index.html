@@ -221,6 +221,7 @@
       flex-direction: column;
       justify-content: center;
       padding: 0 48px;
+      scroll-margin-top: 76px;
     }
 
     /* ---------- SECTION 1 : HERO ---------- */
@@ -718,13 +719,15 @@
     /* RESPONSIVE QUERIES DÀNH CHO CẢ MÀN HÌNH LAPTOP & DI ĐỘNG */
     @media (max-width: 1024px) {
       #menu {
+        scroll-margin-top: 76px;
         padding-top: clamp(45px, 6.5vh, 65px);
       }
       .menu-hero-header {
+        top: clamp(68px, 9vh, 78px);
         left: clamp(10px, 2vw, 20px);
       }
       .menu-rooster-img {
-        width: clamp(95px, 10vw, 120px);
+        width: clamp(80px, 10vw, 105px);
       }
       .menu-card-visual {
         width: clamp(320px, 36vh, 370px);
@@ -746,10 +749,16 @@
 
     @media (max-width: 600px) {
       #menu {
-        min-height: 100vh;
-        min-height: 100svh;
-        padding: clamp(40px, 5.5vh, 50px) 12px clamp(12px, 1.8vh, 16px);
-        overflow: visible;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        overflow: hidden !important;
+        padding: clamp(54px, 7.5vh, 64px) 12px clamp(8px, 1.2vh, 14px) !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
       }
 
       #menu::before {
@@ -758,49 +767,67 @@
       }
 
       .menu-hero-header {
-        position: absolute;
-        top: 0;
-        left: 12px;
-        margin: 0;
-        padding: 0;
-        z-index: 6;
+        position: absolute !important;
+        top: 0 !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 7 !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
       }
 
       .menu-rooster-img {
-        width: clamp(75px, 18vw, 90px);
+        width: clamp(175px, 44vw, 210px) !important;
+        display: block !important;
+        margin: 0 auto !important;
       }
 
       .menu-stage-wrapper {
-        margin-top: clamp(20px, 3.5vh, 32px);
+        margin-top: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        max-height: calc(100svh - 70px) !important;
       }
 
       .menu-carousel-track {
-        height: clamp(580px, 72vh, 670px);
+        height: auto !important;
+        max-height: calc(100svh - 75px) !important;
       }
 
       .menu-card-visual {
-        width: clamp(320px, 42vh, 390px);
-        height: clamp(320px, 42vh, 390px);
-        margin-bottom: -18px;
+        width: clamp(230px, 33vh, 280px) !important;
+        height: clamp(230px, 33vh, 280px) !important;
+        margin-bottom: -15px !important;
       }
 
       .menu-card.is-active .menu-card-body {
-        width: 90vw;
-        max-width: 340px;
-        padding: 6px 10px 0;
+        width: 90vw !important;
+        max-width: 320px !important;
+        padding: 4px 10px 0 !important;
       }
 
       .menu-card.is-active .menu-card-title {
-        font-size: clamp(22px, 5.8vw, 28px);
+        font-size: clamp(18px, 4.8vw, 22px) !important;
+        margin-bottom: 2px !important;
       }
 
       .menu-card.is-active .menu-card-price {
-        font-size: clamp(22px, 5.8vw, 28px);
+        font-size: clamp(17px, 4.5vw, 20px) !important;
+        margin-bottom: 2px !important;
       }
 
       .menu-card.is-active .menu-card-desc {
-        font-size: clamp(13px, 3.5vw, 15px);
-        max-width: 310px;
+        font-size: clamp(11.5px, 3vw, 13px) !important;
+        max-width: 290px !important;
+        line-height: 1.35 !important;
+        margin: 0 auto 6px !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        display: -webkit-box !important;
+        overflow: hidden !important;
       }
 
       .menu-card.is-active .menu-card-cta {
@@ -810,16 +837,16 @@
       }
 
       .menu-card.is-active {
-        transform: translate3d(-50%, -50%, 40px) scale(1) !important;
+        transform: translate3d(-50%, calc(-50% - 24px), 40px) scale(1) !important;
       }
 
       .menu-card.is-near-prev {
-        transform: translate3d(calc(-50% - 78%), calc(-50% + 10px), -40px) scale(0.78) !important;
+        transform: translate3d(calc(-50% - 78%), calc(-50% - 14px), -40px) scale(0.78) !important;
         opacity: 0.28 !important;
       }
 
       .menu-card.is-near-next {
-        transform: translate3d(calc(-50% + 78%), calc(-50% + 10px), -40px) scale(0.78) !important;
+        transform: translate3d(calc(-50% + 78%), calc(-50% - 14px), -40px) scale(0.78) !important;
         opacity: 0.28 !important;
       }
 
@@ -1164,6 +1191,10 @@
       justify-content: center;
     }
 
+    .welcome-photo-chick {
+      display: none;
+    }
+
     .welcome-photo img,
     .welcome-framed-img {
       display: block;
@@ -1186,64 +1217,197 @@
 
     @media (max-width: 880px) {
       #welcome {
-        padding: 36px 20px 42px;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        overflow: hidden !important;
+        padding: clamp(50px, 7vh, 60px) 14px clamp(16px, 2.5vh, 24px) !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-evenly !important;
+        align-items: center !important;
+        position: relative !important;
+        background-color: #3F2311 !important;
       }
 
       .welcome-grid {
-        grid-template-columns: 1fr;
-        gap: 26px;
-        text-align: center;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+        gap: clamp(6px, 1.2vh, 10px) !important;
+        text-align: center !important;
+        position: relative !important;
+        z-index: 2 !important;
+        width: 100% !important;
+        max-width: 380px !important;
+        height: 100% !important;
+        max-height: calc(100svh - 68px) !important;
+        padding: 0 !important;
+        margin: 0 !important;
       }
 
-      .welcome-photo {
-        order: -1;
-        width: min(100%, 560px);
-        margin: 0 auto;
-        padding: 0;
+      .welcome-copy {
+        display: contents !important;
       }
 
-      .welcome-copy,
-      .welcome-description {
-        max-width: 100%;
+      .welcome-label {
+        display: none !important;
+      }
+
+      .welcome-corner-chick {
+        display: none !important;
       }
 
       .welcome-title {
-        margin-bottom: 14px;
-        font-size: clamp(32px, 9vw, 46px);
+        order: 1 !important;
+        margin: 0 auto 4px !important;
+        font-size: clamp(21px, 5.4vw, 26px) !important;
+        line-height: 1.15 !important;
+        color: #FFF6E4 !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 340px !important;
+        padding: 0 !important;
+      }
+
+      .welcome-photo {
+        order: 2 !important;
+        position: relative !important;
+        width: min(90vw, 325px) !important;
+        height: auto !important;
+        aspect-ratio: 1540 / 1464 !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      .welcome-photo-chick {
+        display: block !important;
+        position: absolute !important;
+        top: auto !important;
+        bottom: 100% !important;
+        left: 12px !important;
+        width: clamp(52px, 13vw, 68px) !important;
+        z-index: 1 !important;
+        transform: none !important;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45)) !important;
+        pointer-events: none !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .welcome-photo-chick img,
+      .welcome-chick-img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+      }
+
+      .welcome-photo picture {
+        position: relative !important;
+        z-index: 2 !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .welcome-photo picture img,
+      .welcome-framed-img {
+        position: relative !important;
+        z-index: 2 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45) !important;
+        border: none !important;
+      }
+
+      .welcome-divider {
+        order: 3 !important;
+        width: 36px !important;
+        height: 1.5px !important;
+        background-color: var(--gold, #C99A4A) !important;
+        margin: 4px auto 6px !important;
       }
 
       .welcome-description {
-        font-size: clamp(19px, 5.5vw, 23px);
-        line-height: 1.42;
+        order: 4 !important;
+        font-size: clamp(12.5px, 3.4vw, 14.5px) !important;
+        line-height: 1.48 !important;
+        margin: 0 auto !important;
+        color: rgba(255, 246, 228, 0.95) !important;
+        max-width: 330px !important;
+        text-align: center !important;
+      }
+
+      .welcome-corner-chick img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
       }
     }
 
     @media (max-width: 880px) {
       #story {
-        aspect-ratio: auto;
-        min-height: 500px;
-        height: 560px;
-        padding: 0;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        overflow: hidden !important;
+        position: relative !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .story-slider {
+        height: 100% !important;
+        width: 100% !important;
+      }
+
+      .story-slide {
+        height: 100% !important;
       }
 
       .story-slide img {
-        object-position: 58% center;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: 80% 65% !important;
       }
 
       .story-slide__content {
-        width: auto;
-        margin: 0 24px 70px;
+        position: absolute !important;
+        top: clamp(62px, 9.5vh, 76px) !important;
+        bottom: auto !important;
+        left: 20px !important;
+        right: 20px !important;
+        margin: 0 !important;
+        width: auto !important;
       }
 
       .story-slide__quote {
-        max-width: 18ch;
-        font-size: clamp(29px, 8.2vw, 40px);
-        line-height: 1.12;
+        font-size: clamp(21px, 5.8vw, 27px) !important;
+        line-height: 1.35 !important;
+        margin: 0 !important;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.7) !important;
       }
 
       .story-slider__dots {
-        right: 24px;
-        bottom: 42px;
+        right: 20px;
+        bottom: 24px;
       }
     }
 
@@ -1397,6 +1561,92 @@
       width: 100%;
       height: 100%;
       border: 0;
+    }
+
+    /* ---- Mạng xã hội & Đặt món trực tuyến tại Chân trang ---- */
+    .loc-socials-dock {
+      max-width: 1180px;
+      margin: clamp(24px, 3vw, 36px) auto 0;
+      padding: 18px 24px;
+      background: rgba(36, 22, 16, 0.65);
+      border: 1px solid rgba(201, 154, 74, 0.28);
+      border-radius: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 12px 32px rgba(18, 10, 6, 0.35);
+    }
+
+    .loc-socials-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .loc-socials-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .loc-social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(242, 232, 213, 0.16);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+
+    .loc-social-btn:hover,
+    .loc-social-btn:focus-visible {
+      background: rgba(201, 154, 74, 0.18);
+      border-color: var(--gold);
+      color: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    .loc-social-btn .social-icon {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    .loc-social-btn .social-icon-img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .loc-social-btn--hotline {
+      background: rgba(184, 75, 50, 0.25);
+      border-color: rgba(184, 75, 50, 0.55);
+      color: #ffb8a3;
+    }
+
+    .loc-social-btn--hotline:hover {
+      background: rgba(184, 75, 50, 0.45);
+      border-color: #b84b32;
+      color: #fff;
+    }
+
+    @media (max-width: 880px) {
+      .loc-socials-dock {
+        display: none !important;
+      }
     }
 
     /* ---------- SECTION 5 : CUSTOMER REVIEWS ---------- */
@@ -1697,6 +1947,60 @@
     }
 
     @media (max-width: 880px) {
+      /* MOBILE WEB APP: CỐ ĐỊNH KHUNG HÌNH & SCROLL SNAP 100SVH */
+      html {
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        height: 100%;
+      }
+
+      body {
+        overflow-x: hidden;
+        touch-action: pan-y;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      section {
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        scroll-snap-align: start !important;
+        scroll-snap-stop: always !important;
+        overflow: hidden !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+      }
+
+      #customer-reviews {
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        overflow: hidden !important;
+        padding: clamp(54px, 7.5vh, 64px) 16px clamp(12px, 2vh, 18px) !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      #location {
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-snap-align: start !important;
+        padding: clamp(56px, 7.5vh, 66px) 16px 20px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+
       .site-nav {
         padding: 18px 20px;
         background: linear-gradient(to bottom, rgba(36, 22, 16, 0.94), rgba(36, 22, 16, 0.16));
@@ -2010,77 +2314,83 @@
         text-wrap: auto;
       }
 
+      /* =======================================================
+         MOBILE WEB APP: SCROLL SNAP & FIXED SECTIONS CONTAINER
+         ======================================================= */
       #hero {
-        padding: 0;
-        min-height: 100svh;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        overflow: hidden;
-        background: var(--bg-deep);
-      }
-
-      .hero-content {
-        flex: 1 0 auto;
-        width: 100%;
-        min-height: 38svh;
-        padding: 28px 24px 96px;
-        max-width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        background:
-          linear-gradient(180deg, rgba(36, 22, 16, 0.95) 0%, var(--bg-deep) 42%),
-          var(--bg-deep);
-        pointer-events: none;
-      }
-
-      .hero-quote {
-        white-space: normal;
-        font-size: clamp(22px, 6vw, 30px);
-      }
-
-      .hero-overlay {
-        inset: 0 0 auto;
-        height: 62svh;
-        background: linear-gradient(to bottom,
-            rgba(36, 22, 16, 0.22) 0%,
-            rgba(36, 22, 16, 0.08) 42%,
-            rgba(36, 22, 16, 0.2) 78%,
-            rgba(36, 22, 16, 0.46) 100%);
+        padding: 0 !important;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-end !important;
+        overflow: hidden !important;
+        position: relative !important;
+        background: var(--bg-deep) !important;
       }
 
       .hero-panorama {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        height: 62svh;
-        flex: 0 0 62svh;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        scrollbar-width: none;
-        touch-action: pan-x pan-y;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        flex: none !important;
+        overflow: hidden !important;
+        touch-action: pan-y !important;
+        user-select: none !important;
       }
 
       .hero-panorama::-webkit-scrollbar {
         display: none;
       }
 
+      .hero-picture,
       .hero-bg-photo {
-        position: relative;
-        inset: auto;
-        width: auto;
-        min-width: 100%;
-        height: 62svh;
-        max-width: none;
-        object-fit: contain;
-        object-position: center center;
-        user-select: none;
-        -webkit-user-drag: none;
-        aspect-ratio: 1672 / 941;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        object-fit: cover !important;
+        object-position: center 25% !important;
+        user-select: none !important;
+        -webkit-user-drag: none !important;
+        pointer-events: none !important;
+      }
+
+      .hero-overlay {
+        position: absolute !important;
+        inset: 0 !important;
+        height: 100% !important;
+        background: linear-gradient(180deg,
+            rgba(36, 22, 16, 0.45) 0%,
+            rgba(36, 22, 16, 0.1) 40%,
+            rgba(36, 22, 16, 0.75) 75%,
+            rgba(36, 22, 16, 0.98) 100%) !important;
+        z-index: 1 !important;
+        pointer-events: none !important;
+      }
+
+      .hero-content {
+        position: relative !important;
+        z-index: 2 !important;
+        width: 100% !important;
+        min-height: auto !important;
+        padding: 0 20px 32px !important;
+        background: none !important;
+        pointer-events: none !important;
+      }
+
+      .hero-quote {
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: clamp(21px, 5.8vw, 26px) !important;
+        line-height: 1.3 !important;
+        color: var(--cream) !important;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8) !important;
+        margin: 0 !important;
+        white-space: normal !important;
       }
 
       .dotnav {
@@ -2088,24 +2398,47 @@
       }
 
       .social-corner {
-        bottom: 16px;
-        right: 16px;
+        position: fixed !important;
+        bottom: clamp(16px, 2.8vh, 24px) !important;
+        right: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        z-index: 95 !important;
+        pointer-events: auto !important;
       }
 
       .social-corner a {
-        width: 46px;
-        height: 46px;
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 11px !important;
       }
 
       .social-corner a.hotline-link {
-        width: 46px;
-        min-width: 46px;
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        border-radius: 50% !important;
+        background: #b84b32 !important;
+        color: #ffffff !important;
+        box-shadow: 0 8px 24px rgba(184, 75, 50, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+      }
+
+      .social-corner a.hotline-link:active {
+        transform: scale(0.92) !important;
       }
     }
 
     /* ========== SECTION: BACKSTAGE (Hậu trường bếp) ========== */
     #backstage {
       background: var(--bg-deep);
+      scroll-margin-top: 76px;
       padding: clamp(28px, 3.2vw, 44px) clamp(24px, 6vw, 96px) clamp(56px, 6vw, 84px);
       color: var(--cream);
     }
@@ -2249,32 +2582,70 @@
 
     @media (max-width: 620px) {
       #backstage {
-        padding: 30px 18px 48px;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        overflow: hidden !important;
+        padding: clamp(54px, 7.5vh, 64px) 12px clamp(8px, 1.2vh, 14px) !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+
+      .bs-shell {
+        height: 100% !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
       }
 
       .bs-head {
-        margin-bottom: 20px;
+        margin-bottom: 6px !important;
+        gap: 2px !important;
+      }
+
+      .bs-eyebrow {
+        font-size: 10px !important;
+        letter-spacing: 0.22em !important;
+      }
+
+      .bs-title {
+        font-size: clamp(20px, 5.2vw, 26px) !important;
+        line-height: 1.1 !important;
       }
 
       .bs-quote {
-        padding-bottom: 14px;
+        font-size: clamp(12.5px, 3.2vw, 14.5px) !important;
+        line-height: 1.35 !important;
+        padding-bottom: 6px !important;
+        max-width: 320px !important;
       }
 
       .bs-grid-8 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-height: calc(100svh - 170px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-right: 2px !important;
       }
 
       .bs-card {
-        height: clamp(165px, 23vh, 205px);
-        border-radius: 10px;
+        height: clamp(115px, 16vh, 140px) !important;
+        border-radius: 8px !important;
       }
 
       .bs-card-caption {
-        font-size: 11.5px;
-        left: 10px;
-        right: 10px;
-        bottom: 8px;
+        font-size: 11px !important;
+        left: 8px !important;
+        right: 8px !important;
+        bottom: 6px !important;
       }
     }
   </style>
@@ -2381,7 +2752,13 @@
         <p class="welcome-description">Hàng Gòn tự hào mang đến hương vị bánh canh gà đậm đà giữa lòng thành phố. Từng tô canh được nấu mỗi ngày với nước lèo ninh xương, thịt gà tươi chọn lọc, giữ trọn vẹn sự ngọt thanh nguyên bản.</p>
       </div>
       <figure class="welcome-photo">
-        <img src="images/story/framed-restaurant-storefront.webp" alt="Khung ảnh mặt tiền quán Bánh Canh Gà Hàng Gòn về đêm" class="welcome-framed-img" loading="lazy" decoding="async">
+        <div class="welcome-photo-chick" aria-hidden="true">
+          <img src="images/story/cute-chicken.webp" alt="Linh vật chú gà ta Hàng Gòn" class="welcome-chick-img" loading="lazy" decoding="async">
+        </div>
+        <picture>
+          <source media="(max-width: 880px)" srcset="images/story/mattien-quan-dem_result.webp">
+          <img src="images/story/framed-restaurant-storefront.webp" alt="Mặt tiền quán Bánh Canh Gà Hàng Gòn về đêm" class="welcome-framed-img" loading="lazy" decoding="async">
+        </picture>
       </figure>
     </div>
   </section>
@@ -2665,6 +3042,39 @@
       </div>
     </div>
 
+    <!-- KHỐI MẠNG XÃ HỘI & KẾT NỐI TẠI CHÂN TRANG -->
+    <div class="loc-socials-dock" aria-label="Mạng xã hội và Đặt món trực tuyến">
+      <span class="loc-socials-title">Kết nối cùng Hàng Gòn:</span>
+      <div class="loc-socials-list">
+        <a class="loc-social-btn loc-social-btn--hotline" href="tel:0356538789" title="Gọi Hotline 0356 538 789" aria-label="Gọi Hotline 0356 538 789">
+          <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.6 3.2 9 2.7c.65-.14 1.29.2 1.55.81l1.14 2.67c.22.52.1 1.12-.31 1.51L9.9 8.99a13.2 13.2 0 0 0 5.1 5.1l1.3-1.48c.39-.41.99-.53 1.51-.31l2.67 1.14c.61.26.95.9.81 1.55l-.5 2.4c-.14.67-.73 1.15-1.41 1.15C10.84 18.54 5.46 13.16 5.46 6.62c0-.68.48-1.27 1.14-1.41Z" />
+          </svg>
+          <span>Hotline: 0356 538 789</span>
+        </a>
+        <a class="loc-social-btn loc-social-btn--fb" href="https://www.facebook.com/profile.php?id=61593212993128&mibextid=wwXIfr&rdid=OChtamQQHg39Rh0H&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17vbFd6Koe%2F%3Fmibextid%3DwwXIfr" title="Facebook Bánh Canh Gà Hàng Gòn" aria-label="Facebook Bánh Canh Gà Hàng Gòn" target="_blank" rel="noopener noreferrer">
+          <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.2 8.2V6.9c0-.62.42-.77.71-.77h1.82V3.18L14.22 3.17c-2.79 0-3.43 2.09-3.43 3.43v1.6H8.55v3.04h2.24V21h3.41v-9.76h2.53l.33-3.04h-2.86z" />
+          </svg>
+          <span>Facebook</span>
+        </a>
+        <a class="loc-social-btn loc-social-btn--tiktok" href="https://www.tiktok.com/@banhcanhgahanggon?lang=en" title="TikTok Bánh Canh Gà Hàng Gòn" aria-label="TikTok Bánh Canh Gà Hàng Gòn" target="_blank" rel="noopener noreferrer">
+          <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16.58 4.06c.54 1.82 1.78 3.07 3.49 3.35v3.05a7.14 7.14 0 0 1-3.36-.93v5.7c0 3.43-2.39 5.77-5.68 5.77-3.05 0-5.1-2.05-5.1-4.82 0-2.95 2.24-5.01 5.47-5.01.31 0 .61.02.9.08v3.18a3.6 3.6 0 0 0-.94-.13c-1.32 0-2.18.73-2.18 1.81 0 1.02.78 1.74 1.88 1.74 1.29 0 2.13-.83 2.13-2.36V3h3.24c.02.37.07.72.15 1.06z" />
+          </svg>
+          <span>TikTok</span>
+        </a>
+        <a class="loc-social-btn loc-social-btn--shopee" href="https://shopeefood.vn/ho-chi-minh/xoi-ga-banh-canh-ga-hang-gon-490-dien-bien-phu" title="ShopeeFood Bánh Canh Gà Hàng Gòn" aria-label="ShopeeFood Bánh Canh Gà Hàng Gòn" target="_blank" rel="noopener noreferrer">
+          <img class="social-icon-img" src="images/icon-shopee_result.webp" alt="ShopeeFood" decoding="async">
+          <span>ShopeeFood</span>
+        </a>
+        <a class="loc-social-btn loc-social-btn--grab" href="https://food.grab.com/vn/en/restaurant/b%C3%A1nh-canh-g%C3%A0-h%C3%A0ng-g%C3%B2n-%C4%91i%E1%BB%87n-bi%C3%AAn-ph%E1%BB%A7-delivery/5-C8CDLGLKJTDAFE" title="GrabFood Bánh Canh Gà Hàng Gòn" aria-label="GrabFood Bánh Canh Gà Hàng Gòn" target="_blank" rel="noopener noreferrer">
+          <img class="social-icon-img" src="images/icon-grab-food_result.webp" alt="GrabFood" decoding="async">
+          <span>GrabFood</span>
+        </a>
+      </div>
+    </div>
+
     <footer class="loc-copyright">© 2026 Bánh Canh Gà Hàng Gòn · 490 Điện Biên Phủ, TP.HCM</footer>
   </section>
 
@@ -2710,18 +3120,22 @@
       link.addEventListener('click', closeMobileNav);
     });
 
-    // Header offset for precise smooth scrolling
+    // Header offset for precise smooth scrolling (Tương thích Scroll Snap 100svh)
     function scrollToSection(targetId) {
       if (!targetId) return;
       const target = document.getElementById(targetId);
       if (!target) return;
-      const headerOffset = 68;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: 'smooth'
-      });
+      if (window.innerWidth <= 880) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        const headerOffset = 68;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: 'smooth'
+        });
+      }
     }
 
     // Handle hash landing on page load (e.g. index.html#menu, index.html#welcome)

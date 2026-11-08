@@ -536,6 +536,48 @@
       box-shadow: none !important;
     }
 
+    .dish-stepper-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .btn-stepper {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 75, 50, 0.45);
+      background: #faf7f0;
+      color: #b84b32;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      box-shadow: 0 1px 3px rgba(60, 40, 25, 0.15);
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+
+    .btn-stepper:active {
+      transform: scale(0.88);
+      background: #b84b32;
+      color: #fff;
+    }
+
+    .dish-stepper-qty {
+      font-size: 13px;
+      font-weight: 700;
+      color: #221610;
+      min-width: 16px;
+      text-align: center;
+      line-height: 1;
+    }
+
     .btn-add-cart img {
       width: 100%;
       height: 100%;
@@ -1343,13 +1385,32 @@
       }
     }
 
+    /* Top handle & close button on guest check */
+    .mobile-sheet-bar-top {
+      display: none;
+    }
+    .btn-close-sheet {
+      display: none;
+    }
+
+    /* Sleeping Cat (Mobile App only) */
+    .menu-sleepy-cat {
+      display: none;
+    }
+
     @media (max-width: 767px) {
+      /* 1. TOP NAV BAR (NỀN TRONG SUỐT CHO MOBILE APP) */
       .site-nav {
-        padding: 14px 20px;
+        padding: 12px 18px;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
       }
       .site-nav .logo {
-        width: 52px;
-        height: 52px;
+        width: 46px;
+        height: 46px;
       }
       .site-nav ul {
         position: absolute;
@@ -1379,91 +1440,316 @@
         padding: 6px 14px;
         font-size: 16px;
       }
+      /* Ẩn nút Đặt hàng thừa trên thanh Nav mobile vì đã có Bottom Bar */
       .mobile-order-btn {
-        display: inline-flex;
+        display: none !important;
       }
       .nav-toggle {
         display: inline-flex;
       }
 
-      /* Stage adjustments & Mobile Peek-in Mascot */
+      /* 2. KHÔNG GIAN BÀN ĂN & CHÚ GÀ THÂN THIỆN */
       .table-stage-split {
-        padding: 60px 12px 76px;
+        padding: 78px 12px 88px !important;
+        min-height: 100vh;
       }
       .rooster-menu-holder {
-        padding-left: 0;
-        width: 100%;
-        min-height: auto;
-        justify-content: center;
-        margin-top: 50px;
+        padding-left: 0 !important;
+        width: 100% !important;
+        max-width: 520px !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+      .rooster-foot-block,
+      .rooster-arm-shadow,
+      .rooster-claw-top,
+      .rooster-claw-mid {
+        display: none !important;
       }
       .rooster-mascot-body {
-        left: -10px;
-        top: -75px;
-        width: 280px;
-        height: auto;
-        filter: drop-shadow(2px 6px 14px rgba(0, 0, 0, 0.5));
+        display: none !important;
       }
-      .rooster-claw-top {
-        left: 65px;
-        top: -10px;
-        width: 55px;
+
+      /* Chú mèo đang ngủ chính giữa tì trên mép trên khung Menu (Mobile App) */
+      .menu-sleepy-cat {
+        display: block !important;
+        position: absolute !important;
+        top: -46px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: clamp(140px, 40vw, 190px) !important;
+        z-index: 10 !important;
+        pointer-events: none !important;
+        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45)) !important;
       }
-      .rooster-claw-mid {
-        display: none;
+
+      .sleepy-cat-img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
       }
+
+      /* 3. THỰC ĐƠN GIẤY KEM TINH GỌN (BỎ BẢNG GỖ CO GIÃN BỊ MÉO) */
       .clipboard-wrapper {
-        width: 100%;
-        min-height: auto;
-        height: auto;
-        margin-top: 0;
-        padding-bottom: 20px;
+        width: 100% !important;
+        max-width: 520px !important;
+        margin: 0 auto !important;
+        aspect-ratio: auto !important;
+        background: none !important;
+        filter: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
       }
       .single-menu-sheet {
-        position: relative;
-        top: 0;
-        width: 100%;
-        min-height: auto;
-        padding: 14px 14px 12px;
-        margin-top: 50px;
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        background: #faf7f0 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+        border: 1px solid rgba(201, 154, 74, 0.38) !important;
+        padding: 20px 14px 26px !important;
+        margin: 0 !important;
+        z-index: 2 !important;
+        overflow: visible !important;
+      }
+      .single-menu-header {
+        text-align: center;
+        border-bottom: 2px solid var(--ink-dark);
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+      }
+      .single-menu-title {
+        font-size: 1.85rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--ink-dark);
+        line-height: 1.1;
+        margin: 0;
+        text-transform: lowercase;
       }
       .menu-two-col-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        overflow: visible !important;
+        padding-right: 0 !important;
       }
-      .menu-col-left {
-        border-right: none;
-        padding-right: 0;
-        gap: 10px;
-      }
+      .menu-col-left,
       .menu-col-right {
-        padding-left: 0;
-        gap: 10px;
+        border-right: none !important;
+        padding: 0 !important;
+        gap: 16px !important;
+      }
+      .menu-category-block {
+        gap: 4px;
+      }
+      .menu-category-heading {
+        font-family: 'Be Vietnam Pro', sans-serif !important;
+        font-size: 0.88rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.08em !important;
+        color: #8c2a18 !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1.5px solid rgba(140, 42, 24, 0.25) !important;
+        margin-bottom: 6px !important;
+        margin-top: 4px !important;
+      }
+      .compact-dish-item {
+        padding: 8px 6px !important;
+        min-height: 46px !important;
+        border-radius: 6px !important;
+        border-bottom: 1px dashed rgba(60, 40, 25, 0.1) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+      }
+      .compact-dish-item.selected {
+        background: rgba(201, 154, 74, 0.15) !important;
+      }
+      .dish-info-left {
+        max-width: 68% !important;
+      }
+      .compact-dish-name {
+        font-size: 14.5px !important;
+        font-weight: 500 !important;
+        white-space: normal !important;
+        line-height: 1.35 !important;
+      }
+      .dish-dots {
+        margin: 0 4px !important;
+      }
+      .dish-action-right {
+        gap: 8px !important;
+      }
+      .compact-dish-price {
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #b84b32 !important;
+      }
+      /* Khử 100% card bo viền & ẩn icon thêm món mặc định trên Mobile */
+      .btn-add-cart {
+        display: none !important;
+        width: 20px !important;
+        height: 20px !important;
+        min-width: 20px !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        cursor: pointer !important;
+        transition: transform 0.15s ease !important;
+      }
+      .btn-add-cart img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
       }
 
-      /* Hide Desktop Guest Check Column on Mobile */
+      .dish-item.selected .btn-add-cart {
+        display: none !important;
+      }
+
+      .dish-stepper-control {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin-left: 6px !important;
+        vertical-align: middle !important;
+      }
+
+      .btn-stepper {
+        width: 22px !important;
+        height: 22px !important;
+        border-radius: 50% !important;
+        border: 1px solid rgba(184, 75, 50, 0.45) !important;
+        background: #faf7f0 !important;
+        color: #b84b32 !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+        box-shadow: 0 1px 3px rgba(60, 40, 25, 0.15) !important;
+        transition: transform 0.12s ease, background 0.12s ease !important;
+      }
+      .btn-stepper:active {
+        transform: scale(0.88) !important;
+        background: #b84b32 !important;
+        color: #fff !important;
+      }
+
+      .dish-stepper-qty {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #221610 !important;
+        min-width: 16px !important;
+        text-align: center !important;
+        line-height: 1 !important;
+      }
+
+      /* 4. SỬA TRIỆT ĐỂ LỖI MỜ CĂM: ORDER SLIP COLUMN DISPLAY: CONTENTS */
       .order-slip-col {
+        display: contents !important;
+      }
+      .guest-check-card {
         display: none;
       }
 
-      /* Mobile Bottom Sheet for Order Slip */
+      /* 5. BOTTOM SHEET PHIẾU ORDER HIỆN ĐẠI (88VH) */
       .guest-check-card.mobile-sheet-open {
         display: flex !important;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: 86vh;
-        z-index: 200;
-        border-radius: 16px 16px 0 0;
-        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.85);
-        animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        height: 88vh !important;
+        max-height: 88vh !important;
+        z-index: 250 !important;
+        border-radius: 20px 20px 0 0 !important;
+        background: #faf7f0 !important;
+        box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.85) !important;
+        animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+        overflow: hidden !important;
+        transform: translateY(0) !important;
+        margin: 0 !important;
       }
 
-      .guest-check-card.mobile-sheet-open.maximized {
-        height: 100vh !important;
-        border-radius: 0 !important;
-        transform: none !important;
+      .check-drag-handle {
+        position: relative !important;
+        padding: 14px 16px 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-bottom: 1px dashed rgba(60, 40, 25, 0.22) !important;
+        flex: 0 0 auto !important;
+      }
+      .mobile-sheet-bar-top {
+        display: flex !important;
+        justify-content: center !important;
+        position: absolute !important;
+        top: 6px !important;
+        left: 0 !important;
+        right: 0 !important;
+      }
+      .mobile-sheet-pill {
+        width: 38px !important;
+        height: 4px !important;
+        border-radius: 999px !important;
+        background: rgba(60, 40, 25, 0.28) !important;
+      }
+      .btn-close-sheet {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: absolute !important;
+        right: 12px !important;
+        top: 10px !important;
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 50% !important;
+        background: rgba(60, 40, 25, 0.08) !important;
+        border: none !important;
+        color: var(--ink-dark) !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+        transition: background 0.2s ease !important;
+      }
+      .btn-close-sheet:active {
+        background: rgba(60, 40, 25, 0.2) !important;
+      }
+
+      .guest-check-card .check-card-body {
+        flex: 1 1 auto !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 10px 14px !important;
+      }
+
+      .guest-check-card .check-card-footer {
+        flex: 0 0 auto !important;
+        background: #faf7f0 !important;
+        border-top: 1.5px dashed rgba(60, 40, 25, 0.22) !important;
+        padding: 10px 14px 14px !important;
+      }
+
+      .btn-confirm-order {
+        min-height: 48px !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
       }
 
       @keyframes slideUpSheet {
@@ -1473,6 +1759,20 @@
 
       .mobile-bottom-bar {
         display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        padding: 0 16px;
+        background: rgba(26, 16, 8, 0.96);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(201, 154, 74, 0.3);
+        align-items: center;
+        justify-content: space-between;
+        z-index: 180;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.45);
       }
     }
   </style>
@@ -1527,6 +1827,18 @@
 
         <!-- 2. Middle Layer: The Wooden Clipboard (z-index: 2, 100% Unified WebP Board) -->
         <div class="clipboard-wrapper" id="clipboardWrapper">
+          <!-- Chú mèo đang ngủ tì trên khung Menu (Mobile App only) -->
+          <div class="menu-sleepy-cat" aria-hidden="true">
+            <picture>
+              <source srcset="images/order/sleepy-cat-cutout.webp" type="image/webp">
+              <img src="images/order/sleepy-cat-cutout.png"
+                   alt="Chú mèo đang ngủ trên khung Menu"
+                   class="sleepy-cat-img"
+                   loading="lazy"
+                   decoding="async" />
+            </picture>
+          </div>
+
           <!-- Ambient Occlusion Arm Shadow (Bóng đổ cánh gà lên mép bảng) -->
           <div class="rooster-arm-shadow"></div>
 
@@ -2083,10 +2395,14 @@
 
         <!-- Drag Handle Header (Cân đối, tối giản) -->
         <div class="check-drag-handle" id="checkDragHandle" title="Giữ chuột hoặc chạm để kéo di chuyển phiếu trên bàn">
+          <div class="mobile-sheet-bar-top" aria-hidden="true">
+            <span class="mobile-sheet-pill"></span>
+          </div>
           <div class="check-title-wrap">
             <div class="check-brand-title">HÀNG GÒN</div>
             <div class="check-sub-title">PHIẾU ĐẶT HÀNG</div>
           </div>
+          <button type="button" class="btn-close-sheet" onclick="toggleMobileSheet(false)" aria-label="Đóng phiếu order">✕</button>
         </div>
 
         <!-- Body Table -->
@@ -2617,6 +2933,10 @@
       if (!card || !backdrop) return;
 
       if (open) {
+        card.style.removeProperty('--drag-x');
+        card.style.removeProperty('--drag-y');
+        card.style.removeProperty('--scale');
+        card.style.transform = '';
         card.classList.add('mobile-sheet-open');
         backdrop.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -2644,7 +2964,7 @@
     function setupItemClickListeners() {
       document.querySelectorAll('.dish-item').forEach(item => {
         item.addEventListener('click', (e) => {
-          if (e.target.closest('.dish-detail-icon') || e.target.closest('.btn-add-cart')) return;
+          if (e.target.closest('.dish-detail-icon') || e.target.closest('.btn-add-cart') || e.target.closest('.dish-stepper-control')) return;
           const id = item.getAttribute('data-id');
           updateQty(id, 1, e);
         });
@@ -2688,15 +3008,38 @@
       let totalQty = 0;
       let totalPrice = 0;
 
-      // Cập nhật highlight món đã chọn trên Menu
+      // Cập nhật highlight món & stepper số lượng (- 1 +) trên Menu
       document.querySelectorAll('.dish-item').forEach(item => {
         const id = item.getAttribute('data-id');
         const currentQty = orderItems[id] ? orderItems[id].qty : 0;
+        const actionRight = item.querySelector('.dish-action-right');
+        let stepper = actionRight ? actionRight.querySelector('.dish-stepper-control') : null;
 
         if (currentQty > 0) {
           item.classList.add('selected');
+          if (!stepper && actionRight) {
+            stepper = document.createElement('div');
+            stepper.className = 'dish-stepper-control';
+            stepper.innerHTML = `
+              <button type="button" class="btn-stepper btn-stepper-minus" onclick="updateQty('${id}', -1, event)" title="Giảm số lượng" aria-label="Giảm">-</button>
+              <span class="dish-stepper-qty">${currentQty}</span>
+              <button type="button" class="btn-stepper btn-stepper-plus" onclick="updateQty('${id}', 1, event)" title="Tăng số lượng" aria-label="Tăng">+</button>
+            `;
+            const btnAdd = actionRight.querySelector('.btn-add-cart');
+            if (btnAdd) {
+              actionRight.insertBefore(stepper, btnAdd);
+            } else {
+              actionRight.appendChild(stepper);
+            }
+          } else if (stepper) {
+            const qtySpan = stepper.querySelector('.dish-stepper-qty');
+            if (qtySpan) qtySpan.textContent = currentQty;
+          }
         } else {
           item.classList.remove('selected');
+          if (stepper) {
+            stepper.remove();
+          }
         }
       });
 
