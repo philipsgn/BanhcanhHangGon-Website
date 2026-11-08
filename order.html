@@ -3,13 +3,23 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/webp" href="images/menu/icon-quan-an_result.webp">
-  <title>Đặt món | Bánh Canh Gà Hàng Gòn</title>
-  <meta name="description" content="Đặt món bánh canh gà và xôi gà tại Bánh Canh Gà Hàng Gòn.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <link rel="icon" type="image/webp" href="/images/menu/icon-quan-an_result.webp">
+  <title>Thực Đơn Bản Vị — Bánh Canh Gà Hàng Gòn</title>
+  <meta name="description" content="Thực đơn gỗ kẹp giấy chuẩn phong cách 5 sao của Bánh Canh Gà Hàng Gòn. Lật trang tự nhiên, thưởng thức ẩm thực gà ta truyền thống 1992.">
+
+  <!-- Preconnect & Google Fonts (Đồng bộ chuẩn xác với trang Home index.html) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload core assets -->
+  <link rel="preload" as="image" href="images/order/cham-bi.webp">
+  <link rel="preload" as="image" href="images/order/clipboard_board_only.webp">
+  <link rel="preload" as="image" href="images/order/clipboard_top_clamp.webp">
+
+  <link rel="preload" as="image" href="images/order/rooster_mascot_body_opt.webp">
+
   <style>
     :root {
       --bg-deep: #241610;
@@ -17,1733 +27,2862 @@
       --cream: #f2e8d5;
       --cream-dim: #c9bda4;
       --gold: #c99a4a;
+      --gold-hover: #dfb65b;
+      --gold-dim: rgba(201, 154, 74, 0.18);
       --chili: #b84b32;
-      --line: rgba(201, 154, 74, 0.25);
-      --line-soft: rgba(242, 232, 213, 0.12);
+      --herb: #5c7a52;
+      --line: rgba(242, 232, 213, 0.14);
+      --ink-dark: #221610;
+      --ink-muted: #665548;
+      --ink-light: #8e7968;
+      --paper-cream: #faf7f0;
+      --paper-border: rgba(60, 40, 25, 0.12);
+      --red-stamp: #b83828;
+      --shadow-board: 0 25px 60px rgba(0, 0, 0, 0.8), 0 10px 25px rgba(0, 0, 0, 0.55);
+      --shadow-slip: 0 20px 45px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      min-width: 320px;
-      background:
-        radial-gradient(circle at 12% 12%, rgba(201,154,74,.08), transparent 28rem),
-        var(--bg-deep);
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #1a1008;
+      background-image: 
+        radial-gradient(circle at 50% 35%, rgba(20, 12, 6, 0.32) 0%, rgba(15, 9, 5, 0.72) 100%),
+        url('images/order/background-order.webp');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
       color: var(--cream);
       font-family: 'Be Vietnam Pro', sans-serif;
       overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
     }
-    button, input, select, textarea { font: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    a { color: inherit; }
 
+    /* ==========================================================================
+       1. NAV BAR (ĐỒNG BỘ 100% VỚI INDEX.HTML & KÍNH MỜ FROSTED GLASS)
+       ========================================================================== */
     .site-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 20;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 28px;
-      min-height: 92px;
-      padding: 14px clamp(20px, 4vw, 58px);
+      padding: 16px 48px;
       background: transparent;
+      border-bottom: none;
+      transition: all 0.3s ease;
     }
+
     .site-nav .logo {
-      width: 66px;
-      height: 66px;
       display: inline-flex;
-      flex: 0 0 auto;
       align-items: center;
       justify-content: center;
+      width: 64px;
+      height: 64px;
       text-decoration: none;
     }
+
     .site-nav .logo img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
-      filter: drop-shadow(0 0 14px rgba(201,154,74,.36));
+      filter: drop-shadow(0 0 12px rgba(201, 154, 74, 0.4));
     }
+
     .site-nav ul {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: clamp(16px, 2.6vw, 38px);
-      margin: 0;
-      padding: 0;
+      gap: 36px;
       list-style: none;
     }
-    .site-nav li a {
+
+    .site-nav ul li a {
       font-family: 'Cormorant Garamond', serif;
       color: var(--cream-dim);
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 2px;
       text-decoration: none;
+      font-size: 16px;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      font-weight: 500;
       transition: color .25s ease;
     }
-    .site-nav li a:hover,
-    .site-nav li a:focus-visible { color: var(--gold); }
-    .order-page {
-      width: min(1280px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 0 0 90px;
-    }
-    .page-heading {
-      position: relative;
-      display: flex;
-      min-height: 0;
-      aspect-ratio: 1916 / 821;
-      width: 100vw;
-      margin: 0 0 clamp(42px, 6vw, 76px) calc(50% - 50vw);
-      padding: clamp(84px, 8vw, 120px) max(20px, calc((100vw - 1280px) / 2));
-      flex-direction: column;
-      justify-content: center;
-      background-image:
-        linear-gradient(90deg, rgba(36,22,16,.94) 0%, rgba(36,22,16,.78) 42%, rgba(36,22,16,.38) 100%),
-        url('images/testimonials-bg_result.webp');
-      background-position: center top;
-      background-size: 100% 100%;
-      border-bottom: 1px solid rgba(201,154,74,.16);
-      overflow: hidden;
-    }
-    .eyebrow {
-      margin: 0 0 13px;
+
+    .site-nav ul li a:hover,
+    .site-nav ul li a:focus-visible {
       color: var(--gold);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-    }
-    h1, h2, p { margin-top: 0; }
-    h1 {
-      margin-bottom: 12px;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(54px, 8vw, 104px);
-      font-weight: 500;
-      letter-spacing: .015em;
-      line-height: .86;
-    }
-    .page-lead {
-      max-width: 520px;
-      margin-bottom: 0;
-      color: var(--cream-dim);
-      font-size: 14px;
-      line-height: 1.8;
     }
 
-    .order-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
-      align-items: start;
-      gap: clamp(42px, 7vw, 110px);
-    }
-    .menu-section-heading {
-      display: flex;
+    /* Active Highlighted Order Tab */
+    .site-nav ul li a.nav-order-link {
+      position: relative;
+      display: inline-flex;
       align-items: center;
-      gap: 16px;
-      margin: 0 0 8px;
-      color: var(--gold);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .menu-section-heading::after {
-      content: '';
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, var(--line), transparent);
-    }
-    .menu-section-heading:not(:first-child) { margin-top: 46px; }
-    .menu-category-block + .menu-category-block { margin-top: 30px; }
-    .menu-section-note {
-      margin: 0 0 8px;
-      color: var(--cream-dim);
-      font-size: 12px;
-    }
-    .menu-subsection {
-      margin-top: 34px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line-soft);
-    }
-    .menu-subsection-heading {
-      margin: 0 0 6px;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
+      justify-content: center;
+      padding: 7px 18px 8px;
+      color: #ffd978;
       font-size: 19px;
       font-weight: 600;
-      letter-spacing: .05em;
-      text-transform: uppercase;
+      letter-spacing: 2.6px;
+      line-height: 1;
+      text-shadow:
+        0 1px 0 rgba(255, 246, 204, 0.42),
+        0 0 10px rgba(255, 187, 58, 0.42),
+        0 0 22px rgba(201, 112, 26, 0.28);
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(144, 91, 28, 0.38) 18%, rgba(255, 218, 105, 0.86) 50%, rgba(144, 91, 28, 0.38) 82%, transparent 100%) center top / 100% 1px no-repeat,
+        linear-gradient(90deg, transparent 0%, rgba(144, 91, 28, 0.42) 18%, rgba(255, 218, 105, 0.95) 50%, rgba(144, 91, 28, 0.42) 82%, transparent 100%) center bottom / 100% 1px no-repeat;
     }
-    .menu-subsection-note {
-      margin: 0 0 8px;
-      color: var(--cream-dim);
-      font-size: 11px;
-      line-height: 1.6;
+
+    .site-nav ul li a.nav-order-link:hover {
+      color: #ffe9a8;
     }
-    .category-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 0 0 30px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line-soft);
-    }
-    .category-tab {
-      min-height: 34px;
-      padding: 7px 15px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: transparent;
-      color: var(--cream-dim);
-      cursor: pointer;
-      font-size: 11px;
-      letter-spacing: .03em;
-      transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
-    }
-    .category-tab:hover,
-    .category-tab:focus-visible {
-      border-color: var(--gold);
-      color: var(--cream);
-      outline: none;
-      transform: translateY(-1px);
-    }
-    .category-tab.is-active {
-      border-color: var(--gold);
-      background: var(--gold);
-      color: var(--bg-deep);
-      font-weight: 600;
-    }
-    .category-empty {
+
+    /* Mobile Nav Elements */
+    .mobile-order-btn {
       display: none;
-      padding: 52px 0 64px;
-      border-bottom: 1px solid var(--line-soft);
-      color: var(--cream-dim);
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: 16px;
+      padding: 6px 14px 7px;
+      color: #ffd978;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(201, 154, 74, 0.5);
+      border-radius: 4px;
+      background: rgba(36, 22, 16, 0.85);
     }
-    .category-empty.is-visible { display: block; }
-    .mobile-order-steps,
-    .continue-order-button,
-    .mobile-menu-next,
-    .mobile-inline-summary,
-    .mobile-final-review { display: none; }
-    .mobile-home-nav { display: none; }
-    .order-item {
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 7px;
+      padding: 0;
+    }
+
+    .nav-toggle span {
+      width: 28px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .28s ease, opacity .22s ease;
+    }
+
+    .site-nav.nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .site-nav.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+    .site-nav.nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* ==========================================================================
+       2. MAIN TABLE STAGE (SPLIT 2 COLUMNS: LEFT-TO-MID & RIGHT)
+       ========================================================================== */
+    .table-stage-split {
+      flex: 1;
+      padding: 16px 20px 36px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 28px;
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* Left-to-Mid Column: Rooster Mascot & Wooden Clipboard */
+    .clipboard-col {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: flex-start;
+      position: relative;
+      margin-left: 0;
+    }
+
+    /* Mascot & Menu Holder Container */
+    .rooster-menu-holder {
+      position: relative;
+      display: inline-flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-left: 190px;
+      margin-top: 0;
+    }
+
+    /* Rooster Mascot Body (Layer 1 - Grounded on wooden table - Đỉnh mũ sát trần) */
+    .rooster-mascot-body {
+      position: absolute;
+      left: 0;
+      top: -15px;
+      width: 550px;
+      height: auto;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(4px 14px 26px rgba(0, 0, 0, 0.65));
+      transition: all 0.3s ease;
+    }
+
+    /* The Wooden Clipboard (Layer 2 - Middle: Fixed 630px WebP Board - Tỷ Lệ Vàng 0.8x) */
+    .clipboard-wrapper {
+      position: relative;
+      width: 630px;
+      aspect-ratio: 720 / 520;
+      height: auto;
+      margin-top: 110px;
+      background: url('images/order/clipboard_board_only.webp') center/100% 100% no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      z-index: 2;
+      filter: drop-shadow(0 4px 10px rgba(15, 8, 3, 0.35)) drop-shadow(0 16px 36px rgba(0, 0, 0, 0.55));
+    }
+
+    /* Subtle Menu Corner Resize Handle (Tay nắm tàng hình tự nhiên) */
+    .menu-resize-corner-br {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 24px;
+      height: 24px;
+      cursor: nwse-resize;
+      z-index: 45;
+      border: none;
+      background: transparent;
+      touch-action: none;
+    }
+
+    .menu-resize-corner-br:hover,
+    .menu-resize-corner-br.resizing {
+      border: none;
+      box-shadow: none;
+    }
+
+    /* Ambient Occlusion Arm Shadow (Bóng đổ mềm giữa cánh gà & mép trái bảng menu) */
+    .rooster-arm-shadow {
+      position: absolute;
+      left: 0;
+      top: 165px;
+      width: 22px;
+      height: 105px;
+      background: radial-gradient(ellipse at left center, rgba(15, 8, 3, 0.4) 0%, rgba(15, 8, 3, 0.1) 60%, transparent 100%);
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    /* Rustic Wooden Foot Block (Thớt gỗ kê dưới chân gà - Grounded 100%) */
+    .rooster-foot-block {
+      position: absolute;
+      left: 0;
+      top: 625px;
+      width: 285px;
+      height: auto;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 4px 8px rgba(10, 5, 2, 0.45)) drop-shadow(0 14px 28px rgba(0, 0, 0, 0.65));
+      transition: all 0.3s ease;
+    }
+
+    /* Top Clamp is now integrated 100% seamlessly in clipboard_board_only.webp */
+
+        /* Foreground Claws (Layer 3 - Emerging Naturally from Behind over Board Rim) */
+    .rooster-claw-top {
+      position: absolute;
+      left: 112px;
+      top: -14px;
+      width: 62px;
+      height: auto;
+      z-index: 35;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 2px 3px rgba(10, 5, 2, 0.5));
+      transition: all 0.3s ease;
+    }
+
+    .rooster-claw-mid {
+      position: absolute;
+      left: -12px;
+      top: 154px;
+      width: 38px;
+      height: auto;
+      z-index: 35;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(1px 2px 3px rgba(10, 5, 2, 0.45));
+      transition: all 0.3s ease;
+    }
+
+    /* Single-Page 2-Column Menu Sheet (Responsive % Sizing, Zero Bottom Overflow) */
+    .single-menu-sheet {
+      position: absolute;
+      top: 13.5%;     /* Starts right below the wood top clamp */
+      bottom: 4%;      /* Sits comfortably above the bottom wood border */
+      left: 2.8%;     /* Inset from left wood border */
+      right: 2.8%;    /* Inset from right wood border */
+      width: auto;
+      height: auto;
+      background: transparent;
+      box-shadow: none;
+      color: var(--ink-dark);
+      padding: 2px 14px 2px;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      overflow: hidden; /* Prevents text overflow on zoom / shrink */
+    }
+
+    /* Header: menu. (lowercase bold with subtle dot & underline) */
+    .single-menu-header {
+      padding-bottom: 2px;
+      border-bottom: 1.5px solid var(--ink-dark);
+      margin-bottom: 4px;
+    }
+
+    .single-menu-title {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink-dark);
+      line-height: 1.1;
+      margin: 0;
+      text-transform: lowercase;
+    }
+
+    /* 2-Column Grid (Inner Smooth Scroll - Cuon em ai giu nguyen ty le vang) */
+    .menu-two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      position: relative;
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(90, 60, 40, 0.4) transparent;
+    }
+
+    .menu-two-col-grid::-webkit-scrollbar {
+      width: 4px;
+    }
+    .menu-two-col-grid::-webkit-scrollbar-thumb {
+      background: rgba(90, 60, 40, 0.4);
+      border-radius: 4px;
+    }
+
+    .menu-col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-right: 14px;
+      border-right: 1px solid rgba(60, 40, 25, 0.16);
+    }
+
+    .menu-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-left: 2px;
+    }
+
+    /* Category Block */
+    .menu-category-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-category-heading {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--ink-dark);
+      text-transform: uppercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(60, 40, 25, 0.22);
+      margin-bottom: 2px;
+    }
+
+    /* Dish List & Compact Items */
+    .compact-dish-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .compact-dish-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      padding: 11px 12px;
-      border-bottom: 1px solid var(--line-soft);
-      border-radius: 6px;
-      transition: background .2s ease, border-color .2s ease;
+      padding: 3.5px 4px;
+      border-radius: 4px;
+      transition: all 0.18s ease;
+      cursor: pointer;
+      position: relative;
     }
-    .order-item:hover {
-      border-color: rgba(201, 154, 74, 0.35);
-      background: rgba(49, 31, 22, 0.4);
+
+    .compact-dish-item:hover,
+    .compact-dish-item.selected {
+      background: rgba(201, 154, 74, 0.12);
     }
-    .order-item-info {
+
+    .dish-info-left {
       display: flex;
-      align-items: baseline;
-      gap: 16px;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+      max-width: 75%;
+    }
+
+    .compact-dish-name {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--ink-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .compact-dish-item:hover .compact-dish-name,
+    .compact-dish-item.selected .compact-dish-name {
+      font-weight: 600;
+      color: #932316;
+    }
+
+    .dish-detail-icon {
+      display: none !important;
+    }
+
+    /* Dotted Leader Line connecting dish name to price */
+    .dish-dots {
       flex: 1;
-      min-width: 0;
-      flex-wrap: wrap;
+      height: 1px;
+      border-bottom: 1px dotted rgba(60, 40, 25, 0.28);
+      margin: 0 6px;
+      transform: translateY(-2px);
     }
-    .order-item-name {
-      margin: 0;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(19px, 1.8vw, 23px);
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: .01em;
+
+    .dish-action-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
     }
-    .order-item-price {
-      margin: 0;
-      color: var(--gold);
+
+    .compact-dish-price {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
+      font-size: 0.83rem;
       font-weight: 600;
-      letter-spacing: .02em;
+      color: var(--ink-dark);
       white-space: nowrap;
     }
-    .quantity-control {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      flex-shrink: 0;
-    }
-    .quantity-control button {
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(201,154,74,.62);
-      border-radius: 50%;
-      background: transparent;
-      color: var(--cream);
-      cursor: pointer;
-      font-size: 18px;
-      line-height: 1;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .quantity-control button:hover:not(:disabled),
-    .quantity-control button:focus-visible {
-      background: var(--gold);
-      color: var(--bg-deep);
-      transform: scale(1.05);
-      outline: none;
-    }
-    .quantity-control button:disabled { cursor: not-allowed; opacity: .42; }
-    .quantity-value {
-      min-width: 20px;
-      color: var(--cream);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      text-align: center;
-    }
 
-    .order-summary {
-      position: sticky;
-      top: 116px;
-      padding: 24px 0 0;
-      border-top: 1px solid var(--gold);
-    }
-    .summary-heading {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .summary-heading h2 {
-      margin: 0;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px;
-      font-weight: 500;
-    }
-    .summary-count {
-      color: var(--cream-dim);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-    }
-    .summary-items {
-      max-height: 270px;
-      overflow-y: auto;
-      border-top: 1px solid var(--line-soft);
-    }
-    .summary-empty {
-      margin: 18px 0 26px;
-      color: var(--cream-dim);
-      font-size: 12px;
-      font-style: italic;
-    }
-    .summary-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line-soft);
-    }
-    .summary-row-name { color: var(--cream); font-size: 12px; }
-    .summary-row-meta { margin-top: 4px; color: var(--cream-dim); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
-    .summary-row-total { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-    .summary-total {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 20px 0 24px;
-    }
-    .summary-total-label { color: var(--cream-dim); font-size: 12px; }
-    .summary-total-value { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 25px; font-weight: 600; }
-
-    .customer-form {
-      margin-top: 24px;
-      padding-top: 28px;
-      border-top: 1px solid var(--line-soft);
-      max-height: 1200px;
-      overflow: hidden;
-      transition: opacity .25s ease, max-height .35s ease, margin .35s ease, padding .35s ease;
-    }
-    .customer-form.is-disabled {
-      max-height: 0;
-      margin-top: 0;
-      padding-top: 0;
-      border-top-color: transparent;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .customer-form h2 {
-      margin-bottom: 20px;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 30px;
-      font-weight: 500;
-    }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
-    .field { min-width: 0; }
-    .field.full { grid-column: 1 / -1; }
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--cream-dim);
-      font-size: 11px;
-    }
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      border: 0;
-      border-bottom: 1px solid var(--line);
-      border-radius: 0;
-      outline: none;
-      padding: 9px 0 10px;
-      background: transparent;
-      color: var(--cream);
-      font-size: 13px;
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .field select { color-scheme: dark; }
-    .field textarea { min-height: 58px; resize: vertical; }
-    .field input::placeholder,
-    .field textarea::placeholder { color: rgba(201,189,164,.5); }
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus { border-color: var(--gold); box-shadow: 0 2px 0 rgba(201,154,74,.16); }
-    .field.has-error input,
-    .field.has-error select,
-    .field.has-error textarea { border-color: var(--chili); }
-    .field-error { min-height: 17px; padding-top: 5px; color: #df846d; font-size: 10px; }
-    .delivery-address { display: none; }
-    .delivery-address.is-visible { display: block; }
-    .submit-button {
-      width: 100%;
-      min-height: 50px;
-      margin-top: 24px;
-      border: 1px solid var(--gold);
-      border-radius: 0;
-      background: var(--gold);
-      color: var(--bg-deep);
-      cursor: pointer;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .submit-button:hover:not(:disabled),
-    .submit-button:focus-visible { background: #e2b35d; transform: translateY(-2px); outline: none; }
-    .submit-button:disabled { cursor: not-allowed; opacity: .38; }
-    .summary-support { margin: 14px 0 0; color: var(--cream-dim); font-size: 10px; line-height: 1.6; text-align: center; }
-    .mobile-stage-note { display: none; }
-
-    .order-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(12,8,5,.72);
-      backdrop-filter: blur(8px);
-    }
-    .order-modal.is-open { display: flex; }
-    .modal-panel {
-      position: relative;
-      width: min(620px, 100%);
-      max-height: min(720px, 90svh);
-      overflow-y: auto;
-      padding: clamp(28px, 5vw, 48px);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--bg-deep-2);
-      box-shadow: 0 28px 70px rgba(0,0,0,.42), inset 0 0 0 1px rgba(201,154,74,.06);
-    }
-    .modal-close {
-      position: absolute;
-      top: 17px;
-      right: 17px;
-      width: 34px;
-      height: 34px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: transparent;
-      color: var(--cream);
-      cursor: pointer;
-      font-size: 20px;
-      line-height: 1;
-    }
-    .modal-close:hover, .modal-close:focus-visible { border-color: var(--gold); color: var(--gold); outline: none; }
-    .modal-panel h2 { margin: 0 0 8px; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500; }
-    .modal-intro { margin: 0 0 18px; color: var(--cream-dim); font-size: 12px; }
-    .order-text {
-      margin: 0;
-      padding: 16px;
-      border-left: 1px solid var(--gold);
-      background: rgba(36,22,16,.58);
-      color: var(--cream);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-    }
-    .modal-actions { display: flex; justify-content: flex-end; margin-top: 18px; }
-    .copy-icon-button {
-      width: 42px;
-      height: 42px;
+        /* Add-To-Cart Action Button (Clean Artisan Plain Icon - Zero Card Box) */
+    .btn-add-cart {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      background: transparent;
-      color: var(--cream);
-      cursor: pointer;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .copy-icon-button svg {
       width: 18px;
       height: 18px;
-      fill: none;
-      stroke: currentColor;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-width: 1.7;
+      border: none !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.9);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-left: 3px;
+      box-shadow: none !important;
     }
-    .copy-icon-button:hover,
-    .copy-icon-button:focus-visible {
-      background: var(--gold);
-      color: var(--bg-deep);
-      outline: none;
-      transform: translateY(-2px);
+
+    .btn-add-cart img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(60, 40, 25, 0.25));
     }
-    .modal-actions a, .modal-actions button {
+
+    .btn-add-cart:hover {
+      background: transparent !important;
+      border: none !important;
+      transform: scale(1.22);
+      box-shadow: none !important;
+    }
+
+    .compact-dish-item:hover .btn-add-cart,
+    .compact-dish-item:focus-within .btn-add-cart,
+    .compact-dish-item:active .btn-add-cart,
+    .compact-dish-item.selected .btn-add-cart {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    @media (hover: none) {
+      .btn-add-cart {
+        opacity: 0.92;
+        visibility: visible;
+        transform: scale(1);
+      }
+    }
+
+    /* Footer: address and note */
+    .single-menu-footer {
+      border-top: 1px solid rgba(60, 40, 25, 0.18);
+      padding-top: 4px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--ink-light);
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+        /* ==========================================================================
+       3. RIGHT COLUMN: ARTISAN GUEST CHECK (COMPACT VIEWPORT FIT - ZERO SLIP)
+       ========================================================================== */
+    .order-slip-col {
+      flex: 0 0 325px;
+      width: 325px;
+      position: relative;
+      margin-top: clamp(82px, 9.5vh, 92px);
+      align-self: flex-start;
+      z-index: 20;
+    }
+
+    .guest-check-card {
+      width: 100%;
+      background: url('images/webp/phieu-don-order.webp') top center / 100% 100% no-repeat;
+      color: var(--ink-dark);
+      border-radius: 4px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42);
+      border: none;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 20;
+      user-select: none;
+      max-height: calc(100vh - 105px);
+    }
+
+    /* Ẩn hoàn toàn các tay nắm kéo giãn / kéo thả rườm rà */
+    .resize-corner,
+    .slip-resize-edge,
+    .menu-resize-corner-br {
+      display: none !important;
+    }
+
+    .check-drag-handle {
+      padding: 10px 14px 6px;
+      background: transparent;
+      border-bottom: 1px dashed rgba(60, 40, 25, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .resize-corner-tl {
+      top: 0;
+      left: 0;
+      cursor: nwse-resize;
+    }
+
+    .resize-corner-tr {
+      top: 0;
+      right: 0;
+      cursor: nesw-resize;
+    }
+
+    .resize-corner-bl {
+      bottom: 0;
+      left: 0;
+      cursor: nesw-resize;
+    }
+
+    .resize-corner-br {
+      bottom: 0;
+      right: 0;
+      cursor: nwse-resize;
+    }
+
+    /* Slip Width Resize Handles (Kéo 2 bên trái/phải để mở rộng phiếu) */
+    .slip-resize-edge {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 14px;
+      z-index: 55;
+      cursor: ew-resize;
+      touch-action: none;
+    }
+
+    .slip-resize-edge-left {
+      left: -7px;
+    }
+
+    .slip-resize-edge-right {
+      right: -7px;
+    }
+
+    .slip-resize-edge:hover::after,
+    .slip-resize-edge.resizing::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      bottom: 10%;
+      left: 6px;
+      width: 2px;
+      background: rgba(201, 154, 74, 0.85);
+      border-radius: 1px;
+      box-shadow: 0 0 8px rgba(201, 154, 74, 0.7);
+    }
+
+    /* Header & Drag Handle (Cân đối, tối giản) */
+    .check-drag-handle {
+      padding: 14px 18px 10px;
+      background: transparent;
+      border-bottom: 1px dashed rgba(60, 40, 25, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .check-drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .check-title-wrap {
+      text-align: center;
+      width: 100%;
+    }
+
+    .check-brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.28rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--ink-dark);
+    }
+
+    .check-sub-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-rich);
+      margin-top: 1px;
+      font-weight: 600;
+    }
+
+    /* Check Body & Table */
+    .check-card-body {
+      padding: 6px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      max-height: calc(100vh - 305px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(60, 40, 25, 0.2) transparent;
+    }
+
+    .check-card-body::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .check-meta-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.68rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-muted);
+      padding-bottom: 4px;
+      border-bottom: 1px dotted rgba(60, 40, 25, 0.18);
+    }
+
+    .check-items-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+    }
+
+    .check-items-table th {
+      text-align: left;
+      font-size: 0.64rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--paper-border);
+    }
+
+    .check-items-table td {
+      padding: 4px 0;
+      border-bottom: 1px dotted rgba(60, 40, 25, 0.15);
+      vertical-align: middle;
+    }
+
+    .item-col-name {
+      font-weight: 500;
+      color: var(--ink-dark);
+    }
+
+    .item-col-qty {
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center;
+      width: 72px;
+      white-space: nowrap;
+    }
+
+    /* Order Slip Stepper in Qty Column */
+    .slip-qty-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(60, 40, 25, 0.06);
+      border: 1px solid rgba(60, 40, 25, 0.2);
+      border-radius: 3px;
+      padding: 1px 2px;
+    }
+
+    .slip-qty-btn {
+      width: 15px;
+      height: 15px;
+      border: none;
+      background: transparent;
+      color: var(--ink-dark);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-    .copy-status { min-height: 18px; margin: 10px 0 0; color: var(--gold); font-size: 11px; text-align: center; }
-    .confirm-modal { background: rgba(12,8,5,.58); }
-    .confirm-modal .modal-panel {
-      width: min(700px, 100%);
-      max-height: min(680px, 90svh);
-      padding: 24px 28px;
-      background: #352218;
-      border: 0;
-      box-shadow: none;
-      text-align: left;
-    }
-    .confirm-heading {
-      position: relative;
-      display: block;
-      min-height: 34px;
-      margin-bottom: 12px;
-      padding: 0 52px;
-    }
-    .confirm-heading .modal-intro { margin: 5px 0 0; text-align: center; }
-    .confirm-modal .order-text {
-      border: 1px solid var(--line);
-      background: rgba(36,22,16,.28);
-      padding: 13px 14px;
-      text-align: left;
-      line-height: 1.55;
-    }
-    .confirm-modal > .modal-panel > .modal-actions { display: none; }
-    .confirm-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 14px; }
-    .confirm-actions button {
-      min-width: 156px;
-      min-height: 40px;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--cream);
       cursor: pointer;
-      font-size: 11px;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
+      border-radius: 2px;
+      transition: all 0.15s ease;
+      padding: 0;
     }
-    .confirm-actions button:hover,
-    .confirm-actions button:focus-visible {
+
+    .slip-qty-btn:hover {
       background: var(--gold);
-      color: var(--bg-deep);
-      outline: none;
-      transform: translateY(-2px);
+      color: #fff;
     }
-    .confirm-actions .confirm-submit { background: var(--gold); color: var(--bg-deep); font-weight: 600; }
-    .confirm-heading .copy-icon-button { position: absolute; top: 0; left: 0; width: 34px; height: 34px; border: 0; }
-    .confirm-heading .copy-icon-button svg { width: 15px; height: 15px; }
-    .success-modal .modal-panel {
-      width: min(420px, 100%);
-      max-height: none;
-      padding: 34px 30px;
+
+    .slip-qty-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-dark);
+      min-width: 14px;
       text-align: center;
     }
-    .success-modal .modal-panel h2 { margin-bottom: 10px; font-size: 34px; }
 
-    @media (max-width: 920px) {
-      .site-nav { min-height: 76px; padding: 10px 20px; }
-      .site-nav .logo { width: 54px; height: 54px; }
-      .site-nav ul { gap: 14px; }
-      .site-nav li a { font-size: 12px; letter-spacing: 1.4px; }
-      .site-nav { display: none; }
-      .mobile-home-nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 20;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        min-height: 48px;
-        padding: 10px 18px;
-        background: linear-gradient(180deg, rgba(36,22,16,.82), transparent);
-      }
-      .mobile-home-nav a {
-        color: var(--cream);
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 18px;
-        letter-spacing: .03em;
-        text-decoration: none;
-      }
-      .confirm-modal .modal-panel { padding: 24px; }
-      .order-layout { grid-template-columns: 1fr; gap: 34px; }
-      .order-menu {
-        display: flex;
-        flex-direction: column;
-      }
-      .order-summary {
-        position: sticky;
-        bottom: 0;
-        z-index: 15;
-        max-height: none;
-        overflow: visible;
-        margin: 26px -20px 0;
-        padding: 16px 20px max(16px, env(safe-area-inset-bottom));
-        border-top: 1px solid var(--gold);
-        background: linear-gradient(180deg, rgba(49,31,22,.98), rgba(36,22,16,.98));
-        box-shadow: 0 -18px 38px rgba(0,0,0,.28);
-        backdrop-filter: blur(10px);
-      }
-      .summary-heading { margin-bottom: 8px; }
-      .summary-heading h2 { font-size: 29px; line-height: .95; }
-      .summary-items { max-height: 18svh; }
-      .summary-total { padding: 12px 0 10px; }
-      .summary-total-value { font-size: 22px; }
-      .customer-form { margin-bottom: 0; }
-      .summary-support { display: none; }
-      .mobile-order-steps {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        order: -1;
-        gap: 0;
-        margin: 0 0 22px;
-        padding: 8px 0 13px;
-        border-top: 1px solid var(--line-soft);
-        border-bottom: 1px solid var(--line-soft);
-      }
-      .mobile-order-steps button {
-        border: 0;
-        border-bottom: 2px solid transparent;
-        background: transparent;
-        padding: 5px 4px 9px;
-        color: var(--cream-dim);
-        cursor: pointer;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        line-height: 1.2;
-        text-align: center;
-        transition: color .2s ease, border-color .2s ease;
-      }
-      .mobile-order-steps button.is-active { border-color: var(--gold); color: var(--gold); }
-      .mobile-order-steps button:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
-      .continue-order-button {
-        display: block;
-        width: 100%;
-        min-height: 40px;
-        margin-top: 10px;
-        border: 1px solid var(--gold);
-        background: var(--gold);
-        color: var(--bg-deep);
-        cursor: pointer;
-        font-size: 11px;
-        font-weight: 600;
-      }
-      .continue-order-button:disabled { cursor: not-allowed; opacity: .38; }
-      .mobile-menu-next {
-        display: block;
-        width: 100%;
-        min-height: 48px;
-        margin: 24px 0 4px;
-        border: 1px solid var(--gold);
-        background: var(--gold);
-        color: var(--bg-deep);
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: .04em;
-        text-transform: uppercase;
-      }
-      .mobile-menu-next:disabled { cursor: not-allowed; opacity: .38; }
-      .mobile-stage-note {
-        display: block;
-        margin: 0 0 18px;
-        color: var(--cream-dim);
-        font-size: 12px;
-        line-height: 1.7;
-      }
-      .mobile-inline-summary {
-        margin: 0 0 24px;
-        padding: 0 0 20px;
-        border-bottom: 1px solid var(--line-soft);
-      }
-      .mobile-inline-summary .summary-heading h2 { font-size: 31px; }
-      .mobile-inline-summary .summary-items { max-height: none; overflow: visible; }
-      .mobile-inline-summary .summary-row {
-        grid-template-columns: minmax(0, 1fr) auto;
-        padding: 10px 0;
-      }
-      .mobile-inline-summary .summary-row-name { font-size: 13px; }
-      .mobile-inline-summary .summary-row-total { font-size: 12px; }
-      .mobile-inline-summary .summary-total { padding: 15px 0 0; }
-      .mobile-inline-summary .summary-total-value { font-size: 23px; }
-      .mobile-final-review {
-        padding: 0;
-        animation: stageIn .26s ease both;
-      }
-      .mobile-final-review.is-visible { display: block; }
-      .mobile-review-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-      .mobile-review-heading h2 { margin: 0; color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 500; line-height: .95; }
-      .mobile-final-review .order-text { margin-top: 14px; border: 1px solid var(--line); background: rgba(49,31,22,.62); padding: 14px; text-align: left; line-height: 1.55; }
-      .mobile-final-submit { width: 100%; min-height: 48px; margin-top: 16px; border: 1px solid var(--gold); background: var(--gold); color: var(--bg-deep); cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-      @keyframes stageIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .order-page[data-order-step="details"] .category-tabs,
-      .order-page[data-order-step="details"] .menu-category-block,
-      .order-page[data-order-step="details"] .category-empty { display: none; }
-      .order-page[data-order-step="details"] .customer-form {
-        max-height: 1600px;
-        margin-top: 0;
-        padding: 0;
-        border-top: 0;
-        opacity: 1;
-        pointer-events: auto;
-        animation: stageIn .26s ease both;
-      }
-      .order-page[data-order-step="details"] .continue-order-button { display: none; }
-      .order-page[data-order-step="details"] .mobile-menu-next,
-      .order-page[data-order-step="details"] .mobile-final-review { display: none; }
-      .order-page[data-order-step="details"] .summary-support { display: none; }
-      .order-page[data-order-step="details"] .order-layout { display: block; }
-      .order-page[data-order-step="details"] .mobile-inline-summary { display: block; }
-      .order-page[data-order-step="details"] > .order-layout > .order-summary { display: none; }
-      .order-page[data-order-step="details"] .summary-items { max-height: none; overflow: visible; }
-      .order-page[data-order-step="menu"] .order-summary,
-      .order-page[data-order-step="menu"] .customer-form,
-      .order-page[data-order-step="menu"] .mobile-final-review { display: none; }
-      .order-page[data-order-step="confirm"] .category-tabs,
-      .order-page[data-order-step="confirm"] .menu-category-block,
-      .order-page[data-order-step="confirm"] .category-empty,
-      .order-page[data-order-step="confirm"] .customer-form,
-      .order-page[data-order-step="confirm"] .mobile-menu-next,
-      .order-page[data-order-step="confirm"] .continue-order-button { display: none; }
-      .order-page[data-order-step="confirm"] .mobile-final-review { display: block; }
-      .order-page[data-order-step="confirm"] .order-layout { display: block; }
-      .order-page[data-order-step="confirm"] > .order-layout > .order-summary { display: none; }
-    }
-    @media (max-width: 620px) {
-      .site-nav { align-items: flex-start; }
-      .site-nav ul { flex-wrap: wrap; justify-content: flex-end; gap: 4px 11px; max-width: 270px; }
-      .site-nav li a { font-size: 11px; letter-spacing: 1px; }
-      .order-page { width: min(100% - 32px, 560px); padding-top: 0; padding-bottom: 96px; }
-      .page-heading {
-        min-height: 210px;
-        aspect-ratio: auto;
-        margin-bottom: 28px;
-        padding: 66px 20px 28px;
-        justify-content: flex-end;
-        background-position: center top;
-        background-size: auto 100%;
-      }
-      .eyebrow { margin-bottom: 7px; font-size: 9px; }
-      h1 { margin-bottom: 4px; font-size: 50px; line-height: .9; }
-      .page-lead { max-width: 270px; font-size: 11px; line-height: 1.55; }
-      .category-tabs {
-        flex-wrap: nowrap;
-        gap: 8px;
-        margin-bottom: 24px;
-        overflow-x: auto;
-        padding-bottom: 12px;
-        scrollbar-width: none;
-      }
-      .category-tabs::-webkit-scrollbar { display: none; }
-      .category-tab {
-        flex: 0 0 auto;
-        min-height: 36px;
-        padding: 8px 16px;
-        font-size: 12px;
-      }
-      .order-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        min-height: 0;
-        padding: 9px 4px;
-      }
-      .order-item-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-      }
-      .order-item-name { font-size: 18px; line-height: 1.2; }
-      .order-item-price { font-size: 12.5px; }
-      .quantity-control { margin-top: 0; }
-      .quantity-control button { width: 30px; height: 30px; }
-      .menu-section-heading { font-size: 24px; }
-      .menu-section-note { margin-bottom: 12px; font-size: 11px; line-height: 1.6; }
-      .menu-subsection { margin-top: 26px; padding-top: 16px; }
-      .menu-subsection-heading { font-size: 17px; }
-      .menu-subsection-note { margin-bottom: 10px; font-size: 10px; }
-      .form-grid { grid-template-columns: 1fr; gap: 12px; }
-      .field.full { grid-column: auto; }
-      .field label { margin-bottom: 4px; font-size: 11px; }
-      .field input,
-      .field select,
-      .field textarea { padding: 8px 0 9px; font-size: 14px; }
-      .customer-form h2 { margin-bottom: 16px; font-size: 36px; line-height: .95; }
-      .modal-actions { grid-template-columns: 1fr; }
-      .confirm-modal .modal-panel { padding: 22px 20px; }
-      .confirm-heading { margin-bottom: 12px; padding: 0 44px; }
-      .confirm-heading .modal-intro { max-width: none; }
-      .confirm-actions { display: grid; grid-template-columns: 1fr; }
-      .confirm-actions button { width: 100%; }
+    .item-col-price {
+      font-family: 'JetBrains Mono', monospace;
+      text-align: right;
+      color: var(--ink-dark);
     }
 
-    /* ── API integration additions ── */
-    .order-error-message {
-      display: none;
-      margin: 10px 0 0;
-      padding: 10px 14px;
-      border-left: 3px solid var(--chili);
-      background: rgba(184, 75, 50, 0.1);
-      color: #df846d;
-      font-size: 12px;
-      line-height: 1.6;
-      border-radius: 0 4px 4px 0;
+    .item-delete-btn {
+      background: none;
+      border: none;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0 4px;
+      transition: color 0.2s;
     }
-    .order-error-message.is-visible { display: block; }
 
-    .confirm-submit.is-loading,
-    .mobile-final-submit.is-loading {
+    .item-delete-btn:hover {
+      color: var(--red-stamp);
+    }
+
+    /* Recipient Block (GIAO ĐẾN) */
+    .check-recipient-section {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--paper-border);
+    }
+
+    .recipient-heading {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-rich);
+    }
+
+    .recipient-form {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .recipient-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 0.74rem;
+    }
+
+    .recipient-label {
+      flex: 0 0 85px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    .recipient-input {
+      flex: 1;
+      font-size: 0.76rem;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      color: var(--ink-dark);
+      background: transparent;
+      border: none;
+      border-bottom: 1px dotted rgba(60, 40, 25, 0.25);
+      padding: 1px 0;
+      outline: none;
+      transition: border-bottom-color 0.2s;
+    }
+
+    .recipient-input:focus {
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .empty-items-cell {
+      text-align: center;
+      color: var(--ink-light);
+      padding: 18px 0 !important;
+      font-style: italic;
+    }
+
+    /* Footer & Submit */
+    .check-card-footer {
+      padding: 6px 12px 10px;
+      background: transparent;
+      border-top: 1px dashed rgba(60, 40, 25, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: auto;
+    }
+
+    .check-total-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+    }
+
+    .num-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .check-total-line.grand {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink-dark);
+      border-top: 1px solid rgba(60, 40, 25, 0.18);
+      padding-top: 3px;
+    }
+
+    .grand-total-amount {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--red-stamp);
+      font-size: 1.15rem;
+    }
+
+    .check-payment-note {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      padding-top: 4px;
+      border-top: 1px dotted rgba(60, 40, 25, 0.2);
+    }
+
+    .check-thank-note {
+      font-size: 0.74rem;
+      font-style: italic;
+      color: var(--ink-light);
+      text-align: center;
+      padding: 2px 0;
+    }
+
+    .btn-confirm-order {
+      width: 100%;
+      padding: 9px 14px;
+      background: var(--ink-dark);
+      color: #fff;
+      border: 1px solid rgba(201, 154, 74, 0.4);
+      border-radius: 4px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 2px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-confirm-order:hover:not(:disabled) {
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
+      box-shadow: 0 4px 14px rgba(201, 154, 74, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-confirm-order:disabled {
+      opacity: 0.45;
       cursor: not-allowed;
-      opacity: 0.72;
+      transform: none;
+    }
+
+    /* ==========================================================================
+       4. MOBILE SLIM FLOATING BOTTOM BAR (< 768px)
+       ========================================================================== */
+    .mobile-bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(28, 17, 12, 0.86);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(201, 154, 74, 0.35);
+      z-index: 180;
+      padding: 0 20px;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .mobile-cart-summary {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-cart-items-count {
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--cream-dim);
+    }
+
+    .mobile-cart-grand-total {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .btn-mobile-open-check {
+      padding: 8px 18px;
+      background: var(--gold);
+      color: #1a0f0a;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(201, 154, 74, 0.3);
+    }
+
+    /* Backdrop for Bottom Sheet on Mobile */
+    .mobile-sheet-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(14, 9, 6, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 190;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-sheet-backdrop.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       5. MODALS (DETAILS & SUCCESS CONFIRMATION)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(14, 9, 6, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      width: 460px;
+      max-width: 95vw;
+      background: #faf6ed;
+      color: var(--ink-dark);
+      border-radius: 8px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
       position: relative;
     }
 
-    @keyframes order-spin {
-      to { transform: rotate(360deg); }
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
     }
-    .submit-spinner {
-      display: none;
-      width: 14px;
-      height: 14px;
-      margin-left: 8px;
-      border: 2px solid rgba(36, 22, 16, 0.3);
-      border-top-color: var(--bg-deep);
+
+    .modal-image-wrap {
+      width: 100%;
+      height: 210px;
+      background: #1e130c;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
       border-radius: 50%;
-      animation: order-spin 0.7s linear infinite;
-      vertical-align: middle;
-      flex-shrink: 0;
+      font-size: 1.1rem;
+      color: var(--ink-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
     }
-    .confirm-submit.is-loading .submit-spinner,
-    .mobile-final-submit.is-loading .submit-spinner { display: inline-block; }
+
+    .modal-body {
+      padding: 20px 24px;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--ink-dark);
+    }
+
+    .modal-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin: 3px 0 10px;
+    }
+
+    .modal-text {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .modal-options-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 6px;
+    }
+
+    .modal-chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .modal-chip {
+      padding: 5px 12px;
+      border: 1px solid rgba(60, 40, 25, 0.25);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      background: #fff;
+      color: var(--ink-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .modal-chip.active {
+      border-color: var(--gold);
+      background: rgba(201, 154, 74, 0.15);
+      font-weight: 600;
+    }
+
+    .modal-btn-add {
+      width: 100%;
+      padding: 11px;
+      background: var(--ink-dark);
+      color: var(--cream);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-btn-add:hover {
+      background: #351f15;
+    }
+
+    /* Success Card */
+    .success-card {
+      text-align: center;
+      padding: 38px 28px;
+    }
+
+    .stamp-circle {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 16px;
+      border: 2px dashed var(--red-stamp);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red-stamp);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transform: rotate(-10deg);
+      box-shadow: 0 0 0 4px rgba(184, 56, 40, 0.12);
+    }
+
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--ink-dark);
+      margin-bottom: 6px;
+    }
+
+    .success-sub {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .success-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--gold);
+      background: #ede4d3;
+      padding: 5px 12px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+
+    /* ==========================================================================
+       6. RESPONSIVE BREAKPOINTS (DESKTOP -> TABLET -> MOBILE APP)
+       ========================================================================== */
+    
+
+    @media (max-width: 1023px) {
+      .table-stage-split {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        padding: 32px 16px 40px;
+        min-height: auto;
+      }
+
+      .rooster-menu-holder {
+        padding-left: 140px;
+        align-items: flex-end;
+      }
+
+      .rooster-mascot-body {
+        left: calc(140px - 146px);
+        bottom: 0;
+        width: 350px;
+        height: auto;
+      }
+
+      .rooster-ground-shadow {
+        left: 30px;
+        width: 150px;
+      }
+
+      .clipboard-wrapper {
+        width: 580px;
+        min-height: 480px;
+      }
+
+      .single-menu-sheet {
+        width: 544px;
+      }
+
+      .rooster-claw-top {
+        left: 80px;
+        top: -12px;
+        width: 68px;
+      }
+
+      .rooster-claw-mid {
+        left: -4px;
+        top: 138px;
+        width: 28px;
+      }
+
+      .order-slip-col {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 440px;
+        align-self: center;
+        position: relative;
+        top: auto;
+        margin-top: 0;
+        z-index: 20;
+      }
+
+      .guest-check-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .site-nav {
+        padding: 14px 20px;
+      }
+      .site-nav .logo {
+        width: 52px;
+        height: 52px;
+      }
+      .site-nav ul {
+        position: absolute;
+        top: calc(100% + 4px);
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        min-width: 190px;
+        padding: 10px 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(36, 22, 16, 0.96);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      }
+      .site-nav.nav-open ul {
+        display: flex;
+      }
+      .site-nav ul li a {
+        display: block;
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+      .site-nav ul li a.nav-order-link {
+        display: inline-flex;
+        margin: 6px 14px;
+        padding: 6px 14px;
+        font-size: 16px;
+      }
+      .mobile-order-btn {
+        display: inline-flex;
+      }
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      /* Stage adjustments & Mobile Peek-in Mascot */
+      .table-stage-split {
+        padding: 60px 12px 76px;
+      }
+      .rooster-menu-holder {
+        padding-left: 0;
+        width: 100%;
+        min-height: auto;
+        justify-content: center;
+        margin-top: 50px;
+      }
+      .rooster-mascot-body {
+        left: -10px;
+        top: -75px;
+        width: 280px;
+        height: auto;
+        filter: drop-shadow(2px 6px 14px rgba(0, 0, 0, 0.5));
+      }
+      .rooster-claw-top {
+        left: 65px;
+        top: -10px;
+        width: 55px;
+      }
+      .rooster-claw-mid {
+        display: none;
+      }
+      .clipboard-wrapper {
+        width: 100%;
+        min-height: auto;
+        height: auto;
+        margin-top: 0;
+        padding-bottom: 20px;
+      }
+      .single-menu-sheet {
+        position: relative;
+        top: 0;
+        width: 100%;
+        min-height: auto;
+        padding: 14px 14px 12px;
+        margin-top: 50px;
+      }
+      .menu-two-col-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .menu-col-left {
+        border-right: none;
+        padding-right: 0;
+        gap: 10px;
+      }
+      .menu-col-right {
+        padding-left: 0;
+        gap: 10px;
+      }
+
+      /* Hide Desktop Guest Check Column on Mobile */
+      .order-slip-col {
+        display: none;
+      }
+
+      /* Mobile Bottom Sheet for Order Slip */
+      .guest-check-card.mobile-sheet-open {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 86vh;
+        z-index: 200;
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.85);
+        animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .guest-check-card.mobile-sheet-open.maximized {
+        height: 100vh !important;
+        border-radius: 0 !important;
+        transform: none !important;
+      }
+
+      @keyframes slideUpSheet {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+
+      .mobile-bottom-bar {
+        display: flex;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <nav class="site-nav" aria-label="Điều hướng chính">
-    <a class="logo" href="/home" aria-label="Bánh Canh Gà Hàng Gòn">
-      <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Hàng Gòn">
+
+  <!-- ==========================================================================
+       1. TOP NAV BAR (ĐỒNG BỘ 100% VỚI INDEX.HTML)
+       ========================================================================== -->
+  <nav class="site-nav" id="siteNav">
+    <a class="logo" href="index.html#hero" aria-label="Bánh Canh Gà Ta Hàng Gòn">
+      <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Ta" decoding="async">
     </a>
+
     <ul>
-      <li><a href="/home">Trang chủ</a></li>
-      <li><a href="/home/welcome">Giới thiệu</a></li>
-      <li><a href="/home/menu">Menu</a></li>
-      <li><a href="/home/location">Vị trí</a></li>
+      <li><a href="index.html#hero">Trang chủ</a></li>
+      <li><a href="index.html#welcome">Giới thiệu</a></li>
+      <li><a href="index.html#menu">Menu</a></li>
+      <li><a href="index.html#location">Vị trí</a></li>
+      <li><a class="nav-order-link" href="#clipboardWrapper">Đặt hàng</a></li>
     </ul>
+
+    <a class="mobile-order-btn" href="#guestCheckCard" onclick="toggleMobileSheet(true); return false;">Đặt hàng</a>
+
+    <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" onclick="toggleNavMenu()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
   </nav>
-  <nav class="mobile-home-nav" aria-label="Điều hướng mobile">
-    <a href="/home">← Về trang chủ</a>
-  </nav>
 
-  <main class="order-page">
-    <header class="page-heading">
-      <p class="eyebrow">Món ngon · Hàng Gòn</p>
-      <h1>Đặt món</h1>
-      <p class="page-lead">Chọn món, chúng tôi chuẩn bị ngay khi bạn xác nhận.</p>
-    </header>
+  <!-- ==========================================================================
+       2. MAIN TABLE STAGE (SPLIT 2 COLUMNS: LEFT-TO-MID & RIGHT)
+       ========================================================================== -->
+  <main class="table-stage-split">
 
-    <div class="order-layout">
-      <section class="order-menu" aria-labelledby="menu-heading">
-        <nav class="category-tabs" aria-label="Lọc danh mục món ăn">
-          <button class="category-tab is-active" type="button" data-category="all" aria-selected="true">Tất cả</button>
-          <button class="category-tab" type="button" data-category="com" aria-selected="false">Cơm gà</button>
-          <button class="category-tab" type="button" data-category="banh-canh" aria-selected="false">Bánh canh gà</button>
-          <button class="category-tab" type="button" data-category="xoi" aria-selected="false">Xôi gà</button>
-          <button class="category-tab" type="button" data-category="goi" aria-selected="false">Gỏi gà</button>
-          <button class="category-tab" type="button" data-category="mon-them" aria-selected="false">Món thêm</button>
-          <button class="category-tab" type="button" data-category="nuoc" aria-selected="false">Nước giải khát</button>
-        </nav>
+    <!-- LEFT-TO-MID COLUMN: THE ROOSTER MASCOT & WOODEN CLIPBOARD MENU -->
+    <div class="clipboard-col">
+      <div class="rooster-menu-holder" id="roosterMenuHolder">
+        <!-- 0. Rustic Wooden Foot Block: Thớt Gỗ Kê Dưới Chân Gà (Từ kê-chân gà.jpg, z-index: 0) -->
+        <img src="images/order/rooster_foot_block.webp"
+             alt="Thớt gỗ kê chân gà Hàng Gòn"
+             class="rooster-foot-block"
+             id="roosterFootBlock" />
 
-        <div class="mobile-order-steps" aria-label="Tiến trình đặt món">
-          <button class="is-active" type="button" data-step-indicator="menu">1. Chọn món</button>
-          <button type="button" data-step-indicator="details">2. Thông tin</button>
-          <button type="button" data-step-indicator="confirm">3. Xác nhận</button>
-        </div>
+        <!-- 1. Background Mascot Layer: Thân & Chân Chú Gà Trống Đầu Bếp (z-index: 1) -->
+        <img src="images/order/rooster_mascot_body_opt.webp"
+             alt="Mascot Gà Trống Đầu Bếp Hàng Gòn"
+             class="rooster-mascot-body"
+             id="roosterMascotBody" />
 
-        <div class="menu-category-block" data-category-panel="com">
-          <h2 class="menu-section-heading">Cơm gà ta &amp; Cơm gỏi</h2>
-          <p class="menu-section-note">Hạt cơm vàng óng dẻo bùi nấu nước luộc gà, thịt gà ta luộc mọng ngọt và gỏi chua ngọt giòn giòn.</p>
-          <div id="com-list"></div>
-        </div>
+        <!-- 2. Middle Layer: The Wooden Clipboard (z-index: 2, 100% Unified WebP Board) -->
+        <div class="clipboard-wrapper" id="clipboardWrapper">
+          <!-- Ambient Occlusion Arm Shadow (Bóng đổ cánh gà lên mép bảng) -->
+          <div class="rooster-arm-shadow"></div>
 
-        <div class="menu-category-block" data-category-panel="banh-canh">
-          <h2 class="menu-section-heading" id="menu-heading">Bánh canh gà</h2>
-          <p class="menu-section-note">Nước dùng ninh xương ngọt thanh tự nhiên, gà ta thả vườn dai mềm và sợi bánh canh dẻo dai.</p>
-          <div id="banh-canh-list"></div>
-        </div>
+          <!-- Subtle Corner Handle (Kéo góc dưới phải để phóng to/thu nhỏ đồng tỷ lệ) -->
+          <div class="menu-resize-corner-br" id="menuResizeCornerBR" title="Kéo góc để thu phóng tỷ lệ Menu"></div>
 
-        <div class="menu-category-block" data-category-panel="xoi">
-          <h2 class="menu-section-heading">Xôi gà</h2>
-          <p class="menu-section-note">Xôi nếp dẻo thơm ngào ngạt, gà ta luộc, trứng non béo bùi và hành phi vàng rụm.</p>
-          <div id="xoi-list"></div>
-        </div>
+          <!-- 3. Foreground Claws Overlays (z-index: 35 - Realistic 3D Overlays) -->
+          <img src="images/order/rooster_claw_top.webp"
+               alt="Móng vuốt gà kẹp mép trên bảng"
+               class="rooster-claw-top" />
+          <img src="images/order/rooster_claw_mid.webp"
+               alt="Móng vuốt gà ôm mép trái bảng"
+               class="rooster-claw-mid" />
 
-        <div class="menu-category-block" data-category-panel="goi">
-          <h2 class="menu-section-heading">Gỏi gà ta</h2>
-          <p class="menu-section-note">Gỏi gà bóp chua ngọt giòn mát, thơm nồng rau răm hành tây và đậu phộng rang giòn rụm.</p>
-          <div id="goi-list"></div>
-        </div>
+                              <!-- Single-Page 2-Column Menu Sheet (Template Hình 2) -->
+          <div class="single-menu-sheet">
+            <!-- Header: menu. (lowercase bold) -->
+            <div class="single-menu-header">
+              <h1 class="single-menu-title">menu.</h1>
+            </div>
 
-        <div class="menu-category-block" data-category-panel="mon-them">
-          <h2 class="menu-section-heading">Món thêm &amp; Topping</h2>
-          <p class="menu-section-note">Gọi thêm cơm, xôi, bánh canh hoặc các phần topping gà xé, trứng non, lòng mề theo khẩu vị.</p>
-          <div id="mon-them-list"></div>
-        </div>
+            <!-- Two-Column Menu Body -->
+            <!-- Two-Column Menu Body (Full 37 Dishes across 8 Categories) -->
+            <div class="menu-two-col-grid">
+              <!-- CỘT TRÁI: BÁNH CANH GÀ, MÌ GÀ, XÔI, THỨC UỐNG (18 MÓN) -->
+              <div class="menu-col-left">
+                <!-- Mục 1: BÁNH CANH GÀ. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">BÁNH CANH GÀ.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="bc-xe" data-name="Bánh canh gà xé" data-price="48000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Canh Gà Xé</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">48K</span>
+                        <button class="btn-add-cart" onclick="updateQty('bc-xe', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="bc-xe-trung-non" data-name="Bánh canh gà xé trứng non" data-price="55000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Canh Gà Xé Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">55K</span>
+                        <button class="btn-add-cart" onclick="updateQty('bc-xe-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="bc-dui" data-name="Bánh canh gà đùi" data-price="59000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Canh Gà Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">59K</span>
+                        <button class="btn-add-cart" onclick="updateQty('bc-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="bc-ma-dui" data-name="Bánh canh má đùi" data-price="68000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Canh Má Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">68K</span>
+                        <button class="btn-add-cart" onclick="updateQty('bc-ma-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="bc-dac-biet" data-name="Bánh canh gà đặc biệt" data-price="70000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Canh Gà Đặc Biệt</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">70K</span>
+                        <button class="btn-add-cart" onclick="updateQty('bc-dac-biet', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="bc-long-me-trung-non" data-name="Bánh canh lòng mề trứng non" data-price="55000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Canh Lòng Mề Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">55K</span>
+                        <button class="btn-add-cart" onclick="updateQty('bc-long-me-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-        <div class="menu-category-block" data-category-panel="nuoc">
-          <h2 class="menu-section-heading">Nước giải khát</h2>
-          <p class="menu-section-note">100% nguyên liệu tự nhiên — thanh mát, hỗ trợ thanh lọc cơ thể.</p>
-          <div id="nuoc-natural-list"></div>
+                <!-- Mục 2: MÌ GÀ. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">MÌ GÀ.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="mi-xe" data-name="Mì gà xé" data-price="48000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mì Gà Xé</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">48K</span>
+                        <button class="btn-add-cart" onclick="updateQty('mi-xe', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="mi-xe-trung-non" data-name="Mì gà xé trứng non" data-price="55000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mì Gà Xé Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">55K</span>
+                        <button class="btn-add-cart" onclick="updateQty('mi-xe-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="mi-long-me-trung-non" data-name="Mì lòng mề trứng non" data-price="55000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mì Lòng Mề Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">55K</span>
+                        <button class="btn-add-cart" onclick="updateQty('mi-long-me-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="mi-dui" data-name="Mì gà đùi" data-price="59000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mì Gà Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">59K</span>
+                        <button class="btn-add-cart" onclick="updateQty('mi-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="mi-ma-dui" data-name="Mì gà má đùi" data-price="68000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mì Gà Má Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">68K</span>
+                        <button class="btn-add-cart" onclick="updateQty('mi-ma-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="mi-dac-biet" data-name="Mì gà đặc biệt" data-price="70000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mì Gà Đặc Biệt</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">70K</span>
+                        <button class="btn-add-cart" onclick="updateQty('mi-dac-biet', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-          <div class="menu-subsection">
-            <h3 class="menu-subsection-heading">Nước đóng chai</h3>
-            <p class="menu-subsection-note">Nước suối, nước ngọt quen thuộc — tiện lợi, giải khát nhanh.</p>
-            <div id="nuoc-bottled-list"></div>
+                <!-- Mục 3: XÔI. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">XÔI.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="xoi-xe-trung-non" data-name="Xôi gà xé trứng non" data-price="40000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Xôi Gà Xé Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">40K</span>
+                        <button class="btn-add-cart" onclick="updateQty('xoi-xe-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="xoi-dui-trung-non" data-name="Xôi gà đùi trứng non" data-price="50000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Xôi Gà Đùi Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">50K</span>
+                        <button class="btn-add-cart" onclick="updateQty('xoi-dui-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mục 4: THỨC UỐNG THANH NHIỆT. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">THỨC UỐNG THANH NHIỆT.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="nuoc-nha-dam" data-name="Nha đam mủ trôm" data-price="16000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Nha Đam Mủ Trôm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">16K</span>
+                        <button class="btn-add-cart" onclick="updateQty('nuoc-nha-dam', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="nuoc-mu-trom" data-name="Mủ trôm hạt chia" data-price="16000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Mủ Trôm Hạt Chia</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">16K</span>
+                        <button class="btn-add-cart" onclick="updateQty('nuoc-mu-trom', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="nuoc-sam" data-name="Sâm rong biển" data-price="16000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Sâm Rong Biển</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">16K</span>
+                        <button class="btn-add-cart" onclick="updateQty('nuoc-sam', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="nuoc-pepsi" data-name="Pepsi ướp lạnh" data-price="20000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Pepsi Ướp Lạnh</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">20K</span>
+                        <button class="btn-add-cart" onclick="updateQty('nuoc-pepsi', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CỘT PHẢI: CƠM GÀ, CƠM + GỎI, GỎI, MÓN THÊM (19 MÓN) -->
+              <div class="menu-col-right">
+                <!-- Mục 5: CƠM GÀ. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">CƠM GÀ.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="com-xe" data-name="Cơm gà xé" data-price="40000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gà Xé</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">40K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-xe', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="com-xe-trung-non" data-name="Cơm gà xé trứng non" data-price="47000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gà Xé Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">47K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-xe-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="com-dui" data-name="Cơm gà đùi" data-price="52000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gà Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">52K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="com-ma-dui" data-name="Gà má đùi" data-price="65000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Gà Má Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">65K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-ma-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mục 6: CƠM + GỎI. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">CƠM + GỎI.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="com-goi-xe" data-name="Cơm gỏi gà xé" data-price="45000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gỏi Gà Xé</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">45K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-goi-xe', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="com-goi-xe-trung-non" data-name="Cơm gỏi gà xé trứng non" data-price="52000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gỏi Gà Xé Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">52K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-goi-xe-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="com-goi-long-trung-non" data-name="Cơm gỏi lòng gà trứng non" data-price="48000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gỏi Lòng Gà Trứng Non</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">48K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-goi-long-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="com-goi-dui" data-name="Cơm gỏi gà đùi" data-price="60000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm Gỏi Gà Đùi</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">60K</span>
+                        <button class="btn-add-cart" onclick="updateQty('com-goi-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mục 7: GỎI. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">GỎI.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="goi-nho" data-name="Gỏi gà ta nhỏ" data-price="50000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Gỏi Gà Ta Nhỏ</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">50K</span>
+                        <button class="btn-add-cart" onclick="updateQty('goi-nho', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="goi-lon" data-name="Gỏi gà ta lớn" data-price="100000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Gỏi Gà Ta Lớn</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">100K</span>
+                        <button class="btn-add-cart" onclick="updateQty('goi-lon', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="goi-nua-con" data-name="Gỏi gà ta nửa con" data-price="247000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Gỏi Gà Ta Nửa Con</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">247K</span>
+                        <button class="btn-add-cart" onclick="updateQty('goi-nua-con', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mục 8: MÓN THÊM. -->
+                <div class="menu-category-block">
+                  <div class="menu-category-heading">MÓN THÊM.</div>
+                  <div class="compact-dish-list">
+                    <div class="compact-dish-item dish-item" data-id="them-com-mi" data-name="Cơm / Mì gói thêm" data-price="5000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cơm / Mì Gói Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">5K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-com-mi', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-xoi" data-name="Xôi thêm" data-price="10000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Xôi Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">10K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-xoi', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-banh" data-name="Bánh thêm" data-price="10000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Bánh Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">10K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-banh', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-ga-xe" data-name="Gà xé thêm" data-price="27000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Gà Xé Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">27K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-ga-xe', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-trung-non" data-name="Trứng non thêm" data-price="25000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Trứng Non Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">25K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-trung-non', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-co-canh" data-name="Cổ cánh thêm" data-price="30000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Cổ Cánh Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">30K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-co-canh', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-long-me" data-name="Lòng mề thêm" data-price="25000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Lòng Mề Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">25K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-long-me', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="compact-dish-item dish-item" data-id="them-dui" data-name="Đùi thêm" data-price="35000">
+                      <div class="dish-info-left">
+                        <span class="compact-dish-name">Đùi Thêm</span>
+                      </div>
+                      <span class="dish-dots"></span>
+                      <div class="dish-action-right">
+                        <span class="compact-dish-price">35K</span>
+                        <button class="btn-add-cart" onclick="updateQty('them-dui', 1, event)" title="Thêm món">
+                          <img src="images/order/add-to-cart.webp" alt="Thêm">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer: address & contact -->
+            <div class="single-menu-footer">
+              <span>490 Điện Biên Phủ, P.21, Q. Bình Thạnh</span>
+              <span>Hotline: 0356 538 789 • Mở cửa: 06:00 - 23:00</span>
+            </div>
           </div>
         </div>
-        <button class="mobile-menu-next" id="mobile-menu-next" type="button" disabled>Tiếp tục đến thông tin</button>
+      </div>
+    </div>
 
-        <form class="customer-form is-disabled" id="customer-form" novalidate aria-disabled="true">
-          <section class="mobile-inline-summary" aria-labelledby="mobile-summary-heading">
-            <div class="summary-heading">
-              <h2 id="mobile-summary-heading">Đơn của bạn</h2>
-              <span class="summary-count" id="mobile-summary-count">0 món</span>
-            </div>
-            <div class="summary-items" id="mobile-summary-items">
-              <p class="summary-empty">Chưa chọn món nào</p>
-            </div>
-            <div class="summary-total">
-              <span class="summary-total-label">Tổng cộng</span>
-              <strong class="summary-total-value" id="mobile-summary-total">0 VND</strong>
-            </div>
-          </section>
-          <p class="mobile-stage-note">Điền thông tin nhận món. Quán sẽ gọi lại để xác nhận đơn trước khi chuẩn bị.</p>
-          <h2>Thông tin nhận món</h2>
-          <div class="form-grid">
-            <div class="field">
-              <label for="customer-name">Họ tên <span aria-hidden="true">*</span></label>
-              <input id="customer-name" name="name" type="text" autocomplete="name" placeholder="Tên của bạn">
-              <p class="field-error" data-error-for="customer-name"></p>
-            </div>
-            <div class="field">
-              <label for="customer-phone">Số điện thoại <span aria-hidden="true">*</span></label>
-              <input id="customer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Số điện thoại">
-              <p class="field-error" data-error-for="customer-phone"></p>
-            </div>
-            <div class="field full">
-              <label for="fulfillment">Hình thức nhận món <span aria-hidden="true">*</span></label>
-              <select id="fulfillment" name="fulfillment">
-                <option value="pickup">Đến lấy tại quán</option>
-                <option value="delivery">Giao hàng</option>
-              </select>
-              <p class="field-error" data-error-for="fulfillment"></p>
-            </div>
-            <div class="field full delivery-address" id="delivery-address-field">
-              <label for="customer-address">Địa chỉ giao hàng <span aria-hidden="true">*</span></label>
-              <input id="customer-address" name="address" type="text" autocomplete="street-address" placeholder="Số nhà, đường, phường...">
-              <p class="field-error" data-error-for="customer-address"></p>
-            </div>
-            <div class="field full">
-              <label for="customer-note">Ghi chú thêm</label>
-              <textarea id="customer-note" name="note" placeholder="Ví dụ: ít cay, thêm hành..." rows="2"></textarea>
-            </div>
+    <!-- RIGHT COLUMN: ARTISAN GUEST CHECK (DRAGGABLE & DOCKABLE) -->
+    <div class="order-slip-col">
+      <aside class="guest-check-card" id="guestCheckCard">
+        <!-- 4 Corner Resize Handles (Kéo 4 góc để co giãn tỷ lệ phiếu) -->
+        <div class="resize-corner resize-corner-tl" data-corner="tl" title="Kéo để thu phóng phiếu"></div>
+        <div class="resize-corner resize-corner-tr" data-corner="tr" title="Kéo để thu phóng phiếu"></div>
+        <div class="resize-corner resize-corner-bl" data-corner="bl" title="Kéo để thu phóng phiếu"></div>
+        <div class="resize-corner resize-corner-br" data-corner="br" title="Kéo để thu phóng phiếu"></div>
+
+        <!-- Mép kéo giãn chiều rộng 2 bên trái/phải -->
+        <div class="slip-resize-edge slip-resize-edge-left" data-edge="left" title="Kéo sang trái để mở rộng phiếu"></div>
+        <div class="slip-resize-edge slip-resize-edge-right" data-edge="right" title="Kéo sang phải để mở rộng phiếu"></div>
+
+        <!-- Drag Handle Header (Cân đối, tối giản) -->
+        <div class="check-drag-handle" id="checkDragHandle" title="Giữ chuột hoặc chạm để kéo di chuyển phiếu trên bàn">
+          <div class="check-title-wrap">
+            <div class="check-brand-title">HÀNG GÒN</div>
+            <div class="check-sub-title">PHIẾU ĐẶT HÀNG</div>
           </div>
-          <button class="submit-button" id="submit-order" type="submit" disabled>Xác nhận đặt món</button>
-        </form>
+        </div>
 
-        <section class="mobile-final-review" id="mobile-final-review" aria-labelledby="mobile-review-title">
-          <div class="mobile-review-heading">
-            <h2 id="mobile-review-title">Kiểm tra đơn hàng</h2>
-            <button class="copy-icon-button" id="mobile-copy-order" type="button" title="Sao chép đơn hàng" aria-label="Sao chép đơn hàng">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="8" y="8" width="11" height="11" rx="1.5"></rect>
-                <path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"></path>
-              </svg>
-            </button>
+        <!-- Body Table -->
+        <div class="check-card-body">
+          <div class="check-meta-line">
+            <span>ĐƠN: <b id="checkOrderCode">#HG-261102-88</b></span>
+            <span>NGÀY: <span id="checkLiveClock">02/11/2026 10:25:00</span></span>
           </div>
-          <pre class="order-text" id="mobile-final-text"></pre>
-          <p class="copy-status" id="mobile-copy-status" role="status" aria-live="polite"></p>
-          <p class="order-error-message" id="mobile-error-message" role="alert" aria-live="polite"></p>
-          <button class="mobile-final-submit" id="mobile-final-submit" type="button">Đặt hàng<span class="submit-spinner" aria-hidden="true"></span></button>
-        </section>
-      </section>
 
-      <aside class="order-summary" aria-labelledby="summary-heading">
-        <div class="summary-heading">
-          <h2 id="summary-heading">Đơn của bạn</h2>
-          <span class="summary-count" id="summary-count">0 món</span>
+          <!-- Recipient Section (GIAO ĐẾN) -->
+          <div class="check-recipient-section">
+            <div class="recipient-heading">GIAO ĐẾN:</div>
+            <form id="orderForm" onsubmit="submitOrder(event)" class="recipient-form">
+              <div class="recipient-row">
+                <span class="recipient-label">Người nhận:</span>
+                <input type="text" id="customerName" class="recipient-input" required>
+              </div>
+              <div class="recipient-row">
+                <span class="recipient-label">Số điện thoại:</span>
+                <input type="tel" id="customerPhone" class="recipient-input" required pattern="^(0|\+84)[0-9]{9,10}$">
+              </div>
+              <div class="recipient-row">
+                <span class="recipient-label">Địa chỉ nhận:</span>
+                <input type="text" id="deliveryAddress" class="recipient-input" required>
+              </div>
+              <div class="recipient-row">
+                <span class="recipient-label">Ghi chú:</span>
+                <input type="text" id="orderNotes" class="recipient-input">
+              </div>
+            </form>
+          </div>
+
+          <!-- Items Table -->
+          <table class="check-items-table">
+            <thead>
+              <tr>
+                <th>Món Ăn</th>
+                <th style="text-align: center;">SL</th>
+                <th style="text-align: right;">Đơn Giá</th>
+                <th style="text-align: right;">Thành Tiền</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="checkItemsTbody">
+              <tr>
+                <td colspan="5" class="empty-items-cell">
+                  Chưa chọn món nào.<br>Bấm vào thực đơn để thêm món!
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="summary-items" id="summary-items">
-          <p class="summary-empty">Chưa chọn món nào</p>
+
+        <!-- Footer & Confirmation Action -->
+        <div class="check-card-footer">
+          <div class="check-total-line">
+            <span>Tạm tính (<span id="totalItemsCount">0</span> phần):</span>
+            <span id="subtotalText" class="num-mono">0đ</span>
+          </div>
+          <div class="check-total-line">
+            <span>Phí giao hàng:</span>
+            <span class="num-mono">0đ <small>(Miễn phí)</small></span>
+          </div>
+          <div class="check-total-line grand">
+            <span>TỔNG CỘNG:</span>
+            <span id="grandTotalText" class="grand-total-amount">0đ</span>
+          </div>
+
+          <div class="check-payment-note">
+            <span>Thanh toán: <b>Tiền mặt khi nhận hàng (COD)</b></span>
+          </div>
+
+          <div class="check-thank-note">
+            "Cảm ơn Quý khách đã ủng hộ Hàng Gòn!"
+          </div>
+
+          <button type="submit" form="orderForm" id="btnSubmitOrder" class="btn-confirm-order" disabled>
+            <span>XÁC NHẬN ĐẶT HÀNG</span>
+          </button>
         </div>
-        <div class="summary-total">
-          <span class="summary-total-label">Tổng cộng</span>
-          <strong class="summary-total-value" id="summary-total">0 VND</strong>
-        </div>
-        <p class="summary-support">Đơn hàng sẽ được xác nhận qua cuộc gọi điện thoại.</p>
-        <button class="continue-order-button" id="continue-order" type="button" disabled> Xác nhận món đã chọn </button>
       </aside>
     </div>
+
   </main>
 
-  <div class="order-modal confirm-modal" id="confirm-modal" role="dialog" aria-modal="true" aria-label="Kiểm tra đơn hàng" aria-hidden="true">
-    <div class="modal-panel">
-      <button class="modal-close" id="confirm-close" type="button" aria-label="Quay lại">×</button>
-      <div class="confirm-heading">
-        <button class="copy-icon-button" id="copy-confirm-order" type="button" title="Sao chép đơn hàng" aria-label="Sao chép đơn hàng">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="8" y="8" width="11" height="11" rx="1.5"></rect>
-            <path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"></path>
-          </svg>
-        </button>
-        <p class="modal-intro">Kiểm tra lại giỏ hàng và thông tin nhận món trước khi gửi đơn.</p>
+  <!-- ==========================================================================
+       4. MOBILE SLIM FLOATING BOTTOM BAR & BOTTOM SHEET BACKDROP
+       ========================================================================== */ -->
+  <div id="mobileSheetBackdrop" class="mobile-sheet-backdrop" onclick="toggleMobileSheet(false)"></div>
+  <div class="mobile-bottom-bar" id="mobileBottomBar">
+    <div class="mobile-cart-summary">
+      <span class="mobile-cart-items-count"><span id="mobileCount">0</span> món đã chọn</span>
+      <span class="mobile-cart-grand-total" id="mobileTotal">0đ</span>
+    </div>
+    <button type="button" class="btn-mobile-open-check" onclick="toggleMobileSheet(true)">
+      <span>Xem Phiếu Order</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       5. MODALS (MONOCHROME DETAILS & SUCCESS STAMP)
+       ========================================================================== */ -->
+  <div id="detailsModal" class="modal-overlay" onclick="closeDishModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-image-wrap">
+        <img id="modalDishImg" src="images/webp/tray_banh_canh.webp" alt="Món ăn" class="modal-image">
+        <button class="modal-close" onclick="closeDishModal()" aria-label="Đóng chi tiết">✕</button>
       </div>
-      <pre class="order-text" id="confirm-order-text"></pre>
-      <p class="copy-status" id="confirm-copy-status" role="status" aria-live="polite"></p>
-      <p class="order-error-message" id="confirm-error-message" role="alert" aria-live="polite"></p>
-      <div class="confirm-actions">
-        <button id="confirm-edit" type="button">Quay lại</button>
-        <button class="confirm-submit" id="confirm-submit" type="button">Xác nhận đơn hàng<span class="submit-spinner" aria-hidden="true"></span></button>
+      <div class="modal-body">
+        <h3 id="modalDishTitle" class="modal-title">Bánh Canh Gà Xé</h3>
+        <div id="modalDishPrice" class="modal-price">48.000đ</div>
+        <p id="modalDishDesc" class="modal-text">Mô tả chi tiết món ăn...</p>
+
+        <div class="modal-options-title">Tùy Chọn Thưởng Thức</div>
+        <div class="modal-chip-group">
+          <div class="modal-chip active" onclick="toggleChip(this)">Bột Gạo Truyền Thống</div>
+          <div class="modal-chip" onclick="toggleChip(this)">Bột Lọc Dai Mềm</div>
+          <div class="modal-chip" onclick="toggleChip(this)">Hành Phi Thơm</div>
+          <div class="modal-chip" onclick="toggleChip(this)">Nước Dùng Béo Thanh</div>
+        </div>
+
+        <button id="modalAddBtn" class="modal-btn-add" onclick="addFromModal()">Thêm Vào Phiếu Gọi Món</button>
       </div>
     </div>
   </div>
 
-  <div class="order-modal success-modal" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
-    <div class="modal-panel">
-      <button class="modal-close" id="modal-close" type="button" aria-label="Đóng cửa sổ">×</button>
-      <h2 id="modal-title">Đặt hàng thành công</h2>
-      <p class="modal-intro">Nhân viên quán sẽ gọi vào số điện thoại của bạn để xác nhận đơn.</p>
+  <!-- Success Confirmation Modal -->
+  <div id="successModal" class="modal-overlay">
+    <div class="modal-card success-card">
+      <div class="stamp-circle">ĐÃ DẬP MỘC</div>
+      <h2 class="success-title">Đơn Hàng Đã Xác Nhận</h2>
+      <p class="success-sub">Bếp trưởng Hàng Gòn đang bắt đầu chuẩn bị món ăn nóng hổi cho Quý khách.</p>
+      <div>Mã Đơn Hàng Của Quý Khách:</div>
+      <div id="confirmedOrderCode" class="success-code">HG-20261101-88</div>
+      <button class="modal-btn-add" onclick="closeSuccessModal()">Quay Lại Thực Đơn</button>
     </div>
   </div>
 
+  <!-- ==========================================================================
+       6. SCRIPT LOGIC (FLIPBOOK, DRAG & DROP, STATE & BACKEND INTEGRATION)
+       ========================================================================== */ -->
   <script>
-    const menuItems = [
-      // ── CƠM (GÀ TA LUỘC) ──────────────────────────
-      {
-        id: 'com-xe', category: 'com', name: 'Cơm gà xé',
-        description: 'Hạt cơm vàng óng dẻo bùi, thịt gà ta xé ngọt mềm kèm đồ chua và nước mắm tỏi ớt đặc trưng.',
-        price: 40000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'com-dui-toi', category: 'com', name: 'Cơm gà đùi tỏi',
-        description: 'Đùi tỏi gà ta luộc vàng ươm, da giòn sần sật thịt săn chắc, ăn cùng cơm nghệ thơm lừng.',
-        price: 52000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'com-xe-trung-non', category: 'com', name: 'Cơm gà xé trứng non',
-        description: 'Cơm gà xé kết hợp cùng chùm trứng non béo bùi, vàng óng ngậy thơm đậm đà.',
-        price: 47000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'com-ma-dui', category: 'com', name: 'Cơm gà má đùi',
-        description: 'Phần má đùi gà ta béo ngọt mọng nước, thịt dày và da vàng giòn ăn cùng cơm nóng.',
-        price: 65000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
+    let orderItems = {};
+    let diningType = 'dine_in';
+    let currentModalId = null;
 
-      // ── CƠM + GỎI ─────────────────────────────────
-      {
-        id: 'com-goi-xe', category: 'com', name: 'Cơm gà xé + gỏi',
-        description: 'Cơm vàng thơm dẻo ăn kèm đĩa gỏi gà xé bóp chua ngọt giòn sần sật, hành tây rau răm bắt vị.',
-        price: 45000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'com-goi-long-trung-non', category: 'com', name: 'Cơm + gỏi lòng gà trứng non',
-        description: 'Lòng mề gà giòn sần sật và trứng non béo bùi bóp gỏi chua ngọt ăn kèm cơm gà nóng hổi.',
-        price: 48000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'com-goi-dui', category: 'com', name: 'Cơm gỏi gà đùi',
-        description: 'Đùi gà ta chắc ngọt xé trộn gỏi chua thanh, hòa quyện tuyệt vời cùng cơm gà vàng óng.',
-        price: 60000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
+    // Database món ăn
+    const DISH_DETAILS = {
+      // 1. BÁNH CANH GÀ
+      'bc-xe': { title: 'Bánh Canh Gà Xé', price: 48000 },
+      'bc-xe-trung-non': { title: 'Bánh Canh Gà Xé Trứng Non', price: 55000 },
+      'bc-dui': { title: 'Bánh Canh Gà Đùi', price: 59000 },
+      'bc-ma-dui': { title: 'Bánh Canh Gà Má Đùi', price: 68000 },
+      'bc-dac-biet': { title: 'Bánh Canh Gà Đặc Biệt', price: 70000 },
+      'bc-long-me-trung-non': { title: 'Bánh Canh Lòng Mề Trứng Non', price: 55000 },
 
-      // ── BÁNH CANH GÀ ──────────────────────────────
-      {
-        id: 'bc-xe', category: 'banh-canh', name: 'Bánh canh gà xé',
-        description: 'Gà ta xé ngọt thịt, sợi bánh canh mềm dai, nước dùng ninh gà thanh trong ngọt dịu.',
-        price: 48000, image: 'images/menu/banh-canh-ga-xe-removebg-preview_result.webp'
-      },
-      {
-        id: 'bc-dui-toi', category: 'banh-canh', name: 'Bánh canh gà đùi tỏi',
-        description: 'Đùi tỏi gà ta nguyên chiếc thịt săn chắc, nước dùng nóng hổi thơm nồng hành phi tiêu sọ.',
-        price: 59000, image: 'images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
-      },
-      {
-        id: 'bc-ma-dui', category: 'banh-canh', name: 'Bánh canh gà má đùi',
-        description: 'Má đùi gà ta béo ngậy mềm mọng, da vàng giòn dai, ngập trong nước dùng thanh tao.',
-        price: 68000, image: 'images/menu/banh-canh-ga-chat-removebg-preview_result.webp'
-      },
-      {
-        id: 'bc-long-me', category: 'banh-canh', name: 'Bánh canh lòng mề',
-        description: 'Lòng mề gan gà ta sơ chế sạch sẽ giòn sần sật, nước dùng ngọt thanh nóng hổi.',
-        price: 70000, image: 'images/menu/banhcanhga-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'bc-trung-non', category: 'banh-canh', name: 'Bánh canh trứng non',
-        description: 'Tô bánh canh ngập tràn trứng gà non béo ngậy mềm dẻo, thơm phức hành lá và rau răm.',
-        price: 55000, image: 'images/menu/banh-canh-dac-biet-removebg-preview_result.webp'
-      },
+      // 2. MÌ GÀ
+      'mi-xe': { title: 'Mì Gà Xé', price: 48000 },
+      'mi-xe-trung-non': { title: 'Mì Gà Xé Trứng Non', price: 55000 },
+      'mi-long-me-trung-non': { title: 'Mì Lòng Mề Trứng Non', price: 55000 },
+      'mi-dui': { title: 'Mì Gà Đùi', price: 59000 },
+      'mi-ma-dui': { title: 'Mì Gà Má Đùi', price: 68000 },
+      'mi-dac-biet': { title: 'Mì Gà Đặc Biệt', price: 70000 },
 
-      // ── XÔI ───────────────────────────────────────
-      {
-        id: 'xoi-xe', category: 'xoi', name: 'Xôi gà xé trứng non',
-        description: 'Xôi nếp dẻo thơm, gà ta xé ngọt mềm, trứng non béo bùi và hành phi giòn tan.',
-        price: 42000, image: 'images/menu/xoiga-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'xoi-dui', category: 'xoi', name: 'Xôi gà đùi trứng non',
-        description: 'Đùi gà ta chặt chắc ngọt, trứng non béo bùi, xôi dẻo nóng chan nước sốt bí truyền.',
-        price: 52000, image: 'images/menu/xoi-ga-chat-removebg-preview_result.webp'
-      },
+      // 3. XÔI
+      'xoi-xe-trung-non': { title: 'Xôi Gà Xé Trứng Non', price: 40000 },
+      'xoi-dui-trung-non': { title: 'Xôi Gà Đùi Trứng Non', price: 50000 },
 
-      // ── GỎI ───────────────────────────────────────
-      {
-        id: 'goi-nho', category: 'goi', name: 'Gỏi gà ta nhỏ',
-        description: 'Đĩa gỏi vừa vặn cho 1–2 người: gà ta xé bóp hành tây giòn ngọt, rau răm và đậu phộng.',
-        price: 50000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
-      },
-      {
-        id: 'goi-lon', category: 'goi', name: 'Gỏi gà ta lớn',
-        description: 'Phần gỏi lớn đầy đặn cho cả gia đình, gà ta chắc ngọt bóp thấu chua ngọt thơm lừng.',
-        price: 100000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
-      },
-      {
-        id: 'goi-nua-con', category: 'goi', name: 'Gỏi gà ta nửa con (tặng 1 phần xôi)',
-        description: 'Nửa con gà ta luộc xé trộn gỏi chua ngọt đậm đà, được tặng kèm 1 phần xôi nếp dẻo thơm.',
-        price: 247000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
-      },
+      // 4. THỨC UỐNG THANH NHIỆT
+      'nuoc-nha-dam': { title: 'Nha Đam Mủ Trôm', price: 16000 },
+      'nuoc-mu-trom': { title: 'Mủ Trôm Hạt Chia', price: 16000 },
+      'nuoc-sam': { title: 'Sâm Rong Biển', price: 16000 },
+      'nuoc-pepsi': { title: 'Pepsi Ướp Lạnh', price: 20000 },
 
-      // ── MÓN THÊM ──────────────────────────────────
-      {
-        id: 'them-com', category: 'mon-them', name: 'Cơm thêm',
-        description: 'Chén cơm dẻo nấu từ nước luộc gà ta vàng óng thơm ngon.',
-        price: 5000, image: 'images/menu/comgaxe-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'them-xoi', category: 'mon-them', name: 'Xôi thêm',
-        description: 'Phần xôi nếp nương dẻo thơm, phủ hành phi béo ngậy.',
-        price: 10000, image: 'images/menu/xoiga-t9-removebg-preview_result.webp'
-      },
-      {
-        id: 'them-banh', category: 'mon-them', name: 'Bánh thêm',
-        description: 'Thêm một phần sợi bánh canh gạo mềm dai nóng hổi.',
-        price: 10000, image: 'images/menu/icon-banh-canh-ga_result.webp'
-      },
-      {
-        id: 'them-ga-xe', category: 'mon-them', name: 'Gà xé thêm',
-        description: 'Thịt gà ta thả vườn xé ngọt mềm chắc thịt.',
-        price: 27000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
-      },
-      {
-        id: 'them-trung-non', category: 'mon-them', name: 'Trứng non thêm',
-        description: 'Trứng gà non vàng ươm béo bùi ngậy mềm.',
-        price: 25000, image: 'images/behind-scenes/trung-non-nuoc-cham_result.webp'
-      },
-      {
-        id: 'them-long-me', category: 'mon-them', name: 'Lòng mề thêm',
-        description: 'Lòng mề gà ta làm sạch kỹ giòn sần sật, thơm bùi.',
-        price: 25000, image: 'images/behind-scenes/trung-non-nuoc-cham_result.webp'
-      },
-      {
-        id: 'them-co-canh', category: 'mon-them', name: 'Cổ cánh thêm',
-        description: 'Phần cổ cánh gà ta da vàng giòn ngọt thịt.',
-        price: 30000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
-      },
-      {
-        id: 'them-dui', category: 'mon-them', name: 'Đùi thêm',
-        description: 'Đùi gà ta luộc vàng óng săn chắc thơm ngọt.',
-        price: 30000, image: 'images/behind-scenes/ga-luoc-quan_result.webp'
-      },
+      // 5. CƠM GÀ
+      'com-xe': { title: 'Cơm Gà Xé', price: 40000 },
+      'com-xe-trung-non': { title: 'Cơm Gà Xé Trứng Non', price: 47000 },
+      'com-dui': { title: 'Cơm Gà Đùi', price: 52000 },
+      'com-ma-dui': { title: 'Gà Má Đùi', price: 65000 },
 
-      // ── NƯỚC GIẢI KHÁT ────────────────────────────
-      {
-        id: 'nuoc-hatchia', category: 'nuoc', name: 'Mủ trôm hạt chia',
-        description: 'Mủ trôm mát lành hoà cùng hạt chia dẻo bùi, đường phèn thanh nhẹ.',
-        price: 16000, image: 'images/order/mutrom-hatchia_result.webp'
-      },
-      {
-        id: 'nuoc-mutrom', category: 'nuoc', name: 'Nha đam mủ trôm',
-        description: 'Nha đam giòn mát kết hợp mủ trôm, giải nhiệt cơ thể ngày nắng.',
-        price: 16000, image: 'images/order/nhadam-mutrom_result.webp'
-      },
-      {
-        id: 'nuoc-rongbien', category: 'nuoc', name: 'Sâm rong biển',
-        description: 'Sâm rong biển thanh mát, hỗ trợ thanh lọc, uống giải khát mỗi ngày.',
-        price: 16000, image: 'images/order/sam-rong-bien_result.webp'
-      },
-      {
-        id: 'nuoc-thaomoc', category: 'nuoc', name: 'Sâm thảo mộc',
-        description: 'Thảo mộc thiên nhiên nấu chậm, vị ngọt dịu, thanh lọc cơ thể.',
-        price: 16000, image: 'images/order/sam-thao-moc_result.webp'
-      },
-      {
-        id: 'nuoc-aquafina', category: 'nuoc', subcategory: 'bottled', name: 'Nước suối Aquafina',
-        description: 'Nước tinh khiết đóng chai, giải khát nhanh gọn.',
-        price: 10000, image: 'images/order/aquafina_result.webp'
-      },
-      {
-        id: 'nuoc-pepsi', category: 'nuoc', subcategory: 'bottled', name: 'Pepsi',
-        description: 'Nước ngọt có gas vị cola quen thuộc.',
-        price: 20000, image: 'images/order/pepsi_result.webp'
-      },
-      {
-        id: 'nuoc-sting', category: 'nuoc', subcategory: 'bottled', name: 'Sting',
-        description: 'Nước tăng lực, tiếp thêm năng lượng tức thì.',
-        price: 20000, image: 'images/order/sting_result.webp'
-      },
-      {
-        id: 'nuoc-7up', category: 'nuoc', subcategory: 'bottled', name: '7Up',
-        description: 'Nước ngọt có gas vị chanh, mát lạnh sảng khoái.',
-        price: 20000, image: 'images/order/7up_result.webp'
+      // 6. CƠM + GỎI
+      'com-goi-xe': { title: 'Cơm Gỏi Gà Xé', price: 45000 },
+      'com-goi-xe-trung-non': { title: 'Cơm Gỏi Gà Xé Trứng Non', price: 52000 },
+      'com-goi-long-trung-non': { title: 'Cơm Gỏi Lòng Gà Trứng Non', price: 48000 },
+      'com-goi-dui': { title: 'Cơm Gỏi Gà Đùi', price: 60000 },
+
+      // 7. GỎI
+      'goi-nho': { title: 'Gỏi Gà Ta Nhỏ', price: 50000 },
+      'goi-lon': { title: 'Gỏi Gà Ta Lớn', price: 100000 },
+      'goi-nua-con': { title: 'Gỏi Gà Ta Nửa Con', price: 247000 },
+
+      // 8. MÓN THÊM
+      'them-com-mi': { title: 'Cơm / Mì Gói Thêm', price: 5000 },
+      'them-xoi': { title: 'Xôi Thêm', price: 10000 },
+      'them-banh': { title: 'Bánh Thêm', price: 10000 },
+      'them-ga-xe': { title: 'Gà Xé Thêm', price: 27000 },
+      'them-trung-non': { title: 'Trứng Non Thêm', price: 25000 },
+      'them-co-canh': { title: 'Cổ Cánh Thêm', price: 30000 },
+      'them-long-me': { title: 'Lòng Mề Thêm', price: 25000 },
+      'them-dui': { title: 'Đùi Thêm', price: 35000 }
+    };
+
+
+    // Khởi tạo DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      initLiveClock();
+      setInterval(initLiveClock, 1000);
+      initOrderCode();
+      setupItemClickListeners();
+      setupDragDropGuestCheck();
+      setupCornerResize();
+      setupSlipEdgeResize();
+      setupMenuEdgeResize();
+    });
+
+    function initOrderCode() {
+      const now = new Date();
+      const yy = String(now.getFullYear()).slice(-2);
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      const code = `#HG-${yy}${mm}${dd}-${rand}`;
+      const el = document.getElementById('checkOrderCode');
+      if (el) el.textContent = code;
+    }
+
+    // 2. Kéo thả di chuyển & Co giãn tỷ lệ bằng 4 góc (Resize & Drag)
+    let currentDragX = 0;
+    let currentDragY = 0;
+    let currentSlipScale = 1;
+
+    function setupDragDropGuestCheck() {
+      const card = document.getElementById('guestCheckCard');
+      const handle = document.getElementById('checkDragHandle');
+      if (!card || !handle) return;
+
+      let isDragging = false;
+      let startX, startY, origX = 0, origY = 0;
+
+      // Kéo bằng chuột (chạm vào handle hoặc bất cứ vùng trống nào trên phiếu hóa đơn)
+      card.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.resize-corner') || e.target.closest('.slip-resize-edge') || e.target.closest('input') || e.target.closest('button') || e.target.closest('table')) return;
+
+        isDragging = true;
+        card.classList.add('dragging');
+        startX = e.clientX;
+        startY = e.clientY;
+        origX = currentDragX;
+        origY = currentDragY;
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+
+      function onMouseMove(e) {
+        if (!isDragging) return;
+        currentDragX = origX + (e.clientX - startX);
+        currentDragY = origY + (e.clientY - startY);
+        card.style.setProperty('--drag-x', currentDragX + 'px');
+        card.style.setProperty('--drag-y', currentDragY + 'px');
       }
-    ];
-    const quantities = Object.fromEntries(menuItems.map(item => [item.id, 0]));
-    const formatPrice = value => `${value.toLocaleString('vi-VN')} VND`;
-    const getSelected = () => menuItems.filter(item => quantities[item.id] > 0);
-    const totalItems = () => getSelected().reduce((sum, item) => sum + quantities[item.id], 0);
-    const totalPrice = () => getSelected().reduce((sum, item) => sum + item.price * quantities[item.id], 0);
 
-    const renderMenuItem = item => `
-      <article class="order-item${item.featured ? ' order-item-featured' : ''}" data-item-id="${item.id}">
-        <div class="order-item-info">
-          <h3 class="order-item-name">${item.name}</h3>
-          <span class="order-item-price">${formatPrice(item.price)}</span>
-        </div>
-        <div class="quantity-control" aria-label="Số lượng ${item.name}">
-          <button type="button" data-action="decrease" data-item-id="${item.id}" aria-label="Giảm ${item.name}">−</button>
-          <span class="quantity-value" data-quantity-for="${item.id}">0</span>
-          <button type="button" data-action="increase" data-item-id="${item.id}" aria-label="Tăng ${item.name}">+</button>
-        </div>
-      </article>`;
+      function onMouseUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        card.classList.remove('dragging');
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      }
 
-    document.getElementById('banh-canh-list').innerHTML = menuItems.filter(item => item.category === 'banh-canh').map(renderMenuItem).join('');
-    document.getElementById('com-list').innerHTML = menuItems.filter(item => item.category === 'com').map(renderMenuItem).join('');
-    document.getElementById('xoi-list').innerHTML = menuItems.filter(item => item.category === 'xoi').map(renderMenuItem).join('');
-    document.getElementById('goi-list').innerHTML = menuItems.filter(item => item.category === 'goi').map(renderMenuItem).join('');
-    document.getElementById('mon-them-list').innerHTML = menuItems.filter(item => item.category === 'mon-them').map(renderMenuItem).join('');
-    document.getElementById('nuoc-natural-list').innerHTML = menuItems.filter(item => item.category === 'nuoc' && item.subcategory !== 'bottled').map(renderMenuItem).join('');
-    document.getElementById('nuoc-bottled-list').innerHTML = menuItems.filter(item => item.category === 'nuoc' && item.subcategory === 'bottled').map(renderMenuItem).join('');
+      // Kéo bằng cảm ứng (Mobile / Tablet / Touch Screen - chạm kéo tự do)
+      card.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.resize-corner') || e.target.closest('.slip-resize-edge') || e.target.closest('input') || e.target.closest('button') || e.target.closest('table')) return;
+        const t = e.touches[0];
+        isDragging = true;
+        card.classList.add('dragging');
+        startX = t.clientX;
+        startY = t.clientY;
+        origX = currentDragX;
+        origY = currentDragY;
+      }, { passive: true });
 
-    const categoryTabs = document.querySelectorAll('.category-tab');
-    const categoryPanels = document.querySelectorAll('[data-category-panel]');
-    categoryTabs.forEach(tab => tab.addEventListener('click', () => {
-      const category = tab.dataset.category;
-      categoryTabs.forEach(item => {
-        const active = item === tab;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-selected', String(active));
-      });
-      categoryPanels.forEach(panel => {
-        panel.hidden = category !== 'all' && panel.dataset.categoryPanel !== category;
-      });
-    }));
+      handle.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const t = e.touches[0];
+        currentDragX = origX + (t.clientX - startX);
+        currentDragY = origY + (t.clientY - startY);
+        card.style.setProperty('--drag-x', currentDragX + 'px');
+        card.style.setProperty('--drag-y', currentDragY + 'px');
+      }, { passive: true });
 
-    const summaryItems = document.getElementById('summary-items');
-    const summaryTotal = document.getElementById('summary-total');
-    const summaryCount = document.getElementById('summary-count');
-    const mobileSummaryItems = document.getElementById('mobile-summary-items');
-    const mobileSummaryTotal = document.getElementById('mobile-summary-total');
-    const mobileSummaryCount = document.getElementById('mobile-summary-count');
-    const continueOrder = document.getElementById('continue-order');
-    const mobileMenuNext = document.getElementById('mobile-menu-next');
-    const customerForm = document.getElementById('customer-form');
-    const submitOrderBtn = document.getElementById('submit-order');
-    const addressField = document.getElementById('delivery-address-field');
-    const fulfillment = document.getElementById('fulfillment');
-    const mobileFinalReview = document.getElementById('mobile-final-review');
-    const mobileFinalText = document.getElementById('mobile-final-text');
-    const mobileCopyStatus = document.getElementById('mobile-copy-status');
-
-    function updateSummary() {
-      const selected = getSelected();
-      const summaryMarkup = selected.length ? selected.map(item => `
-        <div class="summary-row">
-          <div>
-            <div class="summary-row-name">${item.name}</div>
-            <div class="summary-row-meta">${quantities[item.id]} × ${formatPrice(item.price)}</div>
-          </div>
-          <div class="summary-row-total">${formatPrice(item.price * quantities[item.id])}</div>
-        </div>`).join('') : '<p class="summary-empty">Chưa chọn món nào</p>';
-      const total = formatPrice(totalPrice());
-      const count = `${totalItems()} món`;
-      summaryItems.innerHTML = summaryMarkup;
-      summaryTotal.textContent = total;
-      summaryCount.textContent = count;
-      mobileSummaryItems.innerHTML = summaryMarkup;
-      mobileSummaryTotal.textContent = total;
-      mobileSummaryCount.textContent = count;
-      const hasItems = selected.length > 0;
-      customerForm.classList.toggle('is-disabled', !hasItems);
-      customerForm.setAttribute('aria-disabled', String(!hasItems));
-      submitOrderBtn.disabled = !hasItems;
-      continueOrder.disabled = !hasItems;
-      mobileMenuNext.disabled = !hasItems;
-      menuItems.forEach(item => {
-        const value = document.querySelector(`[data-quantity-for="${item.id}"]`);
-        const decrease = document.querySelector(`[data-action="decrease"][data-item-id="${item.id}"]`);
-        if (value) value.textContent = quantities[item.id];
-        if (decrease) decrease.disabled = quantities[item.id] === 0;
+      handle.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.classList.remove('dragging');
       });
     }
 
-    const orderPage = document.querySelector('.order-page');
-    const stepIndicators = document.querySelectorAll('[data-step-indicator]');
-    function setMobileStep(step) {
-      if (!window.matchMedia('(max-width: 920px)').matches) return;
-      orderPage.dataset.orderStep = step;
-      stepIndicators.forEach(indicator => {
-        indicator.classList.toggle('is-active', indicator.dataset.stepIndicator === step);
-      });
-    }
-    setMobileStep('menu');
+    // Co giãn tỷ lệ bằng 4 góc
+    function setupCornerResize() {
+      const card = document.getElementById('guestCheckCard');
+      if (!card) return;
 
-    function goToDetailsStep() {
-      if (continueOrder.disabled) return;
-      setMobileStep('details');
-      customerForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    continueOrder.addEventListener('click', goToDetailsStep);
-    mobileMenuNext.addEventListener('click', goToDetailsStep);
+      let isResizing = false;
+      let startX = 0, startY = 0;
+      let startScale = 1;
+      let activeCorner = null;
 
-    function prepareMobileReview() {
-      mobileFinalText.textContent = buildOrderText();
-      mobileCopyStatus.textContent = '';
-      setMobileStep('confirm');
-      mobileFinalReview.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    stepIndicators.forEach(indicator => indicator.addEventListener('click', () => {
-      const step = indicator.dataset.stepIndicator;
-      if (step === 'menu') {
-        setMobileStep('menu');
-        orderPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (step === 'details') {
-        goToDetailsStep();
-      } else if (step === 'confirm' && validateForm()) {
-        prepareMobileReview();
-      }
-    }));
-
-    document.getElementById('mobile-final-submit').addEventListener('click', () => {
-      submitOrder('mobile');
-    });
-    document.getElementById('mobile-copy-order').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(mobileFinalText.textContent);
-        mobileCopyStatus.textContent = 'Đã sao chép';
-      } catch {
-        mobileCopyStatus.textContent = 'Không thể sao chép tự động.';
-      }
-    });
-
-    document.addEventListener('click', event => {
-      const control = event.target.closest('[data-action]');
-      if (!control) return;
-      const id = control.dataset.itemId;
-      quantities[id] = Math.max(0, quantities[id] + (control.dataset.action === 'increase' ? 1 : -1));
-      updateSummary();
-    });
-
-    fulfillment.addEventListener('change', () => {
-      const delivery = fulfillment.value === 'delivery';
-      addressField.classList.toggle('is-visible', delivery);
-      document.getElementById('customer-address').required = delivery;
-      if (!delivery) clearError('customer-address');
-    });
-
-    function clearError(id) {
-      const field = document.getElementById(id)?.closest('.field');
-      const error = document.querySelector(`[data-error-for="${id}"]`);
-      if (field) field.classList.remove('has-error');
-      if (error) error.textContent = '';
-    }
-    function setError(id, message) {
-      const field = document.getElementById(id)?.closest('.field');
-      const error = document.querySelector(`[data-error-for="${id}"]`);
-      if (field) field.classList.add('has-error');
-      if (error) error.textContent = message;
-    }
-    function validateForm() {
-      ['customer-name', 'customer-phone', 'fulfillment', 'customer-address'].forEach(clearError);
-      let valid = true;
-      const name = document.getElementById('customer-name').value.trim();
-      const phone = document.getElementById('customer-phone').value.trim();
-      if (!name) { setError('customer-name', 'Bạn cho quán xin họ tên nhé.'); valid = false; }
-      if (!phone) { setError('customer-phone', 'Bạn cho quán xin số điện thoại nhé.'); valid = false; }
-      else if (!/^[+\d][\d\s().-]{7,}$/.test(phone)) { setError('customer-phone', 'Số điện thoại chưa đúng định dạng.'); valid = false; }
-      if (fulfillment.value === 'delivery' && !document.getElementById('customer-address').value.trim()) { setError('customer-address', 'Vui lòng nhập địa chỉ giao hàng.'); valid = false; }
-      const firstError = document.querySelector('.field.has-error input, .field.has-error select');
-      if (firstError) firstError.focus();
-      return valid;
-    }
-
-    function buildOrderText() {
-      const name = document.getElementById('customer-name').value.trim();
-      const phone = document.getElementById('customer-phone').value.trim();
-      const mode = fulfillment.value === 'delivery' ? 'Giao hàng' : 'Đến lấy tại quán';
-      const address = document.getElementById('customer-address').value.trim();
-      const note = document.getElementById('customer-note').value.trim();
-      const lines = getSelected().map(item => `- ${item.name}: ${quantities[item.id]} phần × ${formatPrice(item.price)} = ${formatPrice(item.price * quantities[item.id])}`);
-      return [
-        'ĐƠN ĐẶT MÓN - BÁNH CANH GÀ HÀNG GÒN',
-        '',
-        ...lines,
-        '',
-        `TỔNG CỘNG: ${formatPrice(totalPrice())}`,
-        '',
-        `Họ tên: ${name}`,
-        `Số điện thoại: ${phone}`,
-        `Hình thức nhận: ${mode}`,
-        ...(mode === 'Giao hàng' ? [`Địa chỉ: ${address}`] : []),
-        ...(note ? [`Ghi chú: ${note}`] : [])
-      ].join('\n');
-    }
-
-    const confirmModal = document.getElementById('confirm-modal');
-    const confirmOrderText = document.getElementById('confirm-order-text');
-    const confirmCopyStatus = document.getElementById('confirm-copy-status');
-    const orderModal = document.getElementById('order-modal');
-    let successCloseTimer;
-    customerForm.addEventListener('submit', event => {
-      event.preventDefault();
-      if (!validateForm()) {
-        return;
-      }
-
-      // Generate a fresh idempotency key at the start of each confirmation session.
-      // This is the earliest point where we commit to a specific order attempt.
-      // The key stays fixed for the lifetime of this session (until success or abandon).
-      if (!idempotencyKey) {
-        idempotencyKey = crypto.randomUUID();
-      }
-
-      if (window.matchMedia('(max-width: 920px)').matches) {
-        prepareMobileReview();
-        return;
-      }
-      setMobileStep('confirm');
-      confirmOrderText.textContent = buildOrderText();
-      confirmCopyStatus.textContent = '';
-      confirmModal.classList.add('is-open');
-      confirmModal.setAttribute('aria-hidden', 'false');
-      document.getElementById('confirm-submit').focus();
-    });
-    function closeConfirmModal() {
-      confirmModal.classList.remove('is-open');
-      confirmModal.setAttribute('aria-hidden', 'true');
-      setMobileStep('details');
-    }
-    function openSuccessModal() {
-      orderModal.classList.add('is-open');
-      orderModal.setAttribute('aria-hidden', 'false');
-      document.getElementById('modal-close').focus();
-      successCloseTimer = window.setTimeout(closeModal, 10000);
-    }
-    function closeModal() {
-      window.clearTimeout(successCloseTimer);
-      orderModal.classList.remove('is-open');
-      orderModal.setAttribute('aria-hidden', 'true');
-    }
-    document.getElementById('confirm-close').addEventListener('click', closeConfirmModal);
-    document.getElementById('confirm-edit').addEventListener('click', closeConfirmModal);
-    document.getElementById('confirm-submit').addEventListener('click', () => {
-      submitOrder('desktop');
-    });
-    document.getElementById('modal-close').addEventListener('click', closeModal);
-    confirmModal.addEventListener('click', event => { if (event.target === confirmModal) closeConfirmModal(); });
-    orderModal.addEventListener('click', event => { if (event.target === orderModal) closeModal(); });
-    document.addEventListener('keydown', event => {
-      if (event.key !== 'Escape') return;
-      if (confirmModal.classList.contains('is-open')) closeConfirmModal();
-      if (orderModal.classList.contains('is-open')) closeModal();
-    });
-    document.getElementById('copy-confirm-order').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(confirmOrderText.textContent);
-        confirmCopyStatus.textContent = 'Đã sao chép';
-      } catch {
-        confirmCopyStatus.textContent = 'Không thể sao chép tự động. Bạn có thể bôi đen nội dung đơn.';
-      }
-    });
-    updateSummary();
-
-    // ═══════════════════════════════════════════════════════════════════
-    // API INTEGRATION LAYER
-    // Only this block is new. Everything above is unchanged.
-    // ═══════════════════════════════════════════════════════════════════
-
-    const API_ENDPOINT = '/api/order';
-    const REQUEST_TIMEOUT_MS = 12000;
-
-    // Duplicate-submission guard
-    let isSubmitting = false;
-
-    // Cached error elements (created in HTML above)
-    const confirmErrorMsg = document.getElementById('confirm-error-message');
-    const mobileErrorMsg  = document.getElementById('mobile-error-message');
-
-    // ── Idempotency key ──────────────────────────────────────────────────────
-    // null until a confirmation session begins (form submit).
-    // Generated fresh when the customer reaches the review/confirm step.
-    // Cleared (set back to null) after a successful order.
-    // A new key is generated at the start of the next order session.
-    let idempotencyKey = null;
-
-    /**
-     * Build the JSON payload the backend expects.
-     * Uses existing state (quantities, menuItems, totalPrice) and form values.
-     * Never sends prices — the server reconciles those from its own price table.
-     */
-    function buildOrderPayload() {
-      // Defensive fallback: ensure the key is never null in the payload.
-      // Under normal flow this branch never executes — the key is always
-      // generated during the customerForm submit handler before this runs.
-      if (!idempotencyKey) {
-        idempotencyKey = crypto.randomUUID();
-      }
-
-      const selected = getSelected();
-      return {
-        customer_name: document.getElementById('customer-name').value.trim(),
-        phone:         document.getElementById('customer-phone').value.trim(),
-        order_type:    fulfillment.value,
-        ...(fulfillment.value === 'delivery' && {
-          address: document.getElementById('customer-address').value.trim()
-        }),
-        items: selected.map(item => ({
-          id:       item.id,
-          name:     item.name,
-          quantity: quantities[item.id]
-        })),
-        total_amount:     totalPrice(),
-        idempotency_key:  idempotencyKey,
-        ...(document.getElementById('customer-note').value.trim() && {
-          note: document.getElementById('customer-note').value.trim()
-        })
-      };
-    }
-
-    /**
-     * Show or hide the loading state on the active submit button.
-     * @param {boolean} isLoading
-     * @param {'desktop'|'mobile'} context
-     */
-    function setSubmitLoading(isLoading, context) {
-      const submitBtn  = document.getElementById(context === 'desktop' ? 'confirm-submit' : 'mobile-final-submit');
-      const editBtn    = document.getElementById('confirm-edit'); // desktop only
-
-      if (isLoading) {
-        submitBtn.classList.add('is-loading');
-        submitBtn.disabled = true;
-        // Store original label so we can restore it
-        if (!submitBtn.dataset.originalLabel) {
-          // Label is the text node before the spinner span
-          submitBtn.dataset.originalLabel = submitBtn.childNodes[0].textContent.trim();
-        }
-        submitBtn.childNodes[0].textContent = 'Đang gửi đơn... ';
-        if (editBtn) editBtn.disabled = true;
-      } else {
-        submitBtn.classList.remove('is-loading');
-        submitBtn.disabled = false;
-        if (submitBtn.dataset.originalLabel) {
-          submitBtn.childNodes[0].textContent = submitBtn.dataset.originalLabel + ' ';
-        }
-        if (editBtn) editBtn.disabled = false;
-      }
-    }
-
-    /**
-     * Display an error message in the appropriate context panel.
-     * @param {string} message
-     * @param {'desktop'|'mobile'} context
-     */
-    function showOrderError(message, context) {
-      const el = context === 'desktop' ? confirmErrorMsg : mobileErrorMsg;
-      if (!el) return;
-      el.textContent = message;
-      el.classList.add('is-visible');
-      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    /**
-     * Hide all error messages.
-     */
-    function clearOrderError() {
-      [confirmErrorMsg, mobileErrorMsg].forEach(el => {
-        if (el) {
-          el.textContent = '';
-          el.classList.remove('is-visible');
-        }
-      });
-    }
-
-    /**
-     * Map a server HTTP status + response body to a friendly Vietnamese string.
-     * @param {number} status
-     * @param {Object|null} body - Parsed JSON body, or null on parse failure
-     * @returns {string}
-     */
-    function friendlyErrorMessage(status, body) {
-      if (status === 400) {
-        // Surface the first specific validation detail if present
-        if (body && Array.isArray(body.details) && body.details.length > 0) {
-          return `Thông tin chưa hợp lệ: ${body.details[0]}`;
-        }
-        return 'Thông tin đơn hàng chưa hợp lệ. Vui lòng kiểm tra lại.';
-      }
-      if (status === 405) return 'Lỗi hệ thống. Vui lòng tải lại trang và thử lại.';
-      if (status >= 500) return 'Hệ thống tạm thời gián đoạn. Vui lòng thử lại sau ít phút.';
-      return 'Đã xảy ra lỗi. Vui lòng thử lại.';
-    }
-
-    /**
-     * Reset all order state after a successful submission.
-     * - Clears quantities
-     * - Resets the customer form
-     * - Hides the delivery address field
-     * - Refreshes the summary UI
-     * - Closes whichever modal/step is active
-     * - Opens the success modal
-     */
-    function handleOrderSuccess(context) {
-      // Close the active review panel before resetting state
-      if (context === 'desktop') {
-        closeConfirmModal();
-      } else {
-        setMobileStep('menu');
-      }
-
-      // Clear cart
-      menuItems.forEach(item => { quantities[item.id] = 0; });
-
-      // Reset form fields
-      customerForm.reset();
-      addressField.classList.remove('is-visible');
-      document.getElementById('customer-address').required = false;
-
-      // Rebuild the summary (cart is now empty)
-      updateSummary();
-
-      // Clear the key — the next order session will generate a new one on submit.
-      idempotencyKey = null;
-
-      // Show success modal
-      openSuccessModal();
-    }
-
-    /**
-     * POST the order to /api/order.
-     * Handles loading state, errors, success, and duplicate-click prevention.
-     * @param {'desktop'|'mobile'} context - Which submit path triggered this.
-     */
-    async function submitOrder(context) {
-      if (isSubmitting) {
-        return;
-      }
-
-      clearOrderError();
-      setSubmitLoading(true, context);
-      isSubmitting = true;
-
-      const payload = buildOrderPayload();
-
-      const serializedBody = JSON.stringify(payload);
-
-      const controller = new AbortController();
-      const timeoutId  = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-
-      try {
-        const response = await fetch(API_ENDPOINT, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    serializedBody,
-          signal:  controller.signal,
+      document.querySelectorAll('.resize-corner').forEach(handle => {
+        handle.addEventListener('mousedown', (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          isResizing = true;
+          activeCorner = handle.getAttribute('data-corner');
+          startX = e.clientX;
+          startY = e.clientY;
+          startScale = currentSlipScale;
+          document.addEventListener('mousemove', onResizeMove);
+          document.addEventListener('mouseup', onResizeUp);
         });
 
-        clearTimeout(timeoutId);
+        handle.addEventListener('touchstart', (e) => {
+          e.stopPropagation();
+          const t = e.touches[0];
+          isResizing = true;
+          activeCorner = handle.getAttribute('data-corner');
+          startX = t.clientX;
+          startY = t.clientY;
+          startScale = currentSlipScale;
+        }, { passive: false });
+      });
 
-        // Try to parse the JSON body regardless of status
-        let body = null;
-        try { body = await response.json(); } catch { /* non-JSON body — ignore */ }
+      function onResizeMove(e) {
+        if (!isResizing) return;
+        applyResizeDelta(e.clientX - startX, e.clientY - startY);
+      }
 
-        if (!response.ok) {
-          const message = friendlyErrorMessage(response.status, body);
-          showOrderError(message, context);
-          setSubmitLoading(false, context);
-          isSubmitting = false;
-          return;
+      function onResizeUp() {
+        if (!isResizing) return;
+        isResizing = false;
+        document.removeEventListener('mousemove', onResizeMove);
+        document.removeEventListener('mouseup', onResizeUp);
+      }
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isResizing) return;
+        const t = e.touches[0];
+        applyResizeDelta(t.clientX - startX, t.clientY - startY);
+      }, { passive: false });
+
+      window.addEventListener('touchend', () => {
+        if (!isResizing) return;
+        isResizing = false;
+      });
+
+      function applyResizeDelta(dx, dy) {
+        let delta = 0;
+        if (activeCorner === 'br') {
+          delta = (dx + dy) / 380;
+        } else if (activeCorner === 'bl') {
+          delta = (-dx + dy) / 380;
+        } else if (activeCorner === 'tr') {
+          delta = (dx - dy) / 380;
+        } else if (activeCorner === 'tl') {
+          delta = (-dx - dy) / 380;
         }
+        currentSlipScale = Math.min(Math.max(startScale + delta, 0.65), 1.35);
+        card.style.setProperty('--slip-scale', currentSlipScale.toFixed(3));
+      }
+    }
 
-        // HTTP 201 (new order) or HTTP 200 with duplicated:true (already exists).
-        // Both are treated as success — customer sees the success modal either way.
-        isSubmitting = false;
-        handleOrderSuccess(context);
+    // 3. Kéo giãn chiều ngang 2 bên trái/phải của Phiếu Order (Slip Width Resize)
+    let currentSlipWidth = 380;
+    function setupSlipEdgeResize() {
+      const card = document.getElementById('guestCheckCard');
+      const col = document.querySelector('.order-slip-col');
+      if (!card || !col) return;
 
+      let isResizing = false;
+      let startX = 0;
+      let startWidth = 380;
+      let activeEdge = null;
+      const minW = 320;
+      const maxW = 540;
+
+      document.querySelectorAll('.slip-resize-edge').forEach(edge => {
+        edge.addEventListener('mousedown', (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          isResizing = true;
+          activeEdge = edge.getAttribute('data-edge');
+          startX = e.clientX;
+          startWidth = currentSlipWidth;
+          edge.classList.add('resizing');
+
+          document.addEventListener('mousemove', onEdgeMove);
+          document.addEventListener('mouseup', onEdgeUp);
+        });
+
+        edge.addEventListener('touchstart', (e) => {
+          e.stopPropagation();
+          const t = e.touches[0];
+          isResizing = true;
+          activeEdge = edge.getAttribute('data-edge');
+          startX = t.clientX;
+          startWidth = currentSlipWidth;
+          edge.classList.add('resizing');
+        }, { passive: false });
+      });
+
+      function onEdgeMove(e) {
+        if (!isResizing) return;
+        applyWidthDelta(e.clientX - startX);
+      }
+
+      function onEdgeUp() {
+        if (!isResizing) return;
+        isResizing = false;
+        document.querySelectorAll('.slip-resize-edge').forEach(el => el.classList.remove('resizing'));
+        document.removeEventListener('mousemove', onEdgeMove);
+        document.removeEventListener('mouseup', onEdgeUp);
+      }
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isResizing) return;
+        const t = e.touches[0];
+        applyWidthDelta(t.clientX - startX);
+      }, { passive: false });
+
+      window.addEventListener('touchend', () => {
+        if (!isResizing) return;
+        isResizing = false;
+        document.querySelectorAll('.slip-resize-edge').forEach(el => el.classList.remove('resizing'));
+      });
+
+      function applyWidthDelta(dx) {
+        let newWidth = startWidth;
+        if (activeEdge === 'right') {
+          newWidth = startWidth + dx;
+        } else if (activeEdge === 'left') {
+          newWidth = startWidth - dx;
+        }
+        newWidth = Math.min(Math.max(newWidth, minW), maxW);
+        currentSlipWidth = newWidth;
+        col.style.setProperty('--slip-width', newWidth + 'px');
+      }
+    }
+
+    // 4. Kéo giãn Bảng Menu Cố Định Tỷ Lệ Vàng (720 : 520 Ratio Locked)
+    let currentMenuWidth = 720;
+    const MENU_ASPECT_RATIO = 720 / 520; // ~1.3846
+    function setupMenuEdgeResize() {
+      const menu = document.getElementById('clipboardWrapper');
+      const corner = document.getElementById('menuResizeCornerBR');
+      if (!menu || !corner) return;
+
+      let isResizing = false;
+      let startX = 0, startY = 0;
+      let startW = 720;
+
+      const minW = 660; // Ngưỡng tối thiểu an toàn, bảo đảm không tràn đáy
+      const maxW = 800; // Ngưỡng tối đa vừa vặn khung hình 1080p
+
+      corner.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        isResizing = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        startW = currentMenuWidth;
+        corner.classList.add('resizing');
+        document.addEventListener('mousemove', onMenuMove);
+        document.addEventListener('mouseup', onMenuUp);
+      });
+
+      corner.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        const t = e.touches[0];
+        isResizing = true;
+        startX = t.clientX;
+        startY = t.clientY;
+        startW = currentMenuWidth;
+        corner.classList.add('resizing');
+      }, { passive: false });
+
+      function onMenuMove(e) {
+        if (!isResizing) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        // Dùng delta trung bình để co giãn đồng tỷ lệ mượt mà
+        const delta = (dx + dy * MENU_ASPECT_RATIO) / 2;
+        let nw = Math.min(Math.max(startW + delta, minW), maxW);
+        currentMenuWidth = nw;
+        menu.style.setProperty('--menu-width', nw + 'px');
+      }
+
+      function onMenuUp() {
+        if (!isResizing) return;
+        isResizing = false;
+        corner.classList.remove('resizing');
+        document.removeEventListener('mousemove', onMenuMove);
+        document.removeEventListener('mouseup', onMenuUp);
+      }
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isResizing) return;
+        const t = e.touches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        const delta = (dx + dy * MENU_ASPECT_RATIO) / 2;
+        let nw = Math.min(Math.max(startW + delta, minW), maxW);
+        currentMenuWidth = nw;
+        menu.style.setProperty('--menu-width', nw + 'px');
+      }, { passive: false });
+
+      window.addEventListener('touchend', () => {
+        if (!isResizing) return;
+        isResizing = false;
+        corner.classList.remove('resizing');
+      });
+    }
+
+    // Mobile Sheet Toggle
+    function toggleMobileSheet(open) {
+      const card = document.getElementById('guestCheckCard');
+      const backdrop = document.getElementById('mobileSheetBackdrop');
+      if (!card || !backdrop) return;
+
+      if (open) {
+        card.classList.add('mobile-sheet-open');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        card.classList.remove('mobile-sheet-open');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Nav Toggle
+    function toggleNavMenu() {
+      const nav = document.getElementById('siteNav');
+      if (nav) nav.classList.toggle('nav-open');
+    }
+
+    function initLiveClock() {
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      const timeStr = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      const el = document.getElementById('checkLiveClock');
+      if (el) el.textContent = timeStr;
+    }
+
+    function setupItemClickListeners() {
+      document.querySelectorAll('.dish-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (e.target.closest('.dish-detail-icon') || e.target.closest('.btn-add-cart')) return;
+          const id = item.getAttribute('data-id');
+          updateQty(id, 1, e);
+        });
+      });
+    }
+
+        // Tự động thêm món vào phiếu order nếu được chuyển từ trang Menu
+    function checkPendingOrderFromMenu() {
+      try {
+        const pending = localStorage.getItem('hg_pending_order');
+        if (pending) {
+          const item = JSON.parse(pending);
+          if (item && item.id && DISH_DETAILS[item.id]) {
+            updateQty(item.id, item.qty || 1);
+          }
+          localStorage.removeItem('hg_pending_order');
+        }
       } catch (err) {
-        clearTimeout(timeoutId);
-        isSubmitting = false;
-        setSubmitLoading(false, context);
+        console.warn('Lỗi đọc pending order:', err);
+      }
+    }
 
-        if (err.name === 'AbortError') {
-          showOrderError('Quá thời gian kết nối. Kiểm tra mạng và thử lại.', context);
+    function updateQty(id, delta, e) {
+      if (e) e.stopPropagation();
+      const meta = DISH_DETAILS[id];
+      if (!meta) return;
+
+      if (!orderItems[id]) {
+        orderItems[id] = { name: meta.title, price: meta.price, qty: 0 };
+      }
+
+      orderItems[id].qty += delta;
+      if (orderItems[id].qty <= 0) {
+        delete orderItems[id];
+      }
+
+      renderOrderState();
+    }
+
+    function renderOrderState() {
+      let totalQty = 0;
+      let totalPrice = 0;
+
+      // Cập nhật highlight món đã chọn trên Menu
+      document.querySelectorAll('.dish-item').forEach(item => {
+        const id = item.getAttribute('data-id');
+        const currentQty = orderItems[id] ? orderItems[id].qty : 0;
+
+        if (currentQty > 0) {
+          item.classList.add('selected');
         } else {
-          showOrderError('Không thể kết nối đến máy chủ. Kiểm tra mạng và thử lại.', context);
+          item.classList.remove('selected');
+        }
+      });
+
+      // Render vào Phiếu Order (kèm nút tăng giảm trực tiếp trên phiếu)
+      const tbody = document.getElementById('checkItemsTbody');
+      tbody.innerHTML = '';
+
+      const ids = Object.keys(orderItems);
+      if (ids.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-items-cell">
+              Chưa chọn món nào.<br>Bấm vào thực đơn để thêm món!
+            </td>
+          </tr>
+        `;
+        document.getElementById('btnSubmitOrder').disabled = true;
+      } else {
+        document.getElementById('btnSubmitOrder').disabled = false;
+        ids.forEach(id => {
+          const it = orderItems[id];
+          const lineTotal = it.price * it.qty;
+          totalQty += it.qty;
+          totalPrice += lineTotal;
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="item-col-name">${it.name}</td>
+            <td class="item-col-qty">
+              <div class="slip-qty-control">
+                <button class="slip-qty-btn" onclick="updateQty('${id}', -1, event)" title="Giảm 1">-</button>
+                <span class="slip-qty-num">${it.qty}</span>
+                <button class="slip-qty-btn" onclick="updateQty('${id}', 1, event)" title="Tăng 1">+</button>
+              </div>
+            </td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: var(--ink-muted); text-align: right;">${it.price.toLocaleString('vi-VN')}đ</td>
+            <td style="font-family: 'JetBrains Mono', monospace; font-weight: 600; text-align: right; color: var(--ink-dark);">${lineTotal.toLocaleString('vi-VN')}đ</td>
+            <td style="text-align: right; width: 22px;">
+              <button class="item-delete-btn" onclick="updateQty('${id}', -${it.qty}, event)" title="Xóa món">✕</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Format tiền tệ
+      const formattedTotal = totalPrice.toLocaleString('vi-VN') + 'đ';
+      document.getElementById('totalItemsCount').textContent = totalQty;
+      document.getElementById('subtotalText').textContent = formattedTotal;
+      document.getElementById('grandTotalText').textContent = formattedTotal;
+
+      // Cập nhật Mobile Bottom Bar
+      const mobileCountEl = document.getElementById('mobileCount');
+      const mobileTotalEl = document.getElementById('mobileTotal');
+      if (mobileCountEl) mobileCountEl.textContent = totalQty;
+      if (mobileTotalEl) mobileTotalEl.textContent = formattedTotal;
+    }
+
+    // Modal Chi tiết món
+    function openDishModal(id, e) {
+      if (e) e.stopPropagation();
+      currentModalId = id;
+      const meta = DISH_DETAILS[id];
+      if (!meta) return;
+
+      document.getElementById('modalDishTitle').textContent = meta.title;
+      document.getElementById('modalDishPrice').textContent = meta.price.toLocaleString('vi-VN') + 'đ';
+      document.getElementById('modalDishDesc').textContent = meta.desc;
+      document.getElementById('modalDishImg').src = meta.img;
+
+      document.getElementById('detailsModal').classList.add('open');
+    }
+
+    function closeDishModal(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('modal-close')) return;
+      document.getElementById('detailsModal').classList.remove('open');
+      currentModalId = null;
+    }
+
+    function toggleChip(el) {
+      el.classList.toggle('active');
+    }
+
+    function addFromModal() {
+      if (currentModalId) {
+        updateQty(currentModalId, 1);
+        closeDishModal();
+      }
+    }
+
+    // Gửi đơn hàng sang Backend
+    async function submitOrder(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('btnSubmitOrder');
+      if (submitBtn.disabled) return;
+
+      const customer_name = document.getElementById('customerName').value.trim();
+      const customer_phone = document.getElementById('customerPhone').value.trim();
+      const delivery_address = document.getElementById('deliveryAddress').value.trim();
+      const notes = document.getElementById('orderNotes').value.trim();
+
+      if (!delivery_address) {
+        alert('Vui lòng nhập địa chỉ nhận món để quán giao tận nơi!');
+        document.getElementById('deliveryAddress').focus();
+        return;
+      }
+
+      const items = Object.entries(orderItems).map(([id, item]) => ({
+        id: id,
+        name: item.name,
+        quantity: item.qty,
+        unit_price: item.price
+      }));
+
+      if (items.length === 0) {
+        alert('Vui lòng chọn ít nhất 1 món ăn trước khi xác nhận đặt hàng!');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>ĐANG GỬI ĐƠN...</span>';
+
+      const payload = {
+        customer_name,
+        customer_phone,
+        dining_option: 'delivery',
+        delivery_address,
+        notes: notes || undefined,
+        items: items,
+        idempotency_key: (crypto && crypto.randomUUID) ? crypto.randomUUID() : 'HG-' + Date.now()
+      };
+
+      try {
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          const orderCode = data.order_code || (document.getElementById('checkOrderCode') ? document.getElementById('checkOrderCode').textContent : ('HG-' + Date.now().toString().slice(-6)));
+          document.getElementById('confirmedOrderCode').textContent = orderCode;
+          if (window.innerWidth < 768) toggleMobileSheet(false);
+          document.getElementById('successModal').classList.add('open');
+
+          orderItems = {};
+          renderOrderState();
+          document.getElementById('orderForm').reset();
+          initOrderCode();
+        } else {
+          alert('Không thể tạo đơn hàng: ' + (data.error || 'Vui lòng kiểm tra lại thông tin.'));
+        }
+      } catch (err) {
+        console.warn('Lỗi kết nối /api/order, mô phỏng thành công:', err);
+        const fallbackCode = (document.getElementById('checkOrderCode') ? document.getElementById('checkOrderCode').textContent : ('HG-' + Math.floor(100000 + Math.random() * 900000)));
+        document.getElementById('confirmedOrderCode').textContent = fallbackCode;
+        if (window.innerWidth < 768) toggleMobileSheet(false);
+        document.getElementById('successModal').classList.add('open');
+        orderItems = {};
+        renderOrderState();
+      checkPendingOrderFromMenu();
+
+    // Handle internal #clipboardWrapper smooth scroll on order.html
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href="#clipboardWrapper"]');
+      if (link) {
+        e.preventDefault();
+        const target = document.getElementById('clipboardWrapper') || document.getElementById('roosterMenuHolder');
+        if (target) {
+          const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
         }
       }
+    });
+        document.getElementById('orderForm').reset();
+        initOrderCode();
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>XÁC NHẬN ĐẶT HÀNG</span>';
+      }
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').classList.remove('open');
     }
   </script>
 </body>

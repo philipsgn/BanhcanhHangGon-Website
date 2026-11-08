@@ -29,3 +29,12 @@ build/
 images.zip
 .vercel
 .env*
+
+# Temporary test previews and test assets in root
+artisan_*.png
+desk_preview.jpg
+mob_preview.jpg
+proof_*.png
+test*.webp
+test_*.webp
+menu_preview.html

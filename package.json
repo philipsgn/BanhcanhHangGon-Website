@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 3333",
+    "start": "python -m http.server 3333",
+    "test:desktop": "cmd /c start msedge --new-window http://localhost:3333/#menu --window-size=1440,900",
+    "test:app": "cmd /c start msedge --new-window http://localhost:3333/#menu --window-size=390,844",
+    "test": "npm run dev"
+  },
   "engines": {
     "node": ">=18.x"
   },

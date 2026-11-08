@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/home", "destination": "/index.html" },
+    { "source": "/home/**", "destination": "/index.html" },
+    { "source": "/order", "destination": "/order.html" },
+    { "source": "/chinhsachbaomat", "destination": "/chinh-sach-quyen-rieng-tu.html" },
+    { "source": "/favicon.ico", "destination": "/images/menu/icon-quan-an_result.webp" }
+  ]
+}

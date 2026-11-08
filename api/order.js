@@ -230,6 +230,10 @@ function resolveRequestId(req) {
 const ALLOWED_ORIGINS = new Set([
   'https://banhcanhgahanggon.vercel.app', // production
   'http://localhost:3000',                // Vercel Dev CLI
+  'http://localhost:3030',                // Local Dev Server (Custom Port)
+  'http://127.0.0.1:3030',
+  'http://localhost:3333',                // Local Dev Server (New Free Port)
+  'http://127.0.0.1:3333',
   'http://localhost:8080',                // python -m http.server
   'http://127.0.0.1:8080',
   'http://localhost:5500',                // VS Code Live Server

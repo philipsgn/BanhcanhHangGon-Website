@@ -1,0 +1,495 @@
+/* ==========================================================================
+   BÁNH CANH GÀ HÀNG GÒN — 5-STAR LUXURY MENU SECTION STYLESHEET
+   Design Philosophy: Warm-neutral studio lighting, floating teak wooden trays,
+   subtle texture, zero visible seams, and editorial typography.
+   ========================================================================== */
+
+:root {
+  /* Studio Backdrop Tokens sampled from authentic high-angle photography */
+  --bg-base: #bab9ba;
+  --bg-base-light: #c7c6c7;
+  --bg-base-warm: #b3b0ac;
+  --bg-studio-spotlight: #d6d5d6;
+  
+  /* Surrounding Site Dark Tone for Seamless Bleed */
+  --bg-dark-bleed: #241610;
+
+  /* Luxurious Accent & Metal Tokens */
+  --accent-gold: #B8975A;
+  --accent-gold-hover: #cfa864;
+  --accent-gold-dim: rgba(184, 151, 90, 0.18);
+  --accent-gold-line: rgba(184, 151, 90, 0.35);
+
+  /* High-legibility Editorial Charcoal Typography */
+  --text-title: #2B2B2B;
+  --text-body: #5A5A5A;
+  --text-muted: #7E7C79;
+  --text-badge: #8c6f37;
+
+  /* Typography Font Families */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Elevation & Motion */
+  --shadow-tray: drop-shadow(0 20px 26px rgba(0, 0, 0, 0.20));
+  --shadow-tray-hover: drop-shadow(0 28px 34px rgba(0, 0, 0, 0.26));
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   SECTION CONTAINER & MULTI-LAYERED STUDIO BACKDROP (STEP 3)
+   ========================================================================== */
+
+#menu {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 70px 48px 80px;
+  background-color: var(--bg-base); /* Exact 100% match with photos backdrop: #bab9ba */
+  overflow: hidden;
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Seamless Dark-to-Light Bleed Transitions at Section Top and Bottom */
+#menu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(180deg, var(--bg-dark-bleed) 0%, rgba(36, 22, 16, 0.72) 35%, rgba(36, 22, 16, 0) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+#menu::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(0deg, var(--bg-dark-bleed) 0%, rgba(36, 22, 16, 0.72) 35%, rgba(36, 22, 16, 0) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Main Inner Wrapper */
+.menu-inner-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   SECTION HEADER (COMPACT LUXURY)
+   ========================================================================== */
+
+.menu-header-luxury {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 36px;
+}
+
+.menu-badge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+.menu-badge-label::before,
+.menu-badge-label::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent-gold-line);
+}
+
+.menu-luxury-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  line-height: 1.18;
+  color: var(--text-title);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+.menu-gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto 16px;
+  color: var(--accent-gold);
+}
+
+.menu-gold-divider span {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--accent-gold);
+  opacity: 0.7;
+}
+
+.menu-gold-divider svg {
+  width: 12px;
+  height: 12px;
+  fill: var(--accent-gold);
+}
+
+.menu-luxury-subtitle {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-body);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   2-COLUMN STAGGERED EDITORIAL DISH ROWS (COMPACT SPACING)
+   ========================================================================== */
+
+.menu-staggered-list {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.luxury-dish-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px 54px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s ease, transform 0.75s var(--ease-luxury);
+  will-change: opacity, transform;
+}
+
+.luxury-dish-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reverse Stagger: Dish 2 & 4 (Text Left, Image Right) */
+.luxury-dish-card.card-reversed {
+  direction: rtl;
+}
+
+.luxury-dish-card.card-reversed > * {
+  direction: ltr;
+}
+
+/* Tray Visual Wrapper & Radial Mask Blending */
+.dish-visual-container {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dish-tray-image {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  /* Realistic floating drop shadow conforming to round teak wooden tray */
+  filter: var(--shadow-tray);
+  transition: transform 0.6s var(--ease-luxury), filter 0.6s ease;
+  will-change: transform, filter;
+  cursor: pointer;
+}
+
+.dish-visual-container:hover .dish-tray-image {
+  transform: scale(1.03);
+  filter: var(--shadow-tray-hover);
+}
+
+/* Dish Info Section */
+.dish-info-content {
+  max-width: 480px;
+}
+
+.dish-tag-badge {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-badge);
+  background: var(--accent-gold-dim);
+  padding: 4px 12px 3px;
+  border-radius: 2px;
+  border-left: 2px solid var(--accent-gold);
+  margin-bottom: 10px;
+}
+
+.dish-name-serif {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 2.8vw, 38px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-title);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.dish-desc-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-body);
+  font-weight: 350;
+  margin-bottom: 18px;
+}
+
+.dish-meta-action {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dish-price-group {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.dish-price-amount {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-title);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.dish-price-currency {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dish-order-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background-color: var(--accent-gold);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(184, 151, 90, 0.28);
+  transition: all 0.35s var(--ease-luxury);
+}
+
+.dish-order-btn:hover,
+.dish-order-btn:focus-visible {
+  background-color: var(--text-title);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.dish-order-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.dish-order-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   MENU FOOTER CALL-TO-ACTION (COMPACT)
+   ========================================================================== */
+
+.menu-footer-luxury {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.menu-footer-hours {
+  font-size: 13.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.menu-full-catalog-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  border: 1px solid var(--accent-gold);
+  background: transparent;
+  color: var(--text-title);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.35s var(--ease-luxury);
+}
+
+.menu-full-catalog-btn:hover,
+.menu-full-catalog-btn:focus-visible {
+  background-color: var(--accent-gold);
+  color: #ffffff;
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(184, 151, 90, 0.3);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM (COMPACT)
+   ========================================================================== */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  #menu {
+    padding: 60px 28px 70px;
+  }
+  
+  .luxury-dish-card {
+    gap: 28px 36px;
+  }
+  
+  .dish-visual-container {
+    max-width: 380px;
+  }
+  
+  .dish-name-serif {
+    font-size: 30px;
+  }
+  
+  .menu-staggered-list {
+    gap: 36px;
+  }
+}
+
+/* Mobile Devices (<= 768px and 390px Viewport) */
+@media (max-width: 768px) {
+  #menu {
+    padding: 50px 18px 60px;
+  }
+
+  .menu-header-luxury {
+    margin-bottom: 30px;
+  }
+
+  .menu-luxury-title {
+    font-size: 29px;
+  }
+
+  .menu-luxury-subtitle {
+    font-size: 14px;
+  }
+
+  .menu-staggered-list {
+    gap: 36px;
+  }
+
+  /* 1-column Vertical Flow */
+  .luxury-dish-card,
+  .luxury-dish-card.card-reversed {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  /* Image always sits on top on Mobile */
+  .dish-visual-container {
+    max-width: 290px;
+    order: -1;
+  }
+
+  .dish-info-content {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .dish-tag-badge {
+    margin-bottom: 12px;
+  }
+
+  .dish-name-serif {
+    font-size: 27px;
+    margin-bottom: 12px;
+  }
+
+  .dish-desc-text {
+    font-size: 14.5px;
+    margin-bottom: 22px;
+    text-align: justify;
+    text-align-last: center;
+  }
+
+  .dish-meta-action {
+    justify-content: center;
+    gap: 20px;
+    padding-top: 16px;
+  }
+
+  .dish-price-amount {
+    font-size: 30px;
+  }
+
+  .dish-order-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* Accessibility: Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .luxury-dish-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .dish-tray-image,
+  .dish-visual-container:hover .dish-tray-image {
+    transition: none !important;
+    transform: none !important;
+  }
+}
