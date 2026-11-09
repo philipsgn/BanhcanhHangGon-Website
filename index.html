@@ -2756,17 +2756,17 @@
 <body>
 
   <nav class="site-nav" id="siteNav">
-    <a class="logo" href="#hero" aria-label="Bánh Canh Gà Ta Hàng Gòn">
+    <a class="logo" href="/home" aria-label="Bánh Canh Gà Ta Hàng Gòn">
       <img src="images/menu/icon-quan-an_result.webp" alt="Bánh Canh Gà Ta" decoding="async">
     </a>
     <ul>
-      <li><a href="#hero">Trang chủ</a></li>
-      <li><a href="#welcome">Giới thiệu</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#location">Vị trí</a></li>
-      <li><a class="nav-order-link" href="order.html">Đặt hàng</a></li>
+      <li><a href="/home">Trang chủ</a></li>
+      <li><a href="/home/welcome">Giới thiệu</a></li>
+      <li><a href="/home/menu">Menu</a></li>
+      <li><a href="/home/location">Vị trí</a></li>
+      <li><a class="nav-order-link" href="/order">Đặt hàng</a></li>
     </ul>
-    <a class="mobile-order-btn" href="order.html">Đặt hàng</a>
+    <a class="mobile-order-btn" href="/order">Đặt hàng</a>
     <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -3116,11 +3116,11 @@
       <div class="loc-group loc-group--menu">
         <h3 class="loc-group-title">Danh mục</h3>
         <ul class="loc-list loc-list--links">
-          <li><a href="#hero">Trang chủ</a></li>
-          <li><a href="#menu">Thực đơn</a></li>
-          <li><a href="order.html">Đặt món</a></li>
-          <li><a href="#welcome">Về chúng tôi</a></li>
-          <li><a href="#location">Liên hệ</a></li>
+          <li><a href="/home">Trang chủ</a></li>
+          <li><a href="/home/menu">Thực đơn</a></li>
+          <li><a href="/order">Đặt món</a></li>
+          <li><a href="/home/welcome">Về chúng tôi</a></li>
+          <li><a href="/home/location">Liên hệ</a></li>
         </ul>
       </div>
 
@@ -3227,36 +3227,70 @@
       }
     }
 
-    // Handle hash landing on page load (e.g. index.html#menu, index.html#welcome)
-    function handleHashLanding() {
+    const sectionRouteMap = {
+      '/': 'hero',
+      '/home': 'hero',
+      '/home/welcome': 'welcome',
+      '/home/menu': 'menu',
+      '/home/location': 'location'
+    };
+
+    function getSectionIdForPath(pathname) {
+      const clean = pathname.replace(/\/+$/, '') || '/';
+      return sectionRouteMap[clean] || sectionRouteMap[clean + '/'];
+    }
+
+    // Handle hash landing or Clean URL landing on page load
+    function handleLandingRoute() {
       const hash = window.location.hash.replace('#', '');
       if (hash) {
-        setTimeout(() => {
-          scrollToSection(hash);
-        }, 150);
+        setTimeout(() => scrollToSection(hash), 150);
+        return;
+      }
+      const sectionFromPath = getSectionIdForPath(window.location.pathname);
+      if (sectionFromPath && sectionFromPath !== 'hero') {
+        setTimeout(() => scrollToSection(sectionFromPath), 150);
       }
     }
-    window.addEventListener('DOMContentLoaded', handleHashLanding);
-    window.addEventListener('load', handleHashLanding);
+    window.addEventListener('DOMContentLoaded', handleLandingRoute);
+    window.addEventListener('load', handleLandingRoute);
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '');
       if (hash) scrollToSection(hash);
     });
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        scrollToSection(hash);
+      } else {
+        const sectionFromPath = getSectionIdForPath(window.location.pathname);
+        if (sectionFromPath) scrollToSection(sectionFromPath);
+      }
+    });
 
-    // Handle internal nav link clicks smoothly without jumping to top
+    // Handle internal nav link clicks (supporting both Hash links & Clean URLs /home*) smoothly
     document.addEventListener('click', (event) => {
-      const link = event.target.closest('a[href^="#"]');
+      const link = event.target.closest('a[href^="#"], a[href^="/home"], a[href="/"]');
       if (!link) return;
       const href = link.getAttribute('href');
       if (href === '#' || href === '#!') return;
-      const targetId = href.substring(1);
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        event.preventDefault();
-        closeMobileNav();
-        scrollToSection(targetId);
-        if (history.replaceState) {
-          history.replaceState(null, '', href);
+
+      let targetId = null;
+      if (href.startsWith('#')) {
+        targetId = href.substring(1);
+      } else {
+        targetId = getSectionIdForPath(href);
+      }
+
+      if (targetId) {
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          event.preventDefault();
+          closeMobileNav();
+          scrollToSection(targetId);
+          if (window.history && window.history.pushState) {
+            window.history.pushState({}, '', href);
+          }
         }
       }
     });
