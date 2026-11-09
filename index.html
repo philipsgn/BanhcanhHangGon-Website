@@ -2558,17 +2558,6 @@
       grid-row: span 2;
     }
 
-    /* Grand Storefront Spotlight Panorama on Desktop */
-    .bs-card--storefront {
-      grid-column: 1 / -1;
-      grid-row: span 2;
-      height: clamp(340px, 28vw, 440px);
-    }
-
-    .bs-card--storefront img {
-      object-fit: cover;
-      object-position: center bottom !important;
-    }
 
     .bs-card img {
       width: 100%;
@@ -2626,8 +2615,7 @@
         grid-auto-rows: clamp(180px, 22vw, 220px);
         gap: 12px;
       }
-      .bs-card--landscape,
-      .bs-card--storefront {
+      .bs-card--landscape {
         grid-column: span 2;
         grid-row: span 1;
         aspect-ratio: 4 / 3;
@@ -2704,20 +2692,14 @@
         border: 1px solid rgba(201, 154, 74, 0.25) !important;
       }
 
-      /* Thẻ toàn cảnh 4:3 (Nồi nước lèo & Mặt tiền quán) - Mở trọn vẹn 100% không gian */
-      .bs-card--landscape,
-      .bs-card--storefront {
+      /* Thẻ toàn cảnh 4:3: Nồi nước lèo - Mở trọn vẹn 100% không gian */
+      .bs-card--landscape {
         grid-column: span 2 !important;
         grid-row: span 1 !important;
         width: 100% !important;
         aspect-ratio: 4 / 3 !important;
         height: auto !important;
         max-height: 285px !important;
-      }
-
-      .bs-card--storefront img {
-        object-fit: cover !important;
-        object-position: center bottom !important;
       }
 
       .bs-card--landscape img {
@@ -3045,11 +3027,6 @@
           <figcaption class="bs-card-caption">Góc quán thân thuộc</figcaption>
         </figure>
 
-        <!-- 8. Không gian mặt tiền quán phố (Landscape 4:3 - Grand Storefront) -->
-        <figure class="bs-card bs-card--landscape bs-card--storefront">
-          <img src="images/behind-scenes/khong-gian-quan_result.webp" alt="Mặt tiền Hàng Gòn" loading="lazy" decoding="async">
-          <figcaption class="bs-card-caption">Mặt tiền quán phố</figcaption>
-        </figure>
       </div>
     </div>
   </section>
