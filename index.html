@@ -10,6 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="images/home/new-chicken-chef-desktop.webp" media="(min-width: 881px)" fetchpriority="high">
   <link rel="preload" as="image" href="images/home/new-chicken-chef-mobile.webp" media="(max-width: 880px)" fetchpriority="high">
+  <link rel="preload" as="image" href="images/menu/original-chef-rooster-board.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/menu/Vietnamese Chicken Soup on Wooden Tray_result.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/menu/com-ga-xe.webp" type="image/webp">
+  <link rel="preload" as="image" href="images/menu/goi-ga.webp" type="image/webp">
+  <link rel="preload" as="image" href="images/menu/Vietnamese Xôi Gà on a Wooden Tray_result.webp" type="image/webp">
+  <link rel="preload" as="image" href="images/menu/mi-ga.webp" type="image/webp">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
@@ -2630,30 +2636,29 @@
 
     @media (max-width: 620px) {
       #backstage {
-        height: 100svh !important;
-        min-height: 100svh !important;
-        max-height: 100svh !important;
-        overflow: hidden !important;
-        padding: clamp(54px, 7.5vh, 64px) 12px clamp(8px, 1.2vh, 14px) !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        scroll-snap-align: none !important;
+        scroll-snap-stop: normal !important;
+        padding: clamp(40px, 5.5vh, 52px) 12px 36px !important;
         box-sizing: border-box !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        align-items: center !important;
+        display: block !important;
       }
 
       .bs-shell {
-        height: 100% !important;
+        height: auto !important;
+        max-height: none !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important;
         align-items: center !important;
       }
 
       .bs-head {
-        margin-bottom: 6px !important;
-        gap: 2px !important;
+        margin-bottom: 12px !important;
+        gap: 4px !important;
       }
 
       .bs-eyebrow {
@@ -2662,8 +2667,8 @@
       }
 
       .bs-title {
-        font-size: clamp(20px, 5.2vw, 26px) !important;
-        line-height: 1.1 !important;
+        font-size: clamp(22px, 5.5vw, 28px) !important;
+        line-height: 1.15 !important;
       }
 
       .bs-quote {
@@ -2676,15 +2681,21 @@
       .bs-grid-8 {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        grid-auto-rows: clamp(140px, 18vh, 165px) !important;
+        grid-auto-rows: clamp(150px, 20vh, 185px) !important;
         gap: 10px !important;
         width: 100% !important;
-        max-height: calc(100svh - 170px) !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        padding-right: 4px !important;
-        padding-bottom: 24px !important;
-        scroll-behavior: smooth !important;
+        max-height: none !important;
+        overflow: visible !important;
+        overflow-y: visible !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+        scrollbar-width: none !important;
+      }
+
+      .bs-grid-8::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
       }
 
       .bs-card {
@@ -2699,7 +2710,7 @@
         width: 100% !important;
         aspect-ratio: 4 / 3 !important;
         height: auto !important;
-        max-height: 285px !important;
+        max-height: 320px !important;
       }
 
       .bs-card--landscape img {
@@ -2713,14 +2724,14 @@
         grid-column: span 1 !important;
         grid-row: span 2 !important;
         height: auto !important;
-        min-height: calc(clamp(140px, 18vh, 165px) * 2 + 10px) !important;
+        min-height: calc(clamp(150px, 20vh, 185px) * 2 + 10px) !important;
       }
 
       /* 2 Thẻ Dọc Tiêu Chuẩn: Gà luộc & Trứng non */
       .bs-card--portrait {
         grid-column: span 1 !important;
         grid-row: span 1 !important;
-        height: clamp(140px, 18vh, 165px) !important;
+        height: clamp(150px, 20vh, 185px) !important;
       }
 
       .bs-card-caption {
@@ -2872,7 +2883,7 @@
       <div class="menu-hero-mascot">
         <picture>
           <source srcset="images/menu/original-chef-rooster-board.webp" type="image/webp">
-          <img src="images/menu/Gà trống mặc trang phục bên bảng gỗ.png" alt="Chú gà trống đầu bếp Hàng Gòn bên bảng gỗ nghệ thuật nguyên bản" class="menu-rooster-img" loading="lazy" decoding="async">
+          <img src="images/menu/original-chef-rooster-board.webp" alt="Chú gà trống đầu bếp Hàng Gòn bên bảng gỗ nghệ thuật nguyên bản" class="menu-rooster-img" loading="eager" fetchpriority="high" decoding="async">
         </picture>
       </div>
     </header>
@@ -2886,7 +2897,7 @@
           <div class="menu-card-visual">
             <picture>
               <source srcset="images/menu/Vietnamese Chicken Soup on Wooden Tray_result.webp" type="image/webp">
-              <img src="images/menu/Vietnamese Chicken Soup on Wooden Tray_result.webp" alt="Mẹt Bánh Canh Gà Đặc Biệt Hàng Gòn" class="menu-card-plate" loading="eager" decoding="async">
+              <img src="images/menu/Vietnamese Chicken Soup on Wooden Tray_result.webp" alt="Mẹt Bánh Canh Gà Đặc Biệt Hàng Gòn" class="menu-card-plate" loading="eager" fetchpriority="high" decoding="async">
             </picture>
           </div>
           <div class="menu-card-body">
@@ -2902,7 +2913,7 @@
           <div class="menu-card-visual">
             <picture>
               <source srcset="images/menu/com-ga-xe.webp" type="image/webp">
-              <img src="images/menu/com-ga-xe.webp" alt="Mẹt Cơm Gà Xé Trứng Non Hàng Gòn" class="menu-card-plate" loading="lazy" decoding="async">
+              <img src="images/menu/com-ga-xe.webp" alt="Mẹt Cơm Gà Xé Trứng Non Hàng Gòn" class="menu-card-plate" loading="eager" fetchpriority="auto" decoding="async">
             </picture>
           </div>
           <div class="menu-card-body">
@@ -2918,7 +2929,7 @@
           <div class="menu-card-visual">
             <picture>
               <source srcset="images/menu/goi-ga.webp" type="image/webp">
-              <img src="images/menu/goi-ga.webp" alt="Mẹt Gỏi Gà Ta Hàng Gòn" class="menu-card-plate" loading="lazy" decoding="async">
+              <img src="images/menu/goi-ga.webp" alt="Mẹt Gỏi Gà Ta Hàng Gòn" class="menu-card-plate" loading="eager" fetchpriority="auto" decoding="async">
             </picture>
           </div>
           <div class="menu-card-body">
@@ -2934,7 +2945,7 @@
           <div class="menu-card-visual">
             <picture>
               <source srcset="images/menu/Vietnamese Xôi Gà on a Wooden Tray_result.webp" type="image/webp">
-              <img src="images/menu/Vietnamese Xôi Gà on a Wooden Tray_result.webp" alt="Mẹt Xôi Gà Trứng Non Hàng Gòn" class="menu-card-plate" loading="lazy" decoding="async">
+              <img src="images/menu/Vietnamese Xôi Gà on a Wooden Tray_result.webp" alt="Mẹt Xôi Gà Trứng Non Hàng Gòn" class="menu-card-plate" loading="eager" fetchpriority="auto" decoding="async">
             </picture>
           </div>
           <div class="menu-card-body">
@@ -2950,7 +2961,7 @@
           <div class="menu-card-visual">
             <picture>
               <source srcset="images/menu/mi-ga.webp" type="image/webp">
-              <img src="images/menu/mi-ga.webp" alt="Mẹt Mì Gà Ta Truyền Thống Hàng Gòn" class="menu-card-plate" loading="lazy" decoding="async">
+              <img src="images/menu/mi-ga.webp" alt="Mẹt Mì Gà Ta Truyền Thống Hàng Gòn" class="menu-card-plate" loading="eager" fetchpriority="auto" decoding="async">
             </picture>
           </div>
           <div class="menu-card-body">
@@ -3625,6 +3636,25 @@
           else if (e.key === 'ArrowRight') updateCarousel(currentIndex + 1);
         }
       });
+
+      // Khởi động giải mã hình ảnh trước (Image decode warmup) giúp lướt menu mượt mà tức thì
+      (function warmupMenuImages() {
+        const dishUrls = [
+          'images/menu/original-chef-rooster-board.webp',
+          'images/menu/Vietnamese Chicken Soup on Wooden Tray_result.webp',
+          'images/menu/com-ga-xe.webp',
+          'images/menu/goi-ga.webp',
+          'images/menu/Vietnamese Xôi Gà on a Wooden Tray_result.webp',
+          'images/menu/mi-ga.webp'
+        ];
+        dishUrls.forEach(src => {
+          const img = new Image();
+          img.src = src;
+          if (img.decode) {
+            img.decode().catch(() => {});
+          }
+        });
+      })();
 
       updateCarousel(0);
     })();
