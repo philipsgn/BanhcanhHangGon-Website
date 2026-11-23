@@ -239,7 +239,7 @@
       display: inline-flex;
       align-items: flex-start;
       justify-content: flex-start;
-      padding-left: 190px;
+      padding-left: 216px;
       margin-top: 0;
     }
 
@@ -297,10 +297,10 @@
     .rooster-arm-shadow {
       position: absolute;
       left: 0;
-      top: 165px;
-      width: 22px;
-      height: 105px;
-      background: radial-gradient(ellipse at left center, rgba(15, 8, 3, 0.4) 0%, rgba(15, 8, 3, 0.1) 60%, transparent 100%);
+      top: 155px;
+      width: 24px;
+      height: 118px;
+      background: radial-gradient(ellipse at left center, rgba(15, 8, 3, 0.52) 0%, rgba(15, 8, 3, 0.16) 60%, transparent 100%);
       pointer-events: none;
       z-index: 15;
     }
@@ -321,30 +321,17 @@
 
     /* Top Clamp is now integrated 100% seamlessly in clipboard_board_only.webp */
 
-        /* Foreground Claws (Layer 3 - Emerging Naturally from Behind over Board Rim) */
-    .rooster-claw-top {
-      position: absolute;
-      left: 112px;
-      top: -14px;
-      width: 62px;
-      height: auto;
-      z-index: 35;
-      pointer-events: none;
-      user-select: none;
-      filter: drop-shadow(0 2px 3px rgba(10, 5, 2, 0.5));
-      transition: all 0.3s ease;
-    }
-
+    /* Foreground Continuous Wing Grip (Layer 3 - Seamless 1:1 Lock with Mascot Sleeve) */
     .rooster-claw-mid {
       position: absolute;
-      left: -12px;
-      top: 154px;
-      width: 38px;
+      left: -18.9px;
+      top: 168.3px;
+      width: 61.4px;
       height: auto;
       z-index: 35;
       pointer-events: none;
       user-select: none;
-      filter: drop-shadow(1px 2px 3px rgba(10, 5, 2, 0.45));
+      filter: drop-shadow(2px 3px 3px rgba(12, 6, 2, 0.72)) drop-shadow(4px 6px 9px rgba(15, 8, 3, 0.38));
       transition: all 0.3s ease;
     }
 
@@ -1341,13 +1328,14 @@
       }
 
       .rooster-menu-holder {
-        padding-left: 140px;
+        padding-left: 137px;
         align-items: flex-end;
       }
 
       .rooster-mascot-body {
-        left: calc(140px - 146px);
-        bottom: 0;
+        left: 0;
+        top: 52px;
+        bottom: auto;
         width: 350px;
         height: auto;
       }
@@ -1366,16 +1354,10 @@
         width: 544px;
       }
 
-      .rooster-claw-top {
-        left: 80px;
-        top: -12px;
-        width: 68px;
-      }
-
       .rooster-claw-mid {
-        left: -4px;
-        top: 138px;
-        width: 28px;
+        left: -11.6px;
+        top: 128.7px;
+        width: 39.1px;
       }
 
       .order-slip-col {
@@ -1875,12 +1857,9 @@
           <!-- Subtle Corner Handle (Kéo góc dưới phải để phóng to/thu nhỏ đồng tỷ lệ) -->
           <div class="menu-resize-corner-br" id="menuResizeCornerBR" title="Kéo góc để thu phóng tỷ lệ Menu"></div>
 
-          <!-- 3. Foreground Claws Overlays (z-index: 35 - Realistic 3D Overlays) -->
-          <img src="images/order/rooster_claw_top.webp"
-               alt="Móng vuốt gà kẹp mép trên bảng"
-               class="rooster-claw-top" />
+          <!-- 3. Foreground Continuous Wing Grip Overlay (z-index: 35 - 1:1 Lock with Mascot Sleeve) -->
           <img src="images/order/rooster_claw_mid.webp"
-               alt="Móng vuốt gà ôm mép trái bảng"
+               alt="Cánh chú gà ôm mép trái bảng Menu"
                class="rooster-claw-mid" />
 
                               <!-- Single-Page 2-Column Menu Sheet (Template Hình 2) -->
