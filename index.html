@@ -2003,17 +2003,28 @@
       }
 
       #location {
-        height: 100svh !important;
+        height: auto !important;
         min-height: 100svh !important;
-        max-height: 100svh !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        max-height: none !important;
+        overflow: visible !important;
         scroll-snap-align: start !important;
-        padding: clamp(56px, 7.5vh, 66px) 16px 20px !important;
+        scroll-snap-stop: normal !important;
+        padding: clamp(56px, 7.5vh, 66px) 16px 36px !important;
         box-sizing: border-box !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
+      }
+
+      .map-wrap {
+        display: block !important;
+        position: relative !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+      }
+
+      .map-wrap iframe {
+        pointer-events: none !important;
       }
 
       .site-nav {
@@ -3126,11 +3137,11 @@
         </ul>
       </div>
 
-      <div class="map-wrap">
+      <a class="map-wrap" href="https://maps.app.goo.gl/m2fKyMJy4xSPQMa87" target="_blank" rel="noopener" aria-label="Mở địa chỉ quán trên Google Maps">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.134059220087!2d106.71036697355223!3d10.801042958742219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529619df418e7%3A0x158a745e81901a1c!2zQsOhbmggQ2FuaCBHw6AgLSBYw7RpIEfDoCBIw6BuZyBHw7Ju!5e0!3m2!1svi!2s!4v1784371316143!5m2!1svi!2s"
           loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
+      </a>
     </div>
 
     <!-- KHỐI MẠNG XÃ HỘI & KẾT NỐI TẠI CHÂN TRANG -->
