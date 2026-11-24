@@ -1306,12 +1306,12 @@
         display: block !important;
         position: absolute !important;
         top: auto !important;
-        bottom: 100% !important;
+        bottom: calc(100% - 8px) !important;
         left: 12px !important;
         width: clamp(52px, 13vw, 68px) !important;
         z-index: 1 !important;
         transform: none !important;
-        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45)) !important;
+        filter: none !important;
         pointer-events: none !important;
         background: transparent !important;
         border: none !important;
@@ -1328,6 +1328,7 @@
         box-shadow: none !important;
         border: none !important;
         background: transparent !important;
+        filter: none !important;
       }
 
       .welcome-photo picture {
